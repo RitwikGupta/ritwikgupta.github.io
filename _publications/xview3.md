@@ -8,6 +8,6 @@ venue: "Thirty-sixth Conference on Neural Information Processing Systems (NeurIP
 projecturl: "https://iuu.xview.us/"
 paperurl: "https://arxiv.org/abs/2206.00897"
 github: "https://github.com/DIUx-xView/xview3-reference/"
-video: "https://www.youtube.com/watch?v=gwkCIdwHRhc"
+video: "https://youtu.be/RPnUqmSyZ6Q"
 citation: 'Fernando Paolo*, Tsu-ting Tim Lin*, Ritwik Gupta*, Bryce Goodman, Nirav Patel, Daniel Kuster, David Kroodsma, Jared Dunnmon. "xView3-SAR: Detecting Dark Fishing Activity Using Synthetic Aperture Radar Imagery." In Proceedings of the Thirty-sixth Conference on Neural Information Processing Systems (NeurIPS). 2022.'
 ---
