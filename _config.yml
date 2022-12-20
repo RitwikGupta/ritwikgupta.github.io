@@ -1,10 +1,10 @@
 locale: en-US
 title: Gradients
-title_separator: '-'
+title_separator: "-"
 name: Ritwik Gupta
 description: Innovations in machine learning and humanitarian assistance and disaster response.
-url: 'https://ritwikgupta.me'
-baseurl: ''
+url: "https://ritwikgupta.me"
+baseurl: ""
 repository: RitwikGupta/ritwikgupta.github.io
 teaser: null
 breadcrumbs: false
@@ -28,10 +28,10 @@ staticman:
     - message
   branch: gh-pages
   commitMessage: New comment.
-  filename: 'comment-{@timestamp}'
+  filename: "comment-{@timestamp}"
   format: yml
   moderation: true
-  path: '_data/comments/{options.slug}'
+  path: "_data/comments/{options.slug}"
   requiredFields:
     - name
     - email
@@ -70,9 +70,8 @@ author:
   name: Ritwik Gupta
   avatar: profile.jpg
   bio: >-
-    Focusing on the intersection of machine learning + humanitarian assistance and disaster response. Frequent forays
-    into systems engineering and robotics. Generalist.
-  location: 'San Francisco, CA'
+    AI and Policy researcher focused on humanitarian assistance and disaster response (HADR).
+  location: "Berkeley, CA"
   employer: Neural Tangent
   googlescholar: "https://scholar.google.com/citations?user=4Cdwp_MAAAAJ&hl=en"
   email: null
@@ -109,8 +108,8 @@ include:
   - _pages
   - files
 exclude:
-  - '*.sublime-project'
-  - '*.sublime-workspace'
+  - "*.sublime-project"
+  - "*.sublime-workspace"
   - .asset-cache
   - .bundle
   - .jekyll-assets-cache
@@ -136,7 +135,7 @@ keep_files:
   - .git
   - .svn
 encoding: utf-8
-markdown_ext: 'markdown,mkdown,mkdn,mkd,md'
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 markdown: kramdown
 highlighter: rouge
 lsi: false
@@ -151,24 +150,24 @@ kramdown:
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  smart_quotes: 'lsquo,rsquo,ldquo,rdquo'
+  smart_quotes: "lsquo,rsquo,ldquo,rdquo"
   enable_coderay: false
 collections:
   teaching:
     output: true
-    permalink: '/:collection/:path/'
+    permalink: "/:collection/:path/"
   publications:
     output: true
-    permalink: '/:collection/:path/'
+    permalink: "/:collection/:path/"
   portfolio:
     output: true
-    permalink: '/:collection/:path/'
+    permalink: "/:collection/:path/"
   talks:
     output: true
-    permalink: '/:collection/:path/'
+    permalink: "/:collection/:path/"
 defaults:
   - scope:
-      path: ''
+      path: ""
       type: posts
     values:
       layout: single
@@ -178,13 +177,13 @@ defaults:
       share: true
       related: true
   - scope:
-      path: ''
+      path: ""
       type: pages
     values:
       layout: single
       author_profile: true
   - scope:
-      path: ''
+      path: ""
       type: teaching
     values:
       layout: single
@@ -192,7 +191,7 @@ defaults:
       share: true
       comments: true
   - scope:
-      path: ''
+      path: ""
       type: publications
     values:
       layout: single
@@ -200,7 +199,7 @@ defaults:
       share: true
       comments: true
   - scope:
-      path: ''
+      path: ""
       type: portfolio
     values:
       layout: single
@@ -208,7 +207,7 @@ defaults:
       share: true
       comment: true
   - scope:
-      path: ''
+      path: ""
       type: talks
     values:
       layout: talk
@@ -217,7 +216,7 @@ defaults:
 sass:
   sass_dir: _sass
   style: compressed
-permalink: '/:categories/:title/'
+permalink: "/:categories/:title/"
 timezone: America/Los_Angeles
 gems:
   - jekyll-paginate
