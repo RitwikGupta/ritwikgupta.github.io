@@ -8,15 +8,13 @@ redirect_from:
   - /about.html
 ---
 
-Hello! My name is Ritwik Gupta and I am currently a second year Ph.D. student at the University of California, Berkeley. My focus is on (1) efficient machine learning for humanitarian assistance and disaster response and (2) the development of policies surrounding the use of ML in developing areas.
+My name is Ritwik Gupta and I am a Ph.D. student at the University of California, Berkeley, where I am a member of the [Berkeley AI Research (BAIR)](https://bair.berkeley.edu/) lab. My research focus is on computer vision for humanitarian assistance and disaster response, as well as the development of policies related to the use of machine learning in developing areas. I am co-advised by Drs. [Trevor Darrell](https://people.eecs.berkeley.edu/~trevor/) and [Shankar Sastry](https://www2.eecs.berkeley.edu/Faculty/Homepages/sastry.html), and also work with the [Center for Security in Politics](https://csp.berkeley.edu/) under the advisement of [Sec. Janet Napolitano](https://en.wikipedia.org/wiki/Janet_Napolitano).
 
-I am a member of the [Berkeley AI Research (BAIR) lab](https://bair.berkeley.edu/), co-advised by Drs. [Trevor Darrell](https://people.eecs.berkeley.edu/~trevor/) and [Shankar Sastry](https://www2.eecs.berkeley.edu/Faculty/Homepages/sastry.html). On the policy side, I work with the [Center for Security in Politics](https://csp.berkeley.edu/) under the advisement of [Sec. Janet Napolitano](https://en.wikipedia.org/wiki/Janet_Napolitano).
+In addition to my academic pursuits, I am the Founder and President of [Neural Tangent](https://neuraltangent.com/), a company that uses machine learning to solve problems in the field of humanitarian assistance and disaster response. I also provide consulting services in the areas of machine learning, artificial intelligence, edge computing, and remote sensing.
 
-I co-organize the [Berkeley AI Reseach Climate Initiative](https://ai-climate.berkeley.edu/) with [Colorado Reed](http://people.eecs.berkeley.edu/~cjrd/) and [Medhini Narasimhan](https://medhini.github.io/) which is focused on uniting researchers to work on more meaningful AI x Climate research, and transitioning that work into the field. If you are interested in participating, please join the Slack and send me a message!
+I co-organize the [Berkeley AI Reseach Climate Initiative](https://ai-climate.berkeley.edu/) with [Colorado Reed](http://people.eecs.berkeley.edu/~cjrd/) and [Medhini Narasimhan](https://medhini.github.io/), which brings together researchers to work on AI research through the lens of climate change and helps to translate that work into real-world applications. If you are interested in participating, please join our Slack group and send me a message.
 
-I am also the Founder and President of [Neural Tangent](https://neuraltangent.com/), a company aimed at creating ML solutions to humanitarian assistance and disaster response problems. I also provide consulting in the space of machine learning, artificial intelligence, edge computing, and remote sensing.
-
-You can contact me by email at <i>firstlast</i>@berkeley.edu. I am currently not looking for undergraduate students to work with, though new opportunities frequently arise.
+If you would like to contact me, you can email me at firstlast@berkeley.edu. Please note that I am currently not accepting undergraduate students for research opportunities, although new opportunities may arise in the future.
 
 ---
 
