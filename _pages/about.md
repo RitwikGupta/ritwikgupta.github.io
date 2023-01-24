@@ -20,6 +20,7 @@ If you would like to contact me, you can email me at firstlast@berkeley.edu. Ple
 
 ### News
 
+- **[Jan. 2023]** I earned the Graduate Certificate in Security Policy from the Goldman School at Berkeley.
 - **[Sept. 2022]** One paper accepted to NeurIPS 2022!
 - **[Jul. 2022]** I was awarded the National Science Foundation's Digital Transformation of Development Fellowship.
 - **[Jul. 2022]** The non-profit H2H8 awarded me a grant for my work on AI for humanitarian assistance and disaster response.
