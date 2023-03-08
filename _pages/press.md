@@ -9,19 +9,13 @@ author_profile: true
 
 # Articles
 
+## AI for Disaster Response
+
+- [CNN News Segment](https://twitter.com/jchatterleyCNN/status/1630949841537839112). CNN. March 1, 2023.
+- [From ‘paradise’ to hell: How a luxury development in Turkey became an earthquake death trap](https://ig.ft.com/turkey-earthquake-apartment-collapse/). Financial Times. February 27, 2023
 - [How AI can actually be helpful in disaster response](https://www.technologyreview.com/2023/02/20/1068824/ai-actually-helpful-disaster-response-turkey-syria-earthquake/). MIT Technology Review. February 20, 2023.
 - [Nach Menschenrechtsverstößen fahnden](https://www.deutschlandfunkkultur.de/satelliten-bilder-krieg-100.html). Deutschlandfunk Kultur. April 14, 2022.
 - [Satellite Companies Join the Hunt for Russian War Crimes](https://www.politico.com/news/2022/04/06/satellite-russian-war-crimes-00023386). POLITICO. April 6, 2022.
-- [U.S. Fishing for Defense Tech to Protect International Waters](https://www.nationaldefensemagazine.org/articles/2022/1/20/us-fishing-for-defense-tech-to-protect-international-waters). National Defense Magazine. January 20, 2022.
-- [Can We Spot Illegal Fishing Fleets from Space?](https://www.defenseone.com/technology/2021/08/can-we-spot-illegal-fishing-fleets-space/184300/). Defense One. August 4, 2021.
-- [DOD Announces AI Competition to Detect, Defeat Illegal Fishing](https://www.defense.gov/Explore/News/Article/Article/2703739/dod-announces-ai-competition-to-detect-defeat-illegal-fishing/). Department of Defense. July 22, 2021.
-- [Defense Innovation Unit to Sponsor Computer Vision Prize Challenge](https://www.nationaldefensemagazine.org/articles/2020/3/12/defense-innovation-unit-to-sponsor-computer-vision-prize-challenge). National Defense Magazine. July 22, 2021.
-- [The Pentagon Wants Programmers' Help to Catch IUU Fishing Activity](https://www.maritime-executive.com/article/the-pentagon-wants-programmers-help-to-spot-iuu-fishing). The Maritime Executive. July 22, 2021
-- [Naval Academy Participates in Rapid Analysis of Threat Exposure (Rate) Study](https://www.usna.edu/NewsCenter/2020/12/Naval_Academy_Participates_in_Rapid_Analysis_of_Threat_Exposure_Rate_Study.php). US Naval Academy. December 14, 2020.
-- [Detecting Change With Artificial Intelligence](https://www.afcea.org/content/detecting-change-artificial-intelligence). SIGNAL Magazine. December 1, 2020.
-- [Thousands of American Troops to Take Part in Covid-19 Early-Detection Study](https://www.wsj.com/articles/thousands-of-american-troops-to-take-part-in-covid-19-early-detection-study-11600772402). Wall Street Journal. September 22, 2020.
-- [AI Aids DOD in Early Detection of COVID-19](https://www.defense.gov/Explore/News/Article/Article/2356086/ai-aiding-dod-in-early-detection-of-covid-19-say-technologists/). Department of Defense News. September 22, 2020.
-- [The US Military’s Latest Wearables Can Detect Illness Two Days Before You Get Sick](https://www.defenseone.com/technology/2020/09/militarys-latest-wearables-can-detect-illness-two-days-you-get-sick/168664/). Defense One. September 22, 2020.
 - [California National Guard Using Satellites to Fight Wildfires](https://www.airforcemag.com/california-national-guard-using-satellites-to-fight-wildfires/). Air Force Magazine. September 8, 2020.
 - [Fighting Fires Together: xView 2 Prize Challenge Helps Automate Damage Assessments](https://appliedsciences.nasa.gov/our-impact/news/fighting-fires-together-xview-2-prize-challenge-helps-automate-damage-assessments). NASA. June 25, 2020.
 - [JUST IN: Defense Innovation Unit to Sponsor Computer Vision Prize Challenge](https://www.nationaldefensemagazine.org/articles/2020/3/12/defense-innovation-unit-to-sponsor-computer-vision-prize-challenge). National Defense Magazine. March 12, 2020.
@@ -35,6 +29,26 @@ author_profile: true
 - [U.S. Military, Looking to Automate Post-Disaster Damage Recognition, Seeks a Winning Formula](https://spectrum.ieee.org/tech-talk/computing/software/defense-department-launches-disastrous-computer-vision-contest). IEEE Spectrum. September 26, 2019.
 - [Defense Innovation Unit launches new satellite imagery prize challenge](https://spacenews.com/defense-innovation-unit-launches-new-satellite-imagery-prize-challenge/). Space News. September 26, 2019.
 - [DOD Sponsors Artificial Intelligence Competition](https://www.afcea.org/content/dod-sponsors-artificial-intelligence-competition). SIGNAL Magazine. August 15, 2019.
+
+# AI to Detect Illegal Fishing
+
+- [U.S. Fishing for Defense Tech to Protect International Waters](https://www.nationaldefensemagazine.org/articles/2022/1/20/us-fishing-for-defense-tech-to-protect-international-waters). National Defense Magazine. January 20, 2022.
+- [Can We Spot Illegal Fishing Fleets from Space?](https://www.defenseone.com/technology/2021/08/can-we-spot-illegal-fishing-fleets-space/184300/). Defense One. August 4, 2021.
+- [DOD Announces AI Competition to Detect, Defeat Illegal Fishing](https://www.defense.gov/Explore/News/Article/Article/2703739/dod-announces-ai-competition-to-detect-defeat-illegal-fishing/). Department of Defense. July 22, 2021.
+- [Defense Innovation Unit to Sponsor Computer Vision Prize Challenge](https://www.nationaldefensemagazine.org/articles/2020/3/12/defense-innovation-unit-to-sponsor-computer-vision-prize-challenge). National Defense Magazine. July 22, 2021.
+- [The Pentagon Wants Programmers' Help to Catch IUU Fishing Activity](https://www.maritime-executive.com/article/the-pentagon-wants-programmers-help-to-spot-iuu-fishing). The Maritime Executive. July 22, 2021
+
+# AI for Climate Change
+
+- [Snowy with a chance for data](https://berkeleysciencereview.com/article/2022/12/04/snowy-with-a-chance-of-data). Berkeley Science Review. December 3, 2022.
+
+# COVID-19
+
+- [Naval Academy Participates in Rapid Analysis of Threat Exposure (Rate) Study](https://www.usna.edu/NewsCenter/2020/12/Naval_Academy_Participates_in_Rapid_Analysis_of_Threat_Exposure_Rate_Study.php). US Naval Academy. December 14, 2020.
+- [Detecting Change With Artificial Intelligence](https://www.afcea.org/content/detecting-change-artificial-intelligence). SIGNAL Magazine. December 1, 2020.
+- [Thousands of American Troops to Take Part in Covid-19 Early-Detection Study](https://www.wsj.com/articles/thousands-of-american-troops-to-take-part-in-covid-19-early-detection-study-11600772402). Wall Street Journal. September 22, 2020.
+- [AI Aids DOD in Early Detection of COVID-19](https://www.defense.gov/Explore/News/Article/Article/2356086/ai-aiding-dod-in-early-detection-of-covid-19-say-technologists/). Department of Defense News. September 22, 2020.
+- [The US Military’s Latest Wearables Can Detect Illness Two Days Before You Get Sick](https://www.defenseone.com/technology/2020/09/militarys-latest-wearables-can-detect-illness-two-days-you-get-sick/168664/). Defense One. September 22, 2020.
 
 # Reports
 
