@@ -11,7 +11,7 @@ author_profile: true
 
 ## AI for Disaster Response
 
-- [CNN News Segment](https://twitter.com/jchatterleyCNN/status/1630949841537839112). CNN. March 1, 2023.
+- [Eyes in the sky: Planet Labs satellites track a changing globe](https://twitter.com/jchatterleyCNN/status/1630949841537839112). CNN. March 1, 2023.
 - [From ‘paradise’ to hell: How a luxury development in Turkey became an earthquake death trap](https://ig.ft.com/turkey-earthquake-apartment-collapse/). Financial Times. February 27, 2023
 - [How AI can actually be helpful in disaster response](https://www.technologyreview.com/2023/02/20/1068824/ai-actually-helpful-disaster-response-turkey-syria-earthquake/). MIT Technology Review. February 20, 2023.
 - [Nach Menschenrechtsverstößen fahnden](https://www.deutschlandfunkkultur.de/satelliten-bilder-krieg-100.html). Deutschlandfunk Kultur. April 14, 2022.
