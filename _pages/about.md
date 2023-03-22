@@ -20,6 +20,8 @@ If you would like to contact me, you can email me at firstlast@berkeley.edu. Ple
 
 ### News
 
+- **[Mar. 2023]** I spoke at NVIDIA's GTC 2023 on the topic of partnerships in AI for humanitarian assistance and disaster response.
+- **[Feb. 2023]** My work on damage assessment for the 2023 Turkey/Syria earthquake was featured in [MIT Technology Review](https://www.technologyreview.com/2023/02/20/1068824/ai-actually-helpful-disaster-response-turkey-syria-earthquake/), [Financial Times](https://ig.ft.com/turkey-earthquake-apartment-collapse/), and [CNN](https://twitter.com/jchatterleyCNN/status/1630949841537839112).
 - **[Jan. 2023]** I earned the Graduate Certificate in Security Policy from the Goldman School at Berkeley.
 - **[Sept. 2022]** One paper accepted to NeurIPS 2022!
 - **[Jul. 2022]** I was awarded the National Science Foundation's Digital Transformation of Development Fellowship.
