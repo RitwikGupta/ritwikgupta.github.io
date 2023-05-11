@@ -63,9 +63,9 @@ social:
   name: null
   links: null
 analytics:
-  provider: google-universal
+  provider: google-gtag
   google:
-    tracking_id: UA-60715523-1
+    tracking_id: G-83XPF3W3R2
 author:
   name: Ritwik Gupta
   avatar: profile.jpg
