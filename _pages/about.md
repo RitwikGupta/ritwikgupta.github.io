@@ -14,7 +14,7 @@ I am lucky to be able to spend time at Berkeley's [Human Rights Center](https://
 
 In addition to my academic pursuits, I am the Founder and President of [Neural Tangent](https://neuraltangent.com/), a company that uses machine learning to solve problems in the field of humanitarian assistance and disaster response. I also provide consulting services in the areas of machine learning, artificial intelligence, edge computing, and remote sensing.
 
-I co-organize the [Berkeley AI Reseach Climate Initiative](https://ai-climate.berkeley.edu/) with [Colorado Reed](http://people.eecs.berkeley.edu/~cjrd/) and [Medhini Narasimhan](https://medhini.github.io/), which brings together researchers to work on AI research through the lens of climate change and helps to translate that work into real-world applications. If you are interested in participating, please join our Slack group and send me a message.
+I co-organize the [Berkeley AI Reseach Climate Initiative](https://ai-climate.berkeley.edu/) with [Medhini Narasimhan](https://medhini.github.io/), which brings together researchers to work on AI research through the lens of climate change and helps to translate that work into real-world applications. If you are interested in participating, please join our Slack group and send me a message.
 
 If you would like to contact me, you can email me at firstlast@berkeley.edu. Please note that I am currently not accepting undergraduate students for research opportunities, although new opportunities may arise in the future.
 
