@@ -8,6 +8,6 @@ projecturl: "https://ai-climate.berkeley.edu/scale-mae-website/"
 paperurl: "https://arxiv.org/abs/2212.14532"
 github: "https://github.com/bair-climate-initiative/scale-mae"
 authors: "<i>Ritwik Gupta*</i>, Colorado Reed*, Shufan Li*, Sarah Brockman, Christopher Funk, Brian Clipp, Kurt Keutzer, Salvatore Candido, Matt Uyttendaele, Trevor Darrell"
-venue: "arXiv, in review."
-citation: 'Ritwik Gupta, Colorado Reed, Shufan Li, Sarah Brockman, Christopher Funk, Brian Clipp, Kurt Keutzer, Salvatore Candido, Matt Uyttendaele, Trevor Darrell. "Scale-MAE: A Scale-Aware Masked Autoencoder for Multiscale Geospatial Representation Learning." arXiv preprint 2212.14532 (2022).'
+venue: "International Conference on Computer Vision (ICCV) 2023"
+citation: 'Ritwik Gupta, Colorado Reed, Shufan Li, Sarah Brockman, Christopher Funk, Brian Clipp, Kurt Keutzer, Salvatore Candido, Matt Uyttendaele, Trevor Darrell. "Scale-MAE: A Scale-Aware Masked Autoencoder for Multiscale Geospatial Representation Learning." International Conference on Computer Vision (ICCV) 2023.'
 ---
