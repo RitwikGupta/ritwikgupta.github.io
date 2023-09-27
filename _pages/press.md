@@ -42,6 +42,12 @@ author_profile: true
 
 - [Snowy with a chance for data](https://berkeleysciencereview.com/article/2022/12/04/snowy-with-a-chance-of-data). Berkeley Science Review. December 3, 2022.
 
+# AI and Space Policy
+
+- [Proliferate, Don’t Obliterate: How Responsive Launch Marginalizes Anti-Satellite Capabilities](https://warontherocks.com/2023/09/proliferate-dont-obliterate-how-responsive-launch-marginalizes-anti-satellite-capabilities/). War on the Rocks. September 21, 2023.
+- [Accelerating the Evolution of AI Export Controls](https://techpolicy.press/accelerating-the-evolution-of-ai-export-controls/). Tech Policy Press. September 21, 2023.
+- [Orbital hypersonic delivery systems threaten strategic stability](https://thebulletin.org/2023/06/orbital-hypersonic-delivery-systems-threaten-strategic-stability/). The Bulletin of Atomic Scientists. June 13, 2023.
+
 # COVID-19
 
 - [Naval Academy Participates in Rapid Analysis of Threat Exposure (Rate) Study](https://www.usna.edu/NewsCenter/2020/12/Naval_Academy_Participates_in_Rapid_Analysis_of_Threat_Exposure_Rate_Study.php). US Naval Academy. December 14, 2020.
