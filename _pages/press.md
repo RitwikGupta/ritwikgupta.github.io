@@ -32,6 +32,7 @@ author_profile: true
 
 # AI to Detect Illegal Fishing
 
+- [AI as a Weapon to Defend the Seas from Illegal Fishing](https://www.akbizmag.com/industry/fisheries/illegal-fishing-ai/). Alaska Business. November 13, 2023.
 - [U.S. Fishing for Defense Tech to Protect International Waters](https://www.nationaldefensemagazine.org/articles/2022/1/20/us-fishing-for-defense-tech-to-protect-international-waters). National Defense Magazine. January 20, 2022.
 - [Can We Spot Illegal Fishing Fleets from Space?](https://www.defenseone.com/technology/2021/08/can-we-spot-illegal-fishing-fleets-space/184300/). Defense One. August 4, 2021.
 - [DOD Announces AI Competition to Detect, Defeat Illegal Fishing](https://www.defense.gov/Explore/News/Article/Article/2703739/dod-announces-ai-competition-to-detect-defeat-illegal-fishing/). Department of Defense. July 22, 2021.
@@ -47,6 +48,11 @@ author_profile: true
 - [Proliferate, Don’t Obliterate: How Responsive Launch Marginalizes Anti-Satellite Capabilities](https://warontherocks.com/2023/09/proliferate-dont-obliterate-how-responsive-launch-marginalizes-anti-satellite-capabilities/). War on the Rocks. September 21, 2023.
 - [Accelerating the Evolution of AI Export Controls](https://techpolicy.press/accelerating-the-evolution-of-ai-export-controls/). Tech Policy Press. September 21, 2023.
 - [Orbital hypersonic delivery systems threaten strategic stability](https://thebulletin.org/2023/06/orbital-hypersonic-delivery-systems-threaten-strategic-stability/). The Bulletin of Atomic Scientists. June 13, 2023.
+
+# AI Governance
+
+- [Corporate Strategies For AI Safety And Governance](https://www.forbes.com/sites/timabansal/2023/11/17/corporate-strategies-for-ai-safety-and-governance/?sh=4e5013c327aa). Forbes. November 17, 2023.
+- [Does OpenAI’s Non-Profit Ownership Structure Actually Matter?](https://www.forbes.com/sites/timabansal/2023/10/13/does-openais-non-profit-ownership-structure-actually-matter/?sh=2d5548317d18) Forbes. October 13, 2023.
 
 # COVID-19
 
