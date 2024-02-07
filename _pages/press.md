@@ -49,6 +49,10 @@ author_profile: true
 - [Accelerating the Evolution of AI Export Controls](https://techpolicy.press/accelerating-the-evolution-of-ai-export-controls/). Tech Policy Press. September 21, 2023.
 - [Orbital hypersonic delivery systems threaten strategic stability](https://thebulletin.org/2023/06/orbital-hypersonic-delivery-systems-threaten-strategic-stability/). The Bulletin of Atomic Scientists. June 13, 2023.
 
+# AI Safety
+
+- [Child sexual abuse material found on popular dataset shows risks for federal AI research ](https://fedscoop.com/ai-federal-research-database-laion-csam/). FedScoop. January 22, 2024.
+
 # AI Governance
 
 - [Corporate Strategies For AI Safety And Governance](https://www.forbes.com/sites/timabansal/2023/11/17/corporate-strategies-for-ai-safety-and-governance/?sh=4e5013c327aa). Forbes. November 17, 2023.
