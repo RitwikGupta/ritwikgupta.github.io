@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/xt
 excerpt: "xT is a framework which lets you model extremely large images (upwards of 30,000 x 30,000 pixels) end-to-end on contemporary GPUs. You get higher accuracy with fewer parameters and less memory used per region."
 date: 2024-03-04
-venue: "arXiv preprint"
+venue: "International Conference on Machine Learning (ICML) 2024"
 projecturl: "http://ai-climate.berkeley.edu/xt-website/"
 paperurl: "https://arxiv.org/abs/2403.01915"
 github: "http://github.com/bair-climate-initiative/xT/"
