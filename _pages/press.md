@@ -49,6 +49,11 @@ author_profile: true
 - [Accelerating the Evolution of AI Export Controls](https://techpolicy.press/accelerating-the-evolution-of-ai-export-controls/). Tech Policy Press. September 21, 2023.
 - [Orbital hypersonic delivery systems threaten strategic stability](https://thebulletin.org/2023/06/orbital-hypersonic-delivery-systems-threaten-strategic-stability/). The Bulletin of Atomic Scientists. June 13, 2023.
 
+# AI and National Security
+
+- [AI Seoul Summit, U.S.-China AI Safety Readout, and the Zhousidun Dataset](https://www.csis.org/podcasts/ai-policy-podcast/ai-seoul-summit-us-china-ai-safety-readout-and-zhousidun-dataset). Center for Strategic & International Studies. June 3, 2024.
+- [Import AI 374: China's military AI dataset; platonic AI; brainlike convnets](https://importai.substack.com/p/import-ai-374-chinas-military-ai). Import AI Newsletter. May 27, 2024.
+
 # AI Safety
 
 - [Child sexual abuse material found on popular dataset shows risks for federal AI research ](https://fedscoop.com/ai-federal-research-database-laion-csam/). FedScoop. January 22, 2024.
