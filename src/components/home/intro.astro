@@ -1,0 +1,95 @@
+---
+import { Image } from "astro:assets";
+import profile from "../../../public/profile.jpg";
+import twitter from "../../../public/icons/twitter.svg";
+import mastodon from "../../../public/icons/mastodon.svg";
+import linkedin from "../../../public/icons/linkedin.svg";
+import github from "../../../public/icons/github.svg";
+
+interface Link {
+    url: string;
+    displayType: string;
+    text: string;
+    imageSrc?: any;
+}
+
+const links: Link[] = [
+    {
+        url: "https://twitter.com/Ritwik_G",
+        displayType: "image",
+        text: "twitter",
+        imageSrc: twitter,
+    },
+    {
+        url: "https://sigmoid.social/@ritwik",
+        displayType: "image",
+        text: "mastodon",
+        imageSrc: mastodon,
+    },
+    {
+        url: "https://www.linkedin.com/in/ritwikgupta",
+        displayType: "image",
+        text: "linkedin",
+        imageSrc: linkedin,
+    },
+    {
+        url: "https://github.com/RitwikGupta",
+        displayType: "image",
+        text: "github",
+        imageSrc: github,
+    },
+    {
+        url: "https://scholar.google.com/citations?user=4Cdwp_MAAAAJ&hl=en",
+        displayType: "text",
+        text: "Google Scholar",
+    },
+    {
+        url: "https://orcid.org/0000-0001-7608-3832",
+        displayType: "text",
+        text: "ORCID",
+    },
+];
+---
+
+<section
+    class="w-full flex items-center justify-center flex-col lg:flex-row gap-x-16 gap-y-4"
+>
+    <Image
+        src={profile}
+        alt="Ritwik Gupta profile picture"
+        class="border rounded-full border-transparent w-[150px]"
+    />
+    <div
+        class="flex items-center lg:items-start justify-center flex-col gap-y-2 lg:gap-y-4"
+    >
+        <div class="flex items-end justify-center flex-row gap-x-2">
+            <h1 class="text-xl sm:text-4xl font-bold">Ritwik Gupta</h1>
+            <p class="text-gray-400 text-sm sm:text-base">[at] berkeley.edu</p>
+        </div>
+        <h2 class="text-base sm:text-lg text-center lg:text-left">
+            AI and Policy researcher driving innovation in humanitarian
+            assistance and disaster response (HADR)
+        </h2>
+        <div class="flex items-stretch justify-center flex-row gap-2 flex-wrap">
+            {
+                links.map((link) => (
+                    <a
+                        href={link.url}
+                        target="_blank"
+                        class="bg-gray-200 hover:bg-gray-300 px-2 py-1 border border-transparent transition-colors rounded-md flex items-center justify-center font-semibold"
+                    >
+                        {link.displayType === "image" ? (
+                            <Image
+                                src={link.imageSrc!}
+                                alt={link.text}
+                                width={20}
+                            />
+                        ) : (
+                            link.text
+                        )}
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</section>
