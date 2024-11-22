@@ -1,4 +1,3 @@
----
 interface Author {
     name: string;
     isPrimary?: boolean;
@@ -16,7 +15,7 @@ interface Pub {
     venue?: string;
 }
 
-const publications: Pub[] = [
+export const publications: Pub[] = [
     {
         title: "Open-Source Assessments of AI Capabilities: The Proliferation of AI Analysis Tools, Replicating Competitor Models, and the Zhousidun Dataset",
         authors: [
@@ -503,37 +502,3 @@ const publications: Pub[] = [
         ],
     },
 ];
----
-
-<div class="w-full flex items-center justify-center flex-col gap-y-12">
-    {
-        publications.map((p) => (
-            <div class="w-full flex items-start justify-center flex-col gap-y-2">
-                <h3 class="text-lg sm:text-2xl font-bold">{p.title}</h3>
-                <p class="text-gray-400">
-                    {p.authors
-                        .map((author) =>
-                            author.isPrimary ? author.name + "*" : author.name
-                        )
-                        .join(", ")}
-                </p>
-                <div class="w-full flex items-center justify-start flex-row flex-wrap gap-2">
-                    {p.venue && (
-                        <span class="bg-blue-100 px-2 py-1 border border-transparent rounded-md text-sm font-semibold">
-                            {p.venue}
-                        </span>
-                    )}
-                    {p.links.map((link) => (
-                        <a
-                            href={link.url}
-                            target="_blank"
-                            class="bg-gray-200 hover:bg-gray-300 px-2 py-1 border border-transparent rounded-md text-sm font-semibold transition-colors"
-                        >
-                            {link.display}
-                        </a>
-                    ))}
-                </div>
-            </div>
-        ))
-    }
-</div>
