@@ -1,0 +1,82 @@
+---
+import "@fontsource-variable/montserrat";
+import Topnav from "../components/topnav.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content={frontmatter.description} />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{frontmatter.title}</title>
+    </head>
+    <body class="flex items-center justify-center flex-col w-screen">
+        <Topnav />
+        <main
+            class="w-full md:w-3/4 xl:w-7/12 flex items-center justify-center flex-col gap-y-10 p-12"
+        >
+            <div class="not-prose flex items-start justify-start w-full">
+                <a
+                    href="/blog"
+                    class="text-sm text-left text-gray-400 hover:text-gray-500 transition-colors font-semibold"
+                    >&larr; See all blogs</a
+                >
+            </div>
+            <div
+                class="not-prose w-full flex items-start justify-center flex-col gap-y-2 text-[#111827] border-b pb-4"
+            >
+                <h1 class="text-2xl sm:text-4xl font-bold">
+                    {frontmatter.title}
+                </h1>
+                <p class="text-gray-400">
+                    Published: {
+                        new Date(frontmatter.pubDate)
+                            .toLocaleString("en-US", {
+                                timeZone: "UTC",
+                            })
+                            .split(",")[0]
+                    }
+                </p>
+            </div>
+            <div
+                class="prose prose-headings:mt-8 prose-headings:mb-0 prose-headings:text-left prose-p:mt-4 prose-p:mb-0 prose-ol:mt-4 prose-ol:mb-0 prose-ul:mt-4 prose-ul:mb-0 prose-a:text-blue-500 hover:prose-a:text-blue-600 transition-colors"
+            >
+                <slot />
+            </div>
+        </main>
+    </body>
+    <style is:global>
+        :root {
+            --accent: 136, 58, 234;
+            --accent-light: 224, 204, 250;
+            --accent-dark: 49, 10, 101;
+            --accent-gradient: linear-gradient(
+                45deg,
+                rgb(var(--accent)),
+                rgb(var(--accent-light)) 30%,
+                white 60%
+            );
+        }
+
+        ::selection {
+            background: #d1d5db;
+        }
+
+        code {
+            font-family:
+                Menlo,
+                Monaco,
+                Lucida Console,
+                Liberation Mono,
+                DejaVu Sans Mono,
+                Bitstream Vera Sans Mono,
+                Courier New,
+                monospace;
+        }
+    </style>
+</html>

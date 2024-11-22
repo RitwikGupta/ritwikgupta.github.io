@@ -1,0 +1,55 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const posts: any[] = Object.values(
+    import.meta.glob("./posts/*.md", { eager: true })
+);
+
+posts.sort(
+    (a, b) =>
+        new Date(b.frontmatter.pubDate).valueOf() -
+        new Date(a.frontmatter.pubDate).valueOf()
+);
+---
+
+<Layout
+    title="Ritwik Gupta | Blog"
+    desc="AI and Policy researcher driving innovation in humanitarian assistance and disaster response (HADR)"
+>
+    <main
+        class="w-full md:w-3/4 xl:w-7/12 flex items-center justify-center flex-col gap-y-10 p-12"
+    >
+        <div class="flex items-start justify-start w-full">
+            <a
+                href="/"
+                class="text-sm text-left text-gray-400 hover:text-gray-500 transition-colors font-semibold"
+                >&larr; Back to home</a
+            >
+        </div>
+        <h1 class="text-2xl sm:text-4xl font-bold">Blog</h1>
+        <div class="w-full flex items-center justify-center flex-col gap-y-12">
+            {
+                posts.map((p) => (
+                    <div class="w-full flex items-start justify-center flex-col gap-y-2">
+                        <a
+                            href={p.url}
+                            class="text-lg sm:text-2xl font-bold text-blue-500 hover:text-blue-600 transition-colors underline"
+                        >
+                            {p.frontmatter.title}
+                        </a>
+                        <p class="text-gray-400 text-sm">
+                            {
+                                new Date(p.frontmatter.pubDate)
+                                    .toLocaleString("en-US", {
+                                        timeZone: "UTC",
+                                    })
+                                    .split(",")[0]
+                            }
+                        </p>
+                        <p>{p.frontmatter.description}</p>
+                    </div>
+                ))
+            }
+        </div>
+    </main>
+</Layout>
