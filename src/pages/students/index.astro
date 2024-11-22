@@ -1,10 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Bio from "../components/about/full-bio.md";
+import Layout from "../../layouts/Layout.astro";
+import StudentList from "./_list.md";
 ---
 
 <Layout
-    title="Ritwik Gupta | About"
+    title="Ritwik Gupta | Students"
     desc="AI and Policy researcher driving innovation in humanitarian assistance and disaster response (HADR)"
 >
     <main
@@ -17,11 +17,11 @@ import Bio from "../components/about/full-bio.md";
                 >&larr; Back to home</a
             >
         </div>
-        <h1 class="text-2xl sm:text-4xl font-bold">About Me</h1>
+        <h1 class="text-2xl sm:text-4xl font-bold">Students</h1>
         <div
             class="prose prose-a:text-blue-500 hover:prose-a:text-blue-600 transition-colors"
         >
-            <Bio />
+            <StudentList />
         </div>
     </main>
 </Layout>

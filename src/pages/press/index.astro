@@ -1,10 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import PubItems from "../components/publications/publications.astro";
+import Layout from "../../layouts/Layout.astro";
+import PressList from "./_press.md";
 ---
 
 <Layout
-    title="Ritwik Gupta | Publications"
+    title="Ritwik Gupta | Press Articles"
     desc="AI and Policy researcher driving innovation in humanitarian assistance and disaster response (HADR)"
 >
     <main
@@ -17,7 +17,11 @@ import PubItems from "../components/publications/publications.astro";
                 >&larr; Back to home</a
             >
         </div>
-        <h1 class="text-2xl sm:text-4xl font-bold">Publications</h1>
-        <PubItems />
+        <h1 class="text-2xl sm:text-4xl font-bold">Press Articles</h1>
+        <div
+            class="prose prose-a:text-blue-500 hover:prose-a:text-blue-600 transition-colors"
+        >
+            <PressList />
+        </div>
     </main>
 </Layout>
