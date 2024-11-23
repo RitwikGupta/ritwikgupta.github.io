@@ -3,6 +3,7 @@ layout: ../../../layouts/BlogLayout.astro
 title: The Department of Defense is Prioritizing Open Source Software. Here's How Open Source Projects Can Benefit.
 pubDate: 2022-02-07
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+og_image: /images/dod-oss/og.png
 ---
 
 On January 26, 2022, the new Chief Information Officer (CIO) of the U.S. Department of Defense (DoD), John B. Sherman, released a memo to the entire Department titled ["Software Development and Open Source Software"](https://dodcio.defense.gov/Portals/0/Documents/Library/SoftwareDev-OpenSource.pdf). In this memo, the CIO addresses two primary concerns: 1) using open source software (OSS) introduces supply chain risks for DoD software programs, and 2) sharing DoD code via open source channels without proper checks enables potential leaks of proprietary DoD information to adversaries. In laying out how these two concerns should be addressed properly, the CIO categorizes OSS into a unique position, one which can be utilized by OSS foundations and project maintainers to gain funding for their essential contributions.

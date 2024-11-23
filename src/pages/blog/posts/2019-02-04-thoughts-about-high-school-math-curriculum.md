@@ -3,6 +3,7 @@ layout: ../../../layouts/BlogLayout.astro
 title: Thoughts About My High School's Math Curriculum
 pubDate: 2019-02-04
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+og_image: /images/math/math.jpg
 ---
 
 I went to high school to Thomas Jefferson High School in Pittsburgh, PA (not the famous one in Alexandria, VA). I wrote an email to my math teachers there talking about my thoughts about our high school math curriculum now that I've been through an undergrad, currently taking grad courses, and have a full-time job doing math for a living. I'm pasting the emails as-is here, with some additional formatting. Please let me know if you have any comments or criticisms.

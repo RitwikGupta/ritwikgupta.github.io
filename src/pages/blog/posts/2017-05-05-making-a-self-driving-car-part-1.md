@@ -3,6 +3,7 @@ layout: ../../../layouts/BlogLayout.astro
 title: Making a Self Driving Car - Part 1
 pubDate: 2017-05-05
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+og_image: /images/ml/sdp1-1.jpg
 ---
 
 I just graduated from the University of Pittsburgh and have some time to relax before starting my job, so my dad and I decided to build a self-driving car. We think we can do it, and even if we can't, at least we'll learn some cool stuff while doing it. The goal is to start simple and build as we go.

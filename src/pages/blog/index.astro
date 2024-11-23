@@ -30,13 +30,13 @@ posts.sort(
         <div class="w-full flex items-center justify-center flex-col gap-y-12">
             {
                 posts.map((p) => (
-                    <div class="w-full flex items-start justify-center flex-col gap-y-2">
-                        <a
-                            href={p.url}
-                            class="text-lg sm:text-2xl font-bold text-blue-500 hover:text-blue-600 transition-colors underline"
-                        >
+                    <a
+                        href={p.url}
+                        class="w-full flex items-start justify-center flex-col gap-y-2 border p-8 rounded-md hover:border-black transition-colors"
+                    >
+                        <h2 class="text-lg sm:text-2xl font-bold">
                             {p.frontmatter.title}
-                        </a>
+                        </h2>
                         <p class="text-gray-400 text-sm">
                             {
                                 new Date(p.frontmatter.pubDate)
@@ -47,7 +47,13 @@ posts.sort(
                             }
                         </p>
                         <p>{p.frontmatter.description}</p>
-                    </div>
+                        <div class="flex items-center justify-center w-full">
+                            <img
+                                src={p.frontmatter.og_image}
+                                alt={p.frontmatter.title}
+                            />
+                        </div>
+                    </a>
                 ))
             }
         </div>

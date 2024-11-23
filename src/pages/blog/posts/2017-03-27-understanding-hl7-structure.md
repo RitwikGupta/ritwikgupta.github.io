@@ -3,6 +3,7 @@ layout: ../../../layouts/BlogLayout.astro
 title: Understanding HL7 Structure
 pubDate: 2017-03-29
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+og_image: /images/hc/hl7-1.jpg
 ---
 
 # What is HL7

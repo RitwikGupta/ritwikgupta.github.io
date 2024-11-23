@@ -3,6 +3,7 @@ layout: ../../../layouts/BlogLayout.astro
 title: Idea for Efficient Cell Image Compression
 pubDate: 2017-03-25
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+og_image: /images/gc/compression-1.jpg
 ---
 
 ## Premise

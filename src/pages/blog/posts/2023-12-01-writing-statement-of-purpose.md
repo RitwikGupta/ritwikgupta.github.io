@@ -3,6 +3,7 @@ layout: ../../../layouts/BlogLayout.astro
 title: How to Write an Impactful Statement of Purpose
 pubDate: 2023-12-01
 description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+og_image: /images/grad-letter/letter.png
 ---
 
 As the grad school application season unfolds, students worldwide, including yourself, are diligently preparing their applications. The statement of purpose (SOP) stands out as the most crucial and anxiety-inducing component of this process.
