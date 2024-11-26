@@ -2,7 +2,7 @@
 layout: ../../../layouts/BlogLayout.astro
 title: How to Write an Impactful Statement of Purpose
 pubDate: 2023-12-01
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+description: Grad school application season got you stressed? Fret not, here's how to write a good statement of purpose.
 og_image: /images/grad-letter/letter.png
 ---
 

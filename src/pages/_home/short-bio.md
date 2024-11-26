@@ -1,1 +1,5 @@
-Ph.D., Berkeley AI Research (BAIR) **&#183;** AI Policy Fellow, Center for Security in Politics **&#183;** Graduate Fellow, Berkeley Risk and Security Lab **&#183;** Research Fellow, Berkeley’s Human Rights Center **&#183;** Fellow, Berkeley’s AI Policy Hub **&#183;** Founder and President, Neural Tangent **&#183;** Co-organizer, Berkeley AI Reseach Climate Initiative.
+Ph.D. Student, Berkeley AI Research (BAIR)
+
+Ph.D. Student, Berkeley Risk and Security Lab (BRSL)
+
+Technical Director for Autonomy, Defense Innovation Unit (DIU)

@@ -2,7 +2,7 @@
 layout: ../../../layouts/BlogLayout.astro
 title: Making an API for Pitt
 pubDate: 2015-07-25
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+description: I discuss the inspiration and process behind making the now-popular PittAPI.
 og_image: /images/gc/api-1.png
 ---
 

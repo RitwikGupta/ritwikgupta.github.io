@@ -2,7 +2,7 @@
 layout: ../../../layouts/BlogLayout.astro
 title: "Exploring Deep Learning: Theory and Practice"
 pubDate: 2017-10-05
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+description: A lecture I gave at the CMU Data Science Club that introduced undergraduates to deep learning.
 og_image: /images/ml/neural-network.png
 ---
 

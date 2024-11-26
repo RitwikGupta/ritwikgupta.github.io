@@ -2,7 +2,7 @@
 layout: ../../../layouts/BlogLayout.astro
 title: Understanding HL7 Structure
 pubDate: 2017-03-29
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+description: I spent a long time working with and fixing broken HL7 and ADT pipelines at hospitals. Here are my learnings.
 og_image: /images/hc/hl7-1.jpg
 ---
 

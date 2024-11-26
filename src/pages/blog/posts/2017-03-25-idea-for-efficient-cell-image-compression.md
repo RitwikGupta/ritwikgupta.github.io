@@ -2,7 +2,7 @@
 layout: ../../../layouts/BlogLayout.astro
 title: Idea for Efficient Cell Image Compression
 pubDate: 2017-03-25
-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+description: Just throwing this out there to the world. Surely there must be a way to compress gigapixel cell imagery!
 og_image: /images/gc/compression-1.jpg
 ---
 
