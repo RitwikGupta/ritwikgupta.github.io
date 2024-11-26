@@ -31,6 +31,7 @@ import { publications } from "./list";
                         </a>
                     ))}
                 </div>
+                {p.imgSrc && <img src={p.imgSrc} alt={p.title} />}
             </div>
         ))
     }
