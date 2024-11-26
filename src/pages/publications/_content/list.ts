@@ -17,6 +17,21 @@ interface Pub {
 
 export const publications: Pub[] = [
     {
+        title: "Whack-a-Chip: The Futility of Hardware-Centric Export Controls",
+        authors: [
+            { name: "Ritwik Gupta" },
+            { name: "Leah Walker" },
+            { name: "Andrew W. Reddie" },
+        ],
+        venue: "arXiv preprint",
+        links: [
+            {
+                url: "https://arxiv.org/abs/2411.14425",
+                display: "paper",
+            },
+        ],
+    },
+    {
         title: "Open-Source Assessments of AI Capabilities: The Proliferation of AI Analysis Tools, Replicating Competitor Models, and the Zhousidun Dataset",
         authors: [
             { name: "Ritwik Gupta" },
@@ -26,7 +41,7 @@ export const publications: Pub[] = [
             { name: "Sarthak Bhatnagar" },
             { name: "Andrew W. Reddie" },
         ],
-        venue: "arXiv preprint",
+        venue: "In review",
         links: [
             {
                 url: "https://arxiv.org/abs/2405.12167",
