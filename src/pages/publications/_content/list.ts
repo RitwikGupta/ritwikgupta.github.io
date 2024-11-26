@@ -33,10 +33,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
-        award: "Best Paper Award", // TODO: This is an example!
         excerpt:
             "We give the first, public evidence as to how leading PRC AI labs are effectively circumventing U.S. semiconductor export controls through better software. We question the basis and efficacy of the current export control regime.",
-        imgSrc: "/images/grad-letter/letter.png", // TODO: This is an example!
     },
     {
         title: "Open-Source Assessments of AI Capabilities: The Proliferation of AI Analysis Tools, Replicating Competitor Models, and the Zhousidun Dataset",
@@ -255,6 +253,7 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        award: "Best Paper Award", // TODO: This is an example!
         excerpt:
             "The largest-ever dataset designed for hybrid ML-physics research. It comprises multi-scale climate simulations, developed by a consortium of climate scientists and ML researchers.",
     },
@@ -300,6 +299,7 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        award: "Nominated for Best Paper", // TODO: This is an example!
         excerpt:
             "A pre-training method to make encoders robust to imagery captured at varying satellite resolutions. State-of-the-art multi-scale pre-training method and the largest satellite imagery foundation model, to date.",
     },
