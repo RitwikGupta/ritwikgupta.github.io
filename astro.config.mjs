@@ -11,4 +11,5 @@ export default defineConfig({
         remarkPlugins: [remarkMath],
         rehypePlugins: [[rehypeKatex, { output: "mathml" }]],
     },
+    site: "https://ritwikgupta.github.io",
 });
