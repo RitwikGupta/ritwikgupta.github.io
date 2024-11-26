@@ -12,6 +12,7 @@ interface Pub {
     title: string;
     authors: Author[];
     links: Link[];
+    excerpt: string;
     venue?: string;
 }
 
@@ -30,6 +31,7 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt: "TODO",
     },
     {
         title: "Open-Source Assessments of AI Capabilities: The Proliferation of AI Analysis Tools, Replicating Competitor Models, and the Zhousidun Dataset",
@@ -52,6 +54,8 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        excerpt:
+            "China is training machine learning models to target American and Allied navel vessels, but how well do they work? In this paper, we train a state-of-the-art machine learning model on a leaked Chinese dataset that labels Aegis combat system components on military vessels. We propose a new methodology for open source assessment of adversary AI capabilities.",
     },
     {
         title: "xT: Nested Tokenization for Larger Context in Large Images",
@@ -78,6 +82,8 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        excerpt:
+            "xT is a framework which lets you model extremely large images (upwards of 30,000 x 30,000 pixels) end-to-end on contemporary GPUs. You get higher accuracy with fewer parameters and less memory used per region.",
     },
     {
         title: "Russian Nuclear ASAT Weapons: The Fallout",
@@ -100,6 +106,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "What is the state of the existing space governance regime amid concerns that Moscow is developing a nuclear-tipped anti-satellite weapon in orbit?",
     },
     {
         title: "LAION and the Challenges of Preventing AI-Generated CSAM",
@@ -111,6 +119,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "I examined the challenges in preventing AI-generated Child Sexual Abuse Material (CSAM), such as within the widely-used LAION-5B dataset, emphasizing the need for updated legal and technological strategies to tackle the spread of such content by generative AI technologies.",
     },
     {
         title: "See, Say, and Segment: Teaching LMMs to Overcome False Premises",
@@ -139,6 +149,8 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        excerpt:
+            "A method to prevent large, multimodal models (LMMs) to stop hallucinating when given false premises.",
     },
     {
         title: "Proliferate, Don't Obliterate: How Responsive Launch Marginalizes Anti-Satellite Capabilities",
@@ -150,6 +162,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "We analyze how the emerging responsive launch industry fundamentally shifts the strategic calculus of ASAT weapons.",
     },
     {
         title: "Accelerating the Evolution of AI Export Controls",
@@ -161,6 +175,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "Current US AI hardware export controls are based on the best AI accelerator chip available at that time. This presents wide loopholes which allow adversarial nations to still maintain their capabilities. We propose an alternate way to set export control thresholds based on the analysis of specific ML workloads.",
     },
     {
         title: "ClimSim: An open large-scale dataset for training high-resolution physics emulators in hybrid multi-scale climate simulators",
@@ -234,6 +250,8 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        excerpt:
+            "The largest-ever dataset designed for hybrid ML-physics research. It comprises multi-scale climate simulations, developed by a consortium of climate scientists and ML researchers.",
     },
     {
         title: "Orbital hypersonic delivery systems threaten strategic stability",
@@ -245,6 +263,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "We assess that China's development of a fractional orbital hypersonic delivery system, combining hypersonic glide vehicles with orbital bombardment, presents a concerning challenge to global stability, allowing for faster, undetectable delivery of large nuclear payloads and signaling renewed interest in first-strike capabilities.",
     },
     {
         title: "Scale-MAE: A Scale-Aware Masked Autoencoder for Multiscale Geospatial Representation Learning",
@@ -275,6 +295,8 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        excerpt:
+            "A pre-training method to make encoders robust to imagery captured at varying satellite resolutions. State-of-the-art multi-scale pre-training method and the largest satellite imagery foundation model, to date.",
     },
     {
         title: "Emerging Technology and Policy Co-Design Considerations for the Safe and Transparent Use of Small Unmanned Aerial Systems",
@@ -295,6 +317,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "With the meteoric rise of small unmanned aerial systems, we discuss policy shortcomings in integrating sUAS technology in a safe fashion into our society. We suggest technology and policy co-design approaches to addressing these gaps in our systems.",
     },
     {
         title: "xView3-SAR: Detecting Dark Fishing Activity Using Synthetic Aperture Radar Imagery",
@@ -327,6 +351,8 @@ export const publications: Pub[] = [
                 display: "youtube",
             },
         ],
+        excerpt:
+            "The largest labeled dataset for training ML models to detect and characterize vessels and ocean structures in synthetic aperture radar imagery. xView3 is built to help control illegal, unreported, and unregulated fishing.",
     },
     {
         title: "Satlas: A Large-Scale, Multi-Task Dataset for Remote Sensing Image Understanding",
@@ -348,6 +374,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "A foundational remote sensing dataset with over 290M labels under 137 categories and seven label modalities for pre-training large machine learning models.",
     },
     {
         title: "Snowpack Estimation in Key Mountainous Water Basins from Openly-Available, Multimodal Data Sources",
@@ -374,6 +402,8 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        excerpt:
+            "We fuse satellite and weather data to estimate snowpack depth in key mountainous regions and beat single-source estimation by 5.0 inches RMSE.",
     },
     {
         title: "WiSoSuper: Benchmarking Super-Resolution Methods on Wind and Solar Data",
@@ -403,6 +433,8 @@ export const publications: Pub[] = [
                 display: "youtube",
             },
         ],
+        excerpt:
+            "An extensible benchmark of deep learning-based super-resolution techniques on wind and solar data. We accompany the benchmark with a novel public, processed, and machine learning-ready dataset for benchmarking super-resolution methods on wind and solar data.",
     },
     {
         title: "Region-level Active Detector Learning",
@@ -424,6 +456,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "A new strategy that subsumes previous Image-level and Object-level approaches into a generalized, Region-level approach.",
     },
     {
         title: "xBD: A Dataset for Assessing Building Damage from Satellite Imagery",
@@ -453,6 +487,8 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        excerpt:
+            "The foundational dataset for assessing building damage after natural disasters from very-high resolution satellite imagery with over 850,000 annotations across 45,000 square kilometers.",
     },
     {
         title: "Creating xBD: A Dataset for Assessing Building Damage from Satellite Imagery",
@@ -483,6 +519,8 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
+        excerpt:
+            "Preliminary work discussing xBD, the foundational dataset for assessing building damage after natural disasters from very-high resolution satellite imagery with over 850,000 annotations across 45,000 square kilometers.",
     },
     {
         title: "Focusing on the Big Picture: Insights into a Systems Approach to Deep Learning for Satellite Imagery",
@@ -499,6 +537,8 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "Focused around the IARPA Functional Map of the World Challenge, this work discusses how to scale deep learning at an academic lab for geospatial analysis.",
     },
     {
         title: "Open Problems in Robotic Anomaly Detection",
@@ -515,5 +555,7 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
+        excerpt:
+            "Motivated by the development of ROS 2, this work discusses open problems in the field of robotic anomaly detection and presents an inverse reinforcement learning-based approach to detecting anomalous motion.",
     },
 ];
