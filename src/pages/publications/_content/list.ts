@@ -13,6 +13,7 @@ interface Pub {
     authors: Author[];
     links: Link[];
     excerpt: string;
+    award?: string;
     venue?: string;
     imgSrc?: string;
 }
@@ -32,8 +33,10 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
-        excerpt: "We give the first, public evidence as to how leading PRC AI labs are effectively circumventing U.S. semiconductor export controls through better software. We question the basis and efficacy of the current export control regime.",
-        imgSrc: "/images/dod-oss/og.png" // TODO: This is an example!
+        award: "Best Paper Award", // TODO: This is an example!
+        excerpt:
+            "We give the first, public evidence as to how leading PRC AI labs are effectively circumventing U.S. semiconductor export controls through better software. We question the basis and efficacy of the current export control regime.",
+        imgSrc: "/images/grad-letter/letter.png", // TODO: This is an example!
     },
     {
         title: "Open-Source Assessments of AI Capabilities: The Proliferation of AI Analysis Tools, Replicating Competitor Models, and the Zhousidun Dataset",
