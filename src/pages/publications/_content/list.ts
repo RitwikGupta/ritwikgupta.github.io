@@ -31,7 +31,7 @@ export const publications: Pub[] = [
                 display: "paper",
             },
         ],
-        excerpt: "TODO",
+        excerpt: "We give the first, public evidence as to how leading PRC AI labs are effectively circumventing U.S. semiconductor export controls through better software. We question the basis and efficacy of the current export control regime.",
     },
     {
         title: "Open-Source Assessments of AI Capabilities: The Proliferation of AI Analysis Tools, Replicating Competitor Models, and the Zhousidun Dataset",
