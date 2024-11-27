@@ -36,7 +36,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "We give the first, public evidence as to how leading PRC AI labs are effectively circumventing U.S. semiconductor export controls through better software. We question the basis and efficacy of the current export control regime.",
-        date: "2015-07-25", // TODO
+        date: "2024-11-21",
     },
     {
         title: "Open-Source Assessments of AI Capabilities: The Proliferation of AI Analysis Tools, Replicating Competitor Models, and the Zhousidun Dataset",
@@ -48,7 +48,7 @@ export const publications: Pub[] = [
             { name: "Sarthak Bhatnagar" },
             { name: "Andrew W. Reddie" },
         ],
-        venue: "In review",
+        venue: "BRSL Tech Report",
         links: [
             {
                 url: "https://arxiv.org/abs/2405.12167",
@@ -61,7 +61,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "China is training machine learning models to target American and Allied navel vessels, but how well do they work? In this paper, we train a state-of-the-art machine learning model on a leaked Chinese dataset that labels Aegis combat system components on military vessels. We propose a new methodology for open source assessment of adversary AI capabilities.",
-        date: "2015-07-25", // TODO
+        date: "2024-05-20",
     },
     {
         title: "xT: Nested Tokenization for Larger Context in Large Images",
@@ -90,7 +90,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "xT is a framework which lets you model extremely large images (upwards of 30,000 x 30,000 pixels) end-to-end on contemporary GPUs. You get higher accuracy with fewer parameters and less memory used per region.",
-        date: "2015-07-25", // TODO
+        date: "2024-03-04"
     },
     {
         title: "Russian Nuclear ASAT Weapons: The Fallout",
@@ -115,7 +115,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "What is the state of the existing space governance regime amid concerns that Moscow is developing a nuclear-tipped anti-satellite weapon in orbit?",
-        date: "2015-07-25", // TODO
+        date: "2024-02-26",
     },
     {
         title: "LAION and the Challenges of Preventing AI-Generated CSAM",
@@ -129,7 +129,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "I examined the challenges in preventing AI-generated Child Sexual Abuse Material (CSAM), such as within the widely-used LAION-5B dataset, emphasizing the need for updated legal and technological strategies to tackle the spread of such content by generative AI technologies.",
-        date: "2015-07-25", // TODO
+        date: "2024-01-02",
     },
     {
         title: "See, Say, and Segment: Teaching LMMs to Overcome False Premises",
@@ -160,7 +160,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "A method to prevent large, multimodal models (LMMs) to stop hallucinating when given false premises.",
-        date: "2015-07-25", // TODO
+        date: "2023-12-13",
     },
     {
         title: "Proliferate, Don't Obliterate: How Responsive Launch Marginalizes Anti-Satellite Capabilities",
@@ -174,7 +174,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "We analyze how the emerging responsive launch industry fundamentally shifts the strategic calculus of ASAT weapons.",
-        date: "2015-07-25", // TODO
+        date: "2023-09-21",
     },
     {
         title: "Accelerating the Evolution of AI Export Controls",
@@ -188,7 +188,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "Current US AI hardware export controls are based on the best AI accelerator chip available at that time. This presents wide loopholes which allow adversarial nations to still maintain their capabilities. We propose an alternate way to set export control thresholds based on the analysis of specific ML workloads.",
-        date: "2015-07-25", // TODO
+        date: "2023-09-21",
     },
     {
         title: "ClimSim: An open large-scale dataset for training high-resolution physics emulators in hybrid multi-scale climate simulators",
@@ -262,10 +262,10 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
-        award: "Best Paper Award", // TODO: This is an example!
+        award: "Best Paper Award",
         excerpt:
             "The largest-ever dataset designed for hybrid ML-physics research. It comprises multi-scale climate simulations, developed by a consortium of climate scientists and ML researchers.",
-        date: "2015-07-25", // TODO
+        date: "2023-06-14",
     },
     {
         title: "Orbital hypersonic delivery systems threaten strategic stability",
@@ -279,7 +279,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "We assess that China's development of a fractional orbital hypersonic delivery system, combining hypersonic glide vehicles with orbital bombardment, presents a concerning challenge to global stability, allowing for faster, undetectable delivery of large nuclear payloads and signaling renewed interest in first-strike capabilities.",
-        date: "2015-07-25", // TODO
+        date: "2023-06-13",
     },
     {
         title: "Scale-MAE: A Scale-Aware Masked Autoencoder for Multiscale Geospatial Representation Learning",
@@ -310,10 +310,10 @@ export const publications: Pub[] = [
                 display: "github",
             },
         ],
-        award: "Nominated for Best Paper", // TODO: This is an example!
+        award: "Nominated for Best Paper",
         excerpt:
             "A pre-training method to make encoders robust to imagery captured at varying satellite resolutions. State-of-the-art multi-scale pre-training method and the largest satellite imagery foundation model, to date.",
-        date: "2015-07-25", // TODO
+        date: "2022-12-30",
     },
     {
         title: "Emerging Technology and Policy Co-Design Considerations for the Safe and Transparent Use of Small Unmanned Aerial Systems",
@@ -336,7 +336,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "With the meteoric rise of small unmanned aerial systems, we discuss policy shortcomings in integrating sUAS technology in a safe fashion into our society. We suggest technology and policy co-design approaches to addressing these gaps in our systems.",
-        date: "2015-07-25", // TODO
+        date: "2022-12-06",
     },
     {
         title: "xView3-SAR: Detecting Dark Fishing Activity Using Synthetic Aperture Radar Imagery",
@@ -371,7 +371,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "The largest labeled dataset for training ML models to detect and characterize vessels and ocean structures in synthetic aperture radar imagery. xView3 is built to help control illegal, unreported, and unregulated fishing.",
-        date: "2015-07-25", // TODO
+        date: "2022-12-03",
     },
     {
         title: "Satlas: A Large-Scale, Multi-Task Dataset for Remote Sensing Image Understanding",
@@ -395,7 +395,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "A foundational remote sensing dataset with over 290M labels under 137 categories and seven label modalities for pre-training large machine learning models.",
-        date: "2015-07-25", // TODO
+        date: "2022-11-28",
     },
     {
         title: "Snowpack Estimation in Key Mountainous Water Basins from Openly-Available, Multimodal Data Sources",
@@ -424,7 +424,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "We fuse satellite and weather data to estimate snowpack depth in key mountainous regions and beat single-source estimation by 5.0 inches RMSE.",
-        date: "2015-07-25", // TODO
+        date: "2022-06-20",
     },
     {
         title: "WiSoSuper: Benchmarking Super-Resolution Methods on Wind and Solar Data",
@@ -456,7 +456,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "An extensible benchmark of deep learning-based super-resolution techniques on wind and solar data. We accompany the benchmark with a novel public, processed, and machine learning-ready dataset for benchmarking super-resolution methods on wind and solar data.",
-        date: "2015-07-25", // TODO
+        date: "2021-09-23",
     },
     {
         title: "Region-level Active Detector Learning",
@@ -480,7 +480,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "A new strategy that subsumes previous Image-level and Object-level approaches into a generalized, Region-level approach.",
-        date: "2015-07-25", // TODO
+        date: "2021-08-20",
     },
     {
         title: "xBD: A Dataset for Assessing Building Damage from Satellite Imagery",
@@ -512,7 +512,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "The foundational dataset for assessing building damage after natural disasters from very-high resolution satellite imagery with over 850,000 annotations across 45,000 square kilometers.",
-        date: "2015-07-25", // TODO
+        date: "2019-11-21",
     },
     {
         title: "Creating xBD: A Dataset for Assessing Building Damage from Satellite Imagery",
@@ -545,7 +545,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "Preliminary work discussing xBD, the foundational dataset for assessing building damage after natural disasters from very-high resolution satellite imagery with over 850,000 annotations across 45,000 square kilometers.",
-        date: "2015-07-25", // TODO
+        date: "2019-06-20",
     },
     {
         title: "Focusing on the Big Picture: Insights into a Systems Approach to Deep Learning for Satellite Imagery",
@@ -564,7 +564,7 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "Focused around the IARPA Functional Map of the World Challenge, this work discusses how to scale deep learning at an academic lab for geospatial analysis.",
-        date: "2015-07-25", // TODO
+        date: "2018-12-10",
     },
     {
         title: "Open Problems in Robotic Anomaly Detection",
@@ -583,6 +583,6 @@ export const publications: Pub[] = [
         ],
         excerpt:
             "Motivated by the development of ROS 2, this work discusses open problems in the field of robotic anomaly detection and presents an inverse reinforcement learning-based approach to detecting anomalous motion.",
-        date: "2015-07-25", // TODO
+        date: "2018-12-10",
     },
 ];
