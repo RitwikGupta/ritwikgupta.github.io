@@ -8,3 +8,4 @@
 - <a href="https://www.linkedin.com/in/eli-glickman/" target="_blank">Eli Glickman</a> - Marshall and Truman Scholar, University of California, Berkeley
 - <a href="https://homepage.jackli.org/" target="_blank">Shufan Li</a> - Ph.D. Student, University of California, Los Angeles
 - <a href="https://tylerzhu.com/" target="_blank">Tyler Zhu</a> - Ph.D. Student, Princeton University
+- <a href="https://xyntechx.com/" target="_blank">Nyx Iskandar</a> - Junior, University of California, Berkeley
