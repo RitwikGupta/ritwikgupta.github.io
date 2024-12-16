@@ -1,7 +1,10 @@
 - <a href="http://people.eecs.berkeley.edu/~kaylene/" target="_blank">Kaylene Stocking</a> - Ph.D. Student, U.C. Berkeley (Electrical and Computer Engineering)
-- <a href="https://www.linkedin.com/in/alex-fulton/" target="_blank">Alex Fulton</a> - 1st Lietenant, U.S. Air Force (67th Cyberspace Wing)
-- <a href="https://www.linkedin.com/in/sandra-s-59a08298/" target="_blank">Sandra Sajeev</a> - Data Scientist, Microsoft
-- <a href="https://www.linkedin.com/in/dominick-gurnari/" target="_blank">Dominick Gurnari</a> - Software Development Engineer, Amazon Web Services
-- <a href="https://www.linkedin.com/in/daniel-tunitis/" target="_blank">Danny Tunitis</a> - 2nd Lietenant, U.S. Air Force
-- <a href="http://rupakv.com/" target="_blank">Rupa Kurinchi-Vendhan</a> - Sophomore, California Institute of Technology
-- <a href="https://www.linkedin.com/in/rithwik-sudharsan/" target="_blank">Rithwik Sudharshan</a> - Junior, University of California, Berkeley
+- <a href="https://www.linkedin.com/in/alex-fulton/" target="_blank">Alex Fulton</a> - Cyber Officer, U.S. Air Force
+- <a href="https://www.linkedin.com/in/sandra-s-59a08298/" target="_blank">Sandra Sajeev</a> - Senior Machine Learning Scientist, Coursera
+- <a href="https://www.linkedin.com/in/dominick-gurnari/" target="_blank">Dominick Gurnari</a> - Software Development Engineer II, Amazon Web Services
+- <a href="https://www.linkedin.com/in/daniel-tunitis/" target="_blank">Danny Tunitis</a> - Cyber Officer, U.S. Air Force
+- <a href="http://rupakv.com/" target="_blank">Rupa Kurinchi-Vendhan</a> - Ph.D. Student, Massachusetts Institute of Technology
+- <a href="https://www.linkedin.com/in/rithwik-sudharsan/" target="_blank">Rithwik Sudharshan</a> - Senior, University of California, Berkeley
+- <a href="https://www.linkedin.com/in/eli-glickman/" target="_blank">Eli Glickman</a> - Marshall and Truman Scholar, University of California, Berkeley
+- <a href="https://homepage.jackli.org/" target="_blank">Shufan Li</a> - Ph.D. Student, University of California, Los Angeles
+- <a href="https://tylerzhu.com/" target="_blank">Tyler Zhu</a> - Ph.D. Student, Princeton University
