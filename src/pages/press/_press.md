@@ -32,23 +32,19 @@
 
 - <a href="https://berkeleysciencereview.com/article/2022/12/04/snowy-with-a-chance-of-data" target="_blank">Snowy with a chance for data</a>. Berkeley Science Review. December 3, 2022.
 
-## AI and Space Policy
+## AI, National Security, and Public Policy
 
+- <a href="https://www.newscientist.com/article/2458860-tencent-seems-unaffected-by-us-ai-chip-export-ban-research-shows" target="_blank">Tencent seems unaffected by US AI chip export ban, research shows</a>. New Scientist. December 5, 2024.
+- <a href="https://www.csis.org/podcasts/ai-policy-podcast/ai-seoul-summit-us-china-ai-safety-readout-and-zhousidun-dataset" target="_blank">AI Seoul Summit, U.S.-China AI Safety Readout, and the Zhousidun Dataset</a>. Center for Strategic & International Studies. June 3, 2024.
+- <a href="https://importai.substack.com/p/import-ai-374-chinas-military-ai" target="_blank">Import AI 374: China's military AI dataset; platonic AI; brainlike convnets</a>. Import AI Newsletter. May 27, 2024.
 - <a href="https://warontherocks.com/2023/09/proliferate-dont-obliterate-how-responsive-launch-marginalizes-anti-satellite-capabilities/" target="_blank">Proliferate, Don't Obliterate: How Responsive Launch Marginalizes Anti-Satellite Capabilities</a>. War on the Rocks. September 21, 2023.
 - <a href="https://techpolicy.press/accelerating-the-evolution-of-ai-export-controls/" target="_blank">Accelerating the Evolution of AI Export Controls</a>. Tech Policy Press. September 21, 2023.
 - <a href="https://thebulletin.org/2023/06/orbital-hypersonic-delivery-systems-threaten-strategic-stability/" target="_blank">Orbital hypersonic delivery systems threaten strategic stability</a>. The Bulletin of Atomic Scientists. June 13, 2023.
 
-## AI and National Security
 
-- <a href="https://www.csis.org/podcasts/ai-policy-podcast/ai-seoul-summit-us-china-ai-safety-readout-and-zhousidun-dataset" target="_blank">AI Seoul Summit, U.S.-China AI Safety Readout, and the Zhousidun Dataset</a>. Center for Strategic & International Studies. June 3, 2024.
-- <a href="https://importai.substack.com/p/import-ai-374-chinas-military-ai" target="_blank">Import AI 374: China's military AI dataset; platonic AI; brainlike convnets</a>. Import AI Newsletter. May 27, 2024.
-
-## AI Safety
+## AI Safety and Governance
 
 - <a href="https://fedscoop.com/ai-federal-research-database-laion-csam/" target="_blank">Child sexual abuse material found on popular dataset shows risks for federal AI research</a>. FedScoop. January 22, 2024.
-
-## AI Governance
-
 - <a href="https://www.forbes.com/sites/timabansal/2023/11/17/corporate-strategies-for-ai-safety-and-governance/?sh=4e5013c327aa" target="_blank">Corporate Strategies For AI Safety And Governance</a>. Forbes. November 17, 2023.
 - <a href="https://www.forbes.com/sites/timabansal/2023/10/13/does-openais-non-profit-ownership-structure-actually-matter/?sh=2d5548317d18" target="_blank">Does OpenAI's Non-Profit Ownership Structure Actually Matter?</a> Forbes. October 13, 2023.
 
