@@ -34,6 +34,7 @@
 
 ## AI, National Security, and Public Policy
 
+- <a href="https://time.com/7204164/china-ai-advances-chips/" target="_blank">How China Is Advancing in AI Despite U.S. Chip Restrictions</a>. TIME Magazine. January 8, 2025.
 - <a href="https://www.newscientist.com/article/2458860-tencent-seems-unaffected-by-us-ai-chip-export-ban-research-shows" target="_blank">Tencent seems unaffected by US AI chip export ban, research shows</a>. New Scientist. December 5, 2024.
 - <a href="https://www.csis.org/podcasts/ai-policy-podcast/ai-seoul-summit-us-china-ai-safety-readout-and-zhousidun-dataset" target="_blank">AI Seoul Summit, U.S.-China AI Safety Readout, and the Zhousidun Dataset</a>. Center for Strategic & International Studies. June 3, 2024.
 - <a href="https://importai.substack.com/p/import-ai-374-chinas-military-ai" target="_blank">Import AI 374: China's military AI dataset; platonic AI; brainlike convnets</a>. Import AI Newsletter. May 27, 2024.
