@@ -1,0 +1,22 @@
+---
+import { content } from "./list"
+import Extra from "./_extra.md"
+---
+
+{
+    content.map((c) => (
+        <h2>{c.title}</h2>
+        <div class="grid grid-cols-3 md:grid-cols-5 w-full gap-4 items-center">
+            {c.links.map((link) => (
+                <a href={link.url} target="_blank" class="flex items-center justify-center w-full h-full">
+                    <img
+                        src={link.img}
+                        alt={link.url}
+                    />
+                </a>
+            ))}
+        </div>
+    ))
+}
+
+<Extra />
