@@ -128,6 +128,10 @@ export const content: Content[] = [
         title: "AI, National Security, and Public Policy",
         links: [
             {
+                url: "https://www.lemonde.fr/economie/article/2025/01/25/la-chine-talonne-les-americains-dans-la-course-a-l-intelligence-artificielle_6514703_3234.html",
+                img: "/press/LeMonde.svg",
+            },
+            {
                 url: "https://on.ft.com/4jwunLy",
                 img: "/press/Financial_Times.svg",
             },
