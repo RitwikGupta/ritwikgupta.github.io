@@ -20,7 +20,7 @@ Continued progress in AI requires two key ingredients: large investments in capi
 
 * The Chinese Approach: With limited access to the latest hardware due to geopolitical tensions, China has leaned heavily into developing human capital. While their investments in datacenters are significant, the real emphasis has been on nurturing talent through rigorous education systems.
 
-This brings me to a critical point: scaling hardware alone has its limits. Resources are finite, environmental impact matters, and [perpetual growth isn’t sustainable](https://en.wikipedia.org/wiki/Factfulness). China’s long-term bet on talent&mdash;through many mandatory systems courses in their universities&mdash;positions them uniquely. In contrast, American universities have increasingly deprioritized these fundamental courses. Yet, many of AI’s recent breakthroughs, such as FlashAttention and automatic mixed precision, stem from advances in systems-level thinking. If this trend continues, the talent gap could widen significantly in China’s favor.
+China’s long-term bet on talent&mdash;through many mandatory systems courses in their universities&mdash;positions them uniquely. In contrast, American universities have increasingly deprioritized these fundamental courses. Yet, many of AI’s recent breakthroughs, such as FlashAttention and automatic mixed precision, stem from advances in systems-level thinking. If this trend continues, the talent gap could widen significantly in China’s favor.
 
 DeepSeek’s success is also attributed to their unique approach to engineering. While U.S. companies often default to scaling up with more GPUs&mdash;even if their models poorly utilize hardware&mdash;DeepSeek was incentivized to optimize for efficiency. They developed new training schemes, software, and procedures to maximize performance on less advanced hardware, showcasing the power of ingenuity over brute force.
 
@@ -38,17 +38,17 @@ DeepSeek, like many Chinese LLMs, has been trained to censor topics the PRC deem
 
 DeepSeek has also burst a significant bubble: the myth that scaling AI models is solely about adding more GPUs and burning more electricity. Many leading models have embarrassingly poor model FLOPS utilization (MFUs). For example, Llama can [operate at around 30% MFU](https://github.com/pytorch/torchtitan/blob/main/docs/performance.md) (though many optimizations for this now exist). DeepSeek’s achievement lies in better utilizing existing hardware, proving that efficiency&mdash;not just brute force&mdash;can yield superior results in less time.
 
+Scaling hardware alone has its limits. Resources are finite, environmental impact matters, and [perpetual growth isn’t sustainable](https://en.wikipedia.org/wiki/Factfulness). We covered these topics at depth in our recent papers on [Data-Centric AI Governance](https://arxiv.org/abs/2409.17216), which showed that compute parameters under-specify capabilities, and [Whack-a-Chip](https://arxiv.org/abs/2411.14425), which forecasted PRC AI labs' excellence at squeezing more out of worse hardware through better software.
+
+The impact of hardware limitations tends to unfold over time. Given that modern GPUs are not yet being used at their full capacity, it will take time before their maximum potential is realized. If the United States intends to expand its reliance on hardware export controls, its chip export policies must be carefully reconsidered to address several critical issues:
+
+1. Defining Weaponized Workloads: The specific workloads that the United States seeks to limit must be clearly articulated. For instance, while the U.S. has expressed a desire to prevent the proliferation of weaponized artificial intelligence, there remains ambiguity surrounding what constitutes an "AI weapon." A precise and actionable definition is essential to guide policy.
+
+2. Software-Hardware Integrated Continuous Benchmarks: Export controls should be informed by ongoing, software-hardware benchmarks designed to accurately assess the frontier capabilities of critical workloads. When new hardware is released, it should be made available for testing to a pool of talented AI researchers and engineers who can test the most advanced models and software on that hardware. At present, no such benchmarks exist, creating a gap in the ability to effectively monitor and regulate technological progress.
+
 ## Silicon Valley vs. China
 
 The arrival of DeepSeek’s models doesn’t fundamentally shift the AI race dynamics between the U.S. and China. Any perceived moat between American and Chinese capabilities was always more perception than reality. The rapid diffusion of software technologies makes it inevitable that China would replicate American AI successes. Future breakthroughs will depend on deep investments in both hardware and talent. Both nations have advantages, but the degree to which these advantages translate into dominance remains uncertain. Whoever innovates first will likely see their advancements quickly mirrored by the other side.
-
-## The Impact of U.S. Chip Export Restrictions
-
-This requires a nuanced take, as context is critical. I covered this extensively in my paper, "[Whack-a-Chip: The Futility of Hardware-Centric Export Controls](https://arxiv.org/abs/2411.14425)." The effects of hardware limitations take time to materialize. Since modern GPUs are not yet fully utilized, it will be a while before their true potential is reached. If the U.S. is committed to pursuing hardware export controls, its chip export policies must be revisited to address several key points:
-
-1. The specific workloads America seeks to restrict must be clearly defined. For example, the U.S. has stated it wants to prevent the proliferation of weaponized AI—but what constitutes an AI weapon? A precise definition is necessary.
-
-2. Export controls should be tied to continuous software-hardware benchmarks that accurately reflect the frontier of capabilities for these critical workloads. Such benchmarks do not currently exist.
 
 ## Keep Innovating
 
