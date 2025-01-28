@@ -32,7 +32,7 @@ However, here’s the real game-changer: DeepSeek is open source. Unlike proprie
 
 ## Censorship and Authoritarianism
 
-DeepSeek, like many Chinese LLMs, has been trained to censor topics the PRC deems sensitive, such as the Tiananmen Square massacre. This is problematic and highlights the broader issue of AI being used for influence operations. If widely adopted in its current form, it could serve as a vehicle for subtle censorship and opinion manipulation on a global scale. However, the fact that DeepSeek is open source means it’s only a matter of time before an “uncensored” version emerges. This would allow the technology to be realigned with values that prioritize freedom of speech and open inquiry.
+DeepSeek, like many Chinese LLMs, has been trained to censor topics the PRC deems sensitive, such as the Tiananmen Square massacre. This is problematic and highlights the broader issue of AI being used for influence operations. If widely adopted in its current form, it could serve as a vehicle for subtle censorship and opinion manipulation on a global scale. However, the fact that DeepSeek is open source means that uncensored versions of the model are [already available](https://huggingface.co/collections/huihui-ai/deepseek-r1-abliterated-6790ea12ce8c8c4e5df51b7f) (caveat emptor, these are the distilled versions of the models, but the point stands)! This allows the technology to be realigned with values that prioritize freedom of speech and open inquiry.
 
 ## Breaking the AI Scaling Myth
 
