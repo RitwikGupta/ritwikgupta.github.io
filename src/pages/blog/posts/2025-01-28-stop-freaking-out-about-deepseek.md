@@ -2,7 +2,7 @@
 layout: ../../../layouts/BlogLayout.astro
 title: Stop Freaking Out About DeepSeek
 pubDate: 2025-01-28
-description: Everyone is freaking out about DeepSeek. Cut it out. The model is not the real thing to be worried about.
+description: Everyone is freaking out about DeepSeek. The model is not the real thing to be worried about!
 og_image: /images/deepseek/deepseek.png
 ---
 
