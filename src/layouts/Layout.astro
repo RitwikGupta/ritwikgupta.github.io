@@ -21,14 +21,28 @@ const { title, desc } = Astro.props;
         <title>{title}</title>
 
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-83XPF3W3R2"></script>
-        <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-83XPF3W3R2');
-        </script>
+        <script
+            is:inline
+            type="text/partytown"
+            src="https://www.googletagmanager.com/gtag/js?id=G-83XPF3W3R2"
+        ></script>
+        <script is:inline type="text/partytown">
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+          
+            // This should ALWAYS be set before the gtag("config", "G-XXXXXXXXXX"); line
+            gtag("consent", "default", {
+                ad_storage: "denied",
+                ad_user_data: "denied",
+                ad_personalization: "denied",
+                analytics_storage: "denied",
+            });
+          
+            gtag("config", "G-83XPF3W3R2");
+          </script>
     </head>
     <body class="flex items-center justify-center flex-col w-screen">
         <Topnav />
