@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/tailwind": "^5.1.2",
+    "@astrojs/tailwind": "^5.1.5",
     "@fontsource-variable/montserrat": "^5.1.0",
-    "astro": "^4.16.13",
+    "astro": "^5.1.10",
     "katex": "^0.16.11",
     "rehype-katex": "^7.0.1",
     "rehype-mathjax": "^6.0.0",
