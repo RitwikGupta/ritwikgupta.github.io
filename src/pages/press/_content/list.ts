@@ -128,6 +128,10 @@ export const content: Content[] = [
         title: "AI, National Security, and Public Policy",
         links: [
             {
+                url: "https://giftarticle.ft.com/giftarticle/actions/redeem/97924662-a3db-44af-9875-d22023f945f1",
+                img: "/press/Financial_Times.svg"
+            },
+            {
                 url: "https://www.telegraph.co.uk/money/investing/stocks-shares/deepseek-sparks-ai-market-chaos-is-now-the-time-to-buy-up/",
                 img: "/press/Telegraph.svg"
             },
