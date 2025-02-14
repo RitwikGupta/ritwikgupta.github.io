@@ -128,6 +128,10 @@ export const content: Content[] = [
         title: "AI, National Security, and Public Policy",
         links: [
             {
+                url: "https://www.defenseone.com/technology/2025/01/how-deepseek-changed-future-aiand-what-means-national-security/402594/",
+                img: "/press/defense-one.svg"
+            },
+            {
                 url: "https://giftarticle.ft.com/giftarticle/actions/redeem/97924662-a3db-44af-9875-d22023f945f1",
                 img: "/press/Financial_Times.svg"
             },

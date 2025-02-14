@@ -20,7 +20,13 @@ publications.sort(
                     />
                 )}
                 <div class="w-full flex items-start justify-center flex-col gap-y-2">
-                    <h3 class="text-lg sm:text-2xl font-bold">{p.title}</h3>
+                    <a 
+                        href={p.links[0]?.url || '#'} 
+                        target="_blank" 
+                        class="text-lg sm:text-2xl font-bold text-blue-600 hover:underline"
+                    >
+                        {p.title}
+                    </a>
                     <p class="text-gray-400">
                         {p.authors
                             .map((author) =>

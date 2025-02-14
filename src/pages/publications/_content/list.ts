@@ -21,6 +21,24 @@ interface Pub {
 
 export const publications: Pub[] = [
     {
+        title: "The Hawley Act Threatens AI Innovation ",
+        authors: [
+            { name: "Ritwik Gupta" },
+            { name: "Andrew Reddie" },
+        ],
+        venue: "Lawfare",
+        links: [
+            {
+                url: "https://www.lawfaremedia.org/article/the-hawley-act-threatens-ai-innovation",
+                display: "paper",
+            },
+        ],
+        excerpt:
+            "Senator Hawley’s new bill seeks to cut U.S. AI ties with China but risks stifling innovation and hurting U.S. technical dominance instead.",
+        date: "2025-02-10",
+        imgSrc: "/images/thumbnails/hawley.jpg",
+    },
+    {
         title: "Whack-a-Chip: The Futility of Hardware-Centric Export Controls",
         authors: [
             { name: "Ritwik Gupta" },
