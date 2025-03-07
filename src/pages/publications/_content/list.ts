@@ -21,6 +21,29 @@ interface Pub {
 
 export const publications: Pub[] = [
     {
+        title: "Enough Coin Flips Can Make LLMs Act Bayesian",
+        authors: [
+            { name: "Ritwik Gupta" },
+            { name: "Rodolfo Corona" },
+            { name: "Jiaxin Ge" },
+            { name: "Eric Wang" },
+            { name: "Dan Klein" },
+            { name: "Trevor Darrell" },
+            { name: "David M. Chan" },
+        ],
+        venue: "In review",
+        links: [
+            {
+                url: "https://arxiv.org/abs/2503.04722",
+                display: "paper",
+            },
+        ],
+        excerpt:
+            "Can LLMs accurately represent probabilities? We find in this work, no! We also show that in-context learning can be used to induce semi-accurate probability simulation in LLMs.",
+        date: "2025-03-06",
+        imgSrc: "/images/thumbnails/coinflips.jpg",
+    },
+    {
         title: "The Hawley Act Threatens AI Innovation ",
         authors: [
             { name: "Ritwik Gupta" },
