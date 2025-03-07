@@ -39,7 +39,7 @@ export const publications: Pub[] = [
             },
         ],
         excerpt:
-            "Can LLMs accurately represent probabilities? We find in this work, no! We also show that in-context learning can be used to induce semi-accurate probability simulation in LLMs.",
+            "Can LLMs accurately represent probabilities? We find in this work, no! By using biased coin flips as a simple but powerful exemplar, we show that in-context learning can be used to induce semi-accurate probability simulation in LLMs.",
         date: "2025-03-06",
         imgSrc: "/images/thumbnails/coinflips.jpg",
     },
