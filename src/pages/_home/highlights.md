@@ -1,4 +1,5 @@
 ## Highlights
+- **[May 2024]**Our paper, <a href="https://ai-climate.berkeley.edu/random-needles-website/" target="_blank">Enough Coin Flips Can Make LLMs Act Bayesian</a>, was accepted to ACL 2025.
 - **[Sep. 2024]** I launched the <a href="https://brsl.berkeley.edu/ai-frontiers-initiative/" target="_blank">AI Frontiers Intiative</a> aimed at centering data and realistic ML research trends in AI governance.
 - **[May 2024]** Our paper, <a href="https://ai-climate.berkeley.edu/xt-website/" target="_blank">xT</a>, was accepted to ICML 2024.
 - **[Apr. 2024]** I was awarded the <a href="https://www2.eecs.berkeley.edu/Students/Awards/100/" target="_blank">Timothy B. Campbell Innovation Award</a> by the EECS Department.
