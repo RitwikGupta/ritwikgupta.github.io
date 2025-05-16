@@ -1,4 +1,4 @@
-- <a href="http://people.eecs.berkeley.edu/~kaylene/" target="_blank">Kaylene Stocking</a> - Ph.D. Student, U.C. Berkeley (Electrical and Computer Engineering)
+- <a href="http://people.eecs.berkeley.edu/~kaylene/" target="_blank">Kaylene Stocking</a> - Post-doctoral Researcher, Toyota Technological Institute at Chicago
 - <a href="https://www.linkedin.com/in/alex-fulton/" target="_blank">Alex Fulton</a> - Cyber Officer, U.S. Air Force
 - <a href="https://www.linkedin.com/in/sandra-s-59a08298/" target="_blank">Sandra Sajeev</a> - Senior Machine Learning Scientist, Coursera
 - <a href="https://www.linkedin.com/in/dominick-gurnari/" target="_blank">Dominick Gurnari</a> - Software Development Engineer II, Amazon Web Services
