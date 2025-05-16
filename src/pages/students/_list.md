@@ -10,3 +10,4 @@
 - <a href="https://www.linkedin.com/in/emilygelbart" target="_blank">Emily Gelbart</a> - Ph.D. Student, Texas Tech University and NASA
 - <a href="https://tylerzhu.com/" target="_blank">Tyler Zhu</a> - Ph.D. Student, Princeton University
 - <a href="https://xyntechx.com/" target="_blank">Nyx Iskandar</a> - Junior, University of California, Berkeley
+- <a href="https://www.linkedin.com/in/detk" target="_blank">Declan Kutscher</a> - M.S. Student, University of Pittsburgh

@@ -31,8 +31,12 @@ export const publications: Pub[] = [
             { name: "Trevor Darrell" },
             { name: "David M. Chan" },
         ],
-        venue: "In review",
+        venue: "Association for Computational Linguistics (ACL) 2025",
         links: [
+            {
+                url: "https://ai-climate.berkeley.edu/random-needles-website/",
+                display: "website",
+            },
             {
                 url: "https://arxiv.org/abs/2503.04722",
                 display: "paper",
