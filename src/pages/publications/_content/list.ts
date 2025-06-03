@@ -21,6 +21,34 @@ interface Pub {
 
 export const publications: Pub[] = [
     {
+        "title": "REOrdering Patches Improves Vision Models",
+        authors: [
+            { name: "Declan Kutscher" },
+            { name: "David M. Chan" },
+            { name: "Yutong Bai" },
+            { name: "Trevor Darrell" },
+            { name: "Ritwik Gupta" },
+        ],
+        venue: "arXiv preprint, in review",
+        links: [
+            {
+                url: "https://d3tk.github.io/REOrder/",
+                display: "website",
+            },
+            {
+                url: "https://arxiv.org/abs/2505.23751",
+                display: "paper",
+            },
+            {
+                url: "https://github.com/d3tk/REOrder",
+                display: "github",
+            },
+        ],
+        excerpt: "We show that long sequence models are sensitive to the order of patches provided to them, affecting performance by as much as 13%. We propose REOrder, an information-theoretic and RL-based approach to learning an optimal patch ordering to improve performance.",
+        date: "2025-05-29",
+        imgSrc: "/images/thumbnails/reorder.gif",
+    },
+    {
         title: "Enough Coin Flips Can Make LLMs Act Bayesian",
         authors: [
             { name: "Ritwik Gupta" },
@@ -34,13 +62,17 @@ export const publications: Pub[] = [
         venue: "Association for Computational Linguistics (ACL) 2025",
         links: [
             {
-                url: "https://ai-climate.berkeley.edu/random-needles-website/",
+                url: "https://ai-climate.berkeley.edu/llm-coin-flips/",
                 display: "website",
             },
             {
                 url: "https://arxiv.org/abs/2503.04722",
                 display: "paper",
             },
+            {
+                url: "https://github.com/rcorona/llm-coin-flips",
+                display: "github",
+            }
         ],
         excerpt:
             "Can LLMs accurately represent probabilities? We find in this work, no! By using biased coin flips as a simple but powerful exemplar, we show that in-context learning can be used to induce semi-accurate probability simulation in LLMs.",
