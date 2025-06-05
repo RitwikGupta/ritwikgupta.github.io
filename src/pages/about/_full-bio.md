@@ -3,5 +3,3 @@ My name is Ritwik Gupta and I am an Assistant Professor in Computer Science at t
 I conduct open-source investigations as a Research Fellow at Berkeley’s <a href="https://humanrights.berkeley.edu/home" target="_blank">Human Rights Center</a>.
 
 Outside of Berkeley, I serve as the Technical Director for Autonomy for the Defense Innovation Unit and as the Advisor on AI and AI Policy to the U.S. Department of Justice.
-
-<b>Prospective Students:</b> Students interested in working with me should apply to the UMD CS Ph.D. program and mention my name in their research statement. I am looking for students interested in working on physics-integrated computer vision, multi-robot perception, and technology policy. I am also looking for also looking for talented Public Policy Ph.D. students. For this, please apply to the UMD Public Policy Ph.D. program and mention your interest in working with me, but please pick faculty advisors in SPP itself.

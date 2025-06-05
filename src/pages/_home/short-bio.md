@@ -1,5 +1,3 @@
-Ph.D. Student, Berkeley AI Research (BAIR)
-
-Ph.D. Student, Berkeley Risk and Security Lab (BRSL)
+Assistant Professor, University of Maryland (starting 2026)
 
 Technical Director for Autonomy, Defense Innovation Unit (DIU)
