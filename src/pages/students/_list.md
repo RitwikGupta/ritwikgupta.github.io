@@ -11,3 +11,5 @@
 - <a href="https://tylerzhu.com/" target="_blank">Tyler Zhu</a> - Ph.D. Student, Princeton University
 - <a href="https://xyntechx.com/" target="_blank">Nyx Iskandar</a> - Junior, University of California, Berkeley
 - <a href="https://www.linkedin.com/in/detk" target="_blank">Declan Kutscher</a> - M.S. Student, University of Pittsburgh
+- <a href="https://www.linkedin.com/in/naomilqcarvalho/" target="_blank">Naomi Carvalho</a> - B.S. Student, University of California, Berkeley
+- <a href="https://www.linkedin.com/in/grey-pilarczyk-8203a5295/" target="_blank">Grey Pilarczyk</a> - B.S. Student, George Washington University
