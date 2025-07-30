@@ -66,7 +66,7 @@ export const publications: Pub[] = [
                 display: "website",
             },
             {
-                url: "https://arxiv.org/abs/2503.04722",
+                url: "https://aclanthology.org/2025.acl-long.377/",
                 display: "paper",
             },
             {
