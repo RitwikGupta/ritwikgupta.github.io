@@ -128,6 +128,10 @@ export const content: Content[] = [
         title: "AI, National Security, and Public Policy",
         links: [
             {
+                url: "https://on.ft.com/4oBVNCc",
+                img: "/press/Financial_Times.svg"
+            },
+            {
                 url: "https://www.wsj.com/tech/ai/artificial-intelligence-us-vs-china-03372176",
                 img: "/press/wsj.svg"
             },
