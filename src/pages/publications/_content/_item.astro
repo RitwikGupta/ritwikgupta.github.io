@@ -23,11 +23,11 @@ publications.sort(
                     <a 
                         href={p.links[0]?.url || '#'} 
                         target="_blank" 
-                        class="text-lg sm:text-2xl font-bold text-blue-600 hover:underline"
+                        class="text-lg sm:text-2xl font-bold text-blue-600 dark:text-blue-400 hover:underline"
                     >
                         {p.title}
                     </a>
-                    <p class="text-gray-400">
+                    <p class="text-gray-600 dark:text-gray-400">
                         {p.authors
                             .map((author) =>
                                 author.isPrimary
@@ -39,12 +39,12 @@ publications.sort(
                     <p>{p.excerpt}</p>
                     <div class="w-full flex items-center justify-start flex-row flex-wrap gap-2">
                         {p.award && (
-                            <span class="bg-yellow-400 px-2 py-1 border border-transparent rounded-md text-sm font-semibold">
+                            <span class="bg-yellow-400 dark:bg-yellow-500 text-black px-2 py-1 border border-transparent rounded-md text-sm font-semibold">
                                 {p.award}
                             </span>
                         )}
                         {p.venue && (
-                            <span class="bg-blue-100 px-2 py-1 border border-transparent rounded-md text-sm font-semibold">
+                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 px-2 py-1 border border-transparent rounded-md text-sm font-semibold">
                                 {p.venue}
                             </span>
                         )}
@@ -52,7 +52,7 @@ publications.sort(
                             <a
                                 href={link.url}
                                 target="_blank"
-                                class="bg-gray-200 hover:bg-gray-300 px-2 py-1 border border-transparent rounded-md text-sm font-semibold transition-colors"
+                                class="!text-black bg-gray-200 hover:bg-gray-300 px-2 py-1 border border-transparent rounded-md text-sm font-semibold"
                             >
                                 {link.display}
                             </a>
