@@ -1,24 +1,73 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const links = [
+    { href: "/publications", text: "Publications" },
+    { href: "/blog", text: "Blog" },
+    { href: "/students", text: "Students" },
+    { href: "/press", text: "Press" },
+    { href: "/RitwikCV.pdf", text: "CV", target: "_blank" }
+];
+---
+
 <nav
-    class="w-full md:w-3/4 xl:w-7/12 flex items-center justify-between gap-x-4 p-6 border-b font-semibold text-sm sm:text-base"
+    class="w-full md:w-3/4 xl:w-7/12 border-b border-gray-200 dark:border-slate-700"
 >
-    <a
-        href="/publications"
-        class="text-gray-400 hover:text-gray-500 transition-colors"
-        >Publications</a
-    >
-    <a href="/blog" class="text-gray-400 hover:text-gray-500 transition-colors"
-        >Blog</a
-    >
-    <a
-        href="/students"
-        class="text-gray-400 hover:text-gray-500 transition-colors">Students</a
-    >
-    <a href="/press" class="text-gray-400 hover:text-gray-500 transition-colors"
-        >Press</a
-    >
-    <a
-        href="/RitwikCV.pdf"
-        target="_blank"
-        class="text-gray-400 hover:text-gray-500 transition-colors">CV</a
-    >
+    <!-- Desktop Navigation -->
+    <div class="hidden sm:flex items-center justify-between p-6">
+        <div class="flex items-center">
+            {links.map((link, index) => (
+                <>
+                    <a
+                        href={link.href}
+                        target={link.target}
+                        class="text-gray-700 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white transition-colors px-4 font-semibold"
+                    >
+                        {link.text}
+                    </a>
+                    {index < links.length - 1 && (
+                        <div class="h-4 w-px bg-gray-300 dark:bg-gray-600"></div>
+                    )}
+                </>
+            ))}
+        </div>
+        <ThemeToggle />
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="sm:hidden">
+        <div class="flex items-center justify-between p-4">
+            <button
+                id="mobile-menu-button"
+                class="text-gray-700 dark:text-gray-100 hover:text-gray-900 dark:hover:text-white"
+                aria-label="Toggle menu"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+            <ThemeToggle />
+        </div>
+        
+        <!-- Mobile Menu Panel -->
+        <div
+            id="mobile-menu"
+            class="hidden px-4 pb-4 space-y-2"
+        >
+            {links.map(link => (
+                <a
+                    href={link.href}
+                    target={link.target}
+                    class="block py-2 px-4 text-gray-700 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white transition-colors font-semibold hover:bg-gray-100 dark:hover:bg-gray-800 rounded"
+                >
+                    {link.text}
+                </a>
+            ))}
+        </div>
+    </div>
 </nav>
+
+<script is:inline>
+    const menu = document.getElementById('mobile-menu');
+    document.getElementById('mobile-menu-button')?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+</script>

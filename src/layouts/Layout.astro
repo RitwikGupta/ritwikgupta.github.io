@@ -1,6 +1,7 @@
 ---
 import "@fontsource-variable/montserrat";
 import Topnav from "../components/topnav.astro";
+import ThemeScript from "../components/ThemeScript.astro";
 
 interface Props {
     title: string;
@@ -20,6 +21,8 @@ const { title, desc } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
 
+        <ThemeScript />
+
         <!-- Google tag (gtag.js) -->
         <script
             is:inline
@@ -36,37 +39,49 @@ const { title, desc } = Astro.props;
             gtag("config", "G-83XPF3W3R2");
           </script>
     </head>
-    <body class="flex items-center justify-center flex-col w-screen">
+    <body class="flex items-center justify-center flex-col w-screen bg-white dark:bg-[#0B1120]">
         <Topnav />
         <slot />
     </body>
 </html>
 <style is:global>
-    :root {
-        --accent: 136, 58, 234;
-        --accent-light: 224, 204, 250;
-        --accent-dark: 49, 10, 101;
-        --accent-gradient: linear-gradient(
-            45deg,
-            rgb(var(--accent)),
-            rgb(var(--accent-light)) 30%,
-            white 60%
-        );
+    /* Base text colors */
+    body {
+        @apply text-gray-800 dark:text-gray-200;
     }
 
-    ::selection {
-        background: #d1d5db;
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
+        @apply dark:text-white;
     }
 
+    /* Links */
+    a {
+        @apply dark:text-blue-300 hover:dark:text-blue-200;
+    }
+
+    /* Inline text elements */
+    p, span, li {
+        @apply dark:text-gray-200;
+    }
+
+    b, strong {
+        @apply dark:text-gray-100;
+    }
+
+    time {
+        @apply dark:text-gray-300;
+    }
+
+    /* Code blocks */
     code {
-        font-family:
-            Menlo,
-            Monaco,
-            Lucida Console,
-            Liberation Mono,
-            DejaVu Sans Mono,
-            Bitstream Vera Sans Mono,
-            Courier New,
+        font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono",
+            "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New",
             monospace;
+    }
+
+    /* Selection */
+    ::selection {
+        @apply bg-gray-300;
     }
 </style>

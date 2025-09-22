@@ -1,6 +1,7 @@
 ---
 import "@fontsource-variable/montserrat";
 import Topnav from "../components/topnav.astro";
+import ThemeScript from "../components/ThemeScript.astro";
 
 const { frontmatter } = Astro.props;
 ---
@@ -18,6 +19,8 @@ const { frontmatter } = Astro.props;
         <meta property="og:description" content={frontmatter.description} />
         <meta property="og:image" content={frontmatter.og_image} />
 
+        <ThemeScript />
+
         <!-- Google tag (gtag.js) -->
         <script
             is:inline
@@ -34,7 +37,7 @@ const { frontmatter } = Astro.props;
             gtag("config", "G-83XPF3W3R2");
           </script>
     </head>
-    <body class="flex items-center justify-center flex-col w-screen">
+    <body class="flex items-center justify-center flex-col w-screen bg-white dark:bg-[#0B1120] text-gray-800 dark:text-gray-200">
         <Topnav />
         <main
             class="w-full md:w-3/4 xl:w-7/12 flex items-center justify-center flex-col gap-y-10 p-12"
@@ -42,17 +45,17 @@ const { frontmatter } = Astro.props;
             <div class="not-prose flex items-start justify-start w-full">
                 <a
                     href="/blog"
-                    class="text-sm text-left text-gray-400 hover:text-gray-500 transition-colors font-semibold"
+                    class="text-sm text-left text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 transition-colors font-semibold"
                     >&larr; See all blogs</a
                 >
             </div>
             <div
-                class="not-prose w-full flex items-start justify-center flex-col gap-y-2 text-[#111827]"
+                class="not-prose w-full flex items-start justify-center flex-col gap-y-2 text-gray-900 dark:text-white"
             >
                 <h1 class="text-2xl sm:text-4xl font-bold">
                     {frontmatter.title}
                 </h1>
-                <p class="text-gray-400">
+                <p class="text-gray-600 dark:text-gray-400">
                     Published: {
                         new Date(frontmatter.pubDate)
                             .toLocaleString("en-US", {
@@ -66,7 +69,7 @@ const { frontmatter } = Astro.props;
                 </div>
             </div>
             <div
-                class="prose prose-headings:mt-8 prose-headings:mb-0 prose-headings:text-left prose-p:mt-4 prose-p:mb-0 prose-ol:mt-4 prose-ol:mb-0 prose-ul:mt-4 prose-ul:mb-0 prose-a:text-blue-500 hover:prose-a:text-blue-600 transition-colors"
+                class="prose prose-headings:mt-8 prose-headings:mb-0 prose-headings:text-left prose-p:mt-4 prose-p:mb-0 prose-ol:mt-4 prose-ol:mb-0 prose-ul:mt-4 prose-ul:mb-0 prose-a:text-blue-500 hover:prose-a:text-blue-600 transition-colors dark:prose-invert dark:prose-a:text-blue-400 dark:hover:prose-a:text-blue-300"
             >
                 <slot />
             </div>
