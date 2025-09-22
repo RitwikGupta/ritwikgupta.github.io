@@ -29,7 +29,7 @@ export const publications: Pub[] = [
             { name: "Trevor Darrell" },
             { name: "Ritwik Gupta" },
         ],
-        venue: "arXiv preprint, in review",
+        venue: "Neural Information Processing Systems (NeurIPS) 2025",
         links: [
             {
                 url: "https://d3tk.github.io/REOrder/",
@@ -47,6 +47,31 @@ export const publications: Pub[] = [
         excerpt: "We show that long sequence models are sensitive to the order of patches provided to them, affecting performance by as much as 13%. We propose REOrder, an information-theoretic and RL-based approach to learning an optimal patch ordering to improve performance.",
         date: "2025-05-29",
         imgSrc: "/images/thumbnails/reorder.gif",
+    },
+    {
+        title: "LISAT: Language-Instructed Segmentation Assistant for Satellite Imagery",
+        authors: [
+            { name: "Jerome Quenum" },
+            { name: "Wen-Han Hsieh" },
+            { name: "Tsung-Han Wu" },
+            { name: "Ritwik Gupta" },
+            { name: "Trevor Darrell" },
+            { name: "David M. Chan" },
+        ],
+        venue: "Neural Information Processing Systems (NeurIPS) 2025",
+        links: [
+            {
+                url: "https://lisat-bair.github.io/LISAt/",
+                display: "website",
+            },
+            {
+                url: "https://arxiv.org/abs/2505.02829",
+                display: "paper",
+            }
+        ],
+        excerpt: "LISAT reduces the rate of hallucinations for grounded segmentation tasks in VLMs for remote sensing imagery.",
+        date: "2025-05-05",
+        imgSrc: "/images/thumbnails/lisat.jpg"
     },
     {
         title: "Enough Coin Flips Can Make LLMs Act Bayesian",
@@ -93,7 +118,7 @@ export const publications: Pub[] = [
             },
         ],
         excerpt:
-            "Senator Hawley’s new bill seeks to cut U.S. AI ties with China but risks stifling innovation and hurting U.S. technical dominance instead.",
+            "Senator Hawley's new bill seeks to cut U.S. AI ties with China but risks stifling innovation and hurting U.S. technical dominance instead.",
         date: "2025-02-10",
         imgSrc: "/images/thumbnails/hawley.jpg",
     },
