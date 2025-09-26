@@ -1,10 +1,13 @@
 ## Current
 - <a href="https://xyntechx.com/" target="_blank">Nyx Iskandar</a> - Junior, University of California, Berkeley
 - <a href="https://www.linkedin.com/in/detk" target="_blank">Declan Kutscher</a> - M.S. Student, University of Pittsburgh
-- <a href="https://www.linkedin.com/in/naomilqcarvalho/" target="_blank">Naomi Carvalho</a> - B.S. Student, University of California, Berkeley
 - <a href="https://www.linkedin.com/in/grey-pilarczyk-8203a5295/" target="_blank">Grey Pilarczyk</a> - B.S. Student, George Washington University
+- <a href="https://www.linkedin.com/in/henry-gaston/" target="_blank">Henry Gaston</a> - B.S. Student, California Institute of Technology
+- <a href="https://www.linkedin.com/in/sahir-tandon" target="_blank">Sahir Tandon</a> - B.S. Student, University of California, Berkeley
+- <a href="https://www.anirudhkotamraju.com/" target="_blank">Anirudh Kotamraju</a> - B.S. Student, University of California, Berkeley
 
 ## Former
+- <a href="https://www.linkedin.com/in/naomilqcarvalho/" target="_blank">Naomi Carvalho</a> - B.S. Student, University of California, Berkeley
 - <a href="http://people.eecs.berkeley.edu/~kaylene/" target="_blank">Kaylene Stocking</a> - Post-doctoral Researcher, Toyota Technological Institute at Chicago
 - <a href="https://www.linkedin.com/in/alex-fulton/" target="_blank">Alex Fulton</a> - Cyber Officer, U.S. Air Force
 - <a href="https://www.linkedin.com/in/sandra-s-59a08298/" target="_blank">Sandra Sajeev</a> - Senior Machine Learning Scientist, Coursera
