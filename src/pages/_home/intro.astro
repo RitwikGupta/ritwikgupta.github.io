@@ -58,7 +58,12 @@ const links: Link[] = [
     <Image
         src={profile}
         alt="Ritwik Gupta profile picture"
-        class="border rounded-full border-transparent w-[150px]"
+        width={150}
+        height={150}
+        quality={85}
+        format="webp"
+        loading="eager"
+        class="border rounded-full border-transparent"
     />
     <div
         class="flex items-center lg:items-start justify-center flex-col gap-y-2 lg:gap-y-4"
