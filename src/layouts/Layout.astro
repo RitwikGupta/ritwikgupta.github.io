@@ -14,6 +14,12 @@ const { title, desc } = Astro.props;
 <!doctype html>
 <html lang="en">
     <head>
+        <script is:inline>
+            if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        </script>
+        
         <meta charset="UTF-8" />
         <meta name="description" content={desc} />
         <meta name="viewport" content="width=device-width" />

@@ -1,16 +1,3 @@
-<!-- Prevent flash of wrong theme -->
-<script is:inline>
-    // Immediately set the theme before any content renders
-    let isDark = false;
-    try {
-        isDark = localStorage.getItem('theme') === 'dark' || 
-                (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        if (isDark) {
-            document.documentElement.classList.add('dark');
-        }
-    } catch (e) {}
-</script>
-
 <!-- Theme toggle functionality -->
 <script>
     // Theme toggle functionality after DOM loads
