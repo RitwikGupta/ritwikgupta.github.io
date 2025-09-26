@@ -39,10 +39,12 @@ const links = [
         <div class="flex items-center justify-between p-4">
             <button
                 id="mobile-menu-button"
-                class="text-gray-700 dark:text-gray-100 hover:text-gray-900 dark:hover:text-white"
-                aria-label="Toggle menu"
+                class="text-gray-700 dark:text-gray-100 hover:text-gray-900 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-lg"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
@@ -69,5 +71,55 @@ const links = [
 
 <script is:inline>
     const menu = document.getElementById('mobile-menu');
-    document.getElementById('mobile-menu-button')?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+    const button = document.getElementById('mobile-menu-button');
+    const menuLinks = menu?.querySelectorAll('a') || [];
+    let isOpen = false;
+
+    function toggleMenu() {
+        isOpen = !isOpen;
+        menu?.classList.toggle('hidden');
+        button?.setAttribute('aria-expanded', isOpen.toString());
+        
+        if (isOpen) {
+            // Focus first menu item when opening
+            menuLinks[0]?.focus();
+        } else {
+            // Return focus to button when closing
+            button?.focus();
+        }
+    }
+
+    // Handle click
+    button?.addEventListener('click', toggleMenu);
+
+    // Handle escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) {
+            toggleMenu();
+        }
+    });
+
+    // Trap focus in menu when open
+    menu?.addEventListener('keydown', (e) => {
+        if (!isOpen) return;
+
+        const focusableElements = Array.from(menuLinks);
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+        const isTabPressed = e.key === 'Tab';
+
+        if (!isTabPressed) return;
+
+        if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+                lastElement?.focus();
+                e.preventDefault();
+            }
+        } else {
+            if (document.activeElement === lastElement) {
+                firstElement?.focus();
+                e.preventDefault();
+            }
+        }
+    });
 </script>

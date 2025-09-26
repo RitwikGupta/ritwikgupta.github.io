@@ -21,12 +21,23 @@ const { title, desc } = Astro.props;
         </script>
         
         <meta charset="UTF-8" />
-        <meta name="description" content={desc} />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
+        <meta name="description" content={desc} />
 
+        <link rel="preload" href="@fontsource-variable/montserrat" as="font" type="font/woff2" crossorigin />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0B1120" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={desc} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content="@Ritwik_G" />
+        
+        <title>{title}</title>
         <ThemeScript />
 
         <!-- Google tag (gtag.js) -->
