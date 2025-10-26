@@ -9,6 +9,31 @@ const { frontmatter } = Astro.props;
 <!doctype html>
 <html lang="en">
     <head>
+        <script is:inline>
+            (function(){
+                try {
+                    var stored = localStorage.getItem('theme');
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    var useDark = stored ? stored === 'dark' : prefersDark;
+                    var root = document.documentElement;
+                    if (useDark) {
+                        root.classList.add('dark');
+                        root.style.colorScheme = 'dark';
+                    } else {
+                        root.classList.remove('dark');
+                        root.style.colorScheme = 'light';
+                    }
+                } catch (e) {}
+            })();
+        </script>
+        <style>
+            @media (prefers-color-scheme: dark) {
+                html { background-color: #0B1120; color-scheme: dark; }
+            }
+            @media (prefers-color-scheme: light) {
+                html { background-color: #ffffff; color-scheme: light; }
+            }
+        </style>
         <meta charset="UTF-8" />
         <meta name="description" content={frontmatter.description} />
         <meta name="viewport" content="width=device-width" />
@@ -18,8 +43,6 @@ const { frontmatter } = Astro.props;
         <meta property="og:title" content={frontmatter.title} />
         <meta property="og:description" content={frontmatter.description} />
         <meta property="og:image" content={frontmatter.og_image} />
-
-        <ThemeScript />
 
         <!-- Google tag (gtag.js) -->
         <script
@@ -74,8 +97,10 @@ const { frontmatter } = Astro.props;
                 <slot />
             </div>
         </main>
+        <ThemeScript />
     </body>
     <style is:global>
+        @reference "../styles/global.css";
         :root {
             --accent: 136, 58, 234;
             --accent-light: 224, 204, 250;

@@ -1,22 +1,26 @@
 <!-- Theme toggle functionality -->
-<script>
-    // Theme toggle functionality after DOM loads
-    const buttons = document.querySelectorAll('.theme-toggle');
-    const sunIcons = document.querySelectorAll('.theme-toggle-sun');
-    const moonIcons = document.querySelectorAll('.theme-toggle-moon');
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        const buttons = document.querySelectorAll('.theme-toggle');
+        const sunIcons = document.querySelectorAll('.theme-toggle-sun');
+        const moonIcons = document.querySelectorAll('.theme-toggle-moon');
 
-    // Set initial icon state
-    const isDark = document.documentElement.classList.contains('dark');
-    sunIcons.forEach(icon => icon.classList.toggle('hidden', isDark));
-    moonIcons.forEach(icon => icon.classList.toggle('hidden', !isDark));
+        // Set initial icon state
+        const isDark = document.documentElement.classList.contains('dark');
+        sunIcons.forEach((icon) => icon.classList.toggle('hidden', isDark));
+        moonIcons.forEach((icon) => icon.classList.toggle('hidden', !isDark));
 
-    // Add click handlers
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            sunIcons.forEach(icon => icon.classList.toggle('hidden'));
-            moonIcons.forEach(icon => icon.classList.toggle('hidden'));
+        // Add click handlers
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const nowDark = document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+                // Keep color-scheme and background consistent immediately
+                document.documentElement.style.colorScheme = nowDark ? 'dark' : 'light';
+                document.documentElement.style.backgroundColor = nowDark ? '#0B1120' : '#ffffff';
+                sunIcons.forEach((icon) => icon.classList.toggle('hidden'));
+                moonIcons.forEach((icon) => icon.classList.toggle('hidden'));
+            });
         });
     });
 </script>

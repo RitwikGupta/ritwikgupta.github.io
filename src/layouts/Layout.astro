@@ -15,16 +15,35 @@ const { title, desc } = Astro.props;
 <html lang="en">
     <head>
         <script is:inline>
-            if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-            }
+            (function(){
+                try {
+                    var stored = localStorage.getItem('theme');
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    var useDark = stored ? stored === 'dark' : prefersDark;
+                    var root = document.documentElement;
+                    if (useDark) {
+                        root.classList.add('dark');
+                        root.style.colorScheme = 'dark';
+                    } else {
+                        root.classList.remove('dark');
+                        root.style.colorScheme = 'light';
+                    }
+                } catch (e) {}
+            })();
         </script>
+        <style>
+            @media (prefers-color-scheme: dark) {
+                html { background-color: #0B1120; color-scheme: dark; }
+            }
+            @media (prefers-color-scheme: light) {
+                html { background-color: #ffffff; color-scheme: light; }
+            }
+        </style>
         
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <meta name="description" content={desc} />
 
-        <link rel="preload" href="@fontsource-variable/montserrat" as="font" type="font/woff2" crossorigin />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
 
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -38,7 +57,6 @@ const { title, desc } = Astro.props;
         <meta name="twitter:creator" content="@Ritwik_G" />
         
         <title>{title}</title>
-        <ThemeScript />
 
         <!-- Google tag (gtag.js) -->
         <script
@@ -59,9 +77,11 @@ const { title, desc } = Astro.props;
     <body class="flex items-center justify-center flex-col w-screen bg-white dark:bg-[#0B1120]">
         <Topnav />
         <slot />
+        <ThemeScript />
     </body>
 </html>
 <style is:global>
+    @reference "../styles/global.css";
     /* Base text colors */
     body {
         @apply text-gray-800 dark:text-gray-200;
