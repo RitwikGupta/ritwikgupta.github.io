@@ -2,13 +2,6 @@
 <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
         const buttons = document.querySelectorAll('.theme-toggle');
-        const sunIcons = document.querySelectorAll('.theme-toggle-sun');
-        const moonIcons = document.querySelectorAll('.theme-toggle-moon');
-
-        // Set initial icon state
-        const isDark = document.documentElement.classList.contains('dark');
-        sunIcons.forEach((icon) => icon.classList.toggle('hidden', isDark));
-        moonIcons.forEach((icon) => icon.classList.toggle('hidden', !isDark));
 
         // Add click handlers
         buttons.forEach((button) => {
@@ -18,8 +11,6 @@
                 // Keep color-scheme and background consistent immediately
                 document.documentElement.style.colorScheme = nowDark ? 'dark' : 'light';
                 document.documentElement.style.backgroundColor = nowDark ? '#0B1120' : '#ffffff';
-                sunIcons.forEach((icon) => icon.classList.toggle('hidden'));
-                moonIcons.forEach((icon) => icon.classList.toggle('hidden'));
             });
         });
     });
