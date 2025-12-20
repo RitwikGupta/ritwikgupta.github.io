@@ -1,10 +1,13 @@
 ## Current
-- <a href="https://xyntechx.com/" target="_blank">Nyx Iskandar</a> - Junior, University of California, Berkeley
+- <a href="https://xyntechx.com/" target="_blank">Nyx Iskandar</a> - B.S. Student, University of California, Berkeley
 - <a href="https://www.linkedin.com/in/detk" target="_blank">Declan Kutscher</a> - M.S. Student, University of Pittsburgh
 - <a href="https://www.linkedin.com/in/grey-pilarczyk-8203a5295/" target="_blank">Grey Pilarczyk</a> - B.S. Student, George Washington University
 - <a href="https://www.linkedin.com/in/henry-gaston/" target="_blank">Henry Gaston</a> - B.S. Student, California Institute of Technology
 - <a href="https://www.linkedin.com/in/sahir-tandon" target="_blank">Sahir Tandon</a> - B.S. Student, University of California, Berkeley
 - <a href="https://www.anirudhkotamraju.com/" target="_blank">Anirudh Kotamraju</a> - B.S. Student, University of California, Berkeley
+- <a href="https://www.linkedin.com/in/aleksey-valouev/" target="_blank">Aleksey Valouev</a> - B.S. Student, University of California, Berkeley
+- <a href="https://www.linkedin.com/in/andrea-yilu-li" target="_blank">Anrea Li</a> - B.S. Student, University of California, Berkeley
+- <a href="https://jackson.yale.edu/person/pranav-pattatathunaduvil/" target="_blank">Pranav Pattatathunaduvil</a> - MPP Student, Yale University
 
 ## Former
 - <a href="https://www.linkedin.com/in/naomilqcarvalho/" target="_blank">Naomi Carvalho</a> - B.S. Student, University of California, Berkeley

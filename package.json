@@ -2,7 +2,7 @@
   "name": "ritwik",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@10.19.0",
+  "packageManager": "pnpm@10.26.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -32,6 +32,8 @@
     "@tailwindcss/typography": "^0.5.15"
   },
   "pnpm": {
-    "overrides": { "vite": "6.4.1" }
+    "overrides": {
+      "vite": "6.4.1"
+    }
   }
 }
