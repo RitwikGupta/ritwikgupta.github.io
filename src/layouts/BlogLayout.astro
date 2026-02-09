@@ -3,6 +3,7 @@ import "@fontsource-variable/montserrat";
 import "../styles/global.css";
 import Topnav from "../components/topnav.astro";
 import ThemeScript from "../components/ThemeScript.astro";
+import ThemeHead from "../components/ThemeHead.astro";
 
 const { frontmatter } = Astro.props;
 ---
@@ -10,35 +11,7 @@ const { frontmatter } = Astro.props;
 <!doctype html>
 <html lang="en">
     <head>
-        <script is:inline>
-            (function(){
-                try {
-                    var stored = localStorage.getItem('theme');
-                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    var useDark = stored ? stored === 'dark' : prefersDark;
-                    var root = document.documentElement;
-                    if (useDark) {
-                        root.dataset.theme = 'dark';
-                        root.style.colorScheme = 'dark';
-                        root.style.backgroundColor = '#0B1120';
-                    } else {
-                        root.dataset.theme = 'light';
-                        root.style.colorScheme = 'light';
-                        root.style.backgroundColor = '#ffffff';
-                    }
-                } catch (e) {}
-            })();
-        </script>
-        <style>
-            html[data-theme="dark"] { background-color: #0B1120; color-scheme: dark; }
-            html[data-theme="light"] { background-color: #ffffff; color-scheme: light; }
-            @media (prefers-color-scheme: dark) {
-                html:not([data-theme]) { background-color: #0B1120; color-scheme: dark; }
-            }
-            @media (prefers-color-scheme: light) {
-                html:not([data-theme]) { background-color: #ffffff; color-scheme: light; }
-            }
-        </style>
+        <ThemeHead />
         <meta charset="UTF-8" />
         <meta name="description" content={frontmatter.description} />
         <meta name="viewport" content="width=device-width" />
