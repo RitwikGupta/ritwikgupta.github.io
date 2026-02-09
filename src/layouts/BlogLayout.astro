@@ -20,9 +20,11 @@ const { frontmatter } = Astro.props;
                     if (useDark) {
                         root.dataset.theme = 'dark';
                         root.style.colorScheme = 'dark';
+                        root.style.backgroundColor = '#0B1120';
                     } else {
                         root.dataset.theme = 'light';
                         root.style.colorScheme = 'light';
+                        root.style.backgroundColor = '#ffffff';
                     }
                 } catch (e) {}
             })();

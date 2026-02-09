@@ -1,7 +1,4 @@
 ## Highlights
-<b>Prospective Students:</b> Students interested in working with me should apply to the UMD CS Ph.D. program and mention my name in their research statement. I am looking for students interested in working on physics-integrated computer vision, multi-robot perception, and technology policy. I am also looking for also looking for Public Policy Ph.D. students with engineering backgrounds. For this, please apply to the UMD Public Policy Ph.D. program and mention your interest in working with me as an outside advisor.
-
-
 - **[June 2025]** I was recognized as an Outstanding Reviewer for CVPR 2025.
 - **[June 2025]** I will be starting as an Assistant Professor in Computer Science and the AI Interdisciplinary Institute at the University of Maryland in Fall 2026.
 - **[May 2025]** Our paper, <a href="https://ai-climate.berkeley.edu/random-needles-website/" target="_blank">Enough Coin Flips Can Make LLMs Act Bayesian</a>, was accepted to ACL 2025.
