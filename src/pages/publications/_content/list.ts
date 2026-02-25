@@ -21,13 +21,62 @@ interface Pub {
 
 export const publications: Pub[] = [
     {
+        title: "TCBench: A Benchmark for Tropical Cyclone Track and Intensity Forecasting at the Global Scale",
+        authors: [
+            { name: "Milton Gomez" },
+            { name: "Marie McGraw" },
+            { name: "Saranya Ganesh S." },
+            { name: "Frederick Iat-Hin Tam" },
+            { name: "Ilia Azizi" },
+            { name: "Samuel Darmon" },
+            { name: "Monika Feldmann" },
+            { name: "Stella Bourdin" },
+            { name: "Louis Poulain-Auzéau" },
+            { name: "Suzana J. Camargo" },
+            { name: "Jonathan Lin" },
+            { name: "Dan Chavas" },
+            { name: "Chia-Ying Lee" },
+            { name: "Ritwik Gupta" },
+            { name: "Andrea Jenney" },
+            { name: "Tom Beucler" },
+        ],
+        venue: "arXiv preprint",
+        links: [
+            {
+                url: "https://arxiv.org/abs/2601.23268",
+                display: "paper",
+            },
+            {
+                url: "https://github.com/tcbench/TCBench",
+                display: "github",
+            }
+        ],
+        excerpt:
+            "TCBench is a benchmark for evaluating global, short to medium-range (1-5 days) forecasts of tropical cyclone track and intensity. It builds on the IBTrACS observational dataset and includes state-of-the-art dynamical and neural weather models. Designed for accessibility, TCBench helps AI practitioners tackle domain-relevant TC challenges.",
+        date: "2026-01-30",
+        imgSrc: "/images/thumbnails/tcbench.png"
+    },
+    {
+        title: "The LLM Mirage: Economic Interests and the Subversion of Weaponization Controls",
+        authors: [
+            { name: "Ritwik Gupta" },
+            { name: "Andrew W. Reddie" },
+        ],
+        venue: "arXiv preprint",
+        links: [
+            {
+                url: "https://arxiv.org/abs/2601.05307",
+                display: "paper",
+            },
+        ],
+        excerpt:
+            "U.S. AI security policy is increasingly shaped by an LLM Mirage, the belief that national security risks scale in proportion to the compute used to train frontier language models. That premise fails in two ways: it miscalibrates strategy because adversaries can obtain weaponizable capabilities with task-specific systems, and it destabilizes regulation because compute thresholds are easily renegotiated as domestic priorities shift.",
+        date: "2026-01-08",
+        imgSrc: "/images/thumbnails/llm-mirage.png",
+    },
+    {
         title: "Crowdsourcing the Frontier: Advancing Hybrid Physics-ML Climate Simulation via a $50,000 Kaggle Competition",
         authors: [
-            { name: "Jerry Lin" },
-            { name: "Zeyuan Hu" },
-            { name: "Yutong Bai" },
-            { name: "Trevor Darrell" },
-            { name: "Ritwik Gupta" },
             { name: "Jerry Lin" },
             { name: "Zeyuan Hu" },
             { name: "Tom Beucler" },
@@ -54,7 +103,7 @@ export const publications: Pub[] = [
             { name: "Yuma Tanabe" },
             { name: "Daisuke Yamamoto" },
             { name: "Jianyao Zhou" },
-            { name: "Mike Pritchard"}
+            { name: "Mike Pritchard" },
         ],
         venue: "In review",
         links: [

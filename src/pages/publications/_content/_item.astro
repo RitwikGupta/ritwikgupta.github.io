@@ -27,7 +27,7 @@ publications.sort(
                     >
                         {p.title}
                     </a>
-                    <p class="text-gray-600 dark:text-gray-400">
+                    <p class="text-sm text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700 pb-2">
                         {p.authors
                             .map((author) =>
                                 author.isPrimary
@@ -36,7 +36,7 @@ publications.sort(
                             )
                             .join(", ")}
                     </p>
-                    <p>{p.excerpt}</p>
+                    <p class="text-gray-800 dark:text-gray-200 mt-2">{p.excerpt}</p>
                     <div class="w-full flex items-center justify-start flex-row flex-wrap gap-2">
                         {p.award && (
                             <span class="bg-yellow-400 dark:bg-yellow-500 text-black px-2 py-1 border border-transparent rounded-md text-sm font-semibold">

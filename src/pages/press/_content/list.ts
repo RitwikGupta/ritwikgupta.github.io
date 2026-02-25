@@ -172,6 +172,10 @@ export const content: Content[] = [
                 img: "/press/importai.png",
             },
             {
+                url: "https://www.ft.com/content/a3f9cd15-0217-4a5d-85b2-89738a5fce70",
+                img: "/press/Financial_Times.svg"
+            },
+            {
                 url: "https://warontherocks.com/2023/09/proliferate-dont-obliterate-how-responsive-launch-marginalizes-anti-satellite-capabilities/",
                 img: "/press/warontherocks.webp",
             },
