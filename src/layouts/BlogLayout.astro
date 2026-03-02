@@ -51,7 +51,7 @@ const { frontmatter } = Astro.props;
                 >
             </div>
             <div
-                class="not-prose w-full flex items-start justify-center flex-col gap-y-2 text-gray-900 dark:text-white"
+                class="not-prose w-full max-w-[82ch] mx-auto flex items-start justify-center flex-col gap-y-3 text-gray-900 dark:text-white"
             >
                 <h1 class="text-2xl sm:text-4xl font-bold">
                     {frontmatter.title}
@@ -66,7 +66,11 @@ const { frontmatter } = Astro.props;
                     }
                 </p>
                 <div class="flex items-center justify-center w-full">
-                    <img src={frontmatter.og_image} alt={frontmatter.title} />
+                    <img
+                        class="w-full"
+                        src={frontmatter.og_image}
+                        alt={frontmatter.title}
+                    />
                 </div>
             </div>
             <div
