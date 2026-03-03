@@ -1,3 +1,7 @@
+## Committee Member
+- <a href="geog.umd.edu/gradprofile/gu/zhuoning" target="_blank">Zhuoning Gu</a> - Ph.D. Student, Department of Geographical Sciences, University of Maryland, College Park
+
+
 ## Current
 - <a href="https://xyntechx.com/" target="_blank">Nyx Iskandar</a> - B.S. Student, University of California, Berkeley
 - <a href="https://www.linkedin.com/in/detk" target="_blank">Declan Kutscher</a> - M.S. Student, University of Pittsburgh
