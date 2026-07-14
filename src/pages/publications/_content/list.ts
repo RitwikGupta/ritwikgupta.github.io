@@ -91,7 +91,7 @@ export const publications: Pub[] = [
             { name: "Ritwik Gupta" },
             { name: "Andrew W. Reddie" },
         ],
-        venue: "ACM Conference on Fairness, Accountability, and Transparency (FAccT) 2026, 382-398",
+        venue: "ACM Conference on Fairness, Accountability, and Transparency (FAccT) 2026",
         links: [
             {
                 url: "https://doi.org/10.1145/3805689.3806538",
@@ -134,7 +134,7 @@ export const publications: Pub[] = [
             { name: "Jianyao Zhou" },
             { name: "Mike Pritchard" },
         ],
-        venue: "Journal of Advances in Modeling Earth Systems 18(5), e2025MS005643 (2026)",
+        venue: "Journal of Advances in Modeling Earth Systems",
         links: [
             {
                 url: "https://doi.org/10.1029/2025MS005643",
