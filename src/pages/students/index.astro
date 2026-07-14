@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import StudentList from "./_list.md";
+import { studentSections, students } from "./_data";
 ---
 
 <Layout
@@ -8,7 +8,7 @@ import StudentList from "./_list.md";
     desc="AI and Policy researcher driving innovation in humanitarian assistance and disaster response (HADR)"
 >
     <main
-        class="w-full md:w-3/4 xl:w-7/12 flex items-center justify-center flex-col gap-y-10 p-12"
+        class="w-full max-w-7xl flex items-center justify-center flex-col gap-y-12 px-6 py-12 sm:px-10 lg:px-12"
     >
         <div class="flex items-start justify-start w-full">
             <a
@@ -18,10 +18,75 @@ import StudentList from "./_list.md";
             >
         </div>
         <h1 class="text-2xl sm:text-4xl font-bold">Students</h1>
-        <div
-            class="prose prose-a:text-blue-500 hover:prose-a:text-blue-600 transition-colors"
-        >
-            <StudentList />
+        <div class="w-full space-y-14">
+            {
+                studentSections.map((section) => {
+                    const sectionStudents = students.filter(
+                        (student) => student.section === section.id
+                    );
+
+                    if (sectionStudents.length === 0) return null;
+
+                    return (
+                        <section aria-labelledby={`${section.id}-heading`} class="space-y-6">
+                            <div class="border-b border-gray-200 pb-3 dark:border-gray-700">
+                                <h2
+                                    id={`${section.id}-heading`}
+                                    class="text-2xl font-bold text-gray-900 dark:text-gray-100"
+                                >
+                                    {section.title}
+                                </h2>
+                            </div>
+                            <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+                                {sectionStudents.map((student) => (
+                                    <article class="flex h-full flex-col items-start gap-5 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:shadow-md sm:flex-row sm:items-center dark:border-gray-700 dark:bg-gray-900">
+                                        <img
+                                            src={student.image}
+                                            alt={`${student.name} portrait`}
+                                            width="600"
+                                            height="600"
+                                            loading="lazy"
+                                            decoding="async"
+                                            class="h-28 w-28 shrink-0 rounded-2xl object-cover sm:h-32 sm:w-32"
+                                        />
+                                        <div class="min-w-0 space-y-2">
+                                            <div>
+                                                <a
+                                                    href={student.website}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="text-lg font-bold text-blue-600 hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-400"
+                                                >
+                                                    {student.name}
+                                                </a>
+                                                <p class="mt-1 text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                                    {student.role}
+                                                </p>
+                                                <p class="text-sm leading-snug text-gray-600 dark:text-gray-400">
+                                                    {student.institution}
+                                                </p>
+                                            </div>
+                                            {student.description && (
+                                                <p class="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+                                                    {student.description}
+                                                </p>
+                                            )}
+                                            {student.email && (
+                                                <a
+                                                    href={`mailto:${student.email}`}
+                                                    class="inline-flex text-sm font-medium text-blue-600 hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:text-blue-400"
+                                                >
+                                                    {student.email}
+                                                </a>
+                                            )}
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </section>
+                    );
+                })
+            }
         </div>
     </main>
 </Layout>
