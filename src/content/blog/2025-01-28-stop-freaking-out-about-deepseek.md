@@ -2,7 +2,7 @@
 title: Stop Freaking Out About DeepSeek
 pubDate: 2025-01-28
 description: Everyone is freaking out about DeepSeek. The model is not the real thing to be worried about!
-og_image: /images/deepseek/deepseek.png
+og_image: ../../assets/blog/deepseek/deepseek.png
 ---
 
 The recent buzz around DeepSeek has been palpable, sending shockwaves through tech circles and media alike. While it’s a wake-up call for those who’ve been buying into the narratives perpetuated by American venture capitalists, it’s hardly surprising to those of us who’ve been building and observing AI technology over the past decade. Here’s why this moment was inevitable and what it tells us about the current state of AI innovation.

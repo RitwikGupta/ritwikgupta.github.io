@@ -2,7 +2,7 @@
 title: "Exploring Deep Learning: Theory and Practice"
 pubDate: 2017-10-05
 description: A lecture I gave at the CMU Data Science Club that introduced undergraduates to deep learning.
-og_image: /images/ml/neural-network.png
+og_image: ../../assets/blog/ml/neural-network.png
 ---
 
 This is a page for my talk given at the [CMU Data Science Club](https://www.facebook.com/CMUDataScienceClub/) at Doherty A302 on October 5th, 2017.

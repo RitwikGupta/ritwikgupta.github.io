@@ -2,7 +2,7 @@
 title: Understanding HL7 Structure
 pubDate: 2017-03-29
 description: I spent a long time working with and fixing broken HL7 and ADT pipelines at hospitals. Here are my learnings.
-og_image: /images/hc/hl7-1.jpg
+og_image: ../../assets/blog/hc/hl7-1.jpg
 ---
 
 # What is HL7
@@ -41,7 +41,7 @@ NK1|2|WEBERN^ANTON|SON|12 STRASSE MUSIK^^VIENNA^AUS^11212|(123)456-7890
 IN1|1|PRE2||LIFE PRUDENT BUYER|PO BOX 23523^WELLINGTON^ON^98111|||19601||||||||THOMAS^JAMES^M|F|||||||||||||||||||ZKA535529776
 ```
 To start off, let's look at the image below:
-![segments](/images/hc/hl7-1.jpg)
+![segments](../../assets/blog/hc/hl7-1.jpg)
 
 ### The red boxes ###
 Every section inside a red box is called a **segment**. Segments are groups of data that each contain related pieces of information. Each segment has a **carriage return (\r)** at the end of it to demarcate the end of a segment. 
@@ -51,7 +51,7 @@ Each segment begins with a three letter string called a **header**. In this pict
  
 ### Fields ###
 Let us look at one segment for the time being:
-![segment](/images/hc/hl7-2.jpg)
+![segment](../../assets/blog/hc/hl7-2.jpg)
 Within a segment, each **field** is separated with the pipe character ( | ), called a **bar** in HL7 terminology. Two or more bars in a row indicate an empty field. In the example above, we can see the the first field (indexed by *PID.1*) holds a value of 1, *PID.2* is empty, and *PID.3* holds a value of 000395122. Since this is a version 2.7 HL7 message (indicated by MSH.12), we can view exactly what each PID field means [here](http://hl7-definition.caristix.com:9010/Default.aspx?version=HL7+v2.7&segment=PID). However, fields get more and more complicated as we go along.
 
 #### Components ####

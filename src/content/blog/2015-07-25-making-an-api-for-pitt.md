@@ -2,7 +2,7 @@
 title: Making an API for Pitt
 pubDate: 2015-07-25
 description: I discuss the inspiration and process behind making the now-popular PittAPI.
-og_image: /images/gc/api-1.png
+og_image: ../../assets/blog/gc/api-1.png
 ---
 
 
@@ -11,7 +11,7 @@ og_image: /images/gc/api-1.png
 > A journey into production code.  
 > Note: This a post from 2015 copied from my Medium. Posted here on March 25, 2017.
 
-![](/images/gc/api-1.png)
+![](../../assets/blog/gc/api-1.png)
 
 The University of Pittsburgh is one of the largest universities in the United
 States. We have a brand new CS/Psychology/Business building (*heavy* sarcasm),
@@ -31,7 +31,7 @@ students to access course descriptions.
 
 Pitt’s websites are built with ASP.NET, which is weird. I really don’t like it.
 
-![](/images/gc/api-2.png)
+![](../../assets/blog/gc/api-2.png)
 
 Pressing on a button takes you to
 [http://www.courses.as.pitt.edu/results-subj.asp](http://www.courses.as.pitt.edu/results-subj.asp).
@@ -68,7 +68,7 @@ Turns out anything after labstats_txtmsg isn’t necessary. Accessing
 [http://www.ewi-ssl.pitt.edu/labstats_txtmsg/](http://www.ewi-ssl.pitt.edu/labstats_txtmsg/)
 gives you this:
 
-![](/images/gc/api-3.png)
+![](../../assets/blog/gc/api-3.png)
 
 Perfect. Some BeautifulSoup action later, I can now reliably provide computer
 lab status through the API.
@@ -88,7 +88,7 @@ status.
 The UI itself is ugly and not mobile-responsive. That’s a shame, because most
 students use their phones for everything.
 
-![](/images/gc/api-4.png)
+![](../../assets/blog/gc/api-4.png)
 
 The URL for the above view is
 [http://classic.laundryview.com/laundry_room.php?view=c&lr=2430136](http://classic.laundryview.com/laundry_room.php?view=c&lr=2430136).
@@ -99,12 +99,12 @@ looking forward to scraping this monstrosity to get machine data. However, I
 noticed that this page refreshes every 60 seconds. Keeping the network tab open,
 I noticed two new calls being made every 60 seconds.
 
-![](/images/gc/api-5.png)
+![](../../assets/blog/gc/api-5.png)
 
 Gold. classic_laundry_room_ajax.php is just the same UI without styling.
 However, appliance_status_ajax.php gives this:
 
-![](/images/gc/api-6.png)
+![](../../assets/blog/gc/api-6.png)
 
 Awesome! Obviously not all the info I was looking for, but this is a URL that
 can be accessed without any authentication, so this was immediately tossed into
@@ -114,16 +114,16 @@ One thing to notice is that this is a classic view. Removing the classic part
 from the URL gives us a nicer UI! Still not mobile-responsive, and still not
 helpful.
 
-![](/images/gc/api-7.png)
+![](../../assets/blog/gc/api-7.png)
 
 This page makes two interesting calls immediately on load.
 
-![](/images/gc/api-8.png)
+![](../../assets/blog/gc/api-8.png)
 
 Dynamic room data! Gold! At this point I was very excited. This was the finish
 line. Turns out I was only halfway there. This is dynamicRoomData.php
 
-![](/images/gc/api-9.png)
+![](../../assets/blog/gc/api-9.png)
 
 At this point I thought of getting a degree in cryptography or something.
 However, keeping this open in one tab and the pretty UI in another, I started
@@ -169,4 +169,3 @@ The Pitt API is available here:
 
 *Disclaimer: This write up has skipped a lot of the dead-ends I faced for
 brevity.*
-

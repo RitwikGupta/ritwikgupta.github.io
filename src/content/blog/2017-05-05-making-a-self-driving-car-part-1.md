@@ -2,7 +2,7 @@
 title: Making a Self Driving Car - Part 1
 pubDate: 2017-05-05
 description: My dad and I were bored and decided to make a self-driving car. Step one, getting data from the car!
-og_image: /images/ml/sdp1-1.jpg
+og_image: ../../assets/blog/ml/sdp1-1.jpg
 ---
 
 I just graduated from the University of Pittsburgh and have some time to relax before starting my job, so my dad and I decided to build a self-driving car. We think we can do it, and even if we can't, at least we'll learn some cool stuff while doing it. The goal is to start simple and build as we go.
@@ -20,9 +20,7 @@ Modern cars are computers with wheels. Made up of many microcontrollers and **EC
 
 Having so many systems is a networking nightmare. Data has to be sent around the car since it is used in multiple places, which means miles of wiring underneath the car. This is not only inefficient, but also cost ineffective. To solve this issue, the **CAN Bus** was created.  
 
-<p align="center">
-	<img src="/images/ml/sdp1-1.jpg" alt="CAN diagram" />
-</p>
+![CAN diagram](../../assets/blog/ml/sdp1-1.jpg)
 <p align="center">
 	Image obtained from Volkswagen Audi.
 </p>
@@ -39,9 +37,7 @@ CAN, standing for **controller area network**, is a protocol in which all contro
 
 The CAN bus works like an argument at a bar: everyone has stuff to say, so everyone starts yelling at once. Whoever starts yelling first wins after a bit and everyone stops talking and listens to them till they're done, and then the yelling starts again.
 
-<p align="center">
-	<img src="/images/ml/sdp1-2.jpg" alt="CAN diagram" />
-</p>
+![CAN diagram](../../assets/blog/ml/sdp1-2.jpg)
 <p align="center">
 	Image obtained from Volkswagen Audi.
 </p>
@@ -57,9 +53,7 @@ Now that we know that our desired steering wheel angle data is to be obtained fr
 
 As of 1996, every car in the US is required to be shipped with an OBDII  (**on-board diagnostics v2**) port. This connector has 16 pins, but most importantly, it has two pins for CAN High and CAN Low.
 
-<p align="center">
-	<img src="/images/ml/sdp1-3.jpg" alt="CAN diagram" />
-</p>
+![CAN diagram](../../assets/blog/ml/sdp1-3.jpg)
 <p align="center">
 	OBDII port. Image obtained from obd2allinone.com.
 </p>
@@ -74,9 +68,7 @@ My thought was that if I could hook up a serial DB9 cable to those pins in my 20
 | CAN Low         | 14    | 5   |
 | Power           | 16    | 9   |
 
-<p align="center">
-	<img src="/images/ml/sdp1-4.jpg" alt="CAN diagram" />
-</p>
+![CAN diagram](../../assets/blog/ml/sdp1-4.jpg)
 <p align="center">
 	Horribly compressed image of the franken-cable. Use at your own risk.
 </p>

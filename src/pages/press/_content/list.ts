@@ -1,3 +1,9 @@
+import { contentImage, type LocalImageAsset } from "../../../utils/content-images";
+
+export type PressImage =
+    | { kind: "svg"; src: string }
+    | { kind: "raster"; source: LocalImageAsset };
+
 interface Content {
     title: string;
     links: Link[];
@@ -5,10 +11,14 @@ interface Content {
 
 interface Link {
     url: string;
-    img: string;
+    img: PressImage;
 }
 
-export const content: Content[] = [
+type RawContent = Omit<Content, "links"> & {
+    links: Array<{ url: string; img: string }>;
+};
+
+const rawContent: RawContent[] = [
     {
         title: "AI for Disaster Response",
         links: [
@@ -46,7 +56,7 @@ export const content: Content[] = [
             },
             {
                 url: "https://www.nationaldefensemagazine.org/articles/2020/3/12/defense-innovation-unit-to-sponsor-computer-vision-prize-challenge",
-                img: "/press/National_Defense.jpg",
+                img: "press/National_Defense.jpg",
             },
             {
                 url: "https://www.theaustralian.com.au/science/bushfires-astronaut-paul-scullypower-in-space-age-plan-to-save-wildlife/news-story/b51795c4612c77213d387c995fa17b9f",
@@ -54,7 +64,7 @@ export const content: Content[] = [
             },
             {
                 url: "https://sociable.co/technology/ai-natural-disaster-damage-assessment-california/",
-                img: "/press/The_Sociable.png",
+                img: "press/The_Sociable.png",
             },
             {
                 url: "https://federalnewsnetwork.com/artificial-intelligence/2019/11/diu-teams-up-with-civilian-agencies-to-start-humanitarian-ai-challenge/",
@@ -70,7 +80,7 @@ export const content: Content[] = [
             },
             {
                 url: "https://www.c4isrnet.com/intel-geoint/2019/10/04/can-ai-automate-damage-assessments-after-a-disaster/",
-                img: "/press/c4isrnet.png",
+                img: "press/c4isrnet.png",
             },
             {
                 url: "https://www.fedscoop.com/xview2-challenge-building-damage-disaster-recovery/",
@@ -78,7 +88,7 @@ export const content: Content[] = [
             },
             {
                 url: "https://spacenews.com/defense-innovation-unit-launches-new-satellite-imagery-prize-challenge/",
-                img: "/press/spacenews.png",
+                img: "press/spacenews.png",
             },
             {
                 url: "https://www.afcea.org/content/dod-sponsors-artificial-intelligence-competition",
@@ -91,11 +101,11 @@ export const content: Content[] = [
         links: [
             {
                 url: "https://www.akbizmag.com/industry/fisheries/illegal-fishing-ai/",
-                img: "/press/akbiz.webp",
+                img: "press/akbiz.webp",
             },
             {
                 url: "https://www.nationaldefensemagazine.org/articles/2022/1/20/us-fishing-for-defense-tech-to-protect-international-waters",
-                img: "/press/National_Defense.jpg",
+                img: "press/National_Defense.jpg",
             },
             {
                 url: "https://www.defenseone.com/technology/2021/08/can-we-spot-illegal-fishing-fleets-space/184300/",
@@ -103,15 +113,15 @@ export const content: Content[] = [
             },
             {
                 url: "https://www.defense.gov/Explore/News/Article/Article/2703739/dod-announces-ai-competition-to-detect-defeat-illegal-fishing/",
-                img: "/press/DOD.png",
+                img: "press/DOD.png",
             },
             {
                 url: "https://www.nationaldefensemagazine.org/articles/2020/3/12/defense-innovation-unit-to-sponsor-computer-vision-prize-challenge",
-                img: "/press/National_Defense.jpg",
+                img: "press/National_Defense.jpg",
             },
             {
                 url: "https://www.maritime-executive.com/article/the-pentagon-wants-programmers-help-to-spot-iuu-fishing",
-                img: "/press/marex.webp",
+                img: "press/marex.webp",
             },
         ],
     },
@@ -120,7 +130,7 @@ export const content: Content[] = [
         links: [
             {
                 url: "https://berkeleysciencereview.com/article/2022/12/04/snowy-with-a-chance-of-data",
-                img: "/press/berkeley-science.png",
+                img: "press/berkeley-science.png",
             },
         ],
     },
@@ -165,11 +175,11 @@ export const content: Content[] = [
             },
             {
                 url: "https://www.csis.org/podcasts/ai-policy-podcast/ai-seoul-summit-us-china-ai-safety-readout-and-zhousidun-dataset",
-                img: "/press/csis.png",
+                img: "press/csis.png",
             },
             {
                 url: "https://importai.substack.com/p/import-ai-374-chinas-military-ai",
-                img: "/press/importai.png",
+                img: "press/importai.png",
             },
             {
                 url: "https://www.ft.com/content/a3f9cd15-0217-4a5d-85b2-89738a5fce70",
@@ -177,7 +187,7 @@ export const content: Content[] = [
             },
             {
                 url: "https://warontherocks.com/2023/09/proliferate-dont-obliterate-how-responsive-launch-marginalizes-anti-satellite-capabilities/",
-                img: "/press/warontherocks.webp",
+                img: "press/warontherocks.webp",
             },
             {
                 url: "https://techpolicy.press/accelerating-the-evolution-of-ai-export-controls/",
@@ -185,7 +195,7 @@ export const content: Content[] = [
             },
             {
                 url: "https://thebulletin.org/2023/06/orbital-hypersonic-delivery-systems-threaten-strategic-stability/",
-                img: "/press/atomic-scientists.webp",
+                img: "press/atomic-scientists.webp",
             },
         ],
     },
@@ -223,7 +233,7 @@ export const content: Content[] = [
             },
             {
                 url: "https://www.defense.gov/Explore/News/Article/Article/2356086/ai-aiding-dod-in-early-detection-of-covid-19-say-technologists/",
-                img: "/press/DOD.png",
+                img: "press/DOD.png",
             },
             {
                 url: "https://www.defenseone.com/technology/2020/09/militarys-latest-wearables-can-detect-illness-two-days-you-get-sick/168664/",
@@ -232,3 +242,13 @@ export const content: Content[] = [
         ],
     },
 ];
+
+export const content: Content[] = rawContent.map((section) => ({
+    ...section,
+    links: section.links.map((link) => ({
+        ...link,
+        img: link.img.endsWith(".svg")
+            ? { kind: "svg", src: link.img }
+            : { kind: "raster", source: contentImage(link.img) },
+    })),
+}));

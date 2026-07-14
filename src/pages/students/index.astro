@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import PageHeader from "../../components/PageHeader.astro";
+import ProgressiveImage from "../../components/ProgressiveImage.astro";
 import { studentSections, students } from "./_data";
 ---
 
@@ -31,13 +32,12 @@ import { studentSections, students } from "./_data";
                             <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
                                 {sectionStudents.map((student) => (
                                     <article class="surface-card flex h-full flex-col items-start gap-5 p-5 transition duration-200 hover:-translate-y-0.5 hover:border-[var(--border-strong)] sm:flex-row sm:items-center">
-                                        <img
-                                            src={student.image}
+                                        <ProgressiveImage
+                                            source={student.image}
                                             alt={`${student.name} portrait`}
-                                            width="600"
-                                            height="600"
+                                            widths={[128, 256]}
+                                            sizes="(min-width: 640px) 128px, 112px"
                                             loading="lazy"
-                                            decoding="async"
                                             class="h-28 w-28 shrink-0 rounded-xl border border-[var(--border)] object-cover sm:h-32 sm:w-32"
                                         />
                                         <div class="min-w-0 space-y-2">

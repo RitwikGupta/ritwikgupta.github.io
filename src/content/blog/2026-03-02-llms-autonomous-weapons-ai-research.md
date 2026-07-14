@@ -2,7 +2,7 @@
 title: LLMs, Autonomous Weapons, and AI Research
 pubDate: 2026-03-02
 description: The Anthropic/DoW fight is a symptom of a structural mismatch between an AI industry that ships research as product and a government that takes the marketing at face value.
-og_image: /images/llm-weapons/pulling-drones.webp
+og_image: ../../assets/blog/llm-weapons/pulling-drones.webp
 ---
 
 **_The views expressed are those of the author and do not reflect the official policy or position of the Department of War or the US Government._**
@@ -37,7 +37,7 @@ What frontier AI companies largely elide in their public statements is that LLMs
 
 An autonomous weapon can be understood as five integrated components: flight hardware, payload, compute, networking, and power. The design of modern autonomous weapons prioritizes payload capacity and range, which means making the most of limited power generation and minimizing weight. This results in highly constrained onboard compute, often orders of magnitude smaller than what LLMs require. The power draw of Transformer-based language models alone is prohibitive, producing an unacceptable reduction in range before even getting to the problems associated with latency.
 
-![](/images/llm-weapons/weapons-systems.webp)
+![](../../assets/blog/llm-weapons/weapons-systems.webp)
 
 There are four stages in which autonomous weapons operate: launch, infiltration, reconnaissance and targeting, and terminal guidance. I’ll set aside target curation and battle damage assessment, both crucial and legally mandated stages to the left and right of the autonomous weapon, for now, though I’ll return to them briefly.
 

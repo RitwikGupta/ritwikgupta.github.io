@@ -1,6 +1,7 @@
 ---
 import { content } from "./list";
 import Extra from "./_extra.md";
+import ProgressiveImage from "../../../components/ProgressiveImage.astro";
 ---
 
 <div class="grid gap-10">
@@ -10,7 +11,18 @@ import Extra from "./_extra.md";
             <div class="logo-grid">
                 {c.links.map((link) => (
                     <a href={link.url} target="_blank" rel="noopener noreferrer" class="logo-card" aria-label={`Read coverage at ${new URL(link.url).hostname.replace("www.", "")}`}>
-                        <img src={link.img} alt="" loading="lazy" />
+                        {link.img.kind === "svg" ? (
+                            <img src={link.img.src} alt="" loading="lazy" />
+                        ) : (
+                            <ProgressiveImage
+                                source={link.img.source}
+                                alt=""
+                                widths={[144, 288]}
+                                sizes="144px"
+                                fit="contain"
+                                class="h-[4.25rem] w-full"
+                            />
+                        )}
                     </a>
                 ))}
             </div>
@@ -26,5 +38,6 @@ import Extra from "./_extra.md";
     .logo-card { display: grid; min-height: 8rem; place-items: center; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1.25rem; transition: border-color 160ms ease, transform 160ms ease; }
     .logo-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
     img { max-width: 100%; max-height: 4.25rem; object-fit: contain; }
-    :global(html[data-theme="dark"]) img { filter: grayscale(1) brightness(1.65); }
+    :global(.progressive-image) { background-size: contain; background-repeat: no-repeat; }
+    :global(html[data-theme="dark"]) .logo-card img { filter: grayscale(1) brightness(1.65); }
 </style>

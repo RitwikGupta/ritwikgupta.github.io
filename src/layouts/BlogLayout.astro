@@ -2,6 +2,8 @@
 import Layout from "./Layout.astro";
 import type { CollectionEntry } from "astro:content";
 import { formatUtcDate } from "../utils/date";
+import ProgressiveImage from "../components/ProgressiveImage.astro";
+import { contentImageFromMetadata } from "../utils/content-images";
 
 interface Props {
     frontmatter: CollectionEntry<"blog">["data"];
@@ -9,12 +11,13 @@ interface Props {
 
 const { frontmatter } = Astro.props;
 const published = formatUtcDate(frontmatter.pubDate);
+const heroImage = contentImageFromMetadata(frontmatter.og_image);
 ---
 
 <Layout
     title={frontmatter.title}
     desc={frontmatter.description}
-    ogImage={frontmatter.og_image}
+    ogImage={frontmatter.og_image.src}
 >
     <main class="site-shell">
         <article class="mx-auto max-w-[70ch]">
@@ -25,10 +28,15 @@ const published = formatUtcDate(frontmatter.pubDate);
                     Published {published}
                 </time>
                 {frontmatter.og_image && (
-                    <img
-                        class="mt-8 aspect-[16/9] w-full rounded-[var(--radius)] border border-[var(--border)] object-cover"
-                        src={frontmatter.og_image}
+                    <ProgressiveImage
+                        class="mt-8 aspect-[16/9] w-full rounded-[var(--radius)] border border-[var(--border)]"
+                        source={heroImage}
                         alt=""
+                        widths={[640, 960, 1280]}
+                        sizes="min(100vw, 70ch)"
+                        aspectRatio="16 / 9"
+                        loading="eager"
+                        fetchpriority="high"
                     />
                 )}
             </header>

@@ -1,3 +1,5 @@
+import { contentImage, type LocalImageAsset } from "../../utils/content-images";
+
 export type StudentSection =
     | "phd"
     | "current"
@@ -10,19 +12,21 @@ export interface Student {
     role: string;
     institution: string;
     website: string;
-    image: string;
+    image: LocalImageAsset;
     email?: string;
     section: StudentSection;
 }
 
-export const students: Student[] = [
+type StudentRecord = Omit<Student, "image"> & { image: string };
+
+const studentRecords: StudentRecord[] = [
     {
         name: "Declan Kutscher",
         role: "Ph.D. Student",
         institution: "University of Maryland, College Park",
         website: "https://d3tk.github.io/",
         email: "declank@umd.edu",
-        image: "/images/students/declan.jpg",
+        image: "students/declan.jpg",
         section: "phd",
     },
     {
@@ -31,7 +35,7 @@ export const students: Student[] = [
         institution: "University of Maryland, College Park",
         website: "https://www.linkedin.com/in/priyankari-perali",
         email: "perali@umd.edu",
-        image: "/images/students/priya.jpg",
+        image: "students/priya.jpg",
         section: "phd",
     },
     {
@@ -40,7 +44,7 @@ export const students: Student[] = [
         institution: "University of Maryland, College Park",
         website: "https://www.linkedin.com/in/clare-yang/",
         email: "cyang120@umd.edu",
-        image: "/images/students/clare.jpg",
+        image: "students/clare.jpg",
         section: "phd",
     },
     {
@@ -49,7 +53,7 @@ export const students: Student[] = [
         institution: "University of Maryland, College Park",
         website: "https://www.linkedin.com/in/cj-nygard-31ab16224",
         email: "cnygard@umd.edu",
-        image: "/images/students/cj.jpg",
+        image: "students/cj.jpg",
         section: "phd",
     },
     {
@@ -57,7 +61,7 @@ export const students: Student[] = [
         role: "Research Engineer",
         institution: "Aura",
         website: "https://xyntechx.com/",
-        image: "/images/students/nyx-iskandar.jpg",
+        image: "students/nyx-iskandar.jpg",
         section: "former_bs_ms",
     },
     {
@@ -65,7 +69,7 @@ export const students: Student[] = [
         role: "B.S. Student",
         institution: "George Washington University",
         website: "https://www.linkedin.com/in/grey-pilarczyk-8203a5295/",
-        image: "/images/students/grey-pilarczyk.jpg",
+        image: "students/grey-pilarczyk.jpg",
         section: "current",
     },
     {
@@ -73,7 +77,7 @@ export const students: Student[] = [
         role: "B.S. Student",
         institution: "California Institute of Technology",
         website: "https://www.linkedin.com/in/henry-gaston/",
-        image: "/images/students/henry-gaston.jpg",
+        image: "students/henry-gaston.jpg",
         section: "current",
     },
     {
@@ -81,7 +85,7 @@ export const students: Student[] = [
         role: "B.S. Student",
         institution: "University of California, Berkeley",
         website: "https://www.linkedin.com/in/sahir-tandon",
-        image: "/images/students/sahir-tandon.jpg",
+        image: "students/sahir-tandon.jpg",
         section: "current",
     },
     {
@@ -89,7 +93,7 @@ export const students: Student[] = [
         role: "B.S. Student",
         institution: "University of California, Berkeley",
         website: "https://www.anirudhkotamraju.com/",
-        image: "/images/students/anirudh-kotamraju.jpg",
+        image: "students/anirudh-kotamraju.jpg",
         section: "current",
     },
     {
@@ -97,7 +101,7 @@ export const students: Student[] = [
         role: "B.S. Student",
         institution: "University of California, Berkeley",
         website: "https://www.linkedin.com/in/andrea-yilu-li",
-        image: "/images/students/andrea-li.jpg",
+        image: "students/andrea-li.jpg",
         section: "current",
     },
     {
@@ -105,7 +109,7 @@ export const students: Student[] = [
         role: "MPP Student",
         institution: "Yale University",
         website: "https://jackson.yale.edu/person/pranav-pattatathunaduvil/",
-        image: "/images/students/pranav-pattatathunaduvil.jpg",
+        image: "students/pranav-pattatathunaduvil.jpg",
         section: "current",
     },
     {
@@ -113,7 +117,7 @@ export const students: Student[] = [
         role: "Ph.D. Student",
         institution: "Department of Geographical Sciences, University of Maryland, College Park",
         website: "https://geog.umd.edu/gradprofile/gu/zhuoning",
-        image: "/images/students/zhuoning-gu.jpg",
+        image: "students/zhuoning-gu.jpg",
         section: "committee",
     },
     {
@@ -121,7 +125,7 @@ export const students: Student[] = [
         role: "B.S. Student",
         institution: "University of California, Berkeley",
         website: "https://www.linkedin.com/in/naomilqcarvalho/",
-        image: "/images/students/naomi-carvalho.jpg",
+        image: "students/naomi-carvalho.jpg",
         section: "former_bs_ms",
     },
     {
@@ -129,7 +133,7 @@ export const students: Student[] = [
         role: "Research Assistant Professor",
         institution: "Toyota Technological Institute at Chicago",
         website: "https://www.ttic.edu/faculty/stocking/",
-        image: "/images/students/kaylene-stocking.jpg",
+        image: "students/kaylene-stocking.jpg",
         section: "former_bs_ms",
     },
     {
@@ -137,7 +141,7 @@ export const students: Student[] = [
         role: "Cyber Officer",
         institution: "U.S. Air Force",
         website: "https://www.linkedin.com/in/alex-fulton/",
-        image: "/images/students/alex-fulton.jpg",
+        image: "students/alex-fulton.jpg",
         section: "former_bs_ms",
     },
     {
@@ -145,7 +149,7 @@ export const students: Student[] = [
         role: "Senior Machine Learning Scientist",
         institution: "Coursera",
         website: "https://www.linkedin.com/in/sandra-s-59a08298/",
-        image: "/images/students/sandra-sajeev.jpg",
+        image: "students/sandra-sajeev.jpg",
         section: "former_bs_ms",
     },
     {
@@ -153,7 +157,7 @@ export const students: Student[] = [
         role: "Technical Program Manager",
         institution: "Snap",
         website: "https://www.linkedin.com/in/dominick-gurnari/",
-        image: "/images/students/dominick-gurnari.jpg",
+        image: "students/dominick-gurnari.jpg",
         section: "former_bs_ms",
     },
     {
@@ -161,7 +165,7 @@ export const students: Student[] = [
         role: "Cyber Officer",
         institution: "U.S. Air Force",
         website: "https://www.linkedin.com/in/daniel-tunitis/",
-        image: "/images/students/danny-tunitis.jpg",
+        image: "students/danny-tunitis.jpg",
         section: "former_bs_ms",
     },
     {
@@ -169,7 +173,7 @@ export const students: Student[] = [
         role: "Ph.D. Student",
         institution: "Massachusetts Institute of Technology",
         website: "http://rupakv.com/",
-        image: "/images/students/rupa-kurinchi-vendhan.jpg",
+        image: "students/rupa-kurinchi-vendhan.jpg",
         section: "former_bs_ms",
     },
     {
@@ -177,7 +181,7 @@ export const students: Student[] = [
         role: "Senior",
         institution: "University of California, Berkeley",
         website: "https://www.linkedin.com/in/rithwik-sudharsan/",
-        image: "/images/students/rithwik-sudharshan.jpg",
+        image: "students/rithwik-sudharshan.jpg",
         section: "former_bs_ms",
     },
     {
@@ -185,7 +189,7 @@ export const students: Student[] = [
         role: "Marshall and Truman Scholar",
         institution: "University of California, Berkeley",
         website: "https://www.linkedin.com/in/eli-glickman/",
-        image: "/images/students/eli-glickman.jpg",
+        image: "students/eli-glickman.jpg",
         section: "former_bs_ms",
     },
     {
@@ -193,7 +197,7 @@ export const students: Student[] = [
         role: "Ph.D. Student",
         institution: "University of California, Los Angeles",
         website: "https://homepage.jackli.org/",
-        image: "/images/students/shufan-li.jpg",
+        image: "students/shufan-li.jpg",
         section: "former_bs_ms",
     },
     {
@@ -201,7 +205,7 @@ export const students: Student[] = [
         role: "Ph.D. Student",
         institution: "Texas Tech University and NASA",
         website: "https://www.linkedin.com/in/emilygelbart",
-        image: "/images/students/emily-gelbart.jpg",
+        image: "students/emily-gelbart.jpg",
         section: "former_bs_ms",
     },
     {
@@ -209,10 +213,15 @@ export const students: Student[] = [
         role: "Ph.D. Student",
         institution: "Princeton University",
         website: "https://tylerzhu.com/",
-        image: "/images/students/tyler-zhu.jpg",
+        image: "students/tyler-zhu.jpg",
         section: "former_bs_ms",
     },
 ];
+
+export const students: Student[] = studentRecords.map((student) => ({
+    ...student,
+    image: contentImage(student.image),
+}));
 
 export const studentSections: { id: StudentSection; title: string }[] = [
     { id: "phd", title: "Ph.D. Students" },

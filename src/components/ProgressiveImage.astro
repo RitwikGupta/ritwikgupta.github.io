@@ -1,0 +1,104 @@
+---
+import { Picture } from "astro:assets";
+import type { LocalImageAsset } from "../utils/content-images";
+import { createLqip } from "../utils/lqip";
+
+interface Props {
+    source: LocalImageAsset;
+    alt: string;
+    sizes?: string;
+    widths?: number[];
+    loading?: "eager" | "lazy";
+    fetchpriority?: "high" | "low" | "auto";
+    fit?: "cover" | "contain";
+    position?: string;
+    class?: string;
+    imageClass?: string;
+    quality?: number;
+    preserveAnimation?: boolean;
+    aspectRatio?: string;
+}
+
+const {
+    source,
+    alt,
+    sizes = "100vw",
+    widths = [320, 640, 960, 1280],
+    loading = "lazy",
+    fetchpriority = "auto",
+    fit = "cover",
+    position = "center",
+    class: wrapperClass = "",
+    imageClass = "",
+    quality = 82,
+    preserveAnimation = source.src.format === "gif",
+    aspectRatio = `${source.src.width} / ${source.src.height}`,
+} = Astro.props;
+
+const lqip = await createLqip(source.sourcePath);
+const requestedWidths = widths.filter((width) => width <= source.src.width);
+const responsiveWidths = [...new Set(requestedWidths.length > 0 ? requestedWidths : [source.src.width])]
+    .sort((a, b) => a - b);
+const fallbackWidth = responsiveWidths[responsiveWidths.length - 1];
+const style = `--lqip: url("${lqip}"); --image-fit: ${fit}; --image-position: ${position}; aspect-ratio: ${aspectRatio};`;
+---
+
+<span
+    class:list={["progressive-image", wrapperClass]}
+    style={style}
+    data-progressive-image
+>
+    {preserveAnimation ? (
+        <img
+            src={source.src.src}
+            width={source.src.width}
+            height={source.src.height}
+            alt={alt}
+            loading={loading}
+            fetchpriority={fetchpriority}
+            decoding="async"
+            class={imageClass}
+        />
+    ) : (
+        <Picture
+            src={source.src}
+            formats={["avif", "webp"]}
+            widths={responsiveWidths}
+            width={fallbackWidth}
+            sizes={sizes}
+            alt={alt}
+            loading={loading}
+            fetchpriority={fetchpriority}
+            decoding="async"
+            quality={quality}
+            class={imageClass}
+            pictureAttributes={{ class: "progressive-image__picture" }}
+        />
+    )}
+</span>
+
+<script>
+    function initializeProgressiveImages() {
+        document.querySelectorAll<HTMLElement>("[data-progressive-image]:not([data-progressive-ready])")
+            .forEach((wrapper) => {
+                wrapper.dataset.progressiveReady = "";
+                const image = wrapper.querySelector("img");
+                if (!image) return;
+
+                const reveal = async () => {
+                    try {
+                        await image.decode();
+                    } catch {
+                        // A decoded image is preferred, but a successfully loaded image is still safe to show.
+                    }
+                    if (image.naturalWidth > 0) wrapper.classList.add("is-loaded");
+                };
+
+                if (image.complete) void reveal();
+                else image.addEventListener("load", () => void reveal(), { once: true });
+            });
+    }
+
+    initializeProgressiveImages();
+    document.addEventListener("astro:page-load", initializeProgressiveImages);
+</script>

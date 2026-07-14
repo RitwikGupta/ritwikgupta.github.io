@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import rehypeProgressiveImages from "./src/utils/rehype-progressive-images";
 import tailwindcss from "@tailwindcss/vite";
 
 import partytown from "@astrojs/partytown";
@@ -15,7 +16,7 @@ export default defineConfig({
     },
     markdown: {
         remarkPlugins: [remarkMath],
-        rehypePlugins: [[rehypeKatex, { output: "mathml" }]],
+        rehypePlugins: [rehypeProgressiveImages, [rehypeKatex, { output: "mathml" }]],
     },
     site: siteConfig.url,
 });

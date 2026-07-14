@@ -176,6 +176,51 @@ html[data-theme="dark"] .editorial-prose {
   --tw-prose-pre-bg: #11110f;
 }
 
+.progressive-image {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background-color: var(--surface-muted);
+  background-image: var(--lqip);
+  background-position: var(--image-position, center);
+  background-size: cover;
+}
+
+.progressive-image__picture,
+.progressive-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.editorial-prose :where(.progressive-image--content) {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+.editorial-prose :where(.progressive-image--content img) {
+  width: 100%;
+  margin: 0;
+}
+
+.progressive-image img {
+  object-fit: var(--image-fit, cover);
+  object-position: var(--image-position, center);
+}
+
+html.js .progressive-image img {
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+html.js .progressive-image.is-loaded img {
+  opacity: 1;
+}
+
+html.js .progressive-image.is-loaded {
+  background-image: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

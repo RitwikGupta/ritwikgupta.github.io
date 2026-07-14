@@ -2,7 +2,7 @@
 title: Idea for Efficient Cell Image Compression
 pubDate: 2017-03-25
 description: Just throwing this out there to the world. Surely there must be a way to compress gigapixel cell imagery!
-og_image: /images/gc/compression-1.jpg
+og_image: ../../assets/blog/gc/compression-1.jpg
 ---
 
 ## Premise
@@ -13,9 +13,7 @@ Pathology and histology slide images are taken with extremely high resolution ca
 
 It is important to note that these images often rely on **lossless** compression, because any artifacting will result in a lowered ability for the doctor to give accurate results.
 
-<p align="center">
-	<img src="/images/gc/compression-1.jpg" />
-</p>
+![Cell image compression example](../../assets/blog/gc/compression-1.jpg)
 <p align="center">
 	Example of a cell image.
 </p>
@@ -27,9 +25,7 @@ In most regions of the body, neigboring cells looks alike to the cells bordering
 1. Store a set of deltas for all other cells in terms of rotations, translation, and transformations.
 1. Apply further compression using any standard algorithm to the deltas themselves.
 
-<p align="center">
-	<img src="/images/gc/compression-2.jpg" />
-</p>
+![Compressed cell image example](../../assets/blog/gc/compression-2.jpg)
 <p align="center">
 	Example of "reference" cells.
 </p>

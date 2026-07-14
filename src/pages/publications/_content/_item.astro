@@ -1,5 +1,6 @@
 ---
 import { publications } from "./list";
+import ProgressiveImage from "../../../components/ProgressiveImage.astro";
 
 interface Props {
     limit?: number;
@@ -42,12 +43,16 @@ const displayedPublications = limit === undefined
             </div>
             {p.imgSrc && (
                 <div class="aspect-[16/10] w-full overflow-hidden border-t border-[var(--border)] bg-[var(--surface-muted)] lg:order-last lg:aspect-auto lg:border-t-0 lg:border-l">
-                    <img
-                        src={p.imgSrc}
-                        alt=""
+                    <ProgressiveImage
+                        source={p.imgSrc}
+                        alt={`Artwork for ${p.title}`}
+                        widths={[240, 480]}
+                        sizes="(min-width: 1024px) 240px, 100vw"
                         loading={index === 0 ? "eager" : "lazy"}
-                        decoding="async"
-                        class="h-full w-full object-contain p-4"
+                        fetchpriority={index === 0 ? "high" : "auto"}
+                        fit="contain"
+                        class="h-full w-full"
+                        imageClass="p-4"
                     />
                 </div>
             )}
