@@ -1,11 +1,21 @@
 ---
 import { publications } from "./list";
 
-publications.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
+interface Props {
+    limit?: number;
+}
+
+const { limit } = Astro.props;
+const sortedPublications = [...publications].sort(
+    (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf(),
+);
+const displayedPublications = limit === undefined
+    ? sortedPublications
+    : sortedPublications.slice(0, limit);
 ---
 
 <div class="grid w-full gap-8">
-    {publications.map((p) => (
+    {displayedPublications.map((p) => (
         <article class="surface-card grid overflow-hidden lg:grid-cols-[minmax(0,1fr)_15rem]">
             <div class="flex min-w-0 flex-col gap-3 p-6 sm:p-8">
                 <a
