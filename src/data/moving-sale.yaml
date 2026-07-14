@@ -8,8 +8,8 @@
 
 - id: ikea-bookshelf-black
   name: IKEA Bookshelf (black)
-  product_url: "https://www.ikea.com/us/en/p/kallax-shelf-unit-black-brown-70637304/"
-  image_url: "https://www.ikea.com/us/en/images/products/kallax-shelf-unit-black-brown__0644756_pe702940_s5.jpg"
+  product_url: "https://www.ikea.com/us/en/p/kallax-shelf-unit-black-brown-00631640/"
+  image_url: "https://www.ikea.com/us/en/images/products/kallax-shelf-unit-black-brown__0644754_pe702938_s5.jpg"
   price: 25
   claimed: false
 
