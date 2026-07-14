@@ -52,7 +52,7 @@ const links: Link[] = [
 ---
 
 <section
-    class="w-full max-w-[750px] flex items-center justify-center flex-col lg:flex-row gap-x-16 gap-y-4"
+    class="w-full max-w-[70ch] flex items-center justify-center flex-col lg:flex-row gap-x-14 gap-y-6"
 >
     <Image
         src={profile}
@@ -62,16 +62,16 @@ const links: Link[] = [
         quality={85}
         format="webp"
         loading="eager"
-        class="border rounded-full border-transparent"
+        class="h-40 w-40 rounded-2xl border border-[var(--border)] object-cover shadow-sm"
     />
     <div
         class="flex items-center lg:items-start justify-center flex-col gap-y-2 lg:gap-y-4"
     >
-        <div class="flex items-end justify-center flex-row gap-x-2">
-            <h1 class="text-xl sm:text-4xl font-bold">Ritwik Gupta</h1>
-            <p class="text-gray-400 text-sm sm:text-base">[at] berkeley.edu</p>
+        <div class="flex flex-wrap items-baseline justify-center gap-x-3 lg:justify-start">
+            <h1 class="text-3xl font-bold sm:text-5xl">Ritwik Gupta</h1>
+            <p class="sans text-sm text-[var(--text-muted)]">ritwikg [at] umd.edu</p>
         </div>
-        <h2 class="text-base sm:text-lg text-center lg:text-left">
+        <h2 class="max-w-xl text-center font-serif text-base font-normal leading-relaxed tracking-normal text-[var(--text-muted)] sm:text-lg lg:text-left">
             AI in chaotic environments and governance of dual-use military-civil AI
         </h2>
         <div class="flex items-stretch justify-center flex-row gap-2 flex-wrap">
@@ -80,7 +80,8 @@ const links: Link[] = [
                     <a
                         href={link.url}
                         target="_blank"
-                        class="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 px-2 py-1 border border-transparent transition-colors rounded-md flex items-center justify-center font-semibold"
+                        rel="noopener noreferrer"
+                        class="sans flex items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-semibold text-[var(--text)] no-underline transition hover:border-[var(--border-strong)] hover:text-[var(--link)]"
                     >
                         {link.displayType === "image" ? (
                             <Image

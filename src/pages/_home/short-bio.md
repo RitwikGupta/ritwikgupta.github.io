@@ -1,3 +1,3 @@
-Assistant Professor, University of Maryland (starting 2026)
+Assistant Professor, University of Maryland
 
 Technical Director for Autonomy, Defense Innovation Unit (DIU)

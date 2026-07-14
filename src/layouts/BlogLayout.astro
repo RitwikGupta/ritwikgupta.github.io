@@ -1,114 +1,36 @@
 ---
-import "@fontsource-variable/montserrat";
-import "../styles/global.css";
-import Topnav from "../components/topnav.astro";
-import ThemeScript from "../components/ThemeScript.astro";
-import ThemeHead from "../components/ThemeHead.astro";
+import Layout from "./Layout.astro";
 
 const { frontmatter } = Astro.props;
+const published = new Date(frontmatter.pubDate)
+    .toLocaleString("en-US", { timeZone: "UTC" })
+    .split(",")[0];
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <ThemeHead />
-        <meta charset="UTF-8" />
-        <meta name="description" content={frontmatter.description} />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{frontmatter.title}</title>
-        <meta property="og:title" content={frontmatter.title} />
-        <meta property="og:description" content={frontmatter.description} />
-        <meta property="og:image" content={frontmatter.og_image} />
-
-        <!-- Google tag (gtag.js) -->
-        <script
-            is:inline
-            type="text/partytown"
-            src="https://www.googletagmanager.com/gtag/js?id=G-83XPF3W3R2"
-        ></script>
-        <script is:inline type="text/partytown">
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
-          
-            gtag("config", "G-83XPF3W3R2");
-          </script>
-    </head>
-    <body class="flex items-center justify-center flex-col w-screen bg-white dark:bg-[#0B1120] text-gray-800 dark:text-gray-200">
-        <Topnav />
-        <main
-            class="w-full md:w-3/4 xl:w-7/12 flex items-center justify-center flex-col gap-y-10 p-12"
-        >
-            <div class="not-prose flex items-start justify-start w-full">
-                <a
-                    href="/blog"
-                    class="text-sm text-left text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 transition-colors font-semibold"
-                    >&larr; See all blogs</a
-                >
-            </div>
-            <div
-                class="not-prose w-full max-w-[82ch] mx-auto flex items-start justify-center flex-col gap-y-3 text-gray-900 dark:text-white"
-            >
-                <h1 class="text-2xl sm:text-4xl font-bold">
-                    {frontmatter.title}
-                </h1>
-                <p class="text-gray-600 dark:text-gray-400">
-                    Published: {
-                        new Date(frontmatter.pubDate)
-                            .toLocaleString("en-US", {
-                                timeZone: "UTC",
-                            })
-                            .split(",")[0]
-                    }
-                </p>
-                <div class="flex items-center justify-center w-full">
+<Layout
+    title={frontmatter.title}
+    desc={frontmatter.description}
+    ogImage={frontmatter.og_image}
+>
+    <main class="site-shell">
+        <article class="mx-auto max-w-[70ch]">
+            <a href="/blog" class="back-link">&larr; See all posts</a>
+            <header class="mt-10 mb-12">
+                <h1 class="page-title">{frontmatter.title}</h1>
+                <time class="meta-label mt-4 block" datetime={frontmatter.pubDate}>
+                    Published {published}
+                </time>
+                {frontmatter.og_image && (
                     <img
-                        class="w-full"
+                        class="mt-8 aspect-[16/9] w-full rounded-[var(--radius)] border border-[var(--border)] object-cover"
                         src={frontmatter.og_image}
-                        alt={frontmatter.title}
+                        alt=""
                     />
-                </div>
-            </div>
-            <div
-                class="prose prose-headings:mt-8 prose-headings:mb-0 prose-headings:text-left prose-p:mt-4 prose-p:mb-0 prose-ol:mt-4 prose-ol:mb-0 prose-ul:mt-4 prose-ul:mb-0 prose-a:text-blue-500 hover:prose-a:text-blue-600 transition-colors dark:prose-invert dark:prose-a:text-blue-400 dark:hover:prose-a:text-blue-300"
-            >
+                )}
+            </header>
+            <div class="prose editorial-prose">
                 <slot />
             </div>
-        </main>
-        <ThemeScript />
-    </body>
-    <style is:global>
-        @reference "../styles/global.css";
-        :root {
-            --accent: 136, 58, 234;
-            --accent-light: 224, 204, 250;
-            --accent-dark: 49, 10, 101;
-            --accent-gradient: linear-gradient(
-                45deg,
-                rgb(var(--accent)),
-                rgb(var(--accent-light)) 30%,
-                white 60%
-            );
-        }
-
-        ::selection {
-            background: #d1d5db;
-        }
-
-        code {
-            font-family:
-                Menlo,
-                Monaco,
-                Lucida Console,
-                Liberation Mono,
-                DejaVu Sans Mono,
-                Bitstream Vera Sans Mono,
-                Courier New,
-                monospace;
-        }
-    </style>
-</html>
+        </article>
+    </main>
+</Layout>

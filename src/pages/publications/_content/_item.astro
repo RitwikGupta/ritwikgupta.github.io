@@ -1,65 +1,51 @@
 ---
 import { publications } from "./list";
 
-publications.sort(
-    (a, b) =>
-        new Date(b.date).valueOf() -
-        new Date(a.date).valueOf()
-);
+publications.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf());
 ---
 
-<div class="w-full flex items-center justify-center flex-col gap-y-12">
-    {
-        publications.map((p) => (
-            <div class="w-full flex lg:items-start items-center justify-center lg:flex-row flex-col-reverse gap-x-10 gap-y-2">
-                {p.imgSrc && (
-                    <img
-                        src={p.imgSrc}
-                        alt={p.title}
-                        class="lg:max-w-[250px] w-full"
-                    />
-                )}
-                <div class="w-full flex items-start justify-center flex-col gap-y-2">
-                    <a 
-                        href={p.links[0]?.url || '#'} 
-                        target="_blank" 
-                        class="text-lg sm:text-2xl font-bold text-blue-600 dark:text-blue-400 hover:underline"
-                    >
-                        {p.title}
-                    </a>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700 pb-2">
-                        {p.authors
-                            .map((author) =>
-                                author.isPrimary
-                                    ? author.name + "*"
-                                    : author.name
-                            )
-                            .join(", ")}
-                    </p>
-                    <p class="text-gray-800 dark:text-gray-200 mt-2">{p.excerpt}</p>
-                    <div class="w-full flex items-center justify-start flex-row flex-wrap gap-2">
-                        {p.award && (
-                            <span class="bg-yellow-400 dark:bg-yellow-500 text-black px-2 py-1 border border-transparent rounded-md text-sm font-semibold">
-                                {p.award}
-                            </span>
-                        )}
-                        {p.venue && (
-                            <span class="bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100 px-2 py-1 border border-transparent rounded-md text-sm font-semibold">
-                                {p.venue}
-                            </span>
-                        )}
-                        {p.links.map((link) => (
-                            <a
-                                href={link.url}
-                                target="_blank"
-                                class="!text-black bg-gray-200 hover:bg-gray-300 px-2 py-1 border border-transparent rounded-md text-sm font-semibold"
-                            >
-                                {link.display}
-                            </a>
-                        ))}
-                    </div>
+<div class="grid w-full gap-8">
+    {publications.map((p) => (
+        <article class="surface-card grid overflow-hidden lg:grid-cols-[minmax(0,1fr)_15rem]">
+            <div class="flex min-w-0 flex-col gap-3 p-6 sm:p-8">
+                <a
+                    href={p.links[0]?.url || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-xl font-bold leading-snug sm:text-2xl"
+                >
+                    {p.title}
+                </a>
+                <p class="sans border-b border-[var(--border)] pb-3 text-xs leading-relaxed text-[var(--text-muted)]">
+                    {p.authors.map((author) => author.isPrimary ? `${author.name}*` : author.name).join(", ")}
+                </p>
+                <p class="text-base leading-relaxed text-[var(--text-muted)]">{p.excerpt}</p>
+                <div class="sans mt-auto flex flex-wrap gap-2 pt-2">
+                    {p.award && <span class="tag award">{p.award}</span>}
+                    {p.venue && <span class="tag venue">{p.venue}</span>}
+                    {p.links.map((link) => (
+                        <a href={link.url} target="_blank" rel="noopener noreferrer" class="tag link-tag">
+                            {link.display}
+                        </a>
+                    ))}
                 </div>
             </div>
-        ))
-    }
+            {p.imgSrc && (
+                <img
+                    src={p.imgSrc}
+                    alt=""
+                    loading="lazy"
+                    class="aspect-[16/10] h-full w-full border-t border-[var(--border)] bg-[var(--surface-muted)] object-contain p-4 lg:order-last lg:aspect-auto lg:border-t-0 lg:border-l"
+                />
+            )}
+        </article>
+    ))}
 </div>
+
+<style>
+    .tag { display: inline-flex; align-items: center; border: 1px solid var(--border); border-radius: 999px; padding: 0.28rem 0.65rem; font-size: 0.7rem; font-weight: 650; line-height: 1.2; }
+    .award { border-color: color-mix(in srgb, var(--goldenrod) 55%, var(--border)); background: color-mix(in srgb, var(--goldenrod) 13%, var(--surface)); color: var(--text); }
+    .venue { background: var(--surface-muted); color: var(--text); }
+    .link-tag { color: var(--link); text-decoration: none; }
+    .link-tag:hover { border-color: var(--link); background: var(--surface-muted); }
+</style>

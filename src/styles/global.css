@@ -4,7 +4,185 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: "Montserrat Variable", ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: "Montserrat Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4 Variable", ui-serif, Georgia, Cambria, serif;
+}
+
+:root {
+  --paper: #f8f6f0;
+  --paper-deep: #eee9df;
+  --midnight: #1a1a1a;
+  --ink-soft: #5f5b53;
+  --burgundy: #74030b;
+  --goldenrod: #f48c06;
+
+  --canvas: var(--paper);
+  --surface: #fffdf8;
+  --surface-muted: var(--paper-deep);
+  --text: var(--midnight);
+  --text-muted: var(--ink-soft);
+  --border: #d8d2c6;
+  --border-strong: #aaa296;
+  --link: var(--burgundy);
+  --link-hover: #4f0208;
+  --focus: #9f290f;
+  --selection: #ead0c6;
+  --shadow: 26 23 18;
+  --radius: 0.85rem;
+  --shell: 76rem;
+  --prose: 70ch;
+}
+
+html[data-theme="dark"] {
+  --canvas: var(--midnight);
+  --surface: #222220;
+  --surface-muted: #2b2a27;
+  --text: #f4f0e7;
+  --text-muted: #bbb4a7;
+  --border: #45423c;
+  --border-strong: #68635a;
+  --link: #f6a331;
+  --link-hover: #ffc46d;
+  --focus: #f6a331;
+  --selection: #633d16;
+  --shadow: 0 0 0;
+}
+
+html {
+  min-width: 20rem;
+  background: var(--canvas);
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+html[data-theme="dark"] { color-scheme: dark; }
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--canvas);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6,
+nav, button, .sans, time {
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  letter-spacing: -0.025em;
+}
+
+a {
+  color: var(--link);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+a:hover { color: var(--link-hover); }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 0.2rem;
+}
+
+::selection {
+  background: var(--selection);
+  color: var(--text);
+}
+
+code {
+  font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono", monospace;
+}
+
+.site-shell {
+  width: min(100%, var(--shell));
+  margin-inline: auto;
+  padding: clamp(2.25rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3rem);
+}
+
+.prose-shell { max-width: var(--prose); }
+
+.page-header {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.page-title {
+  margin: 0;
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  font-weight: 750;
+  line-height: 1.02;
+}
+
+.back-link,
+.meta-label {
+  width: fit-content;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.025em;
+}
+
+.back-link:hover { color: var(--link); }
+
+.surface-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 8px 28px rgb(var(--shadow) / 0.055);
+}
+
+.editorial-prose {
+  --tw-prose-body: var(--text);
+  --tw-prose-headings: var(--text);
+  --tw-prose-lead: var(--text-muted);
+  --tw-prose-links: var(--link);
+  --tw-prose-bold: var(--text);
+  --tw-prose-counters: var(--text-muted);
+  --tw-prose-bullets: var(--border-strong);
+  --tw-prose-hr: var(--border);
+  --tw-prose-quotes: var(--text);
+  --tw-prose-quote-borders: var(--goldenrod);
+  --tw-prose-captions: var(--text-muted);
+  --tw-prose-code: var(--text);
+  --tw-prose-pre-code: #eee9df;
+  --tw-prose-pre-bg: #24231f;
+  --tw-prose-th-borders: var(--border-strong);
+  --tw-prose-td-borders: var(--border);
+  width: 100%;
+  max-width: var(--prose);
+  color: var(--text);
+  font-size: 1.08rem;
+  line-height: 1.78;
+}
+
+.editorial-prose :where(h1, h2, h3, h4) { font-family: var(--font-sans); }
+.editorial-prose :where(a) { font-weight: 600; }
+.editorial-prose :where(img) {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+html[data-theme="dark"] .editorial-prose {
+  --tw-prose-pre-code: #f4f0e7;
+  --tw-prose-pre-bg: #11110f;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

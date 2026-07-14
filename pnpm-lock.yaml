@@ -20,6 +20,9 @@ importers:
       '@fontsource-variable/montserrat':
         specifier: ^5.2.8
         version: 5.2.8
+      '@fontsource-variable/source-serif-4':
+        specifier: ^5.2.9
+        version: 5.2.9
       '@tailwindcss/vite':
         specifier: ^4.1.18
         version: 4.1.18(vite@6.4.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.2))
@@ -295,6 +298,9 @@ packages:
 
   '@fontsource-variable/montserrat@5.2.8':
     resolution: {integrity: sha512-d8wykq7GCKhEOlLwEuQIOK3w3qsXNxwDlH0meru4AZZzQ4/+rZyvHWKL6BBtHdmbovSHEEQDkwkD8qYUKlcFtQ==}
+
+  '@fontsource-variable/source-serif-4@5.2.9':
+    resolution: {integrity: sha512-PPcxjLFk/fS0WHg79pDM2YNvz61kC+oYZ5cWZZyCS0DHpJncmuYOuiZAsvj4tDxlWPBEvxxcRLQQNmSaRbPkqw==}
 
   '@img/colour@1.0.0':
     resolution: {integrity: sha512-A5P/LfWGFSl6nsckYtjw9da+19jB8hkJ6ACTGcDfEJ0aE+l2n2El7dsVM7UVHZQ9s2lmYMWlrS21YLy2IR1LUw==}
@@ -2395,6 +2401,8 @@ snapshots:
     optional: true
 
   '@fontsource-variable/montserrat@5.2.8': {}
+
+  '@fontsource-variable/source-serif-4@5.2.9': {}
 
   '@img/colour@1.0.0':
     optional: true

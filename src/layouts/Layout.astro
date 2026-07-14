@@ -1,5 +1,6 @@
 ---
 import "@fontsource-variable/montserrat";
+import "@fontsource-variable/source-serif-4";
 import "../styles/global.css";
 import Topnav from "../components/topnav.astro";
 import ThemeScript from "../components/ThemeScript.astro";
@@ -8,95 +9,41 @@ import ThemeHead from "../components/ThemeHead.astro";
 interface Props {
     title: string;
     desc: string;
+    ogImage?: string;
 }
 
-const { title, desc } = Astro.props;
+const { title, desc, ogImage } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <ThemeHead />
-        
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
+        <ThemeHead />
         <meta name="description" content={desc} />
-
+        <meta name="generator" content={Astro.generator} />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-
-        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#0B1120" media="(prefers-color-scheme: dark)" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
         <meta property="og:title" content={title} />
         <meta property="og:description" content={desc} />
         <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary" />
+        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
         <meta name="twitter:creator" content="@Ritwik_G" />
-        
         <title>{title}</title>
 
-        <!-- Google tag (gtag.js) -->
-        <script
-            is:inline
-            type="text/partytown"
-            src="https://www.googletagmanager.com/gtag/js?id=G-83XPF3W3R2"
-        ></script>
+        <script is:inline type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-83XPF3W3R2"></script>
         <script is:inline type="text/partytown">
             window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
+            function gtag() { dataLayer.push(arguments); }
             gtag("js", new Date());
-          
             gtag("config", "G-83XPF3W3R2");
-          </script>
+        </script>
     </head>
-    <body class="flex items-center justify-center flex-col w-screen bg-white dark:bg-[#0B1120]">
+    <body>
         <Topnav />
         <slot />
         <ThemeScript />
     </body>
 </html>
-<style is:global>
-    @reference "../styles/global.css";
-    /* Base text colors */
-    body {
-        @apply text-gray-800 dark:text-gray-200;
-    }
-
-    /* Headings */
-    h1, h2, h3, h4, h5, h6 {
-        @apply dark:text-white;
-    }
-
-    /* Links */
-    a {
-        @apply dark:text-blue-300 hover:dark:text-blue-200;
-    }
-
-    /* Inline text elements */
-    p, span, li {
-        @apply dark:text-gray-200;
-    }
-
-    b, strong {
-        @apply dark:text-gray-100;
-    }
-
-    time {
-        @apply dark:text-gray-300;
-    }
-
-    /* Code blocks */
-    code {
-        font-family: Menlo, Monaco, "Lucida Console", "Liberation Mono",
-            "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New",
-            monospace;
-    }
-
-    /* Selection */
-    ::selection {
-        @apply bg-gray-300;
-    }
-</style>

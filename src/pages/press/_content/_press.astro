@@ -1,23 +1,30 @@
 ---
-import { content } from "./list"
-import Extra from "./_extra.md"
+import { content } from "./list";
+import Extra from "./_extra.md";
 ---
 
-{
-    content.map((c) => (
-        <h2>{c.title}</h2>
-        <div class="grid grid-cols-3 md:grid-cols-5 w-full gap-4 items-center">
-            {c.links.map((link) => (
-                <a href={link.url} target="_blank" class="flex items-center justify-center w-full h-full">
-                    <img
-                        src={link.img}
-                        alt={link.url}
-                        class="dark:bg-white/10 rounded-lg p-4"
-                    />
-                </a>
-            ))}
-        </div>
-    ))
-}
+<div class="grid gap-10">
+    {content.map((c) => (
+        <section class="press-section">
+            <h2>{c.title}</h2>
+            <div class="logo-grid">
+                {c.links.map((link) => (
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" class="logo-card" aria-label={`Read coverage at ${new URL(link.url).hostname.replace("www.", "")}`}>
+                        <img src={link.img} alt="" loading="lazy" />
+                    </a>
+                ))}
+            </div>
+        </section>
+    ))}
+</div>
+<div class="prose editorial-prose mt-12"><Extra /></div>
 
-<Extra />
+<style>
+    .press-section { display: grid; gap: 1.25rem; }
+    h2 { padding-bottom: 0.7rem; border-bottom: 1px solid var(--border); font-size: 1.4rem; font-weight: 700; }
+    .logo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 1rem; }
+    .logo-card { display: grid; min-height: 8rem; place-items: center; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 1.25rem; transition: border-color 160ms ease, transform 160ms ease; }
+    .logo-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+    img { max-width: 100%; max-height: 4.25rem; object-fit: contain; }
+    :global(html[data-theme="dark"]) img { filter: grayscale(1) brightness(1.65); }
+</style>

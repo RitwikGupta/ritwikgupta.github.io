@@ -1,33 +1,27 @@
-<!-- Theme toggle functionality -->
 <script is:inline>
-    const applyTheme = (isDark) => {
+    (() => {
         const root = document.documentElement;
-        const theme = isDark ? 'dark' : 'light';
-        const background = isDark ? '#0B1120' : '#ffffff';
+        const applyTheme = (theme, persist = true) => {
+            const background = theme === "dark" ? "#1a1a1a" : "#f8f6f0";
+            root.dataset.theme = theme;
+            root.style.colorScheme = theme;
+            root.style.backgroundColor = background;
+            document.querySelector('meta[name="theme-color"]')?.setAttribute("content", background);
+            document.querySelectorAll("[data-theme-toggle]").forEach((toggle) => {
+                toggle.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
+                toggle.setAttribute("title", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
+            });
+            if (persist) {
+                try { localStorage.setItem("theme", theme); } catch (_) {}
+            }
+        };
 
-        root.dataset.theme = theme;
-        try {
-            localStorage.setItem('theme', theme);
-        } catch (e) {
-            // Ignore storage write failures (private mode / blocked storage).
-        }
-        // Keep color-scheme and background consistent immediately
-        root.style.colorScheme = theme;
-        root.style.backgroundColor = background;
-        document.body && (document.body.style.backgroundColor = background);
-    };
+        document.addEventListener("click", (event) => {
+            const target = event.target;
+            if (!(target instanceof Element) || !target.closest("[data-theme-toggle]")) return;
+            applyTheme(root.dataset.theme === "dark" ? "light" : "dark");
+        });
 
-    window.__toggleTheme = () => {
-        const isDark = document.documentElement.dataset.theme !== 'dark';
-        applyTheme(isDark);
-    };
-
-    document.addEventListener('pointerdown', (event) => {
-        const target = event.target;
-        if (!(target instanceof Element)) return;
-        const toggle = target.closest('[data-theme-toggle="true"]');
-        if (!toggle) return;
-
-        window.__toggleTheme();
-    }, { capture: true });
+        applyTheme(root.dataset.theme === "dark" ? "dark" : "light", false);
+    })();
 </script>

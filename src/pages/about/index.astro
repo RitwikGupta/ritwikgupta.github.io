@@ -7,20 +7,12 @@ import Bio from "./_full-bio.md";
     title="Ritwik Gupta | About"
     desc="AI in chaotic environments and governance of dual-use military-civil AI"
 >
-    <main
-        class="w-full md:w-3/4 xl:w-7/12 flex items-center justify-center flex-col gap-y-10 p-12"
-    >
-        <div class="flex items-start justify-start w-full">
-            <a
-                href="/"
-                class="text-sm text-left text-gray-400 hover:text-gray-500 transition-colors font-semibold"
-                >&larr; Back to home</a
-            >
-        </div>
-        <h1 class="text-2xl sm:text-4xl font-bold">About Me</h1>
-        <div
-            class="prose prose-a:text-blue-500 hover:prose-a:text-blue-600 transition-colors"
-        >
+    <main class="site-shell prose-shell">
+        <header class="page-header">
+            <a href="/" class="back-link">&larr; Back to home</a>
+            <h1 class="page-title">About Me</h1>
+        </header>
+        <div class="prose editorial-prose">
             <Bio />
         </div>
     </main>
