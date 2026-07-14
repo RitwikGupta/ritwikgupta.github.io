@@ -49,7 +49,7 @@ const publicationRecords: PublicationRecord[] = [
             },
         ],
         excerpt:
-            "Vision-language models selectively vary how much they use an image based on question framing, even when the same visual reasoning is required. We analyze this behavior and introduce a lightweight prompt-tuning method that improves visual grounding and performance across framings.",
+            "VLMs are selectively blind. They decide how much to look at an image based on question framing (open-ended vs Yes/No vs MCQ), even when the same visual reasoning is required. We analyze this phenomenon and mitigate it in this paper.",
         date: "2026-03-19",
         imgSrc: "publications/tinted-frames.gif",
     },
