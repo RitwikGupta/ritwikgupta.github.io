@@ -1,0 +1,412 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const items = await getCollection("movingSale");
+const availableItems = items.filter((item) => !item.data.claimed);
+const soldItems = items.filter((item) => item.data.claimed);
+
+const priceFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+});
+
+const interestLink = (name: string) => {
+    const subject = encodeURIComponent(`Moving sale: ${name}`);
+    const body = encodeURIComponent(
+        `Hi Ritwik,\n\nI'm interested in the ${name}. Is it still available?\n\nThanks!`,
+    );
+
+    return `mailto:ritwikgupta@berkeley.edu?subject=${subject}&body=${body}`;
+};
+---
+
+<Layout
+    title="Moving Sale | Ritwik Gupta"
+    desc="Furniture and household items available from Ritwik Gupta's moving sale."
+>
+    <main class="sale-page">
+        <header class="sale-header">
+            <a href="/" class="back-link">&larr; Back to home</a>
+            <div class="heading-copy">
+                <h1>Moving Sale</h1>
+                <p class="intro">
+                    Interested in something? Send me an email from the item card.
+                    Product links show the same or equivalent item for reference.
+                </p>
+            </div>
+        </header>
+
+        <section aria-labelledby="available-heading" class="item-section">
+            <div class="section-heading">
+                <h2 id="available-heading">Available</h2>
+                <span>{availableItems.length} {availableItems.length === 1 ? "item" : "items"}</span>
+            </div>
+
+            <div class="item-grid">
+                {
+                    availableItems.map(({ data: item }) => (
+                        <article class="item-card" aria-label={item.name}>
+                            <div class="image-frame">
+                                <img
+                                    src={item.image_url}
+                                    alt={item.name}
+                                    loading="lazy"
+                                    decoding="async"
+                                    referrerpolicy="no-referrer"
+                                />
+                            </div>
+                            <div class="card-content">
+                                <div class="title-row">
+                                    <h3>{item.name}</h3>
+                                    <p class="price">{priceFormatter.format(item.price)}</p>
+                                </div>
+                                {item.notes && <p class="notes">{item.notes}</p>}
+                                <div class="card-actions">
+                                    <a class="interest-link" href={interestLink(item.name)}>
+                                        I'm interested
+                                    </a>
+                                    {item.product_url && (
+                                        <a
+                                            class="product-link"
+                                            href={item.product_url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            View product <span aria-hidden="true">&nearr;</span>
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+
+        {
+            soldItems.length > 0 && (
+                <section aria-labelledby="sold-heading" class="item-section sold-section">
+                    <div class="section-heading">
+                        <h2 id="sold-heading">Sold</h2>
+                        <span>{soldItems.length} {soldItems.length === 1 ? "item" : "items"}</span>
+                    </div>
+
+                    <div class="item-grid">
+                        {soldItems.map(({ data: item }) => (
+                            <article class="item-card sold-card" aria-label={`${item.name} — sold`}>
+                                <div class="image-frame">
+                                    <img
+                                        src={item.image_url}
+                                        alt=""
+                                        loading="lazy"
+                                        decoding="async"
+                                        referrerpolicy="no-referrer"
+                                    />
+                                    <span class="sold-badge">Sold</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="title-row">
+                                        <h3>{item.name}</h3>
+                                        <p class="price">{priceFormatter.format(item.price)}</p>
+                                    </div>
+                                    {item.notes && <p class="notes">{item.notes}</p>}
+                                    {item.product_url && (
+                                        <div class="card-actions">
+                                            <a
+                                                class="product-link"
+                                                href={item.product_url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                View product <span aria-hidden="true">&nearr;</span>
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </section>
+            )
+        }
+    </main>
+</Layout>
+
+<style>
+    .sale-page {
+        width: min(100%, 80rem);
+        padding: 3rem;
+    }
+
+    .sale-header {
+        display: grid;
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .back-link {
+        width: fit-content;
+        color: var(--color-gray-400);
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: color 150ms ease;
+    }
+
+    .back-link:hover {
+        color: var(--color-gray-600);
+    }
+
+    .heading-copy {
+        max-width: 48rem;
+    }
+
+    .eyebrow {
+        margin-bottom: 0.5rem;
+        color: var(--color-blue-600);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        font-size: clamp(2.25rem, 5vw, 4rem);
+        font-weight: 750;
+        letter-spacing: -0.04em;
+        line-height: 1;
+    }
+
+    .intro {
+        max-width: 42rem;
+        margin-top: 1rem;
+        color: var(--color-gray-600);
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .item-section + .item-section {
+        margin-top: 4rem;
+    }
+
+    .section-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--color-gray-200);
+    }
+
+    .section-heading h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .section-heading span {
+        color: var(--color-gray-500);
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    .item-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+        gap: 1.5rem;
+    }
+
+    .item-card {
+        display: flex;
+        min-width: 0;
+        overflow: hidden;
+        flex-direction: column;
+        border: 1px solid var(--color-gray-200);
+        border-radius: 0.875rem;
+        background: white;
+        box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+    }
+
+    .image-frame {
+        position: relative;
+        display: grid;
+        height: 15rem;
+        place-items: center;
+        overflow: hidden;
+        background: var(--color-gray-100);
+    }
+
+    .image-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: transform 250ms ease;
+    }
+
+    .item-card:hover .image-frame img {
+        transform: scale(1.025);
+    }
+
+    .card-content {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        padding: 1.25rem;
+    }
+
+    .title-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .title-row h3 {
+        font-size: 1.0625rem;
+        font-weight: 700;
+        line-height: 1.4;
+    }
+
+    .price {
+        flex: none;
+        color: var(--color-gray-900);
+        font-size: 1rem;
+        font-weight: 750;
+    }
+
+    .notes {
+        margin-top: 0.75rem;
+        color: var(--color-gray-600);
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    .card-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: auto;
+        padding-top: 1.25rem;
+    }
+
+    .interest-link {
+        border-radius: 0.5rem;
+        background: var(--color-gray-900);
+        color: white;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        padding: 0.625rem 0.875rem;
+        transition: background-color 150ms ease, transform 150ms ease;
+    }
+
+    .interest-link:hover {
+        background: var(--color-gray-700);
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    .product-link {
+        color: var(--color-blue-600);
+        font-size: 0.8125rem;
+        font-weight: 650;
+        text-align: right;
+    }
+
+    .product-link:hover {
+        color: var(--color-blue-700);
+        text-decoration: underline;
+    }
+
+    .sold-section {
+        padding-top: 0.5rem;
+    }
+
+    .sold-card {
+        opacity: 0.58;
+    }
+
+    .sold-card .image-frame img {
+        filter: grayscale(1);
+    }
+
+    .sold-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        border-radius: 999px;
+        background: rgb(17 24 39 / 0.9);
+        color: white;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        padding: 0.4rem 0.7rem;
+        text-transform: uppercase;
+    }
+
+    :global([data-theme="dark"]) .back-link:hover {
+        color: var(--color-gray-300);
+    }
+
+    :global([data-theme="dark"]) .eyebrow,
+    :global([data-theme="dark"]) .product-link {
+        color: var(--color-blue-300);
+    }
+
+    :global([data-theme="dark"]) .intro,
+    :global([data-theme="dark"]) .notes,
+    :global([data-theme="dark"]) .section-heading span {
+        color: var(--color-gray-300);
+    }
+
+    :global([data-theme="dark"]) .section-heading,
+    :global([data-theme="dark"]) .item-card {
+        border-color: var(--color-slate-700);
+    }
+
+    :global([data-theme="dark"]) .item-card {
+        background: var(--color-slate-900);
+        box-shadow: none;
+    }
+
+    :global([data-theme="dark"]) .image-frame {
+        background: var(--color-slate-800);
+    }
+
+    :global([data-theme="dark"]) .price {
+        color: white;
+    }
+
+    :global([data-theme="dark"]) .interest-link {
+        background: var(--color-gray-100);
+        color: var(--color-gray-900);
+    }
+
+    :global([data-theme="dark"]) .interest-link:hover {
+        background: white;
+        color: var(--color-gray-900);
+    }
+
+    @media (max-width: 640px) {
+        .sale-page {
+            padding: 2rem 1rem 3rem;
+        }
+
+        .sale-header {
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .image-frame {
+            height: 13rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .image-frame img,
+        .interest-link {
+            transition: none;
+        }
+    }
+</style>

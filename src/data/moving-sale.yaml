@@ -1,0 +1,92 @@
+- id: pool-table-white
+  name: Pool Table (white)
+  product_url: "https://www.amazon.com/dp/B09J1P8QJW?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_4&th=1"
+  image_url: "https://m.media-amazon.com/images/I/714iwtzQoxL.jpg"
+  price: 0
+  notes: "Free if you move it. It's like 400 lbs/180 kg!"
+  claimed: false
+
+- id: ikea-bookshelf-black
+  name: IKEA Bookshelf (black)
+  product_url: "https://www.ikea.com/us/en/p/kallax-shelf-unit-black-brown-70637304/"
+  image_url: "https://www.ikea.com/us/en/images/products/kallax-shelf-unit-black-brown__0644756_pe702940_s5.jpg"
+  price: 25
+  claimed: false
+
+- id: standing-desk-espresso
+  name: Standing Desk (espresso brown top)
+  product_url: "https://www.amazon.com/dp/B0F8QRZ1NF?ref=ppx_pop_dt_b_product_details&th=1"
+  image_url: "https://m.media-amazon.com/images/I/71Kw26XKv1L.jpg"
+  price: 25
+  claimed: false
+
+- id: standing-desk-maple
+  name: Standing Desk (maple)
+  product_url: "https://www.amazon.com/dp/B07Q3TGL7M"
+  image_url: "https://m.media-amazon.com/images/I/819pj+V8QcL.jpg"
+  price: 50
+  claimed: false
+
+- id: ikea-detolf-glass-cabinet
+  name: IKEA Detolf Glass Cabinet
+  image_url: "https://images.squarespace-cdn.com/content/v1/61abdd1af04b6c2762e63f75/1667791663440-A532QIGPL0TM69A7C0U8/AC432883-BA83-41D4-BBB1-3A71766C7FC3?format=1500w"
+  price: 40
+  notes: "This is a discontinued item. It is purely glass and doesn't have boundaries like the other glass cabinets."
+  claimed: false
+
+- id: patio-furniture
+  name: Patio Furniture (brown with gray cushions)
+  product_url: "https://www.walmart.com/ip/EDX-3-Pieces-Patio-Furniture-Set-Wicker-Rattan-Outdoor-Conversation-Furniture-Set-Tempered-Glass-Tabletop-Removable-Cushion-Garden-Balcony-Poolside-P/20010304462"
+  image_url: "https://i5.walmartimages.com/seo/EDX-3-Pieces-Patio-Furniture-Set-Wicker-Rattan-Outdoor-Conversation-Furniture-Set-Tempered-Glass-Tabletop-Removable-Cushion-Garden-Balcony-Poolside-P_045a205a-f6c9-4d3b-8025-dc001354d4f9.424d014b1e600ab65b149b17eeaecc74.jpeg"
+  price: 25
+  claimed: false
+
+- id: bookshelf-white
+  name: Bookshelf (white)
+  product_url: "https://www.walmart.com/ip/Mainstays-Traditional-5-Shelf-Bookcase-with-Doors-Soft-White/3660877607"
+  image_url: "https://i5.walmartimages.com/seo/Mainstays-Traditional-5-Shelf-Bookcase-with-Doors-Soft-White-Finish_7d6a7c49-9486-4b63-b7a9-aab36ede5b0d.d05afe64613428a20745c4a12044acbf.jpeg"
+  price: 20
+  claimed: false
+
+- id: queen-mattress
+  name: Mattress (12 in. queen)
+  product_url: "https://www.amazon.com/dp/B0DPJXK875?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_15"
+  image_url: "https://m.media-amazon.com/images/I/71c2JC8fvHL.jpg"
+  price: 50
+  claimed: false
+
+- id: queen-bed-frame
+  name: Bed Frame (queen)
+  product_url: "https://www.amazon.com/dp/B09H2JHYYK?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_19&th=1"
+  image_url: "https://m.media-amazon.com/images/I/61ummn82Z5L.jpg"
+  price: 25
+  claimed: false
+
+- id: dresser-white
+  name: Dresser (white)
+  product_url: "https://www.amazon.com/dp/B0CNT6JB3M?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_9&th=1"
+  image_url: "https://m.media-amazon.com/images/I/81lE6YutogL.jpg"
+  price: 25
+  claimed: false
+
+- id: cabinet-white
+  name: Cabinet (white)
+  product_url: "https://www.walmart.com/ip/Costway-Bathroom-Storage-Wooden-4-Drawer-Cabinet-Cupboard-2-Shelves-Free-Standing-White/371516939"
+  image_url: "https://i5.walmartimages.com/seo/Costway-Bathroom-Storage-Wooden-4-Drawer-Cabinet-Cupboard-2-Shelves-Free-Standing-White_25a6052b-01a7-429f-8e59-f2c3d4ad86a5.2469f87c29ba1ed986fdaaaf6c31a908.jpeg"
+  price: 30
+  claimed: false
+
+- id: over-toilet-storage
+  name: Over Toilet Storage (dark brown)
+  product_url: "https://www.walmart.com/ip/Walsunny-Over-The-Toilet-Storage-Cabinet-Bathroom-Shelf-Organizer-with-Anti-Tip-Device-Small-Space-Saver-with-Tempered-Glass-Doors-Black/5079093319"
+  image_url: "https://i5.walmartimages.com/seo/Walsunny-Over-The-Toilet-Storage-Cabinet-Bathroom-Shelf-Organizer-with-Anti-Tip-Device-Small-Space-Saver-with-Tempered-Glass-Doors-Black_380e7af2-d049-467e-b10a-e4779d3e0d62.c02b4d9a9070d8e80be62b532482cede.jpeg"
+  price: 30
+  claimed: false
+
+- id: ikea-kitchen-island
+  name: IKEA Movable Kitchen Island
+  product_url: "https://www.ikea.com/us/en/p/vadholma-kitchen-island-black-oak-20359154/"
+  image_url: "https://www.ikea.com/us/en/images/products/vadholma-kitchen-island-black-oak__0736820_pe740762_s5.jpg"
+  price: 350
+  notes: "I'll throw in barstools with cushions for free."
+  claimed: false
