@@ -9,24 +9,17 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "dependencies": {
+  "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/partytown": "^2.1.4",
     "@fontsource-variable/montserrat": "^5.2.8",
     "@fontsource-variable/source-serif-4": "^5.2.9",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.17.1",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
-  },
-  "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19"
-  },
-  "pnpm": {
-    "overrides": {
-      "vite": "6.4.1"
-    }
   }
 }

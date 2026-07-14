@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/PageHeader.astro";
 
 const items = await getCollection("movingSale");
 const sections = [
@@ -39,14 +40,12 @@ const interestLink = (name: string) => {
     desc="Furniture and household items available from Ritwik Gupta's moving sale."
 >
     <main class="site-shell">
-        <header class="page-header">
-            <a href="/" class="back-link">&larr; Back to home</a>
-            <h1 class="page-title">Moving Sale</h1>
+        <PageHeader title="Moving Sale">
             <p class="intro">
                 Interested in something? Send me an email from the item card.
                 Product links show the same or equivalent item for reference.
             </p>
-        </header>
+        </PageHeader>
 
         {sections.map((section) => (
             <section

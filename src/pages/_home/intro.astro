@@ -1,17 +1,27 @@
 ---
 import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import profile from "../../../public/profile.jpg";
 import twitter from "../../../public/icons/twitter.svg";
 import bluesky from "../../../public/icons/bluesky.svg";
 import linkedin from "../../../public/icons/linkedin.svg";
 import github from "../../../public/icons/github.svg";
 
-interface Link {
+interface BaseLink {
     url: string;
-    displayType: string;
     text: string;
-    imageSrc?: any;
 }
+
+interface IconLink extends BaseLink {
+    displayType: "image";
+    imageSrc: ImageMetadata;
+}
+
+interface TextLink extends BaseLink {
+    displayType: "text";
+}
+
+type Link = IconLink | TextLink;
 
 const links: Link[] = [
     {
@@ -85,7 +95,7 @@ const links: Link[] = [
                     >
                         {link.displayType === "image" ? (
                             <Image
-                                src={link.imageSrc!}
+                                src={link.imageSrc}
                                 alt={link.text}
                                 width={20}
                                 class="dark:invert"

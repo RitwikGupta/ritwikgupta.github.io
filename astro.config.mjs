@@ -5,6 +5,7 @@ import rehypeKatex from "rehype-katex";
 import tailwindcss from "@tailwindcss/vite";
 
 import partytown from "@astrojs/partytown";
+import { siteConfig } from "./src/config/site";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,5 +17,5 @@ export default defineConfig({
         remarkPlugins: [remarkMath],
         rehypePlugins: [[rehypeKatex, { output: "mathml" }]],
     },
-    site: "https://ritwikgupta.me",
+    site: siteConfig.url,
 });

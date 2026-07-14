@@ -5,14 +5,22 @@ import "../styles/global.css";
 import Topnav from "../components/topnav.astro";
 import ThemeScript from "../components/ThemeScript.astro";
 import ThemeHead from "../components/ThemeHead.astro";
+import { siteConfig } from "../config/site";
 
 interface Props {
     title: string;
-    desc: string;
+    desc?: string;
     ogImage?: string;
 }
 
-const { title, desc, ogImage } = Astro.props;
+const {
+    title,
+    desc = siteConfig.defaultDescription,
+    ogImage,
+} = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, siteConfig.url);
+const ogImageUrl = ogImage ? new URL(ogImage, siteConfig.url) : undefined;
+const analyticsId = siteConfig.analyticsId;
 ---
 
 <!doctype html>
@@ -25,20 +33,22 @@ const { title, desc, ogImage } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={desc} />
         <meta property="og:type" content="website" />
-        {ogImage && <meta property="og:image" content={ogImage} />}
+        <meta property="og:url" content={canonicalUrl} />
+        {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
         <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
-        <meta name="twitter:creator" content="@Ritwik_G" />
+        <meta name="twitter:creator" content={siteConfig.twitterCreator} />
         <title>{title}</title>
 
-        <script is:inline type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-83XPF3W3R2"></script>
-        <script is:inline type="text/partytown">
+        <script is:inline type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}></script>
+        <script is:inline type="text/partytown" define:vars={{ analyticsId }}>
             window.dataLayer = window.dataLayer || [];
             function gtag() { dataLayer.push(arguments); }
             gtag("js", new Date());
-            gtag("config", "G-83XPF3W3R2");
+            gtag("config", analyticsId);
         </script>
     </head>
     <body>

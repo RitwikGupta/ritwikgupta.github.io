@@ -1,15 +1,14 @@
 ---
 import Layout from "./Layout.astro";
 import type { CollectionEntry } from "astro:content";
+import { formatUtcDate } from "../utils/date";
 
 interface Props {
     frontmatter: CollectionEntry<"blog">["data"];
 }
 
 const { frontmatter } = Astro.props;
-const published = frontmatter.pubDate
-    .toLocaleString("en-US", { timeZone: "UTC" })
-    .split(",")[0];
+const published = formatUtcDate(frontmatter.pubDate);
 ---
 
 <Layout

@@ -1,17 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/PageHeader.astro";
 import PubItems from "./_content/_item.astro";
 ---
 
 <Layout
     title="Ritwik Gupta | Publications"
-    desc="AI and Policy researcher driving innovation in humanitarian assistance and disaster response (HADR)"
 >
     <main class="site-shell">
-        <header class="page-header">
-            <a href="/" class="back-link">&larr; Back to home</a>
-            <h1 class="page-title">Publications</h1>
-        </header>
+        <PageHeader title="Publications" />
         <PubItems />
     </main>
 </Layout>

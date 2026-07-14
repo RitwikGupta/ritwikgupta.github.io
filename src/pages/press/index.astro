@@ -1,17 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/PageHeader.astro";
 import PressList from "./_content/_press.astro";
 ---
 
 <Layout
     title="Ritwik Gupta | Press Coverage"
-    desc="AI and Policy researcher driving innovation in humanitarian assistance and disaster response (HADR)"
 >
     <main class="site-shell">
-        <header class="page-header">
-            <a href="/" class="back-link">&larr; Back to home</a>
-            <h1 class="page-title">Press Coverage</h1>
-        </header>
+        <PageHeader title="Press Coverage" />
         <PressList />
     </main>
 </Layout>

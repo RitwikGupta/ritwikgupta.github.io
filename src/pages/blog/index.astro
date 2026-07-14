@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import PageHeader from "../../components/PageHeader.astro";
+import { formatUtcDate } from "../../utils/date";
 
 const posts = (await getCollection("blog")).sort(
     (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -9,13 +11,9 @@ const posts = (await getCollection("blog")).sort(
 
 <Layout
     title="Ritwik Gupta | Blog"
-    desc="AI and Policy researcher driving innovation in humanitarian assistance and disaster response (HADR)"
 >
     <main class="site-shell">
-        <header class="page-header">
-            <a href="/" class="back-link">&larr; Back to home</a>
-            <h1 class="page-title">Blog</h1>
-        </header>
+        <PageHeader title="Blog" />
         <div class="grid w-full gap-7 md:grid-cols-2">
             {
                 posts.map((p) => (
@@ -31,13 +29,7 @@ const posts = (await getCollection("blog")).sort(
                         />
                         <div class="flex flex-1 flex-col gap-3 p-6">
                         <time class="meta-label" datetime={p.data.pubDate.toISOString()}>
-                            {
-                                p.data.pubDate
-                                    .toLocaleString("en-US", {
-                                        timeZone: "UTC",
-                                    })
-                                    .split(",")[0]
-                            }
+                            {formatUtcDate(p.data.pubDate)}
                         </time>
                         <h2 class="text-xl font-bold leading-snug group-hover:text-[var(--link)] sm:text-2xl">{p.data.title}</h2>
                         <p class="text-base leading-relaxed text-[var(--text-muted)]">{p.data.description}</p>

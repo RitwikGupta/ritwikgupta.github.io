@@ -1,17 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import PageHeader from "../../components/PageHeader.astro";
 import { studentSections, students } from "./_data";
 ---
 
 <Layout
     title="Ritwik Gupta | Students"
-    desc="AI and Policy researcher driving innovation in humanitarian assistance and disaster response (HADR)"
 >
     <main class="site-shell">
-        <header class="page-header">
-            <a href="/" class="back-link">&larr; Back to home</a>
-            <h1 class="page-title">Students</h1>
-        </header>
+        <PageHeader title="Students" />
         <div class="w-full space-y-14">
             {
                 studentSections.map((section) => {
