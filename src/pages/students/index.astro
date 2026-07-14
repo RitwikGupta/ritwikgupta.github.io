@@ -60,11 +60,6 @@ import { studentSections, students } from "./_data";
                                                     {student.institution}
                                                 </p>
                                             </div>
-                                            {student.description && (
-                                                <p class="text-sm leading-relaxed text-[var(--text-muted)]">
-                                                    {student.description}
-                                                </p>
-                                            )}
                                             {student.email && (
                                                 <a
                                                     href={`mailto:${student.email}`}

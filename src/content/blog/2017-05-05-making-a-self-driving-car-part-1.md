@@ -1,5 +1,4 @@
 ---
-layout: ../../../layouts/BlogLayout.astro
 title: Making a Self Driving Car - Part 1
 pubDate: 2017-05-05
 description: My dad and I were bored and decided to make a self-driving car. Step one, getting data from the car!

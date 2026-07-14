@@ -1,5 +1,4 @@
 ---
-layout: ../../../layouts/BlogLayout.astro
 title: The Department of Defense is Prioritizing Open Source Software. Here's How Open Source Projects Can Benefit.
 pubDate: 2022-02-07
 description: Open source software has just been given new priority in the Department of Defense. Here's how open source projects can capitalize on this.

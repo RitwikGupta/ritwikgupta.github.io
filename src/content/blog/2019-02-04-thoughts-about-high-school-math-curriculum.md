@@ -1,5 +1,4 @@
 ---
-layout: ../../../layouts/BlogLayout.astro
 title: Thoughts About My High School's Math Curriculum
 pubDate: 2019-02-04
 description: My high school taught me a lot, but there were things I wish it emphasized more. This is a letter I wrote to my math teacher about those wishes.

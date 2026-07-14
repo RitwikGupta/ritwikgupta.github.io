@@ -1,5 +1,4 @@
 ---
-layout: ../../../layouts/BlogLayout.astro
 title: "Exploring Deep Learning: Theory and Practice"
 pubDate: 2017-10-05
 description: A lecture I gave at the CMU Data Science Club that introduced undergraduates to deep learning.

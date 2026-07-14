@@ -1,28 +1,33 @@
 # Ritwik Gupta
 
-## Setup
-1. Install and set up Astro: https://docs.astro.build/en/install-and-setup/
-2. Clone repo and `cd` into project folder
-3. Run the following commands
-```
-pnpm i
+Personal website built with Astro, Tailwind CSS, and pnpm.
+
+## Development
+
+```sh
+pnpm install
 pnpm dev
 ```
-4. Navigate to http://localhost:4321/
 
-## Project Structure
-The files you need to care about (all in `src/pages`):
-* `_home`
-    * `intro.astro`: the profile card at the top of the homepage (`/`), up to and including the social links
-    * `short-bio.md`: the list of affiliations
-    * `news.md`: the news list in the homepage
-* `about`
-    * `_full-bio.md`: your complete bio in `/about`
-* `blog`
-    * `posts`: contains all the Markdown files for each post in `/blog/posts/...`
-* `press`
-    * `_press.md`: list of press releases in `/press`
-* `publications`
-    * `_content/list.ts`: list of publications in `/publications` (each publication is an object of type `Pub`)
-* `students`
-    * `_list.md`: list of students in `/students`
+The development server runs at `http://localhost:4321/` by default.
+
+Run the production checks and static build with:
+
+```sh
+pnpm build
+```
+
+## Content
+
+- Homepage profile and biography: `src/pages/_home/`
+- Full biography: `src/pages/about/_full-bio.md`
+- Blog posts: `src/content/blog/`
+- Publications: `src/pages/publications/_content/list.ts`
+- Students: `src/pages/students/_data.ts`
+- Press coverage: `src/pages/press/_content/`
+- Moving-sale inventory: `src/data/moving-sale.yaml`
+
+Blog posts and moving-sale items are validated through the collections in
+`src/content.config.ts`. Publication and student pages use typed local data.
+The three newest publications are selected for the homepage automatically at
+build time.

@@ -12,7 +12,6 @@ export interface Student {
     website: string;
     image: string;
     email?: string;
-    description?: string;
     section: StudentSection;
 }
 

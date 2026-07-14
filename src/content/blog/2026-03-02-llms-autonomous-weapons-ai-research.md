@@ -1,5 +1,4 @@
 ---
-layout: ../../../layouts/BlogLayout.astro
 title: LLMs, Autonomous Weapons, and AI Research
 pubDate: 2026-03-02
 description: The Anthropic/DoW fight is a symptom of a structural mismatch between an AI industry that ships research as product and a government that takes the marketing at face value.

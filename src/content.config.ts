@@ -1,5 +1,16 @@
-import { defineCollection, z } from "astro:content";
-import { file } from "astro/loaders";
+import { defineCollection } from "astro:content";
+import { file, glob } from "astro/loaders";
+import { z } from "astro/zod";
+
+const blog = defineCollection({
+    loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
+    schema: z.object({
+        title: z.string(),
+        pubDate: z.coerce.date(),
+        description: z.string(),
+        og_image: z.string(),
+    }),
+});
 
 const movingSale = defineCollection({
     loader: file("src/data/moving-sale.yaml"),
@@ -14,4 +25,4 @@ const movingSale = defineCollection({
     }),
 });
 
-export const collections = { movingSale };
+export const collections = { blog, movingSale };

@@ -1,5 +1,4 @@
 ---
-layout: ../../../layouts/BlogLayout.astro
 title: Making an API for Pitt
 pubDate: 2015-07-25
 description: I discuss the inspiration and process behind making the now-popular PittAPI.
