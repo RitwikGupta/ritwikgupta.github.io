@@ -206,6 +206,8 @@ html[data-theme="dark"] .editorial-prose {
 .progressive-image img {
   object-fit: var(--image-fit, cover);
   object-position: var(--image-position, center);
+  color: transparent;
+  font-size: 0;
 }
 
 html.js .progressive-image img {
