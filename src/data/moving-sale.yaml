@@ -90,3 +90,11 @@
   price: 350
   notes: "I'll throw in barstools with cushions for free."
   claimed: false
+
+- id: coffee-table
+  name: Amazon Basics Coffee Table
+  product_url: "https://www.amazon.com/dp/B07J29V51Q"
+  image_url: "https://m.media-amazon.com/images/I/71zi6Lw8KVL._AC_SL1500_.jpg"
+  price: 10
+  notes: This item is in fair condition. There are some scratches, but they're not too visible and it's perfectly functional.
+  claimed: false
