@@ -21,6 +21,35 @@ interface Pub {
 
 export const publications: Pub[] = [
     {
+        title: "Tinted Frames: Question Framing Blinds Vision-Language Models",
+        authors: [
+            { name: "Wan-Cyuan Fan" },
+            { name: "Jiayun Luo" },
+            { name: "Declan Kutscher" },
+            { name: "Leonid Sigal" },
+            { name: "Ritwik Gupta" },
+        ],
+        venue: "arXiv preprint",
+        links: [
+            {
+                url: "https://davidhalladay.github.io/tinted_frames_demo/",
+                display: "website",
+            },
+            {
+                url: "https://arxiv.org/abs/2603.19203",
+                display: "paper",
+            },
+            {
+                url: "https://github.com/davidhalladay/Tinted-Frames",
+                display: "github",
+            },
+        ],
+        excerpt:
+            "Vision-language models selectively vary how much they use an image based on question framing, even when the same visual reasoning is required. We analyze this behavior and introduce a lightweight prompt-tuning method that improves visual grounding and performance across framings.",
+        date: "2026-03-19",
+        imgSrc: "/images/thumbnails/tinted-frames.gif",
+    },
+    {
         title: "TCBench: A Benchmark for Tropical Cyclone Track and Intensity Forecasting at the Global Scale",
         authors: [
             { name: "Milton Gomez" },
@@ -62,10 +91,10 @@ export const publications: Pub[] = [
             { name: "Ritwik Gupta" },
             { name: "Andrew W. Reddie" },
         ],
-        venue: "arXiv preprint",
+        venue: "ACM Conference on Fairness, Accountability, and Transparency (FAccT) 2026, 382-398",
         links: [
             {
-                url: "https://arxiv.org/abs/2601.05307",
+                url: "https://doi.org/10.1145/3805689.3806538",
                 display: "paper",
             },
         ],
@@ -105,10 +134,10 @@ export const publications: Pub[] = [
             { name: "Jianyao Zhou" },
             { name: "Mike Pritchard" },
         ],
-        venue: "In review",
+        venue: "Journal of Advances in Modeling Earth Systems 18(5), e2025MS005643 (2026)",
         links: [
             {
-                url: "https://arxiv.org/abs/2511.20963",
+                url: "https://doi.org/10.1029/2025MS005643",
                 display: "paper",
             },
             {
