@@ -4,7 +4,7 @@
   image_url: "https://m.media-amazon.com/images/I/714iwtzQoxL.jpg"
   price: 0
   notes: "Free if you move it. It's like 400 lbs/180 kg!"
-  claimed: false
+  claimed: true
 
 - id: ikea-bookshelf-black
   name: IKEA Bookshelf (black)
@@ -18,14 +18,14 @@
   product_url: "https://www.amazon.com/dp/B0F8QRZ1NF?ref=ppx_pop_dt_b_product_details&th=1"
   image_url: "https://m.media-amazon.com/images/I/71Kw26XKv1L.jpg"
   price: 25
-  claimed: false
+  claimed: true
 
 - id: standing-desk-maple
   name: Standing Desk (maple)
   product_url: "https://www.amazon.com/dp/B07Q3TGL7M"
   image_url: "https://m.media-amazon.com/images/I/819pj+V8QcL.jpg"
   price: 50
-  claimed: false
+  claimed: true
 
 - id: ikea-detolf-glass-cabinet
   name: IKEA Detolf Glass Cabinet
@@ -67,7 +67,7 @@
   product_url: "https://www.amazon.com/dp/B0CNT6JB3M?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_9&th=1"
   image_url: "https://m.media-amazon.com/images/I/81lE6YutogL.jpg"
   price: 25
-  claimed: false
+  claimed: true
 
 - id: cabinet-white
   name: Cabinet (white)
