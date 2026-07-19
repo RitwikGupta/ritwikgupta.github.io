@@ -1,0 +1,45 @@
+<aside class="notice-banner" aria-label="Email service notice">
+    <p>
+        <strong>Notice:</strong> My UMD email is facing issues. Please use my
+        <a href="mailto:ritwikgupta@berkeley.edu">Berkeley email</a> for now.
+    </p>
+</aside>
+
+<style>
+    .notice-banner {
+        width: 100%;
+        border-bottom: 1px solid rgb(26 26 26 / 0.22);
+        background: var(--goldenrod);
+        color: var(--midnight);
+        font-family: var(--font-sans);
+    }
+
+    .notice-banner p {
+        width: min(100%, var(--shell));
+        margin: 0 auto;
+        padding: 0.7rem 1.25rem;
+        font-size: 0.84rem;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    .notice-banner strong {
+        font-weight: 750;
+    }
+
+    .notice-banner a {
+        color: inherit;
+        font-weight: 700;
+        text-decoration-thickness: 0.1em;
+    }
+
+    .notice-banner a:hover {
+        color: inherit;
+    }
+
+    @media (min-width: 640px) {
+        .notice-banner p {
+            padding-inline: clamp(1.5rem, 4vw, 3rem);
+        }
+    }
+</style>

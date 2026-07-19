@@ -2,6 +2,7 @@
 import "@fontsource-variable/montserrat";
 import "@fontsource-variable/source-serif-4";
 import "../styles/global.css";
+import NoticeBanner from "../components/NoticeBanner.astro";
 import Topnav from "../components/topnav.astro";
 import ThemeScript from "../components/ThemeScript.astro";
 import ThemeHead from "../components/ThemeHead.astro";
@@ -53,6 +54,7 @@ const analyticsId = siteConfig.analyticsId;
         </script>
     </head>
     <body>
+        <NoticeBanner />
         <Topnav />
         <slot />
         <ThemeScript />
