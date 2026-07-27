@@ -17,8 +17,8 @@ const movingSale = defineCollection({
     schema: z.object({
         id: z.string(),
         name: z.string(),
-        product_url: z.string().url().optional(),
-        image_url: z.string().url(),
+        product_url: z.url().optional(),
+        image_url: z.url(),
         price: z.number().nonnegative(),
         notes: z.string().optional(),
         claimed: z.boolean(),
