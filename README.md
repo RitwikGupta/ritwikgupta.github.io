@@ -25,9 +25,8 @@ pnpm build
 - Publications: `src/pages/publications/_content/list.ts`
 - Students: `src/pages/students/_data.ts`
 - Press coverage: `src/pages/press/_content/`
-- Moving-sale inventory: `src/data/moving-sale.yaml`
 
-Blog posts and moving-sale items are validated through the collections in
+Blog posts items are validated through the collections in
 `src/content.config.ts`. Publication and student pages use typed local data.
 The three newest publications are selected for the homepage automatically at
 build time.
