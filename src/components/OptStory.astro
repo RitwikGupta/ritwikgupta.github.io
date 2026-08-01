@@ -730,12 +730,12 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
     .step-card p { margin:.55rem 0; line-height:1.52; }
     .character-copy { font-family:var(--font-sans); font-size:.9rem; }
     .character-copy b { display:inline-grid; place-items:center; width:1.55rem; height:1.55rem; border:2px solid currentColor; border-radius:50%; margin-right:.45rem; }
-    .story-stage-wrap { position:sticky; top:4.5rem; height:calc(100vh - 5.5rem); display:flex; align-items:center; }
-    .story-stage { width:100%; min-height:min(850px,calc(100vh - 6rem)); border:1px solid var(--border); border-radius:24px; background:var(--surface); overflow:hidden; display:flex; flex-direction:column; box-shadow:0 18px 48px rgba(0,0,0,.08); }
+    .story-stage-wrap { position:sticky; top:4.5rem; height:calc(100vh - 5.5rem); height:calc(100dvh - 5.5rem); display:flex; align-items:stretch; }
+    .story-stage { box-sizing:border-box; width:100%; height:100%; min-height:0; max-height:100%; border:1px solid var(--border); border-radius:24px; background:var(--surface); overflow:hidden; display:flex; flex-direction:column; box-shadow:0 18px 48px rgba(0,0,0,.08); }
     .stage-header { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:1.15rem 1.4rem 0; min-height:64px; }
     .stage-header h3 { max-width:62%; margin:0; font-family:var(--font-sans); font-size:clamp(1.35rem,2.7vw,2.15rem); line-height:1.06; text-align:right; }
     .stage-visual { position:relative; flex:1; min-height:0; }
-    [data-stage-svg] { width:100%; height:100%; min-height:520px; display:block; overflow:visible; }
+    [data-stage-svg] { width:100%; height:100%; min-height:0; display:block; overflow:visible; }
     .character circle { fill:var(--surface); stroke-width:3; }
     .character--asha circle { stroke:#0072b2; } .character--lin circle { stroke:#009e73; }
     .character text { font-family:var(--font-sans); font-size:11px; font-weight:800; text-anchor:middle; fill:var(--text); }
@@ -757,8 +757,8 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
     .threshold-metrics div { background:var(--surface); padding:.65rem .8rem; } .threshold-metrics span { display:block; font-family:var(--font-sans); font-size:.67rem; color:var(--text-muted); } .threshold-metrics b { font-family:var(--font-sans); font-size:.96rem; }
     .threshold-controls { padding:.8rem 1.2rem 1rem; border-top:1px solid var(--border); font-family:var(--font-sans); }
     .threshold-controls label>span { display:flex; justify-content:space-between; gap:1rem; font-size:.78rem; font-weight:650; } .threshold-controls input { width:100%; accent-color:var(--fee); } .threshold-controls small { display:flex; justify-content:space-between; color:var(--text-muted); }
-    .story-stage[data-scene="threshold"] [data-stage-svg] { min-height:390px; }
-    .story-stage[data-scene="threshold"] { height:min(850px,calc(100vh - 6rem)); min-height:0; }
+    .story-stage[data-scene="threshold"] [data-stage-svg] { min-height:0; }
+    .story-stage[data-scene="threshold"] { height:100%; min-height:0; max-height:100%; }
     .story-stage[data-scene="threshold"] .field-legend { padding:.45rem .9rem; gap:.25rem .7rem; font-size:.66rem; }
     .story-stage[data-scene="threshold"] .threshold-metrics div { padding:.42rem .65rem; }
     .story-stage[data-scene="threshold"] .threshold-controls { padding:.45rem .9rem .55rem; }
@@ -797,11 +797,11 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
     @media (max-width:700px) {
         .opt-story { padding-inline:.5rem; }
         .story-grid { display:flex; flex-direction:column; }
-        .story-stage-wrap { order:-1; position:sticky; top:.75rem; z-index:3; width:100%; height:58vh; align-items:stretch; }
+        .story-stage-wrap { order:-1; position:sticky; top:.75rem; z-index:3; width:100%; height:58vh; height:58dvh; align-items:stretch; }
         .story-stage { min-height:0; height:100%; border-radius:16px; }
         .story-stage[data-scene="threshold"] { height:100%; min-height:0; }
         .stage-header { padding:.75rem .9rem 0; min-height:48px; } .stage-header h3 { font-size:1.25rem; }
-        [data-stage-svg] { min-height:300px; }
+        [data-stage-svg] { min-height:0; }
         .story-copy { z-index:1; margin-top:1rem; }
         .story-step { min-height:72vh; align-items:flex-end; padding-bottom:1rem; }
         .step-card { margin:0 .5rem; background:var(--surface); }
