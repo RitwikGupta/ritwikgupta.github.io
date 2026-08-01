@@ -1,7 +1,15 @@
-<aside class="notice-banner" aria-label="Email service notice">
+---
+interface Props {
+    label: string;
+    ariaLabel: string;
+}
+
+const { label, ariaLabel } = Astro.props;
+---
+
+<aside class="notice-banner" aria-label={ariaLabel}>
     <p>
-        <strong>Notice:</strong> My UMD email is facing issues. Please use my
-        <a href="mailto:ritwikgupta@berkeley.edu">Berkeley email</a> for now.
+        <strong>{label}:</strong> <slot />
     </p>
 </aside>
 

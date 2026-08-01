@@ -11,12 +11,14 @@ interface Props {
     title: string;
     desc?: string;
     ogImage?: string;
+    noindex?: boolean;
 }
 
 const {
     title,
     desc = siteConfig.defaultDescription,
     ogImage,
+    noindex = false,
 } = Astro.props;
 const canonicalUrl = new URL(Astro.url.pathname, siteConfig.url);
 const ogImageUrl = ogImage ? new URL(ogImage, siteConfig.url) : undefined;
@@ -32,6 +34,7 @@ const analyticsId = siteConfig.analyticsId;
         <ThemeHead />
         <meta name="description" content={desc} />
         <meta name="generator" content={Astro.generator} />
+        {noindex && <meta name="robots" content="noindex,follow" />}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="canonical" href={canonicalUrl} />
@@ -53,7 +56,7 @@ const analyticsId = siteConfig.analyticsId;
         </script>
     </head>
     <body>
-        <!-- <NoticeBanner /> -->
+        <slot name="banner" />
         <Topnav />
         <slot />
         <ThemeScript />

@@ -1,0 +1,101 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "./Layout.astro";
+import OptStory from "../components/OptStory.astro";
+import { formatUtcDate } from "../utils/date";
+import NoticeBanner from "../components/NoticeBanner.astro";
+
+interface Props {
+    frontmatter: CollectionEntry<"blog">["data"];
+}
+
+const { frontmatter } = Astro.props;
+const published = formatUtcDate(frontmatter.pubDate);
+---
+
+<Layout
+    title={frontmatter.title}
+    desc={frontmatter.description}
+    ogImage={frontmatter.og_image.src}
+    noindex={frontmatter.draft}
+>
+    {frontmatter.draft && (
+        <NoticeBanner slot="banner" label="Draft" ariaLabel="Draft article notice">
+            This article is a work in progress and may change.
+        </NoticeBanner>
+    )}
+    <main class="opt-story-page">
+        <header class="opt-story-hero">
+            <a href="/blog" class="back-link">&larr; See all posts</a>
+            <h1>{frontmatter.title}</h1>
+            <p class="opt-story-deck">
+                American universities have already welcomed and trained these graduates.
+                OPT connects that education to a first job or research appointment.
+                What happens if <a href="https://www.wsj.com/politics/policy/u-s-weighs-100-000-fee-for-foreign-students-wanting-to-work-after-graduation-d0bf43d9">that bridge costs $100,000 to cross?</a>
+            </p>
+            <time class="opt-story-meta" datetime={frontmatter.pubDate.toISOString()}>Published {published}</time>
+            <p class="opt-story-premise">
+                The Wall Street Journal reports that the administration is considering the fee.
+                This story models one charge when a graduate begins initial post-completion OPT.
+            </p>
+        </header>
+        <OptStory />
+    </main>
+</Layout>
+
+<style>
+    .opt-story-page {
+        overflow: clip;
+    }
+
+    .opt-story-hero {
+        width: min(100%, var(--shell));
+        margin-inline: auto;
+        padding: clamp(3rem, 9vw, 8rem) clamp(1.25rem, 5vw, 3rem) clamp(4rem, 8vw, 7rem);
+    }
+
+    h1 {
+        max-width: 12ch;
+        margin: clamp(3rem, 7vw, 6rem) 0 0;
+        font-family: var(--font-sans);
+        font-size: clamp(3.5rem, 10vw, 8.5rem);
+        font-weight: 780;
+        letter-spacing: -0.065em;
+        line-height: 0.88;
+    }
+
+    .opt-story-deck {
+        max-width: 42rem;
+        margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+        color: var(--text-muted);
+        font-size: clamp(1.35rem, 2.5vw, 2rem);
+        line-height: 1.4;
+    }
+
+    .opt-story-deck a {
+        color: inherit;
+        text-decoration-color: var(--goldenrod);
+        text-decoration-thickness: 0.1em;
+        text-underline-offset: 0.15em;
+    }
+
+    .opt-story-meta {
+        display: block;
+        width: fit-content;
+        margin-top: 2rem;
+        color: var(--text-muted);
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+        font-weight: 650;
+        letter-spacing: 0.035em;
+    }
+
+    .opt-story-premise {
+        max-width: 44rem;
+        margin: 1.5rem 0 0;
+        padding-left: 1rem;
+        border-left: 3px solid var(--goldenrod);
+        font-size: 0.98rem;
+        line-height: 1.6;
+    }
+</style>

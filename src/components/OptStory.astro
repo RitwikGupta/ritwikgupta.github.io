@@ -1,0 +1,820 @@
+---
+import storyData from "../data/opt-story.json";
+
+const storyJson = JSON.stringify(storyData).replace(/</g, "\\u003c");
+const number = (value: number) => new Intl.NumberFormat("en-US").format(value);
+const money = (value: number) => new Intl.NumberFormat("en-US", {
+    style: "currency", currency: "USD", maximumFractionDigits: 0,
+}).format(value);
+const percent = (value: number) => `${value.toFixed(1)}%`;
+const maxSchool = Math.max(...storyData.organizations.schoolsByEntrants.map((row) => row.people));
+const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map((row) => row.people));
+---
+
+<section class="opt-story" aria-label="OPT fee visual story" data-opt-story>
+    <script is:inline type="application/json" id="opt-story-data" set:html={storyJson}></script>
+
+    <noscript>
+        <div class="noscript-summary">
+            <h2>The story in brief</h2>
+            <p>
+                The FY2022 SEVIS records contain 115,861 initial post-completion OPT
+                entrants. At the default $100,000 fee, 24,894 would continue under the
+                scenario and 9,319 would not continue. The comparison covers the 34,213 entrants
+                whose occupations can be matched to a compensation benchmark. This is a counterfactual
+                rule, not a forecast.
+            </p>
+        </div>
+    </noscript>
+
+    <div class="story-grid">
+        <div class="story-copy">
+            <section class="story-step is-active" data-scene="graduates">
+                <div class="step-card">
+                    <p class="step-number">01 / International graduates</p>
+                    <h2>America has already welcomed and trained this talent.</h2>
+                    <p>U.S. universities awarded <strong>235,949</strong> bachelor's, master's, and doctoral degrees to international students in 2021–22. These graduates spent years studying in American classrooms and laboratories. Each circle represents about 100 degrees.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="opt">
+                <div class="step-card">
+                    <p class="step-number">02 / Initial OPT</p>
+                    <h2>OPT brings part of that graduating class into the American workforce.</h2>
+                    <p>SEVIS records show <strong>115,861 people</strong> starting initial post-completion OPT in FY2022. The blue block is the talent pool we follow from here.</p>
+                    <p class="character-copy"><b>A</b> Asha completed an MS in computer science.</p>
+                    <p class="character-copy"><b>L</b> Dr. Lin completed an engineering PhD and is entering a postdoc.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="composition">
+                <div class="step-card">
+                    <p class="step-number">03 / Degrees and fields</p>
+                    <h2>More than half enter with a master's degree.</h2>
+                    <p>Master's graduates account for <strong>60,577</strong> entrants, followed by <strong>37,310</strong> bachelor's and <strong>17,974</strong> doctorates. Computer science, business, and engineering together make up <strong>56.6%</strong>.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="connections">
+                <div class="step-card">
+                    <p class="step-number">04 / What OPT connects</p>
+                    <h2>American employers put that training to work.</h2>
+                    <p>Most entrants—<strong>88,661</strong>—head to industry. Another <strong>10,740</strong> go to universities or research institutions.</p>
+                    <p>Asha heads toward software. Dr. Lin heads toward a university postdoc.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="workers">
+                <div class="step-card">
+                    <p class="step-number">05 / American workers</p>
+                    <h2>Does OPT displace American talent?</h2>
+                    <p>The strongest objection to OPT is that when an international graduate gets a job, an American applicant may not. The story, however, is not so clear.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="evidence">
+                <div class="step-card">
+                    <p class="step-number">06 / What research finds</p>
+                    <h2>Studies find effects in both directions.</h2>
+                    <p>A <a href="https://www.census.gov/library/working-papers/2016/adrm/ces-wp-16-56.html">Census Bureau study</a> of immigration broadly found small declines in native workers' earnings and employment. A <a href="https://aisel.aisnet.org/misq/vol48/iss2/15/">2024 study of STEM OPT</a> found that its expansion increased domestic STEM employment, especially in information technology. A <a href="https://www.aeaweb.org/articles?id=10.1257%2Fpandp.20261100">2026 study</a> found that domestic STEM degree completion rose after OPT expanded.</p>
+                    <p>Individual workers may face greater competition for a particular job while domestic STEM employment and training grow across the economy.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="value">
+                <div class="step-card">
+                    <p class="step-number">07 / Employment value</p>
+                    <h2>Asha and Dr. Lin bring different skills to different labor markets.</h2>
+                    <p>Asha's software role carries <strong>$127,260 in median wages</strong> and <strong>$184,435 in estimated compensation</strong>.</p>
+                    <p>Dr. Lin's postdoc has a <strong>$55,000 median salary benchmark</strong>. Including estimated employer-paid benefits, that is about <strong>$79,710 in annual compensation</strong>.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="gate">
+                <div class="step-card step-card--turn">
+                    <p class="step-number">08 / The gate</p>
+                    <h2>A <span data-copy-fee>$100,000</span> fee closes part of the bridge.</h2>
+                    <p>Every entrant faces the same price, including Asha and Dr. Lin.</p>
+                    <p>If all 115,861 entrants crossed once, the fees would total <strong data-copy-gross-exposure>$11.586 billion</strong>.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="student">
+                <div class="step-card">
+                    <p class="step-number">09 / If the student pays</p>
+                    <h2>The fee arrives after years of educational expenses.</h2>
+                    <p>Among master's entrants, median reported tuition is <strong>$32,374</strong> and median annual educational funding is <strong>$57,309</strong>. The fee is <span data-copy-fee>$100,000</span>.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="threshold">
+                <div class="step-card step-card--turn">
+                    <p class="step-number">10 / Employer decision</p>
+                    <h2>Set the price of entry.</h2>
+                    <p>Choose an OPT fee. For each job we can identify, the model assumes that an employer pays when the occupation's typical annual compensation meets the fee. Jobs without a reliable occupation match stay outside the calculation.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="impacts">
+                <div class="step-card">
+                    <p class="step-number">11 / Fields and occupations</p>
+                    <h2>The fee reshapes the talent pool.</h2>
+                    <p>Biology and biomedical science show how quickly specialized talent can be lost. A university laboratory may hire a postdoc at a typical salary of <strong>$55,000</strong> because that researcher has expertise needed for a particular project. Salary and estimated benefits bring the position's annual compensation to about <strong>$79,710</strong>.</p>
+                    <p>At <strong data-copy-fee>$100,000</strong>, <span data-copy-lin-outcome>Dr. Lin's postdoc would be priced out</span>. Among biology graduates whose jobs we can identify, <strong data-copy-biology-outcome>67.8% would be priced out</strong>.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="settings">
+                <div class="step-card">
+                    <p class="step-number">12 / Employers</p>
+                    <h2>Universities feel the fee differently from industry.</h2>
+                    <p>The same fee sits beside an industry salary, a university postdoc, or a public-sector role. <span data-copy-setting-outcome>At $100,000, the model prices out 79.1% of matched university and research jobs and 18.2% of matched industry jobs.</span></p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="organizations">
+                <div class="step-card">
+                    <p class="step-number">13 / Organizations</p>
+                    <h2>The exposure is concentrated in particular schools and employers.</h2>
+                    <p>These rankings count initial OPT entrants at schools and clearly identified employers. The next view examines how frequently individual school programs lead to OPT.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="programs">
+                <div class="step-card">
+                    <p class="step-number">14 / School programs</p>
+                    <h2>Some programs send nearly every expected completer into OPT.</h2>
+                    <p>The chart compares program size with the share of expected completers who begin OPT within 60 days. It includes each school, degree, and program with at least 50 expected completions.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="alternatives">
+                <div class="step-card">
+                    <p class="step-number">15 / Other paths</p>
+                    <h2>Graduates may seek another route.</h2>
+                    <p>J-1 sponsorship, an H-1B petition, further study, departure, and overseas work are all possible. The records cannot show which route a person would take.</p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="ending">
+                <div class="step-card">
+                    <p class="step-number">16 / The selected fee</p>
+                    <h2>The fee changes the talent pool America retains.</h2>
+                    <p>At <strong data-copy-fee>$100,000</strong>, <span data-copy-ending-outcome>24,894 would continue and 9,319 would be priced out</span> among the jobs we can identify. <span data-copy-ending-biology>Biology would lose 67.8% of its matched graduates.</span></p>
+                </div>
+            </section>
+
+            <section class="story-step" data-scene="conclusion">
+                <div class="step-card">
+                    <p class="step-number">17 / The talent America keeps</p>
+                    <h2>America has already invested in this talent.</h2>
+                    <p>America's universities turn talent from around the world into American capacity. Their graduates staff laboratories, build companies, develop new technologies, and train the people who follow them.</p>
+                    <p>American workers deserve protection from underpayment and direct replacement. International graduates educated here represent years of accumulated training and investment. The country benefits when both groups have opportunities to contribute.</p>
+                    <p>The fee makes financial backing the deciding factor. America must develop more American talent and retain the talent it has already trained. Both investments strengthen the same workforce.</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="story-stage-wrap">
+            <div class="story-stage surface-card" data-story-stage>
+                <header class="stage-header">
+                    <p data-stage-eyebrow>International graduates</p>
+                    <h3 data-stage-title>235,949 degrees</h3>
+                </header>
+
+                <div class="stage-visual">
+                    <svg viewBox="0 0 1000 680" role="img" aria-labelledby="opt-stage-title opt-stage-desc" data-stage-svg>
+                        <title id="opt-stage-title">International graduates and initial OPT entrants</title>
+                        <desc id="opt-stage-desc" data-stage-description>About 2,360 circles represent 235,949 nonresident degrees.</desc>
+                        <g data-ribbon-layer></g>
+                        <g data-annotation-layer></g>
+                        <g data-circle-layer></g>
+                        <g class="character character--asha" data-character="asha"><circle r="12"></circle><text dy="0.36em">A</text></g>
+                        <g class="character character--lin" data-character="lin"><circle r="12"></circle><text dy="0.36em">L</text></g>
+                    </svg>
+
+                    <div class="stage-panel comparison-panel" data-panel="value" hidden>
+                        <div class="comparison-row comparison-row--asha">
+                            <h4><span>A</span>Asha · software</h4>
+                            <div class="bullet"><label>Median wage <b>$127,260</b></label><i><em style="width:63.6%"></em></i></div>
+                            <div class="bullet"><label>Estimated compensation <b>$184,435</b></label><i><em style="width:92.2%"></em></i></div>
+                        </div>
+                        <div class="comparison-row comparison-row--lin">
+                            <h4><span>L</span>Dr. Lin · university postdoc</h4>
+                            <div class="bullet"><label>Median postdoc salary <b>$55,000</b></label><i><em style="width:27.5%"></em></i></div>
+                            <div class="bullet"><label>Estimated annual compensation <b>$79,710</b></label><i><em style="width:39.855%"></em></i></div>
+                        </div>
+                        <div class="axis"><span>$0</span><span>$100k</span><span>$200k</span></div>
+                    </div>
+
+                    <div class="stage-panel student-panel" data-panel="student" hidden>
+                        <p>Median master's amounts · common $0–$300k scale</p>
+                        <div class="student-bar"><label>Reported tuition <b>{money(storyData.studentPaid.tuitionUsd)}</b></label><i><em style={`width:${100 * storyData.studentPaid.tuitionUsd / 300000}%`}></em></i></div>
+                        <div class="student-bar"><label>Reported educational funding <b>{money(storyData.studentPaid.reportedFundingUsd)}</b></label><i><em style={`width:${100 * storyData.studentPaid.reportedFundingUsd / 300000}%`}></em></i></div>
+                        <div class="student-bar student-bar--fee"><label>Fee <b data-student-fee>$100,000</b></label><i><em data-student-fee-bar style="width:33.33%"></em></i></div>
+                    </div>
+
+                    <div class="stage-panel organizations-panel" data-panel="organizations" hidden>
+                        <div class="ranking-column">
+                            <p>Schools · raw initial OPT count</p>
+                            {storyData.organizations.schoolsByEntrants.slice(0, 7).map((row) => (
+                                <div class="ranking-row" style={`--bar:${100 * row.people / maxSchool}%`}><span>{row.name}</span><i><b></b></i><strong>{number(row.people)}</strong></div>
+                            ))}
+                        </div>
+                        <div class="ranking-column">
+                            <p>Canonical employers · raw count</p>
+                            {storyData.organizations.employersByEntrants.slice(0, 7).map((row) => (
+                                <div class="ranking-row ranking-row--employer" style={`--bar:${100 * row.people / maxEmployer}%`}><span>{row.name}</span><i><b></b></i><strong>{number(row.people)}</strong></div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div class="stage-panel programs-panel" data-panel="programs" hidden>
+                        <div class="program-scatter">
+                            <p>Expected-completion records vs. OPT within 60 days</p>
+                            <svg viewBox="0 0 520 350" role="img" aria-label="School program OPT share from 50 to 100 percent versus expected-completion cohort size; the rate axis is truncated" data-program-scatter></svg>
+                            <div class="scatter-tooltip" data-program-tooltip hidden role="status" aria-live="polite"></div>
+                            <div class="dot-legend program-degree-legend" aria-label="Degree legend">
+                                <span><i style="--legend-color:var(--degree-bachelors)"></i>Bachelor's</span>
+                                <span><i style="--legend-color:var(--degree-masters)"></i>Master's</span>
+                                <span><i style="--legend-color:var(--degree-doctorate)"></i>Doctorate</span>
+                            </div>
+                        </div>
+                        <div class="program-ranking">
+                            <p>Highest shares · minimum 50 records</p>
+                            {storyData.schoolPrograms.ranked.slice(0, 7).map((row, index) => (
+                                <div class="program-row">
+                                    <b>{index + 1}</b><span>{row.school}<small>{row.degree} · {row.major}</small></span><strong>{row.share60Pct.toFixed(1)}%<small>{number(row.optWithin60)} / {number(row.expectedCompleters)}</small></strong>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div class="stage-panel alternatives-panel" data-panel="alternatives" hidden>
+                        {[
+                            ["J-1", "Research sponsorship"], ["H-1B", "Employer petition"],
+                            ["Study", "Another program"], ["Depart", "Leave the United States"],
+                            ["Overseas", "Work in another country"],
+                        ].map(([title, label]) => <div class="pathway"><b>{title}</b><span>{label}</span><i>?</i></div>)}
+                        <p>No probabilities assigned</p>
+                    </div>
+                </div>
+
+                <div class="field-legend" data-field-legend hidden>
+                    {storyData.cohort.fieldGroups.map((field) => <span><i style={`--field-color:var(--field-${field.key})`}></i>{field.label}</span>)}
+                </div>
+
+                <div class="dot-legend cohort-legend" data-cohort-legend hidden>
+                    <span><i style="--legend-color:var(--opt-highlight)"></i>Initial OPT entrants</span>
+                    <span><i style="--legend-color:var(--mark-neutral)"></i>Other nonresident degree awards</span>
+                </div>
+
+                <div class="threshold-metrics" data-threshold-metrics hidden aria-live="polite">
+                    <div><span>Would continue</span><b data-continues>0</b></div>
+                    <div><span>Would not continue</span><b data-does-not-continue>0</b></div>
+                    <div><span>Fee payments</span><b data-payments>$0</b></div>
+                    <div><span>Represented compensation</span><b data-compensation>$0</b></div>
+                </div>
+
+                <form class="threshold-controls" data-fee-controls hidden>
+                    <label for="opt-fee">
+                        <span>OPT fee <b data-fee-output>$100,000</b></span>
+                        <input id="opt-fee" data-fee-input type="range" min={storyData.meta.feeMinUsd} max={storyData.meta.feeMaxUsd} step={storyData.meta.feeStepUsd} value={storyData.meta.defaultFeeUsd} />
+                        <small><span>$50,000</span><span>$300,000</span></small>
+                    </label>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="story-methods">
+        <h2>Methods, sources, and caveats</h2>
+        <p>The story combines IPEDS 2021–22 international degree awards with FY2022 SEVIS initial post-completion OPT starts. The Institute for Progress obtained the SEVIS records from U.S. Immigration and Customs Enforcement through the Freedom of Information Act and published them through the <a href="https://optobservatory.org/">OPT Observatory</a>. The website receives aggregate tables only.</p>
+
+        <details open>
+            <summary>How to read the numbers</summary>
+            <div class="method-grid">
+                <section><h3>SEVIS provenance</h3><p>ICE public release #43657 was requested by the Institute for Progress under FOIA and published October 1, 2024. Violet Buxton-Walsh and Jeremy Neufeld documented the release in the <cite>OPT Observatory</cite>, Institute for Progress, October 2025.</p></section>
+                <section><h3>Two annual flows</h3><p>The degree count and the OPT-start count cover aligned years. They are not linked person by person, so their ratio is not a national OPT participation rate.</p></section>
+                <section><h3>Compensation and the fee</h3><p>Conservative title matches connect {number(storyData.meta.knownCompensationPeople)} entrants to O*NET occupations and FY2022 BLS benchmarks. The fee scenario compares each occupation's median estimated compensation with the selected fee. The remaining {number(storyData.meta.unknownCompensationPeople)} entrants stay outside the model.</p></section>
+                <section><h3>Students and postdocs</h3><p>Tuition and funding are annual Form I-20 amounts. They do not measure liquid wealth. The {number(storyData.cohort.postdocsWithinDoctorate)} postdocs are a title-based lower bound. NCSES reports a $55,000 median expected postdoc salary; the $79,710 estimate adds employer-paid benefits and excludes research expenses and overhead.</p></section>
+                <section><h3>School-program rates</h3><p>The program measure follows deduplicated expected-completion records to a first OPT start within 60 days and displays cohorts of at least 50. A 90-day window adds {number(storyData.schoolPrograms.sensitivity.additionalAt90)} records. The measure does not establish confirmed graduation, program quality, or institutional intent.</p></section>
+                <section><h3>Employer settings</h3><p>“Industry” contains named employers left after identifying universities and research institutions, nonprofits and health systems, and government. Some employers in this remainder cannot be classified more specifically.</p></section>
+                <section><h3>Evidence on American workers</h3><p>The <a href="https://www.census.gov/library/working-papers/2016/adrm/ces-wp-16-56.html">Census study</a> covers immigration broadly. The <a href="https://aisel.aisnet.org/misq/vol48/iss2/15/">MIS Quarterly study</a> examines domestic STEM employment after a STEM OPT extension. The <a href="https://www.aeaweb.org/articles?id=10.1257%2Fpandp.20261100">AEA study</a> examines STEM degree completion after OPT expansions. None observes the other applicants for jobs in the SEVIS records.</p></section>
+                <section><h3>What remains unobserved</h3><p>The data do not reveal actual OPT pay, employer decisions, student wealth, visa approvals, later immigration status, departure, overstay, or downstream economic effects. The reported fee proposal has no public implementing rule, so its payer, exemptions, and timing remain unspecified.</p></section>
+            </div>
+        </details>
+
+        <details>
+            <summary>Accessible fee table</summary>
+            <div class="table-scroll"><table><thead><tr><th>OPT fee</th><th>Would continue</th><th>Would not continue</th><th>Fee payments</th></tr></thead><tbody>
+                {storyData.compensation.feeScenarios.map((row) => <tr><th>{money(row.feeUsd)}</th><td>{number(row.continuesPeople)}</td><td>{number(row.doesNotContinuePeople)}</td><td>{money(row.feePaymentsUsd)}</td></tr>)}
+            </tbody></table></div>
+        </details>
+
+        <details>
+            <summary>Accessible school-program table</summary>
+            <div class="table-scroll"><table><thead><tr><th>School</th><th>Degree</th><th>Program</th><th>Expected records</th><th>OPT within 60 days</th><th>Share</th></tr></thead><tbody>
+                {storyData.schoolPrograms.ranked.map((row) => <tr><th>{row.school}</th><td>{row.degree}</td><td>{row.major}</td><td>{number(row.expectedCompleters)}</td><td>{number(row.optWithin60)}</td><td>{percent(row.share60Pct)}</td></tr>)}
+            </tbody></table></div>
+        </details>
+
+        <details>
+            <summary>Authoritative sources</summary>
+            <ul class="source-list">{storyData.methods.sources.map((source) => <li><a href={source.url}>{source.publisher} — {source.dataset}</a><span>{source.vintage}. {source.limitations}</span></li>)}</ul>
+        </details>
+    </footer>
+</section>
+
+<script>
+    import * as d3 from "d3";
+
+    type DegreeKey = "bachelors" | "masters" | "doctorate";
+    type WorkSettingKey = "other-named-employer" | "university-research" | "nonprofit-health" | "government" | "employer-not-reported";
+    type SceneKey = "graduates" | "opt" | "composition" | "connections" | "workers" | "evidence" | "value" | "gate" | "student" | "threshold" | "impacts" | "settings" | "organizations" | "programs" | "alternatives" | "ending" | "conclusion";
+    interface OptMark { id: number; degree: DegreeKey; field: string; workSetting: WorkSettingKey; isExplicitPostdoc: boolean; occupationFamily: string; benchmarkCompensationUsd: number | null; }
+    interface Stratum extends OptMark { people: number; marks: number; }
+    interface FeeScenario { feeUsd: number; continuesPeople: number; doesNotContinuePeople: number; unknownPeople: number; feePaymentsUsd: number; representedCompensationUsd: number; }
+    interface ProgramPoint { school: string; degree: string; cip: string; major: string; expectedCompleters: number; optWithin60: number; share60Pct: number; }
+    interface StoryData {
+        schemaVersion: number;
+        meta: { defaultFeeUsd: number; feeMinUsd: number; feeMaxUsd: number; feeStepUsd: number; totalEntrants: number; optMarkCount: number; };
+        openingPopulation: { people: number; markCount: number; optMarkCount: number; };
+        cohort: { marks: OptMark[]; flows: Array<{ degree: DegreeKey; workSetting: WorkSettingKey; people: number }>; degreeGroups: Array<{ key: DegreeKey; label: string; people: number }>; fieldGroups: Array<{ key: string; label: string; people: number }>; workSettings: Array<{ key: WorkSettingKey; label: string; people: number }> };
+        compensation: { strata: Stratum[]; feeScenarios: FeeScenario[]; comparisons: { asha: { totalCompensationUsd: number }; lin: { totalCompensationUsd: number } } };
+        schoolPrograms: { scatter: ProgramPoint[] };
+    }
+
+    const root = document.querySelector<HTMLElement>("[data-opt-story]");
+    const dataElement = document.querySelector<HTMLScriptElement>("#opt-story-data");
+    if (!root || !dataElement) throw new Error("OPT story root or data is missing");
+    const data = JSON.parse(dataElement.textContent || "{}") as StoryData;
+    if (data.schemaVersion !== 5) throw new Error("Unexpected OPT story schema");
+
+    const circleLayer = d3.select<SVGGElement, unknown>(root.querySelector<SVGGElement>("[data-circle-layer]")!);
+    const ribbonLayer = d3.select<SVGGElement, unknown>(root.querySelector<SVGGElement>("[data-ribbon-layer]")!);
+    const annotationLayer = d3.select<SVGGElement, unknown>(root.querySelector<SVGGElement>("[data-annotation-layer]")!);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const formatNumber = new Intl.NumberFormat("en-US");
+    const formatMoney = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+    const formatCompactMoney = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", notation: "compact", maximumFractionDigits: 1 });
+    const stage = root.querySelector<HTMLElement>("[data-story-stage]")!;
+    const feeInput = root.querySelector<HTMLInputElement>("[data-fee-input]")!;
+
+    const degreeY: Record<DegreeKey, number> = { bachelors: 155, masters: 350, doctorate: 545 };
+    const settingY: Record<WorkSettingKey, number> = {
+        "other-named-employer": 125, "university-research": 250, "nonprofit-health": 365,
+        "government": 475, "employer-not-reported": 590,
+    };
+    const fieldColors: Record<string, string> = {
+        "computer-science": "var(--field-computer-science)", business: "var(--field-business)",
+        engineering: "var(--field-engineering)", "social-science": "var(--field-social-science)",
+        mathematics: "var(--field-mathematics)", "biological-science": "var(--field-biological-science)",
+        "physical-science": "var(--field-physical-science)", other: "var(--field-other)",
+    };
+    const openingMarks = d3.range(data.openingPopulation.markCount).map((id) => ({ id, opt: id < data.meta.optMarkCount ? data.cohort.marks[id] : null }));
+    const circles = circleLayer.selectAll<SVGCircleElement, typeof openingMarks[number]>("circle").data(openingMarks).join("circle");
+    const characters = {
+        asha: d3.select<SVGGElement, unknown>(root.querySelector<SVGGElement>('[data-character="asha"]')!),
+        lin: d3.select<SVGGElement, unknown>(root.querySelector<SVGGElement>('[data-character="lin"]')!),
+    };
+    const degreeLocals = new Map<number, number>();
+    (Object.keys(degreeY) as DegreeKey[]).forEach((degree) => data.cohort.marks.filter((mark) => mark.degree === degree).forEach((mark, index) => degreeLocals.set(mark.id, index)));
+    const flowKey = (mark: OptMark) => `${mark.degree}|${mark.workSetting}`;
+    const flowLocals = new Map<number, number>();
+    const flowCounts = new Map<string, number>();
+    const stableHash = (id: number) => {
+        let value = id + 0x9e3779b9;
+        value = Math.imul(value ^ (value >>> 16), 0x85ebca6b);
+        value = Math.imul(value ^ (value >>> 13), 0xc2b2ae35);
+        return (value ^ (value >>> 16)) >>> 0;
+    };
+    d3.group(data.cohort.marks, flowKey).forEach((marks, key) => {
+        const ordered = marks.slice().sort((a, b) => stableHash(a.id) - stableHash(b.id));
+        flowCounts.set(key, ordered.length);
+        ordered.forEach((mark, index) => flowLocals.set(mark.id, index));
+    });
+    const grid = (index: number, columns: number, x: number, y: number, gapX: number, gapY: number) => ({ x: x + (index % columns) * gapX, y: y + Math.floor(index / columns) * gapY });
+    const openingPoint = (id: number) => grid(id, 59, 58, 105, 15.05, 12.3);
+    const degreePoint = (mark: OptMark) => grid(degreeLocals.get(mark.id) || 0, 54, 105, degreeY[mark.degree] - 48, 14.4, 10.2);
+    const cubicPoint = (p0: [number, number], p1: [number, number], p2: [number, number], p3: [number, number], t: number) => {
+        const mt = 1 - t;
+        return {
+            x: mt ** 3 * p0[0] + 3 * mt ** 2 * t * p1[0] + 3 * mt * t ** 2 * p2[0] + t ** 3 * p3[0],
+            y: mt ** 3 * p0[1] + 3 * mt ** 2 * t * p1[1] + 3 * mt * t ** 2 * p2[1] + t ** 3 * p3[1],
+        };
+    };
+    const cubicTangent = (p0: [number, number], p1: [number, number], p2: [number, number], p3: [number, number], t: number) => {
+        const mt = 1 - t;
+        return {
+            x: 3 * mt ** 2 * (p1[0] - p0[0]) + 6 * mt * t * (p2[0] - p1[0]) + 3 * t ** 2 * (p3[0] - p2[0]),
+            y: 3 * mt ** 2 * (p1[1] - p0[1]) + 6 * mt * t * (p2[1] - p1[1]) + 3 * t ** 2 * (p3[1] - p2[1]),
+        };
+    };
+    const flowPoint = (mark: OptMark) => {
+        const key = flowKey(mark);
+        const count = flowCounts.get(key) || 1;
+        const index = flowLocals.get(mark.id) || 0;
+        const share = (index + 0.5) / count;
+        // Government is only five particles at this scale. Keep those few
+        // particles on the destination half so the small branch is legible.
+        const t = mark.workSetting === "government" ? 0.54 + 0.42 * share : 0.04 + 0.92 * share;
+        const left: [[number, number], [number, number], [number, number], [number, number]] = [[160, degreeY[mark.degree]], [320, degreeY[mark.degree]], [390, 340], [500, 340]];
+        const right: [[number, number], [number, number], [number, number], [number, number]] = [[500, 340], [610, 340], [680, settingY[mark.workSetting]], [840, settingY[mark.workSetting]]];
+        const segment = t < 0.5 ? left : right;
+        const u = t < 0.5 ? t * 2 : (t - 0.5) * 2;
+        const point = cubicPoint(...segment, u);
+        const tangent = cubicTangent(...segment, u);
+        const length = Math.hypot(tangent.x, tangent.y) || 1;
+        const offset = ((((mark.id * 17) % 9) - 4) / 4) * Math.min(5.5, 1.8 + Math.sqrt(count) / 5);
+        return { x: point.x - tangent.y / length * offset, y: point.y + tangent.x / length * offset };
+    };
+
+    const state: { scene: SceneKey; feeUsd: number } = { scene: "graduates", feeUsd: data.meta.defaultFeeUsd };
+    const feeScenario = () => data.compensation.feeScenarios.find((row) => row.feeUsd === state.feeUsd)!;
+    const classification = (compensation: number | null) => compensation == null ? "unknown" : compensation >= state.feeUsd ? "continue" : "stop";
+    const markClassIndexes = () => {
+        const indexes = { continue: new Map<number, number>(), stop: new Map<number, number>(), unknown: new Map<number, number>() };
+        const counts = { continue: 0, stop: 0, unknown: 0 };
+        data.cohort.marks.forEach((mark) => { const key = classification(mark.benchmarkCompensationUsd); indexes[key].set(mark.id, counts[key]++); });
+        return indexes;
+    };
+    const thresholdPoint = (mark: OptMark) => {
+        const indexes = markClassIndexes();
+        const key = classification(mark.benchmarkCompensationUsd);
+        const index = indexes[key].get(mark.id) || 0;
+        if (key === "continue") return { ...grid(index, 30, 605, 175, 11, 10.5), key };
+        if (key === "stop") return { ...grid(index, 30, 65, 175, 11, 10.5), key };
+        return { ...grid(index, 90, 62, 535, 9.7, 9.2), key };
+    };
+
+    const sceneText: Record<SceneKey, { eyebrow: string; title: string; description: string }> = {
+        graduates: { eyebrow: "Nonresident degrees · 2021–22", title: "235,949 degrees", description: "About 2,360 circles represent nonresident bachelor's, master's, and doctoral degrees." },
+        opt: { eyebrow: "Initial post-completion OPT · FY2022", title: "115,861 entrants", description: "One contiguous highlighted block represents the FY2022 initial OPT flow." },
+        composition: { eyebrow: "Degree lanes · field color", title: "Who enters OPT", description: "The same cohort is arranged by degree and colored by broad field." },
+        connections: { eyebrow: "Degree → initial OPT → work setting", title: "What OPT connects", description: "Particles follow faint proportional ribbons toward employer-name-inferred settings." },
+        workers: { eyebrow: "American workers", title: "Does OPT displace American talent?", description: "An international graduate may compete with an American applicant for a particular job." },
+        evidence: { eyebrow: "What research finds", title: "Effects in both directions", description: "Studies find modest costs for some workers alongside growth in domestic STEM employment and education." },
+        value: { eyebrow: "Before the fee", title: "Two compensation tracks", description: "Software compensation and estimated postdoc compensation are shown on the same scale." },
+        gate: { eyebrow: "A variable charge", title: "The fee at the crossing", description: "The entire cohort stops at the selected fee before the employer scenario is applied." },
+        student: { eyebrow: "If the student pays", title: "The fee versus prior costs", description: "The selected fee is compared with reported master's tuition and educational funding." },
+        threshold: { eyebrow: "Employer decision", title: "Set the OPT fee", description: "The scenario covers 34,213 entrants whose jobs can be matched to compensation benchmarks." },
+        impacts: { eyebrow: "Who would continue", title: "Fields and occupations", description: "Among matched jobs, different fee levels change the mix of fields and occupations that would continue." },
+        settings: { eyebrow: "Who would continue", title: "Employer settings", description: "Among matched jobs, the same fee has different consequences across workplace settings." },
+        organizations: { eyebrow: "Observed FY2022 counts", title: "Schools and employers", description: "Static rankings show raw exposure counts only." },
+        programs: { eyebrow: "SEVIS expected-completion records", title: "Program rate versus size", description: "School-program cohort size is plotted against first post-completion OPT within 60 days." },
+        alternatives: { eyebrow: "Possible, not predicted", title: "Other pathways", description: "Potential alternatives are shown without substitution probabilities." },
+        ending: { eyebrow: "Measured exposure · selected fee", title: "The line you drew", description: "The final split applies the selected fee to compensation benchmarks." },
+        conclusion: { eyebrow: "The talent America keeps", title: "America has already invested in this talent", description: "American universities have welcomed and trained these graduates. Retaining them and developing American talent strengthen the same workforce." },
+    };
+
+    const addText = (x: number, y: number, text: string, className = "annotation", anchor: "start" | "middle" | "end" = "start") => annotationLayer.append("text").attr("x", x).attr("y", y).attr("class", className).attr("text-anchor", anchor).text(text);
+    const drawGate = () => {
+        annotationLayer.append("line").attr("x1", 500).attr("x2", 500).attr("y1", 95).attr("y2", 505).attr("class", "fee-gate");
+        addText(500, 74, `${formatMoney.format(state.feeUsd)} FEE`, "gate-label", "middle");
+    };
+    const drawDegreeLabels = () => data.cohort.degreeGroups.forEach((row) => {
+        addText(36, degreeY[row.key] - 58, row.label.toUpperCase(), "lane-label");
+        addText(965, degreeY[row.key] - 58, formatNumber.format(row.people), "lane-count", "end");
+    });
+    const drawConnectionLabels = () => {
+        data.cohort.degreeGroups.forEach((row) => {
+            addText(32, degreeY[row.key] - 10, row.label, "flow-label"); addText(32, degreeY[row.key] + 12, formatNumber.format(row.people), "flow-count");
+        });
+        addText(500, 285, "INITIAL OPT", "gate-node", "middle");
+        data.cohort.workSettings.forEach((row) => {
+            addText(970, settingY[row.key] - 5, row.label, "flow-label", "end"); addText(970, settingY[row.key] + 16, formatNumber.format(row.people), "flow-count", "end");
+        });
+    };
+    const drawFeeLabels = () => {
+        drawGate();
+        addText(275, 120, "WOULD NOT CONTINUE", "side-label", "middle");
+        addText(730, 120, "WOULD CONTINUE", "side-label", "middle");
+        addText(500, 525, `${formatNumber.format(data.meta.totalEntrants - feeScenario().unknownPeople)} ENTRANTS WITH MATCHED JOBS`, "chart-kicker", "middle");
+    };
+
+    const summarize = (dimension: "field" | "occupationFamily" | "workSetting") => {
+        const rows = new Map<string, { continue: number; stop: number }>();
+        data.compensation.strata.forEach((row) => {
+            const outcome = classification(row.benchmarkCompensationUsd);
+            if (outcome === "unknown") return;
+            const key = String(row[dimension]);
+            if (!rows.has(key)) rows.set(key, { continue: 0, stop: 0 });
+            rows.get(key)![outcome] += row.people;
+        });
+        return Array.from(rows, ([key, values]) => ({ key, ...values, total: values.continue + values.stop })).sort((a, b) => b.total - a.total);
+    };
+    const displayLabel = (key: string) => data.cohort.fieldGroups.find((row) => row.key === key)?.label || data.cohort.workSettings.find((row) => row.key === key)?.label || key;
+    const drawStackedRows = (rows: ReturnType<typeof summarize>, x: number, y: number, width: number, labelX: number, rowHeight: number, maxRows: number, title: string) => {
+        addText(x, y - 25, title.toUpperCase(), "chart-kicker");
+        addText(labelX, y - 25, "WOULD CONTINUE", "chart-kicker", "end");
+        rows.slice(0, maxRows).forEach((row, index) => {
+            const yy = y + index * rowHeight;
+            const scale = d3.scaleLinear().domain([0, Math.max(...rows.map((item) => item.total))]).range([0, width]);
+            addText(x, yy, displayLabel(row.key), "bar-label");
+            let cursor = x;
+            (["continue", "stop"] as const).forEach((key) => {
+                annotationLayer.append("rect").attr("x", cursor).attr("y", yy + 9).attr("width", scale(row[key])).attr("height", 12).attr("class", `stack stack--${key}`);
+                cursor += scale(row[key]);
+            });
+            const label = addText(labelX, yy + 20, formatNumber.format(row.continue), "bar-count", "end");
+            label.append("title").text(`${displayLabel(row.key)}: ${formatNumber.format(row.total)} matched job records; ${formatNumber.format(row.continue)} would continue; ${formatNumber.format(row.stop)} would not continue.`);
+        });
+    };
+    const drawOutcomeLegend = (x: number, y: number) => {
+        annotationLayer.append("rect").attr("x", x).attr("y", y - 9).attr("width", 12).attr("height", 12).attr("rx", 2).attr("class", "stack--continue");
+        addText(x + 19, y + 1, "Would continue", "legend-label");
+        annotationLayer.append("rect").attr("x", x + 132).attr("y", y - 9).attr("width", 12).attr("height", 12).attr("rx", 2).attr("class", "stack--stop");
+        addText(x + 151, y + 1, "Would not continue", "legend-label");
+    };
+    const drawImpacts = () => {
+        drawStackedRows(summarize("field"), 45, 105, 285, 465, 60, 8, "Major field · matched jobs");
+        drawStackedRows(summarize("occupationFamily"), 535, 105, 275, 955, 60, 8, "Occupation family · matched jobs");
+        drawOutcomeLegend(365, 620);
+    };
+    const drawSettings = () => {
+        drawStackedRows(summarize("workSetting"), 115, 155, 560, 885, 82, 5, "Employer-name-inferred setting · matched jobs");
+        drawOutcomeLegend(365, 610);
+    };
+
+    const flowTotals = d3.rollups(data.cohort.flows, (rows) => d3.sum(rows, (row) => row.people), (row) => row.degree, (row) => row.workSetting).flatMap(([degree, settings]) => settings.map(([workSetting, people]) => ({ degree, workSetting, people })));
+    const ribbonWidth = d3.scaleSqrt().domain([0, d3.max(flowTotals, (row) => row.people) || 1]).range([0.6, 25]);
+    const ribbons = ribbonLayer.selectAll<SVGPathElement, typeof flowTotals[number]>("path").data(flowTotals).join("path")
+        .attr("d", (row) => `M160,${degreeY[row.degree]} C320,${degreeY[row.degree]} 390,340 500,340 C610,340 680,${settingY[row.workSetting]} 840,${settingY[row.workSetting]}`)
+        .attr("stroke-width", (row) => ribbonWidth(row.people)).attr("fill", "none").attr("stroke", "var(--ribbon)").attr("opacity", 0);
+
+    const scatter = d3.select<SVGSVGElement, unknown>(root.querySelector<SVGSVGElement>("[data-program-scatter]")!);
+    if (!scatter.empty()) {
+        const points = data.schoolPrograms.scatter;
+        const tooltip = root.querySelector<HTMLElement>("[data-program-tooltip]")!;
+        const sx = d3.scaleSqrt().domain([50, d3.max(points, (row) => row.expectedCompleters) || 50]).range([55, 495]);
+        const sy = d3.scaleLinear().domain([50, 100]).range([305, 25]).clamp(true);
+        scatter.append("g").attr("transform", "translate(0,305)").call(d3.axisBottom(sx).ticks(4).tickFormat(d3.format("~s"))).attr("class", "scatter-axis");
+        scatter.append("g").attr("transform", "translate(55,0)").call(d3.axisLeft(sy).tickValues([50, 60, 70, 80, 90, 100]).tickFormat((value) => `${value}%`)).attr("class", "scatter-axis");
+        scatter.append("path").attr("d", "M50,310 l10,-8 M50,302 l10,-8").attr("class", "scatter-axis-break");
+        const showProgram = (event: FocusEvent | MouseEvent, row: ProgramPoint) => {
+            const dot = event.currentTarget as SVGCircleElement;
+            const dotBox = dot.getBoundingClientRect();
+            const hostBox = tooltip.parentElement!.getBoundingClientRect();
+            tooltip.textContent = `${row.school}\n${row.degree} · ${row.major}\n${formatNumber.format(row.optWithin60)} of ${formatNumber.format(row.expectedCompleters)} entered OPT within 60 days (${row.share60Pct.toFixed(1)}%)`;
+            tooltip.style.left = `${Math.max(100, Math.min(hostBox.width - 100, dotBox.left - hostBox.left + dotBox.width / 2))}px`;
+            tooltip.style.top = `${Math.max(70, dotBox.top - hostBox.top - 8)}px`;
+            tooltip.hidden = false;
+        };
+        const hideProgram = () => { tooltip.hidden = true; };
+        const dots = scatter.selectAll<SVGCircleElement, ProgramPoint>("circle").data(points).join("circle")
+            .attr("cx", (row) => sx(row.expectedCompleters)).attr("cy", (row) => sy(row.share60Pct)).attr("r", 3.1)
+            .attr("class", (row) => `program-dot program-dot--${row.degree.toLowerCase().replace(/[^a-z]/g, "")}`)
+            .attr("tabindex", 0).attr("role", "img")
+            .attr("aria-label", (row) => `${row.school}, ${row.degree}, ${row.major}: ${row.share60Pct.toFixed(1)} percent entered OPT within 60 days`)
+            .on("mouseenter focus", showProgram).on("mouseleave blur", hideProgram);
+        dots.append("title").text((row) => `${row.school} — ${row.degree}, ${row.major}: ${row.share60Pct.toFixed(1)}% (${formatNumber.format(row.optWithin60)} of ${formatNumber.format(row.expectedCompleters)})`);
+        scatter.append("text").attr("x", 275).attr("y", 342).attr("text-anchor", "middle").attr("class", "scatter-label").text("Expected-completion records");
+        scatter.append("text").attr("transform", "rotate(-90)").attr("x", -165).attr("y", 14).attr("text-anchor", "middle").attr("class", "scatter-label").text("Share entering OPT within 60 days");
+    }
+
+    const markTarget = (opening: typeof openingMarks[number], scene: SceneKey) => {
+        const hidden = { x: 500, y: 650, r: 0, opacity: 0, fill: "var(--mark-neutral)" };
+        if (scene === "graduates" || scene === "opt") {
+            const point = openingPoint(opening.id);
+            return { ...point, r: opening.opt ? 2.5 : 2.15, opacity: scene === "graduates" ? 0.72 : opening.opt ? 0.98 : 0.72, fill: scene === "opt" && opening.opt ? "var(--opt-highlight)" : "var(--mark-neutral)" };
+        }
+        if (!opening.opt) return hidden;
+        if (scene === "composition") {
+            const point = degreePoint(opening.opt);
+            return { ...point, r: 3.1, opacity: 0.94, fill: fieldColors[opening.opt.field] };
+        }
+        if (scene === "connections" || scene === "workers" || scene === "evidence") {
+            const point = flowPoint(opening.opt);
+            return { ...point, r: 3, opacity: 0.9, fill: fieldColors[opening.opt.field] };
+        }
+        if (scene === "gate") {
+            const point = grid(opening.opt.id, 42, 68, 155, 9.7, 10.2);
+            return { ...point, r: 2.5, opacity: 0.7, fill: "var(--mark-blocked)" };
+        }
+        if (scene === "threshold" || scene === "ending" || scene === "conclusion") {
+            const point = thresholdPoint(opening.opt);
+            if (point.key === "unknown") return hidden;
+            return { ...point, r: 2.7, opacity: 0.9, fill: point.key === "continue" ? fieldColors[opening.opt.field] : "var(--mark-blocked)" };
+        }
+        return hidden;
+    };
+
+    const moveGroup = (selection: d3.Selection<SVGGElement, unknown, any, any>, target: { x: number; y: number; opacity: number }, animate: boolean) => {
+        selection.interrupt("story");
+        if (animate && !reducedMotion.matches) {
+            selection.transition("story").duration(520).ease(d3.easeCubicOut)
+                .attr("transform", `translate(${target.x},${target.y})`).attr("opacity", target.opacity);
+        } else {
+            selection.attr("transform", `translate(${target.x},${target.y})`).attr("opacity", target.opacity);
+        }
+    };
+    const heroPositions = (scene: SceneKey) => {
+        const hidden = { x: 500, y: 340, opacity: 0 };
+        if (scene === "opt") return { asha: { x: 175, y: 82, opacity: 1 }, lin: { x: 225, y: 82, opacity: 1 } };
+        if (scene === "composition") return { asha: { x: 925, y: 330, opacity: 1 }, lin: { x: 925, y: 525, opacity: 1 } };
+        if (scene === "connections" || scene === "workers" || scene === "evidence") return { asha: { x: 795, y: 92, opacity: 1 }, lin: { x: 795, y: 220, opacity: 1 } };
+        if (scene === "gate") return { asha: { x: 480, y: 260, opacity: 1 }, lin: { x: 480, y: 390, opacity: 1 } };
+        if (scene === "threshold" || scene === "ending" || scene === "conclusion") {
+            const a = classification(data.compensation.comparisons.asha.totalCompensationUsd) === "continue";
+            const l = classification(data.compensation.comparisons.lin.totalCompensationUsd) === "continue";
+            return { asha: { x: a ? 730 : 470, y: 245, opacity: 1 }, lin: { x: l ? 730 : 470, y: 385, opacity: 1 } };
+        }
+        return { asha: hidden, lin: hidden };
+    };
+    const panelFor = (scene: SceneKey) => ["value", "student", "organizations", "programs", "alternatives"].includes(scene) ? scene : "";
+    const render = (scene = state.scene, animate = true) => {
+        state.scene = scene;
+        const copy = sceneText[scene];
+        const selectedFee = formatMoney.format(state.feeUsd);
+        root.querySelector<HTMLElement>("[data-stage-eyebrow]")!.textContent = copy.eyebrow;
+        root.querySelector<HTMLElement>("[data-stage-title]")!.textContent = scene === "gate" ? `A ${selectedFee} fee at the crossing` : scene === "student" ? `${selectedFee} versus prior costs` : scene === "threshold" || scene === "ending" ? `${selectedFee} OPT fee` : copy.title;
+        root.querySelector<HTMLElement>("[data-stage-description]")!.textContent = scene === "ending" ? `Among matched jobs, ${formatNumber.format(feeScenario().continuesPeople)} would continue and ${formatNumber.format(feeScenario().doesNotContinuePeople)} would be priced out.` : copy.description;
+        root.querySelectorAll<HTMLElement>(".story-step[data-scene]").forEach((step) => step.classList.toggle("is-active", step.dataset.scene === scene));
+        stage.dataset.scene = scene;
+
+        const interactive = ["threshold", "impacts", "settings"].includes(scene);
+        root.querySelector<HTMLElement>("[data-fee-controls]")!.hidden = !interactive;
+        root.querySelector<HTMLElement>("[data-threshold-metrics]")!.hidden = !interactive && scene !== "ending" && scene !== "conclusion";
+        root.querySelector<HTMLElement>("[data-field-legend]")!.hidden = !["composition", "connections", "workers", "evidence", "threshold", "ending", "conclusion"].includes(scene);
+        root.querySelector<HTMLElement>("[data-cohort-legend]")!.hidden = scene !== "opt";
+        root.querySelectorAll<HTMLElement>("[data-panel]").forEach((panel) => panel.hidden = panel.dataset.panel !== panelFor(scene));
+
+        const metric = feeScenario();
+        root.querySelector<HTMLElement>("[data-fee-output]")!.textContent = selectedFee;
+        root.querySelector<HTMLElement>("[data-continues]")!.textContent = formatNumber.format(metric.continuesPeople);
+        root.querySelector<HTMLElement>("[data-does-not-continue]")!.textContent = formatNumber.format(metric.doesNotContinuePeople);
+        root.querySelector<HTMLElement>("[data-payments]")!.textContent = formatCompactMoney.format(metric.feePaymentsUsd);
+        root.querySelector<HTMLElement>("[data-compensation]")!.textContent = formatCompactMoney.format(metric.representedCompensationUsd);
+        root.querySelectorAll<HTMLElement>("[data-copy-fee]").forEach((element) => element.textContent = selectedFee);
+        root.querySelector<HTMLElement>("[data-copy-gross-exposure]")!.textContent = `$${(data.meta.totalEntrants * state.feeUsd / 1_000_000_000).toFixed(3).replace(/\.?0+$/, "")} billion`;
+        root.querySelector<HTMLElement>("[data-copy-ending-outcome]")!.textContent = `${formatNumber.format(metric.continuesPeople)} would continue and ${formatNumber.format(metric.doesNotContinuePeople)} would be priced out`;
+        const biology = summarize("field").find((row) => row.key === "biological-science")!;
+        const biologyPricedOutPct = 100 * biology.stop / biology.total;
+        const linContinues = data.compensation.comparisons.lin.totalCompensationUsd >= state.feeUsd;
+        root.querySelector<HTMLElement>("[data-copy-lin-outcome]")!.textContent = linContinues ? "Dr. Lin's postdoc would remain in the modeled talent pool" : "Dr. Lin's postdoc would be priced out";
+        root.querySelector<HTMLElement>("[data-copy-biology-outcome]")!.textContent = `${biologyPricedOutPct.toFixed(1)}% would be priced out`;
+        root.querySelector<HTMLElement>("[data-copy-ending-biology]")!.textContent = `Biology would lose ${biologyPricedOutPct.toFixed(1)}% of its matched graduates.`;
+        const university = summarize("workSetting").find((row) => row.key === "university-research")!;
+        const industry = summarize("workSetting").find((row) => row.key === "other-named-employer")!;
+        const universityPricedOutPct = 100 * university.stop / university.total;
+        const industryPricedOutPct = 100 * industry.stop / industry.total;
+        root.querySelector<HTMLElement>("[data-copy-setting-outcome]")!.textContent = `At ${selectedFee}, the model prices out ${universityPricedOutPct.toFixed(1)}% of matched university and research jobs and ${industryPricedOutPct.toFixed(1)}% of matched industry jobs.`;
+        root.querySelector<HTMLElement>("[data-student-fee]")!.textContent = selectedFee;
+        root.querySelector<HTMLElement>("[data-student-fee-bar]")!.style.width = `${100 * state.feeUsd / data.meta.feeMaxUsd}%`;
+
+        const targets = openingMarks.map((mark) => markTarget(mark, scene));
+        circles.interrupt("story").attr("fill", (_, index) => targets[index].fill);
+        if (animate && !reducedMotion.matches) {
+            circles.transition("story").duration(560).ease(d3.easeCubicOut)
+                .attr("cx", (_, index) => targets[index].x).attr("cy", (_, index) => targets[index].y)
+                .attr("r", (_, index) => targets[index].r).attr("opacity", (_, index) => targets[index].opacity);
+        } else {
+            circles.attr("cx", (_, index) => targets[index].x).attr("cy", (_, index) => targets[index].y)
+                .attr("r", (_, index) => targets[index].r).attr("opacity", (_, index) => targets[index].opacity);
+        }
+
+        const ribbonOpacity = scene === "connections" || scene === "workers" || scene === "evidence" ? 0.18 : 0;
+        ribbons.interrupt("story");
+        if (animate && !reducedMotion.matches) ribbons.transition("story").duration(420).attr("opacity", ribbonOpacity);
+        else ribbons.attr("opacity", ribbonOpacity);
+        annotationLayer.selectAll("*").remove();
+        if (scene === "composition") drawDegreeLabels();
+        if (scene === "connections" || scene === "workers" || scene === "evidence") drawConnectionLabels();
+        if (scene === "gate") drawGate();
+        if (scene === "threshold" || scene === "ending" || scene === "conclusion") drawFeeLabels();
+        if (scene === "impacts") drawImpacts();
+        if (scene === "settings") drawSettings();
+
+        const heroes = heroPositions(scene);
+        moveGroup(characters.asha, heroes.asha, animate); moveGroup(characters.lin, heroes.lin, animate);
+    };
+
+    feeInput.addEventListener("input", () => { state.feeUsd = Number(feeInput.value); render(state.scene, true); });
+    let activeScene: SceneKey = "graduates";
+    const selectSceneFromScroll = () => {
+        const targetY = window.innerHeight * 0.46;
+        const steps = Array.from(root.querySelectorAll<HTMLElement>(".story-step[data-scene]"));
+        let nearest = steps[0]; let distance = Infinity;
+        steps.forEach((step) => { const rect = step.getBoundingClientRect(); const candidate = Math.abs((rect.top + rect.bottom) / 2 - targetY); if (candidate < distance) { distance = candidate; nearest = step; } });
+        const scene = nearest.dataset.scene as SceneKey;
+        if (scene !== activeScene) { activeScene = scene; render(scene, true); }
+    };
+    window.addEventListener("scroll", selectSceneFromScroll, { passive: true });
+    window.addEventListener("resize", () => { render(state.scene, false); selectSceneFromScroll(); }, { passive: true });
+    reducedMotion.addEventListener("change", () => render(state.scene, false));
+    render("graduates", false);
+    selectSceneFromScroll();
+</script>
+
+<style>
+    .opt-story {
+        --field-computer-science:#0072b2; --field-business:#e69f00; --field-engineering:#009e73;
+        --field-social-science:#cc79a7; --field-mathematics:#56b4e9; --field-biological-science:#d55e00;
+        --field-physical-science:#8064a2; --field-other:#8d897e; --degree-bachelors:var(--midnight);
+        --degree-masters:var(--goldenrod); --degree-doctorate:var(--burgundy); --fee:#8b0010;
+        --mark-neutral:color-mix(in srgb,var(--text) 42%,transparent); --mark-blocked:#aaa69c;
+        --mark-unknown:#c9c4b8; --opt-highlight:#0072b2;
+        --ribbon:color-mix(in srgb,var(--text) 34%,transparent);
+        max-width:1600px; margin:0 auto; padding:0 clamp(.75rem,2vw,2rem) 5rem;
+    }
+    :global(html[data-theme="dark"]) .opt-story { --mark-blocked:#64635f; --mark-unknown:#4d4c48; --ribbon:rgba(255,255,255,.34); --degree-bachelors:#f4f0e7; --degree-doctorate:#e06a72; }
+    .story-grid { display:grid; grid-template-columns:minmax(290px,370px) minmax(0,1fr); gap:clamp(1.5rem,4vw,5rem); align-items:start; }
+    .story-copy { position:relative; z-index:2; }
+    .story-step { min-height:92vh; display:flex; align-items:center; }
+    .step-card { background:color-mix(in srgb,var(--surface) 93%,transparent); border:1px solid var(--border); border-radius:18px; padding:1.35rem 1.45rem; box-shadow:0 10px 36px rgba(0,0,0,.05); opacity:.54; transform:translateY(8px); transition:opacity .25s,transform .25s; }
+    .story-step.is-active .step-card { opacity:1; transform:none; }
+    .step-card--turn { border-left:5px solid var(--fee); }
+    .step-number,.stage-header p,.ranking-column>p,.program-scatter>p,.program-ranking>p,.student-panel>p { font-family:var(--font-sans); text-transform:uppercase; letter-spacing:.08em; font-size:.72rem; font-weight:750; color:var(--text-muted); }
+    .step-card h2 { font-family:var(--font-sans); font-size:clamp(1.45rem,2vw,2rem); line-height:1.08; margin:.35rem 0 .8rem; }
+    .step-card p { margin:.55rem 0; line-height:1.52; }
+    .character-copy { font-family:var(--font-sans); font-size:.9rem; }
+    .character-copy b { display:inline-grid; place-items:center; width:1.55rem; height:1.55rem; border:2px solid currentColor; border-radius:50%; margin-right:.45rem; }
+    .story-stage-wrap { position:sticky; top:4.5rem; height:calc(100vh - 5.5rem); display:flex; align-items:center; }
+    .story-stage { width:100%; min-height:min(850px,calc(100vh - 6rem)); border:1px solid var(--border); border-radius:24px; background:var(--surface); overflow:hidden; display:flex; flex-direction:column; box-shadow:0 18px 48px rgba(0,0,0,.08); }
+    .stage-header { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:1.15rem 1.4rem 0; min-height:64px; }
+    .stage-header h3 { max-width:62%; margin:0; font-family:var(--font-sans); font-size:clamp(1.35rem,2.7vw,2.15rem); line-height:1.06; text-align:right; }
+    .stage-visual { position:relative; flex:1; min-height:0; }
+    [data-stage-svg] { width:100%; height:100%; min-height:520px; display:block; overflow:visible; }
+    .character circle { fill:var(--surface); stroke-width:3; }
+    .character--asha circle { stroke:#0072b2; } .character--lin circle { stroke:#009e73; }
+    .character text { font-family:var(--font-sans); font-size:11px; font-weight:800; text-anchor:middle; fill:var(--text); }
+    :global(.lane-label),:global(.flow-label),:global(.gate-node),:global(.side-label),:global(.chart-kicker) { font-family:var(--font-sans); font-weight:750; fill:var(--text); }
+    :global(.lane-label),:global(.side-label),:global(.chart-kicker) { font-size:12px; letter-spacing:.06em; }
+    :global(.lane-count),:global(.flow-count),:global(.bar-count) { font-family:var(--font-sans); font-size:11px; fill:var(--text-muted); }
+    :global(.flow-label) { font-size:13px; } :global(.gate-node) { font-size:12px; fill:var(--fee); letter-spacing:.08em; }
+    :global(.fee-gate) { stroke:var(--fee); stroke-width:3; } :global(.gate-label) { font-family:var(--font-sans); font-weight:800; font-size:17px; fill:var(--fee); }
+    :global(.bar-label) { font-family:var(--font-sans); font-size:11px; fill:var(--text); }
+    :global(.stack--continue) { fill:#0072b2; } :global(.stack--stop) { fill:#aaa69c; }
+    :global(.legend-label) { font-family:var(--font-sans); font-size:11px; fill:var(--text-muted); }
+    .field-legend { display:flex; flex-wrap:wrap; gap:.35rem 1rem; padding:.75rem 1.2rem; border-top:1px solid var(--border); font-family:var(--font-sans); font-size:.72rem; color:var(--text-muted); }
+    .field-legend span { display:flex; align-items:center; gap:.35rem; } .field-legend i { width:.65rem; height:.65rem; border-radius:50%; background:var(--field-color); }
+    .dot-legend { display:flex; flex-wrap:wrap; align-items:center; gap:.45rem 1.1rem; font-family:var(--font-sans); font-size:.72rem; color:var(--text-muted); }
+    .dot-legend span { display:flex; align-items:center; gap:.4rem; }
+    .dot-legend i { display:block; width:.65rem; height:.65rem; flex:0 0 auto; border-radius:50%; background:var(--legend-color); }
+    .cohort-legend { padding:.75rem 1.2rem; border-top:1px solid var(--border); }
+    .threshold-metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border-top:1px solid var(--border); }
+    .threshold-metrics div { background:var(--surface); padding:.65rem .8rem; } .threshold-metrics span { display:block; font-family:var(--font-sans); font-size:.67rem; color:var(--text-muted); } .threshold-metrics b { font-family:var(--font-sans); font-size:.96rem; }
+    .threshold-controls { padding:.8rem 1.2rem 1rem; border-top:1px solid var(--border); font-family:var(--font-sans); }
+    .threshold-controls label>span { display:flex; justify-content:space-between; gap:1rem; font-size:.78rem; font-weight:650; } .threshold-controls input { width:100%; accent-color:var(--fee); } .threshold-controls small { display:flex; justify-content:space-between; color:var(--text-muted); }
+    .story-stage[data-scene="threshold"] [data-stage-svg] { min-height:390px; }
+    .story-stage[data-scene="threshold"] { height:min(850px,calc(100vh - 6rem)); min-height:0; }
+    .story-stage[data-scene="threshold"] .field-legend { padding:.45rem .9rem; gap:.25rem .7rem; font-size:.66rem; }
+    .story-stage[data-scene="threshold"] .threshold-metrics div { padding:.42rem .65rem; }
+    .story-stage[data-scene="threshold"] .threshold-controls { padding:.45rem .9rem .55rem; }
+    .stage-panel { position:absolute; inset:2rem 3rem; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:clamp(1rem,3vw,2rem); box-shadow:0 14px 38px rgba(0,0,0,.08); overflow:auto; }
+    .comparison-panel { display:grid; align-content:center; gap:2rem; }
+    .comparison-row h4 { font-family:var(--font-sans); font-size:1rem; margin:0 0 1rem; } .comparison-row h4 span { display:inline-grid; place-items:center; width:1.7rem; height:1.7rem; border:2px solid currentColor; border-radius:50%; margin-right:.5rem; }
+    .comparison-row--asha h4 { color:#0072b2; } .comparison-row--lin h4 { color:#009e73; }
+    .bullet { margin:.8rem 0; } .bullet label,.student-bar label { display:flex; justify-content:space-between; font-family:var(--font-sans); font-size:.82rem; }
+    .bullet i,.student-bar i { display:block; height:10px; margin-top:.35rem; border-radius:99px; background:color-mix(in srgb,var(--text) 10%,transparent); overflow:hidden; } .bullet em,.student-bar em { display:block; height:100%; border-radius:inherit; background:#0072b2; }
+    .comparison-row--lin .bullet em { background:#009e73; } .axis { display:flex; justify-content:space-between; border-top:1px solid var(--border); padding-top:.4rem; font-family:var(--font-sans); font-size:.7rem; color:var(--text-muted); }
+    .student-panel { display:grid; align-content:center; gap:1.4rem; } .student-bar em { background:#e69f00; } .student-bar--fee em { background:var(--fee); }
+    .organizations-panel { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    .ranking-row { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(80px,1fr) auto; gap:.65rem; align-items:center; margin:.85rem 0; font-family:var(--font-sans); font-size:.76rem; }
+    .ranking-row>span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .ranking-row i { height:9px; border-radius:99px; background:color-mix(in srgb,var(--text) 9%,transparent); overflow:hidden; } .ranking-row i b { display:block; width:var(--bar); height:100%; background:#0072b2; border-radius:inherit; } .ranking-row--employer i b { background:#009e73; }
+    .programs-panel { display:grid; grid-template-columns:1.05fr .95fr; gap:1.5rem; }
+    .program-scatter { position:relative; }
+    .program-scatter svg { width:100%; max-height:430px; } :global(.scatter-axis text),:global(.scatter-label) { font-family:var(--font-sans); font-size:10px; fill:var(--text-muted); } :global(.scatter-axis path),:global(.scatter-axis line),:global(.scatter-axis-break) { stroke:var(--border); }
+    :global(.scatter-axis-break) { fill:none; stroke-width:2.2; }
+    :global(.program-dot) { fill:var(--degree-bachelors); opacity:.62; cursor:help; } :global(.program-dot--masters) { fill:var(--degree-masters); } :global(.program-dot--doctorate) { fill:var(--degree-doctorate); }
+    :global(.program-dot:hover),:global(.program-dot:focus) { opacity:1; stroke:var(--surface); stroke-width:2; outline:none; }
+    .scatter-tooltip { position:absolute; z-index:4; width:min(250px,80%); transform:translate(-50%,-100%); padding:.55rem .65rem; border:1px solid var(--border-strong); border-radius:10px; background:var(--surface); box-shadow:0 8px 24px rgba(0,0,0,.16); color:var(--text); font-family:var(--font-sans); font-size:.68rem; line-height:1.45; white-space:pre-line; pointer-events:none; }
+    .program-degree-legend { justify-content:center; margin-top:-.3rem; }
+    .program-row { display:grid; grid-template-columns:1.5rem minmax(0,1fr) auto; gap:.55rem; align-items:start; padding:.65rem 0; border-bottom:1px solid var(--border); font-family:var(--font-sans); font-size:.72rem; } .program-row>span,.program-row>strong { min-width:0; } .program-row small { display:block; color:var(--text-muted); margin-top:.2rem; font-weight:450; }
+    .alternatives-panel { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; align-content:center; } .pathway { border:1px solid var(--border); border-radius:14px; padding:1rem; display:grid; grid-template-columns:auto 1fr auto; gap:.75rem; align-items:center; font-family:var(--font-sans); } .pathway i { display:grid; place-items:center; width:1.6rem; height:1.6rem; border-radius:50%; background:color-mix(in srgb,var(--text) 8%,transparent); font-style:normal; } .alternatives-panel>p { grid-column:1/-1; text-align:center; color:var(--text-muted); }
+    .story-methods { max-width:1050px; margin:5rem auto 0; padding:2rem 0; border-top:1px solid var(--border); } .story-methods h2 { font-family:var(--font-sans); } .story-methods details { border-top:1px solid var(--border); padding:1rem 0; } .story-methods summary { cursor:pointer; font-family:var(--font-sans); font-weight:700; }
+    .method-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:1.2rem; } .method-grid h3 { font-family:var(--font-sans); font-size:.9rem; margin:0; } .method-grid p { font-size:.88rem; line-height:1.5; }
+    .table-scroll { overflow-x:auto; margin-top:1rem; } table { width:100%; border-collapse:collapse; font-family:var(--font-sans); font-size:.78rem; } th,td { padding:.55rem .65rem; text-align:left; border-bottom:1px solid var(--border); } .source-list { display:grid; gap:.8rem; padding-left:1.2rem; } .source-list li span { display:block; color:var(--text-muted); font-size:.8rem; }
+    .noscript-summary { max-width:800px; margin:1rem auto; padding:1rem; border:1px solid var(--border); border-radius:14px; }
+    [hidden] { display:none !important; }
+
+    @media (max-width:900px) {
+        .story-grid { grid-template-columns:minmax(245px,300px) minmax(0,1fr); gap:1rem; }
+        .stage-panel { inset:1rem; } .programs-panel,.organizations-panel { grid-template-columns:1fr; }
+        .method-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:700px) {
+        .opt-story { padding-inline:.5rem; }
+        .story-grid { display:flex; flex-direction:column; }
+        .story-stage-wrap { order:-1; position:sticky; top:3.6rem; z-index:3; width:100%; height:58vh; align-items:stretch; }
+        .story-stage { min-height:0; height:100%; border-radius:16px; }
+        .story-stage[data-scene="threshold"] { height:100%; min-height:0; }
+        .stage-header { padding:.75rem .9rem 0; min-height:48px; } .stage-header h3 { font-size:1.25rem; }
+        [data-stage-svg] { min-height:300px; }
+        .story-copy { z-index:1; margin-top:1rem; }
+        .story-step { min-height:72vh; align-items:flex-end; padding-bottom:1rem; }
+        .step-card { margin:0 .5rem; background:var(--surface); }
+        .stage-panel { inset:.45rem; padding:.8rem; }
+        .comparison-panel { gap:.65rem; } .comparison-row h4 { margin-bottom:.35rem; } .bullet { margin:.35rem 0; }
+        .organizations-panel,.programs-panel { display:block; } .ranking-column:nth-child(2),.program-scatter { margin-top:1rem; }
+        .alternatives-panel { grid-template-columns:1fr; gap:.45rem; align-content:start; }
+        .pathway { min-width:0; grid-template-columns:4.3rem minmax(0,1fr) auto; gap:.55rem; padding:.55rem .65rem; font-size:.76rem; }
+        .pathway span { min-width:0; } .pathway i { width:1.3rem; height:1.3rem; }
+        .alternatives-panel>p { margin:.15rem 0 0; font-size:.75rem; }
+        .threshold-metrics { grid-template-columns:repeat(2,1fr); } .threshold-metrics div:nth-child(n+3) { display:none; }
+        .field-legend { max-height:72px; overflow:auto; }
+        .method-grid { grid-template-columns:1fr; }
+    }
+    @media (prefers-reduced-motion:reduce) { .step-card { transition:none; } }
+</style>

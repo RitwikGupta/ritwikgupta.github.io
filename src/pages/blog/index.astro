@@ -6,9 +6,11 @@ import { formatUtcDate } from "../../utils/date";
 import ProgressiveImage from "../../components/ProgressiveImage.astro";
 import { contentImageFromMetadata } from "../../utils/content-images";
 
-const posts = (await getCollection("blog")).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection("blog"))
+    .filter((post) => !post.data.draft)
+    .sort(
+        (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    );
 ---
 
 <Layout

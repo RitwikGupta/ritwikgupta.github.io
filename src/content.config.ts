@@ -1,5 +1,5 @@
 import { defineCollection } from "astro:content";
-import { file, glob } from "astro/loaders";
+import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
 const blog = defineCollection({
@@ -9,6 +9,8 @@ const blog = defineCollection({
         pubDate: z.coerce.date(),
         description: z.string(),
         og_image: image(),
+        draft: z.boolean().default(false),
+        template: z.enum(["standard", "opt-story"]).default("standard"),
     }),
 });
 

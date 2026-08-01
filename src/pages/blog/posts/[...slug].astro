@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BlogLayout from "../../../layouts/BlogLayout.astro";
+import OptStoryLayout from "../../../layouts/OptStoryLayout.astro";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");
@@ -20,6 +21,12 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogLayout frontmatter={post.data}>
-    <Content />
-</BlogLayout>
+{
+    post.data.template === "opt-story" ? (
+        <OptStoryLayout frontmatter={post.data} />
+    ) : (
+        <BlogLayout frontmatter={post.data}>
+            <Content />
+        </BlogLayout>
+    )
+}
