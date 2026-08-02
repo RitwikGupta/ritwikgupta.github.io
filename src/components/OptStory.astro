@@ -9,6 +9,15 @@ const money = (value: number) => new Intl.NumberFormat("en-US", {
 const percent = (value: number) => `${value.toFixed(1)}%`;
 const maxSchool = Math.max(...storyData.organizations.schoolsByEntrants.map((row) => row.people));
 const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map((row) => row.people));
+const defaultFeeScenario = storyData.compensation.feeScenarios.find(
+    (row) => row.feeUsd === storyData.meta.defaultFeeUsd,
+)!;
+const industrySetting = storyData.cohort.workSettings.find(
+    (row) => row.key === "other-named-employer",
+)!;
+const universitySetting = storyData.cohort.workSettings.find(
+    (row) => row.key === "university-research",
+)!;
 ---
 
 <section class="opt-story" aria-label="OPT fee visual story" data-opt-story>
@@ -18,9 +27,15 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
         <div class="noscript-summary">
             <h2>The story in brief</h2>
             <p>
+                Optional Practical Training gives eligible F-1 students temporary
+                permission to work in jobs related to their degree. Initial
+                post-completion OPT may last up to 12 months, and some STEM graduates
+                may later apply for a 24-month extension.
+            </p>
+            <p>
                 The FY2022 SEVIS records contain 115,861 initial post-completion OPT
-                entrants. At the default $100,000 fee, 24,894 would continue under the
-                scenario and 9,319 would not continue. The comparison covers the 34,213 entrants
+                entrants. At the default $100,000 fee, {number(defaultFeeScenario.continuesPeople)} would continue under the
+                scenario and {number(defaultFeeScenario.doesNotContinuePeople)} would not continue. The comparison covers the {number(storyData.meta.knownCompensationPeople)} entrants
                 whose occupations can be matched to a compensation benchmark. This is a counterfactual
                 rule, not a forecast.
             </p>
@@ -37,9 +52,17 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
                 </div>
             </section>
 
+            <section class="story-step" data-scene="orientation">
+                <div class="step-card">
+                    <p class="step-number">02 / How OPT works</p>
+                    <h2>OPT lets many international graduates work in the field they studied.</h2>
+                    <p>An F-1 student can apply for up to 12 months of post-completion OPT. Some STEM graduates can later apply for a 24-month extension. This story examines the moment a graduate first enters post-completion OPT.</p>
+                </div>
+            </section>
+
             <section class="story-step" data-scene="opt">
                 <div class="step-card">
-                    <p class="step-number">02 / Initial OPT</p>
+                    <p class="step-number">03 / Initial OPT</p>
                     <h2>OPT brings part of that graduating class into the American workforce.</h2>
                     <p>SEVIS records show <strong>115,861 people</strong> starting initial post-completion OPT in FY2022. The blue block is the talent pool we follow from here.</p>
                     <p class="character-copy"><b>A</b> Asha completed an MS in computer science.</p>
@@ -49,7 +72,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="composition">
                 <div class="step-card">
-                    <p class="step-number">03 / Degrees and fields</p>
+                    <p class="step-number">04 / Degrees and fields</p>
                     <h2>More than half enter with a master's degree.</h2>
                     <p>Master's graduates account for <strong>60,577</strong> entrants, followed by <strong>37,310</strong> bachelor's and <strong>17,974</strong> doctorates. Computer science, business, and engineering together make up <strong>56.6%</strong>.</p>
                 </div>
@@ -57,16 +80,16 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="connections">
                 <div class="step-card">
-                    <p class="step-number">04 / What OPT connects</p>
+                    <p class="step-number">05 / What OPT connects</p>
                     <h2>American employers put that training to work.</h2>
-                    <p>Most entrants—<strong>88,661</strong>—head to industry. Another <strong>10,740</strong> go to universities or research institutions.</p>
+                    <p>Most entrants—<strong>{number(industrySetting.people)}</strong>—head to industry. Another <strong>{number(universitySetting.people)}</strong> go to universities or research institutions.</p>
                     <p>Asha heads toward software. Dr. Lin heads toward a university postdoc.</p>
                 </div>
             </section>
 
             <section class="story-step" data-scene="workers">
                 <div class="step-card">
-                    <p class="step-number">05 / American workers</p>
+                    <p class="step-number">06 / American workers</p>
                     <h2>Does OPT displace American talent?</h2>
                     <p>The strongest objection to OPT is that when an international graduate gets a job, an American applicant may not. The story, however, is not so clear.</p>
                 </div>
@@ -74,7 +97,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="evidence">
                 <div class="step-card">
-                    <p class="step-number">06 / What research finds</p>
+                    <p class="step-number">07 / What research finds</p>
                     <h2>Studies find effects in both directions.</h2>
                     <p>A <a href="https://www.census.gov/library/working-papers/2016/adrm/ces-wp-16-56.html">Census Bureau study</a> of immigration broadly found small declines in native workers' earnings and employment. A <a href="https://aisel.aisnet.org/misq/vol48/iss2/15/">2024 study of STEM OPT</a> found that its expansion increased domestic STEM employment, especially in information technology. A <a href="https://www.aeaweb.org/articles?id=10.1257%2Fpandp.20261100">2026 study</a> found that domestic STEM degree completion rose after OPT expanded.</p>
                     <p>Individual workers may face greater competition for a particular job while domestic STEM employment and training grow across the economy.</p>
@@ -83,7 +106,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="value">
                 <div class="step-card">
-                    <p class="step-number">07 / Employment value</p>
+                    <p class="step-number">08 / Employment value</p>
                     <h2>Asha and Dr. Lin bring different skills to different labor markets.</h2>
                     <p>Asha's software role carries <strong>$127,260 in median wages</strong> and <strong>$184,435 in estimated compensation</strong>.</p>
                     <p>Dr. Lin's postdoc has a <strong>$55,000 median salary benchmark</strong>. Including estimated employer-paid benefits, that is about <strong>$79,710 in annual compensation</strong>.</p>
@@ -92,7 +115,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="gate">
                 <div class="step-card step-card--turn">
-                    <p class="step-number">08 / The gate</p>
+                    <p class="step-number">09 / The gate</p>
                     <h2>A <span data-copy-fee>$100,000</span> fee closes part of the bridge.</h2>
                     <p>Every entrant faces the same price, including Asha and Dr. Lin.</p>
                     <p>If all 115,861 entrants crossed once, the fees would total <strong data-copy-gross-exposure>$11.586 billion</strong>.</p>
@@ -101,7 +124,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="student">
                 <div class="step-card">
-                    <p class="step-number">09 / If the student pays</p>
+                    <p class="step-number">10 / If the student pays</p>
                     <h2>The fee arrives after years of educational expenses.</h2>
                     <p>Among master's entrants, median reported tuition is <strong>$32,374</strong> and median annual educational funding is <strong>$57,309</strong>. The fee is <span data-copy-fee>$100,000</span>.</p>
                 </div>
@@ -109,7 +132,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="threshold">
                 <div class="step-card step-card--turn">
-                    <p class="step-number">10 / Employer decision</p>
+                    <p class="step-number">11 / Employer decision</p>
                     <h2>Set the price of entry.</h2>
                     <p>Choose an OPT fee. For each job we can identify, the model assumes that an employer pays when the occupation's typical annual compensation meets the fee. Jobs without a reliable occupation match stay outside the calculation.</p>
                 </div>
@@ -117,24 +140,24 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="impacts">
                 <div class="step-card">
-                    <p class="step-number">11 / Fields and occupations</p>
+                    <p class="step-number">12 / Fields and occupations</p>
                     <h2>The fee reshapes the talent pool.</h2>
                     <p>Biology and biomedical science show how quickly specialized talent can be lost. A university laboratory may hire a postdoc at a typical salary of <strong>$55,000</strong> because that researcher has expertise needed for a particular project. Salary and estimated benefits bring the position's annual compensation to about <strong>$79,710</strong>.</p>
-                    <p>At <strong data-copy-fee>$100,000</strong>, <span data-copy-lin-outcome>Dr. Lin's postdoc would be priced out</span>. Among biology graduates whose jobs we can identify, <strong data-copy-biology-outcome>67.8% would be priced out</strong>.</p>
+                    <p>At <strong data-copy-fee>$100,000</strong>, <span data-copy-lin-outcome>Dr. Lin's postdoc would be priced out</span>. Among biology graduates whose jobs we can identify, <strong data-copy-biology-outcome>64.7% would be priced out</strong>.</p>
                 </div>
             </section>
 
             <section class="story-step" data-scene="settings">
                 <div class="step-card">
-                    <p class="step-number">12 / Employers</p>
+                    <p class="step-number">13 / Employers</p>
                     <h2>Universities feel the fee differently from industry.</h2>
-                    <p>The same fee sits beside an industry salary, a university postdoc, or a public-sector role. <span data-copy-setting-outcome>At $100,000, the model prices out 79.1% of matched university and research jobs and 18.2% of matched industry jobs.</span></p>
+                    <p>The same fee sits beside an industry salary, a university postdoc, or a public-sector role. <span data-copy-setting-outcome>At $100,000, the model prices out 75.3% of matched university and research jobs and 17.9% of matched industry jobs.</span></p>
                 </div>
             </section>
 
             <section class="story-step" data-scene="organizations">
                 <div class="step-card">
-                    <p class="step-number">13 / Organizations</p>
+                    <p class="step-number">14 / Organizations</p>
                     <h2>The exposure is concentrated in particular schools and employers.</h2>
                     <p>These rankings count initial OPT entrants at schools and clearly identified employers. The next view examines how frequently individual school programs lead to OPT.</p>
                 </div>
@@ -142,7 +165,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="programs">
                 <div class="step-card">
-                    <p class="step-number">14 / School programs</p>
+                    <p class="step-number">15 / School programs</p>
                     <h2>Some programs send nearly every expected completer into OPT.</h2>
                     <p>The chart compares program size with the share of expected completers who begin OPT within 60 days. It includes each school, degree, and program with at least 50 expected completions.</p>
                 </div>
@@ -150,7 +173,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="alternatives">
                 <div class="step-card">
-                    <p class="step-number">15 / Other paths</p>
+                    <p class="step-number">16 / Other paths</p>
                     <h2>Graduates may seek another route.</h2>
                     <p>J-1 sponsorship, an H-1B petition, further study, departure, and overseas work are all possible. The records cannot show which route a person would take.</p>
                 </div>
@@ -158,15 +181,15 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
             <section class="story-step" data-scene="ending">
                 <div class="step-card">
-                    <p class="step-number">16 / The selected fee</p>
+                    <p class="step-number">17 / The selected fee</p>
                     <h2>The fee changes the talent pool America retains.</h2>
-                    <p>At <strong data-copy-fee>$100,000</strong>, <span data-copy-ending-outcome>24,894 would continue and 9,319 would be priced out</span> among the jobs we can identify. <span data-copy-ending-biology>Biology would lose 67.8% of its matched graduates.</span></p>
+                    <p>At <strong data-copy-fee>$100,000</strong>, <span data-copy-ending-outcome>{number(defaultFeeScenario.continuesPeople)} would continue and {number(defaultFeeScenario.doesNotContinuePeople)} would be priced out</span> among the jobs we can identify. <span data-copy-ending-biology>Biology would lose 64.7% of its matched graduates.</span></p>
                 </div>
             </section>
 
             <section class="story-step" data-scene="conclusion">
                 <div class="step-card">
-                    <p class="step-number">17 / The talent America keeps</p>
+                    <p class="step-number">18 / The talent America keeps</p>
                     <h2>America has already invested in this talent.</h2>
                     <p>America's universities turn talent from around the world into American capacity. Their graduates staff laboratories, build companies, develop new technologies, and train the people who follow them.</p>
                     <p>American workers deserve protection from underpayment and direct replacement. International graduates educated here represent years of accumulated training and investment. The country benefits when both groups have opportunities to contribute.</p>
@@ -187,6 +210,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
                         <title id="opt-stage-title">International graduates and initial OPT entrants</title>
                         <desc id="opt-stage-desc" data-stage-description>About 2,360 circles represent 235,949 nonresident degrees.</desc>
                         <g data-ribbon-layer></g>
+                        <g data-orientation-layer></g>
                         <g data-annotation-layer></g>
                         <g data-circle-layer></g>
                         <g class="character character--asha" data-character="asha"><circle r="12"></circle><text dy="0.36em">A</text></g>
@@ -297,8 +321,8 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
                 <section><h3>SEVIS provenance</h3><p>ICE public release #43657 was requested by the Institute for Progress under FOIA and published October 1, 2024. Violet Buxton-Walsh and Jeremy Neufeld documented the release in the <cite>OPT Observatory</cite>, Institute for Progress, October 2025.</p></section>
                 <section><h3>Two annual flows</h3><p>The degree count and the OPT-start count cover aligned years. They are not linked person by person, so their ratio is not a national OPT participation rate.</p></section>
                 <section><h3>Compensation and the fee</h3><p>Conservative title matches connect {number(storyData.meta.knownCompensationPeople)} entrants to O*NET occupations and FY2022 BLS benchmarks. The fee scenario compares each occupation's median estimated compensation with the selected fee. The remaining {number(storyData.meta.unknownCompensationPeople)} entrants stay outside the model.</p></section>
-                <section><h3>Students and postdocs</h3><p>Tuition and funding are annual Form I-20 amounts. They do not measure liquid wealth. The {number(storyData.cohort.postdocsWithinDoctorate)} postdocs are a title-based lower bound. NCSES reports a $55,000 median expected postdoc salary; the $79,710 estimate adds employer-paid benefits and excludes research expenses and overhead.</p></section>
-                <section><h3>School-program rates</h3><p>The program measure follows deduplicated expected-completion records to a first OPT start within 60 days and displays cohorts of at least 50. A 90-day window adds {number(storyData.schoolPrograms.sensitivity.additionalAt90)} records. The measure does not establish confirmed graduation, program quality, or institutional intent.</p></section>
+                <section><h3>Students and postdocs</h3><p>Tuition and funding are annual Form I-20 amounts. They do not measure liquid wealth. A postdoc title appears somewhere in the post-completion OPT history of {number(storyData.cohort.postdocsWithinDoctorate)} entrants; {number(storyData.cohort.initialPostdocPeople)} have a postdoc as their first identifiable post-completion job and receive the postdoc compensation benchmark. NCSES reports a $55,000 median expected postdoc salary; the $79,710 estimate adds employer-paid benefits and excludes research expenses and overhead.</p></section>
+                <section><h3>School-program rates</h3><p>The program measure links each expected-completion record to post-completion OPT under the same program-level STUDENT_KEY. It displays every school, degree, and program cohort with at least 50 records. A 90-day window adds {number(storyData.schoolPrograms.sensitivity.additionalAt90)} records. The measure does not establish confirmed graduation, program quality, or institutional intent.</p></section>
                 <section><h3>Employer settings</h3><p>“Industry” contains named employers left after identifying universities and research institutions, nonprofits and health systems, and government. Some employers in this remainder cannot be classified more specifically.</p></section>
                 <section><h3>Evidence on American workers</h3><p>The <a href="https://www.census.gov/library/working-papers/2016/adrm/ces-wp-16-56.html">Census study</a> covers immigration broadly. The <a href="https://aisel.aisnet.org/misq/vol48/iss2/15/">MIS Quarterly study</a> examines domestic STEM employment after a STEM OPT extension. The <a href="https://www.aeaweb.org/articles?id=10.1257%2Fpandp.20261100">AEA study</a> examines STEM degree completion after OPT expansions. None observes the other applicants for jobs in the SEVIS records.</p></section>
                 <section><h3>What remains unobserved</h3><p>The data do not reveal actual OPT pay, employer decisions, student wealth, visa approvals, later immigration status, departure, overstay, or downstream economic effects. The reported fee proposal has no public implementing rule, so its payer, exemptions, and timing remain unspecified.</p></section>
@@ -331,14 +355,14 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
     type DegreeKey = "bachelors" | "masters" | "doctorate";
     type WorkSettingKey = "other-named-employer" | "university-research" | "nonprofit-health" | "government" | "employer-not-reported";
-    type SceneKey = "graduates" | "opt" | "composition" | "connections" | "workers" | "evidence" | "value" | "gate" | "student" | "threshold" | "impacts" | "settings" | "organizations" | "programs" | "alternatives" | "ending" | "conclusion";
+    type SceneKey = "graduates" | "orientation" | "opt" | "composition" | "connections" | "workers" | "evidence" | "value" | "gate" | "student" | "threshold" | "impacts" | "settings" | "organizations" | "programs" | "alternatives" | "ending" | "conclusion";
     interface OptMark { id: number; degree: DegreeKey; field: string; workSetting: WorkSettingKey; isExplicitPostdoc: boolean; occupationFamily: string; benchmarkCompensationUsd: number | null; }
     interface Stratum extends OptMark { people: number; marks: number; }
     interface FeeScenario { feeUsd: number; continuesPeople: number; doesNotContinuePeople: number; unknownPeople: number; feePaymentsUsd: number; representedCompensationUsd: number; }
     interface ProgramPoint { school: string; degree: string; cip: string; major: string; expectedCompleters: number; optWithin60: number; share60Pct: number; }
     interface StoryData {
         schemaVersion: number;
-        meta: { defaultFeeUsd: number; feeMinUsd: number; feeMaxUsd: number; feeStepUsd: number; totalEntrants: number; optMarkCount: number; };
+        meta: { defaultFeeUsd: number; feeMinUsd: number; feeMaxUsd: number; feeStepUsd: number; totalEntrants: number; optMarkCount: number; knownCompensationPeople: number; };
         openingPopulation: { people: number; markCount: number; optMarkCount: number; };
         cohort: { marks: OptMark[]; flows: Array<{ degree: DegreeKey; workSetting: WorkSettingKey; people: number }>; degreeGroups: Array<{ key: DegreeKey; label: string; people: number }>; fieldGroups: Array<{ key: string; label: string; people: number }>; workSettings: Array<{ key: WorkSettingKey; label: string; people: number }> };
         compensation: { strata: Stratum[]; feeScenarios: FeeScenario[]; comparisons: { asha: { totalCompensationUsd: number }; lin: { totalCompensationUsd: number } } };
@@ -353,6 +377,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
     const circleLayer = d3.select<SVGGElement, unknown>(root.querySelector<SVGGElement>("[data-circle-layer]")!);
     const ribbonLayer = d3.select<SVGGElement, unknown>(root.querySelector<SVGGElement>("[data-ribbon-layer]")!);
+    const orientationLayer = d3.select<SVGGElement, unknown>(root.querySelector<SVGGElement>("[data-orientation-layer]")!);
     const annotationLayer = d3.select<SVGGElement, unknown>(root.querySelector<SVGGElement>("[data-annotation-layer]")!);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const formatNumber = new Intl.NumberFormat("en-US");
@@ -450,6 +475,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
 
     const sceneText: Record<SceneKey, { eyebrow: string; title: string; description: string }> = {
         graduates: { eyebrow: "Nonresident degrees · 2021–22", title: "235,949 degrees", description: "About 2,360 circles represent nonresident bachelor's, master's, and doctoral degrees." },
+        orientation: { eyebrow: "From a U.S. degree to U.S. work", title: "How OPT works", description: "Post-completion OPT gives eligible F-1 students temporary permission to work in jobs related to their degree; this story models a proposed fee at initial OPT entry." },
         opt: { eyebrow: "Initial post-completion OPT · FY2022", title: "115,861 entrants", description: "One contiguous highlighted block represents the FY2022 initial OPT flow." },
         composition: { eyebrow: "Degree lanes · field color", title: "Who enters OPT", description: "The same cohort is arranged by degree and colored by broad field." },
         connections: { eyebrow: "Degree → initial OPT → work setting", title: "What OPT connects", description: "Particles follow faint proportional ribbons toward employer-name-inferred settings." },
@@ -458,7 +484,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
         value: { eyebrow: "Before the fee", title: "Two compensation tracks", description: "Software compensation and estimated postdoc compensation are shown on the same scale." },
         gate: { eyebrow: "A variable charge", title: "The fee at the crossing", description: "The entire cohort stops at the selected fee before the employer scenario is applied." },
         student: { eyebrow: "If the student pays", title: "The fee versus prior costs", description: "The selected fee is compared with reported master's tuition and educational funding." },
-        threshold: { eyebrow: "Employer decision", title: "Set the OPT fee", description: "The scenario covers 34,213 entrants whose jobs can be matched to compensation benchmarks." },
+        threshold: { eyebrow: "Employer decision", title: "Set the OPT fee", description: `The scenario covers ${formatNumber.format(data.meta.knownCompensationPeople)} entrants whose jobs can be matched to compensation benchmarks.` },
         impacts: { eyebrow: "Who would continue", title: "Fields and occupations", description: "Among matched jobs, different fee levels change the mix of fields and occupations that would continue." },
         settings: { eyebrow: "Who would continue", title: "Employer settings", description: "Among matched jobs, the same fee has different consequences across workplace settings." },
         organizations: { eyebrow: "Observed FY2022 counts", title: "Schools and employers", description: "Static rankings show raw exposure counts only." },
@@ -469,6 +495,58 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
     };
 
     const addText = (x: number, y: number, text: string, className = "annotation", anchor: "start" | "middle" | "end" = "start") => annotationLayer.append("text").attr("x", x).attr("y", y).attr("class", className).attr("text-anchor", anchor).text(text);
+    const drawOrientation = () => {
+        const mobile = window.innerWidth <= 700;
+        orientationLayer.attr("class", mobile ? "orientation-layer orientation-layer--mobile" : "orientation-layer");
+        const defs = orientationLayer.append("defs");
+        defs.append("marker").attr("id", "opt-orientation-arrow").attr("viewBox", "0 -4 8 8").attr("refX", 8).attr("refY", 0)
+            .attr("markerWidth", 8).attr("markerHeight", 8).attr("orient", "auto").append("path").attr("d", "M0,-4L8,0L0,4Z").attr("class", "orientation-arrow");
+        defs.append("marker").attr("id", "opt-orientation-arrow-secondary").attr("viewBox", "0 -4 8 8").attr("refX", 8).attr("refY", 0)
+            .attr("markerWidth", 8).attr("markerHeight", 8).attr("orient", "auto").append("path").attr("d", "M0,-4L8,0L0,4Z").attr("class", "orientation-arrow orientation-arrow--secondary");
+        const link = (d: string, secondary = false) => orientationLayer.append("path").attr("d", d)
+            .attr("class", secondary ? "orientation-link orientation-link--secondary" : "orientation-link")
+            .attr("marker-end", secondary ? "url(#opt-orientation-arrow-secondary)" : "url(#opt-orientation-arrow)");
+        const box = (x: number, y: number, width: number, height: number, titleLines: string[], detailLines: string[], modifier = "") => {
+            const group = orientationLayer.append("g").attr("transform", `translate(${x},${y})`).attr("class", `orientation-station ${modifier}`.trim());
+            group.append("rect").attr("x", -width / 2).attr("y", -height / 2).attr("width", width).attr("height", height).attr("rx", mobile ? 22 : 16).attr("class", "orientation-box");
+            const titleLineHeight = mobile ? 29 : 18;
+            const detailLineHeight = mobile ? 24 : 15;
+            const detailGap = mobile ? 8 : 7;
+            const contentHeight = titleLines.length * titleLineHeight + (detailLines.length ? detailGap + detailLines.length * detailLineHeight : 0);
+            const titleStart = mobile
+                ? -contentHeight / 2 + titleLineHeight * 0.78
+                : detailLines.length ? -17 - (titleLines.length - 1) * 9 : -(titleLines.length - 1) * 9;
+            const title = group.append("text").attr("x", 0).attr("y", titleStart).attr("text-anchor", "middle").attr("class", "orientation-title");
+            titleLines.forEach((line, index) => title.append("tspan").attr("x", 0).attr("dy", index ? titleLineHeight : 0).text(line));
+            const detailStart = titleStart + titleLines.length * titleLineHeight + detailGap;
+            const detail = group.append("text").attr("x", 0).attr("y", detailStart).attr("text-anchor", "middle").attr("class", "orientation-detail");
+            detailLines.forEach((line, index) => detail.append("tspan").attr("x", 0).attr("dy", index ? detailLineHeight : 0).text(line));
+        };
+
+        if (mobile) {
+            link("M500,110 L500,130");
+            link("M500,220 L500,260");
+            link("M500,380 L500,405");
+            link("M500,505 L500,555", true);
+            box(500, 65, 620, 90, ["F-1 student"], ["studying at a U.S. school"]);
+            box(500, 175, 620, 90, ["U.S. degree"], ["program completed"]);
+            box(500, 320, 620, 120, ["Initial post-completion OPT"], ["temporary work authorization", "up to 12 months"], "orientation-station--opt");
+            box(500, 455, 620, 100, ["Job or research appointment"], ["work related to the degree"]);
+            box(500, 615, 620, 120, ["STEM extension"], ["some graduates", "up to 24 additional months"], "orientation-station--secondary");
+            orientationLayer.append("circle").attr("cx", 500).attr("cy", 120).attr("r", 12).attr("class", "orientation-dot");
+        } else {
+            link("M205,310 L255,310");
+            link("M435,310 L545,310");
+            link("M725,310 L795,310");
+            link("M885,365 L885,460", true);
+            box(115, 310, 180, 110, ["F-1 student"], ["studying at a", "U.S. school"]);
+            box(345, 310, 180, 110, ["U.S. degree"], ["program completed"]);
+            box(635, 310, 180, 110, ["Initial post-completion", "OPT"], ["temporary work authorization", "up to 12 months"], "orientation-station--opt");
+            box(885, 310, 180, 110, ["Job or research", "appointment"], ["work related to the degree"]);
+            box(885, 515, 220, 100, ["STEM extension"], ["some graduates", "up to 24 additional months"], "orientation-station--secondary");
+            orientationLayer.append("circle").attr("cx", 480).attr("cy", 310).attr("r", 8).attr("class", "orientation-dot");
+        }
+    };
     const drawGate = () => {
         annotationLayer.append("line").attr("x1", 500).attr("x2", 500).attr("y1", 95).attr("y2", 505).attr("class", "fee-gate");
         addText(500, 74, `${formatMoney.format(state.feeUsd)} FEE`, "gate-label", "middle");
@@ -663,6 +741,9 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
         root.querySelector<HTMLElement>("[data-student-fee]")!.textContent = selectedFee;
         root.querySelector<HTMLElement>("[data-student-fee-bar]")!.style.width = `${100 * state.feeUsd / data.meta.feeMaxUsd}%`;
 
+        orientationLayer.selectAll("*").remove();
+        if (scene === "orientation") drawOrientation();
+
         const targets = openingMarks.map((mark) => markTarget(mark, scene));
         circles.interrupt("story").attr("fill", (_, index) => targets[index].fill);
         if (animate && !reducedMotion.matches) {
@@ -718,7 +799,7 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
         --ribbon:color-mix(in srgb,var(--text) 34%,transparent);
         max-width:1600px; margin:0 auto; padding:0 clamp(.75rem,2vw,2rem) 5rem;
     }
-    :global(html[data-theme="dark"]) .opt-story { --mark-blocked:#64635f; --mark-unknown:#4d4c48; --ribbon:rgba(255,255,255,.34); --degree-bachelors:#f4f0e7; --degree-doctorate:#e06a72; }
+    :global(html[data-theme="dark"]) .opt-story { --mark-blocked:#64635f; --mark-unknown:#4d4c48; --ribbon:rgba(255,255,255,.34); --degree-bachelors:#f4f0e7; --degree-doctorate:#e06a72; --fee:#e06a72; }
     .story-grid { display:grid; grid-template-columns:minmax(290px,370px) minmax(0,1fr); gap:clamp(1.5rem,4vw,5rem); align-items:start; }
     .story-copy { position:relative; z-index:2; }
     .story-step { min-height:92vh; display:flex; align-items:center; }
@@ -744,6 +825,19 @@ const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map(
     :global(.lane-count),:global(.flow-count),:global(.bar-count) { font-family:var(--font-sans); font-size:11px; fill:var(--text-muted); }
     :global(.flow-label) { font-size:13px; } :global(.gate-node) { font-size:12px; fill:var(--fee); letter-spacing:.08em; }
     :global(.fee-gate) { stroke:var(--fee); stroke-width:3; } :global(.gate-label) { font-family:var(--font-sans); font-weight:800; font-size:17px; fill:var(--fee); }
+    :global(.orientation-link) { fill:none; stroke:var(--text-muted); stroke-width:2; opacity:.58; }
+    :global(.orientation-link--secondary) { stroke-dasharray:6 6; opacity:.46; }
+    :global(.orientation-arrow) { fill:var(--text-muted); opacity:.7; }
+    :global(.orientation-arrow--secondary) { opacity:.55; }
+    :global(.orientation-box) { fill:color-mix(in srgb,var(--surface) 92%,var(--text) 8%); stroke:var(--border-strong); stroke-width:1.5; }
+    :global(.orientation-station--opt .orientation-box) { stroke:var(--fee); stroke-width:2.2; }
+    :global(.orientation-station--secondary .orientation-box) { fill:var(--surface); stroke-dasharray:6 5; }
+    :global(.orientation-title),:global(.orientation-detail) { font-family:var(--font-sans); }
+    :global(.orientation-title) { fill:var(--text); font-size:13px; font-weight:750; }
+    :global(.orientation-detail) { fill:var(--text-muted); font-size:10.5px; }
+    :global(.orientation-dot) { fill:var(--mark-neutral); stroke:var(--surface); stroke-width:3; }
+    :global(.orientation-layer--mobile .orientation-title) { font-size:26px; }
+    :global(.orientation-layer--mobile .orientation-detail) { font-size:21px; }
     :global(.bar-label) { font-family:var(--font-sans); font-size:11px; fill:var(--text); }
     :global(.stack--continue) { fill:#0072b2; } :global(.stack--stop) { fill:#aaa69c; }
     :global(.legend-label) { font-family:var(--font-sans); font-size:11px; fill:var(--text-muted); }
