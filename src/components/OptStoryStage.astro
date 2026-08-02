@@ -1,0 +1,197 @@
+---
+import type { OptStoryData } from "../types/opt-story";
+
+interface Props {
+    storyData: OptStoryData;
+}
+
+const { storyData } = Astro.props;
+const number = (value: number) => new Intl.NumberFormat("en-US").format(value);
+const money = (value: number) => new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+}).format(value);
+const compactMoney = (value: number) => new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    notation: "compact",
+    maximumFractionDigits: 1,
+}).format(value);
+const defaultFee = storyData.compensation.feeScenarios.find(
+    (row) => row.feeUsd === storyData.meta.defaultFeeUsd,
+)!;
+const comparisonScaleMax = 200_000;
+const studentScaleMax = storyData.meta.feeMaxUsd;
+const maxSchool = Math.max(...storyData.organizations.schoolsByEntrants.map((row) => row.people));
+const maxEmployer = Math.max(...storyData.organizations.employersByEntrants.map((row) => row.people));
+const minProgramShare = Math.min(
+    ...storyData.schoolPrograms.scatter.map((row) => row.share60Pct),
+    100,
+);
+const percentWidth = (value: number, maximum: number) => `${100 * value / maximum}%`;
+---
+
+<div class="story-stage-wrap">
+    <div class="story-stage surface-card" data-story-stage>
+        <header class="stage-header">
+            <p data-stage-eyebrow>International graduates</p>
+            <h3 data-stage-title>{number(storyData.openingPopulation.people)} degrees</h3>
+        </header>
+
+        <div class="stage-visual">
+            <svg viewBox="0 0 1000 680" role="img" aria-labelledby="opt-stage-title opt-stage-desc" data-stage-svg>
+                <title id="opt-stage-title">International graduates and initial OPT entrants</title>
+                <desc id="opt-stage-desc" data-stage-description>
+                    About {number(storyData.openingPopulation.markCount)} circles represent {number(storyData.openingPopulation.people)} nonresident degrees.
+                </desc>
+                <g data-ribbon-layer></g>
+                <g data-orientation-layer></g>
+                <g data-annotation-layer></g>
+                <g data-circle-layer></g>
+                <g class="character character--asha" data-character="asha"><circle r="12"></circle><text dy="0.36em">A</text></g>
+                <g class="character character--lin" data-character="lin"><circle r="12"></circle><text dy="0.36em">L</text></g>
+            </svg>
+
+            <div class="stage-panel comparison-panel" data-panel="value" hidden>
+                <div class="comparison-row comparison-row--asha">
+                    <h4><span aria-hidden="true">A</span>Asha · software</h4>
+                    <div class="bullet">
+                        <div class="bar-heading"><span>Median wage</span><b>{money(storyData.compensation.comparisons.asha.wageUsd)}</b></div>
+                        <span class="bar-track" aria-hidden="true"><span class="bar-fill" style={`width:${percentWidth(storyData.compensation.comparisons.asha.wageUsd, comparisonScaleMax)}`}></span></span>
+                    </div>
+                    <div class="bullet">
+                        <div class="bar-heading"><span>Estimated compensation</span><b>{money(storyData.compensation.comparisons.asha.totalCompensationUsd)}</b></div>
+                        <span class="bar-track" aria-hidden="true"><span class="bar-fill" style={`width:${percentWidth(storyData.compensation.comparisons.asha.totalCompensationUsd, comparisonScaleMax)}`}></span></span>
+                    </div>
+                </div>
+                <div class="comparison-row comparison-row--lin">
+                    <h4><span aria-hidden="true">L</span>Dr. Lin · university postdoc</h4>
+                    <div class="bullet">
+                        <div class="bar-heading"><span>Median postdoc salary</span><b>{money(storyData.compensation.comparisons.lin.salaryUsd)}</b></div>
+                        <span class="bar-track" aria-hidden="true"><span class="bar-fill" style={`width:${percentWidth(storyData.compensation.comparisons.lin.salaryUsd, comparisonScaleMax)}`}></span></span>
+                    </div>
+                    <div class="bullet">
+                        <div class="bar-heading"><span>Estimated annual compensation</span><b>{money(storyData.compensation.comparisons.lin.totalCompensationUsd)}</b></div>
+                        <span class="bar-track" aria-hidden="true"><span class="bar-fill" style={`width:${percentWidth(storyData.compensation.comparisons.lin.totalCompensationUsd, comparisonScaleMax)}`}></span></span>
+                    </div>
+                </div>
+                <div class="axis" aria-hidden="true"><span>$0</span><span>$100k</span><span>$200k</span></div>
+            </div>
+
+            <div class="stage-panel student-panel" data-panel="student" hidden>
+                <p>Median master's amounts · common $0–$300k scale</p>
+                <div class="student-bar">
+                    <div class="bar-heading"><span>Reported tuition</span><b>{money(storyData.studentPaid.tuitionUsd)}</b></div>
+                    <span class="bar-track" aria-hidden="true"><span class="bar-fill" style={`width:${percentWidth(storyData.studentPaid.tuitionUsd, studentScaleMax)}`}></span></span>
+                </div>
+                <div class="student-bar">
+                    <div class="bar-heading"><span>Form I-20 financial resources</span><b>{money(storyData.studentPaid.reportedFundingUsd)}</b></div>
+                    <span class="bar-track" aria-hidden="true"><span class="bar-fill" style={`width:${percentWidth(storyData.studentPaid.reportedFundingUsd, studentScaleMax)}`}></span></span>
+                </div>
+                <div class="student-bar student-bar--fee">
+                    <div class="bar-heading"><span>Fee</span><b data-student-fee>{money(storyData.meta.defaultFeeUsd)}</b></div>
+                    <span class="bar-track" aria-hidden="true"><span class="bar-fill" data-student-fee-bar style={`width:${percentWidth(storyData.meta.defaultFeeUsd, studentScaleMax)}`}></span></span>
+                </div>
+            </div>
+
+            <div class="stage-panel organizations-panel" data-panel="organizations" hidden>
+                <section class="ranking-column" aria-labelledby="school-ranking-title">
+                    <p id="school-ranking-title">Schools · raw initial OPT count</p>
+                    <ol class="ranking-list">
+                        {storyData.organizations.schoolsByEntrants.slice(0, 7).map((row) => (
+                            <li class="ranking-row" style={`--bar:${100 * row.people / maxSchool}%`}>
+                                <span>{row.name}</span><span class="ranking-track" aria-hidden="true"><span></span></span><strong>{number(row.people)}</strong>
+                            </li>
+                        ))}
+                    </ol>
+                </section>
+                <section class="ranking-column" aria-labelledby="employer-ranking-title">
+                    <p id="employer-ranking-title">Canonical employers · raw count</p>
+                    <ol class="ranking-list">
+                        {storyData.organizations.employersByEntrants.slice(0, 7).map((row) => (
+                            <li class="ranking-row ranking-row--employer" style={`--bar:${100 * row.people / maxEmployer}%`}>
+                                <span>{row.name}</span><span class="ranking-track" aria-hidden="true"><span></span></span><strong>{number(row.people)}</strong>
+                            </li>
+                        ))}
+                    </ol>
+                </section>
+            </div>
+
+            <div class="stage-panel programs-panel" data-panel="programs" hidden>
+                <div class="program-scatter">
+                    <p>Expected-completion records vs. OPT within 60 days</p>
+                    <svg
+                        viewBox="0 0 520 350"
+                        role="img"
+                        tabindex="0"
+                        aria-labelledby="program-scatter-title program-scatter-desc"
+                        data-program-scatter
+                    >
+                        <title id="program-scatter-title">School-program OPT rate versus size</title>
+                        <desc id="program-scatter-desc">
+                            Program shares range from {minProgramShare.toFixed(1)} to 100 percent. Each plotted program is listed in the accessible school-program table in the methods section.
+                        </desc>
+                    </svg>
+                    <div class="scatter-tooltip" data-program-tooltip hidden role="status" aria-live="polite"></div>
+                    <ul class="dot-legend program-degree-legend" aria-label="Degree legend">
+                        <li><span class="legend-dot" style="--legend-color:var(--degree-bachelors)" aria-hidden="true"></span>Bachelor's</li>
+                        <li><span class="legend-dot" style="--legend-color:var(--degree-masters)" aria-hidden="true"></span>Master's</li>
+                        <li><span class="legend-dot" style="--legend-color:var(--degree-doctorate)" aria-hidden="true"></span>Doctorate</li>
+                    </ul>
+                </div>
+                <section class="program-ranking" aria-labelledby="program-ranking-title">
+                    <p id="program-ranking-title">Highest shares · minimum 50 records</p>
+                    <ol class="program-list">
+                        {storyData.schoolPrograms.ranked.slice(0, 7).map((row) => (
+                            <li class="program-row">
+                                <span>{row.school}<small>{row.degree} · {row.major}</small></span>
+                                <strong>{row.share60Pct.toFixed(1)}%<small>{number(row.optWithin60)} / {number(row.expectedCompleters)}</small></strong>
+                            </li>
+                        ))}
+                    </ol>
+                </section>
+            </div>
+
+            <div class="stage-panel alternatives-panel" data-panel="alternatives" hidden>
+                <ul class="pathway-list">
+                    {[
+                        ["J-1", "Research sponsorship"],
+                        ["H-1B", "Employer petition"],
+                        ["Study", "Another program"],
+                        ["Depart", "Leave the United States"],
+                        ["Overseas", "Work in another country"],
+                    ].map(([title, label]) => (
+                        <li class="pathway"><b>{title}</b><span>{label}</span><span class="pathway-question" aria-hidden="true">?</span></li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+
+        <ul class="field-legend" data-field-legend hidden aria-label="Major field legend">
+            {storyData.cohort.fieldGroups.map((field) => (
+                <li><span class="legend-dot" style={`--legend-color:var(--field-${field.key})`} aria-hidden="true"></span>{field.label}</li>
+            ))}
+        </ul>
+
+        <ul class="dot-legend cohort-legend" data-cohort-legend hidden aria-label="Cohort legend">
+            <li><span class="legend-dot" style="--legend-color:var(--opt-highlight)" aria-hidden="true"></span>Initial OPT entrants</li>
+            <li><span class="legend-dot" style="--legend-color:var(--mark-neutral)" aria-hidden="true"></span>Other nonresident degree awards</li>
+        </ul>
+
+        <dl class="threshold-metrics" data-threshold-metrics hidden aria-live="polite">
+            <div><dt>Would continue</dt><dd data-continues>{number(defaultFee.continuesPeople)}</dd></div>
+            <div><dt>Would not continue</dt><dd data-does-not-continue>{number(defaultFee.doesNotContinuePeople)}</dd></div>
+            <div><dt>Fee payments</dt><dd data-payments>{compactMoney(defaultFee.feePaymentsUsd)}</dd></div>
+            <div><dt>Represented compensation</dt><dd data-compensation>{compactMoney(defaultFee.representedCompensationUsd)}</dd></div>
+        </dl>
+
+        <form class="threshold-controls" data-fee-controls hidden>
+            <label for="opt-fee">
+                <span>OPT fee <output for="opt-fee" data-fee-output>{money(storyData.meta.defaultFeeUsd)}</output></span>
+                <input id="opt-fee" data-fee-input type="range" min={storyData.meta.feeMinUsd} max={storyData.meta.feeMaxUsd} step={storyData.meta.feeStepUsd} value={storyData.meta.defaultFeeUsd} />
+                <small><span>{money(storyData.meta.feeMinUsd)}</span><span>{money(storyData.meta.feeMaxUsd)}</span></small>
+            </label>
+        </form>
+    </div>
+</div>

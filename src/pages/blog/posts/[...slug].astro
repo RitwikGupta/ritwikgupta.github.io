@@ -18,15 +18,16 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const rendered = post.data.template === "standard" ? await render(post) : null;
+const Content = rendered?.Content;
 ---
 
 {
     post.data.template === "opt-story" ? (
         <OptStoryLayout frontmatter={post.data} />
-    ) : (
+    ) : Content ? (
         <BlogLayout frontmatter={post.data}>
             <Content />
         </BlogLayout>
-    )
+    ) : null
 }

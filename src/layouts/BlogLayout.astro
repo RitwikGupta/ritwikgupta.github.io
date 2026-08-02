@@ -4,7 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import { formatUtcDate } from "../utils/date";
 import ProgressiveImage from "../components/ProgressiveImage.astro";
 import { contentImageFromMetadata } from "../utils/content-images";
-import NoticeBanner from "../components/NoticeBanner.astro";
+import DraftNotice from "../components/DraftNotice.astro";
 
 interface Props {
     frontmatter: CollectionEntry<"blog">["data"];
@@ -20,12 +20,10 @@ const heroImage = contentImageFromMetadata(frontmatter.og_image);
     desc={frontmatter.description}
     ogImage={frontmatter.og_image.src}
     noindex={frontmatter.draft}
+    ogType="article"
+    publishedTime={frontmatter.pubDate}
 >
-    {frontmatter.draft && (
-        <NoticeBanner slot="banner" label="Draft" ariaLabel="Draft article notice">
-            This article is a work in progress and may change.
-        </NoticeBanner>
-    )}
+    <DraftNotice slot="banner" draft={frontmatter.draft} />
     <main class="site-shell">
         <article class="mx-auto max-w-[70ch]">
             <a href="/blog" class="back-link">&larr; See all posts</a>

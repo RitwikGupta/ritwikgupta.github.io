@@ -1,0 +1,15 @@
+---
+import NoticeBanner from "./NoticeBanner.astro";
+
+interface Props {
+    draft: boolean;
+}
+
+const { draft } = Astro.props;
+---
+
+{draft && (
+    <NoticeBanner label="Draft" ariaLabel="Draft article notice">
+        This article is a work in progress and may change.
+    </NoticeBanner>
+)}

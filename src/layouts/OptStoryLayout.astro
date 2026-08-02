@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import Layout from "./Layout.astro";
 import OptStory from "../components/OptStory.astro";
 import { formatUtcDate } from "../utils/date";
-import NoticeBanner from "../components/NoticeBanner.astro";
+import DraftNotice from "../components/DraftNotice.astro";
 
 interface Props {
     frontmatter: CollectionEntry<"blog">["data"];
@@ -18,29 +18,29 @@ const published = formatUtcDate(frontmatter.pubDate);
     desc={frontmatter.description}
     ogImage={frontmatter.og_image.src}
     noindex={frontmatter.draft}
+    ogType="article"
+    publishedTime={frontmatter.pubDate}
 >
-    {frontmatter.draft && (
-        <NoticeBanner slot="banner" label="Draft" ariaLabel="Draft article notice">
-            This article is a work in progress and may change.
-        </NoticeBanner>
-    )}
+    <DraftNotice slot="banner" draft={frontmatter.draft} />
     <main class="opt-story-page">
-        <header class="opt-story-hero">
-            <a href="/blog" class="back-link">&larr; See all posts</a>
-            <h1>{frontmatter.title}</h1>
-            <p class="opt-story-deck">
-                American universities have already welcomed and trained these graduates.
-                Optional Practical Training (OPT) gives eligible F-1 students temporary
-                permission to work in jobs related to their degree.
-                What happens if <a href="https://www.wsj.com/politics/policy/u-s-weighs-100-000-fee-for-foreign-students-wanting-to-work-after-graduation-d0bf43d9">that bridge costs $100,000 to cross?</a>
-            </p>
-            <time class="opt-story-meta" datetime={frontmatter.pubDate.toISOString()}>Published {published}</time>
-            <p class="opt-story-premise">
-                The Wall Street Journal reports that the administration is considering the fee.
-                This story models one charge when a graduate begins initial post-completion OPT.
-            </p>
-        </header>
-        <OptStory />
+        <article>
+            <header class="opt-story-hero">
+                <a href="/blog" class="back-link">&larr; See all posts</a>
+                <h1>{frontmatter.title}</h1>
+                <p class="opt-story-deck">
+                    American universities have already welcomed and trained these graduates.
+                    Optional Practical Training (OPT) gives eligible F-1 students temporary
+                    permission to work in jobs related to their degree.
+                    What happens if <a href="https://www.wsj.com/politics/policy/u-s-weighs-100-000-fee-for-foreign-students-wanting-to-work-after-graduation-d0bf43d9">that bridge costs $100,000 to cross?</a>
+                </p>
+                <time class="opt-story-meta" datetime={frontmatter.pubDate.toISOString()}>Published {published}</time>
+                <p class="opt-story-premise">
+                    The Wall Street Journal reports that the administration is considering the fee.
+                    This story models one charge when a graduate begins initial post-completion OPT.
+                </p>
+            </header>
+            <OptStory />
+        </article>
     </main>
 </Layout>
 

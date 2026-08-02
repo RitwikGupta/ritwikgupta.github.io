@@ -1,0 +1,63 @@
+---
+import type { OptStoryData } from "../types/opt-story";
+
+interface Props {
+    storyData: OptStoryData;
+}
+
+const { storyData } = Astro.props;
+const number = (value: number) => new Intl.NumberFormat("en-US").format(value);
+const money = (value: number) => new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+}).format(value);
+const percent = (value: number) => `${value.toFixed(1)}%`;
+---
+
+<footer class="story-methods">
+    <h2>Methods, sources, and caveats</h2>
+    <p>
+        The story combines IPEDS 2021–22 international degree awards with FY2022 SEVIS initial post-completion OPT starts. The Institute for Progress obtained the SEVIS records from U.S. Immigration and Customs Enforcement through the Freedom of Information Act and published them through the <a href="https://optobservatory.org/">OPT Observatory</a>. The website receives aggregate tables only.
+    </p>
+
+    <details open>
+        <summary>How to read the numbers</summary>
+        <div class="method-grid">
+            <section><h3>SEVIS provenance</h3><p>ICE public release #43657 was requested by the Institute for Progress under FOIA and published October 1, 2024. Violet Buxton-Walsh and Jeremy Neufeld documented the release in the <cite>OPT Observatory</cite>, Institute for Progress, October 2025.</p></section>
+            <section><h3>Two annual flows</h3><p>The degree count and the OPT-start count cover aligned years. They are not linked person by person, so their ratio is not a national OPT participation rate.</p></section>
+            <section><h3>Compensation and the fee</h3><p>Conservative title matches connect {number(storyData.meta.knownCompensationPeople)} entrants to O*NET occupations and FY2022 BLS benchmarks. The fee scenario compares each occupation's median estimated compensation with the selected fee. The remaining {number(storyData.meta.unknownCompensationPeople)} entrants stay outside the model.</p></section>
+            <section><h3>Students and postdocs</h3><p>Tuition and financial resources are annual Form I-20 amounts. Financial resources combine personal or family funds, school aid, outside support, and expected on-campus earnings. They are not audited wealth or necessarily liquid cash, and they should not be added to tuition. A postdoc title appears somewhere in the post-completion OPT history of {number(storyData.cohort.postdocsWithinDoctorate)} entrants; {number(storyData.cohort.initialPostdocPeople)} have a postdoc as their first identifiable post-completion job and receive the postdoc compensation benchmark. NCSES reports a {money(storyData.compensation.comparisons.lin.salaryUsd)} median expected postdoc salary; the {money(storyData.compensation.comparisons.lin.totalCompensationUsd)} estimate adds employer-paid benefits and excludes research expenses and overhead.</p></section>
+            <section><h3>School-program rates</h3><p>The program measure links each expected-completion record to post-completion OPT under the same program-level STUDENT_KEY. It displays every school, degree, and program cohort with at least 50 records. A 90-day window adds {number(storyData.schoolPrograms.sensitivity.additionalAt90)} records. The measure does not establish confirmed graduation, program quality, or institutional intent.</p></section>
+            <section><h3>Employer settings</h3><p>“Industry” contains named employers left after identifying universities and research institutions, nonprofits and health systems, and government. Some employers in this remainder cannot be classified more specifically.</p></section>
+            <section><h3>Evidence on American workers</h3><p>The <a href="https://www.census.gov/library/working-papers/2016/adrm/ces-wp-16-56.html">Census study</a> covers immigration broadly. The <a href="https://aisel.aisnet.org/misq/vol48/iss2/15/">MIS Quarterly study</a> examines domestic STEM employment after a STEM OPT extension. The <a href="https://www.aeaweb.org/articles?id=10.1257%2Fpandp.20261100">AEA study</a> examines STEM degree completion after OPT expansions. None observes the other applicants for jobs in the SEVIS records.</p></section>
+            <section><h3>What remains unobserved</h3><p>The data do not reveal actual OPT pay, employer decisions, student wealth, visa approvals, later immigration status, departure, overstay, or downstream economic effects. The reported fee proposal has no public implementing rule, so its payer, exemptions, and timing remain unspecified.</p></section>
+        </div>
+    </details>
+
+    <details>
+        <summary>Accessible fee table</summary>
+        <div class="table-scroll">
+            <table>
+                <thead><tr><th scope="col">OPT fee</th><th scope="col">Would continue</th><th scope="col">Would not continue</th><th scope="col">Unmatched</th><th scope="col">Fee payments</th></tr></thead>
+                <tbody>{storyData.compensation.feeScenarios.map((row) => <tr><th scope="row">{money(row.feeUsd)}</th><td>{number(row.continuesPeople)}</td><td>{number(row.doesNotContinuePeople)}</td><td>{number(row.unknownPeople)}</td><td>{money(row.feePaymentsUsd)}</td></tr>)}</tbody>
+            </table>
+        </div>
+    </details>
+
+    <details>
+        <summary>Accessible school-program table</summary>
+        <p id="school-program-table-note">All programs plotted in the rate-versus-size chart are included below.</p>
+        <div class="table-scroll">
+            <table aria-describedby="school-program-table-note" data-program-table>
+                <thead><tr><th scope="col">School</th><th scope="col">Degree</th><th scope="col">Program</th><th scope="col">Expected records</th><th scope="col">OPT within 60 days</th><th scope="col">Share</th></tr></thead>
+                <tbody>{storyData.schoolPrograms.scatter.map((row) => <tr><th scope="row">{row.school}</th><td>{row.degree}</td><td>{row.major}</td><td>{number(row.expectedCompleters)}</td><td>{number(row.optWithin60)}</td><td>{percent(row.share60Pct)}</td></tr>)}</tbody>
+            </table>
+        </div>
+    </details>
+
+    <details>
+        <summary>Authoritative sources</summary>
+        <ul class="source-list">{storyData.methods.sources.map((source) => <li><a href={source.url}>{source.publisher} — {source.dataset}</a><span>{source.vintage}. {source.limitations}</span></li>)}</ul>
+    </details>
+</footer>
