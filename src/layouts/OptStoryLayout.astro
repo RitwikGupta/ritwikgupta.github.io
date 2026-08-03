@@ -45,6 +45,10 @@ const published = formatUtcDate(frontmatter.pubDate);
 </Layout>
 
 <style>
+    :global(html) {
+        min-width: 0;
+    }
+
     .opt-story-page {
         overflow: clip;
     }

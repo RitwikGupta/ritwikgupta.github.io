@@ -1,0 +1,25 @@
+---
+import type { GroupRow } from "../types/opt-story";
+
+interface Props {
+    fields: GroupRow[];
+    shortLabels: Record<string, string>;
+    collapsible?: boolean;
+    afterChart?: boolean;
+}
+
+const { fields, shortLabels, collapsible = false, afterChart = false } = Astro.props;
+---
+
+{collapsible ? (
+    <details class="mobile-collapsible-key">
+        <summary>Field colors</summary>
+        <ul class="mobile-key mobile-key--fields" aria-label="Broad field legend">
+            {fields.map((field) => <li><span style={`--legend-color:var(--field-${field.key})`}></span>{shortLabels[field.key] ?? field.label}<span class="sr-only"> ({field.label})</span></li>)}
+        </ul>
+    </details>
+) : (
+    <ul class:list={["mobile-key", "mobile-key--fields", { "mobile-key--after-chart": afterChart }]} aria-label="Broad field legend">
+        {fields.map((field) => <li><span style={`--legend-color:var(--field-${field.key})`}></span>{shortLabels[field.key] ?? field.label}<span class="sr-only"> ({field.label})</span></li>)}
+    </ul>
+)}

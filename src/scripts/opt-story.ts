@@ -7,6 +7,7 @@ import type {
     ProgramPoint,
     WorkSettingKey,
 } from "../types/opt-story";
+import { initializeMobileStory, type MobileStoryController } from "./opt-story-mobile";
 
 type SceneKey =
     | "graduates"
@@ -31,13 +32,19 @@ type SceneKey =
 type Classification = "continue" | "stop" | "unknown";
 type SummaryDimension = "fields" | "occupationFamilies" | "workSettings";
 
-const root = document.querySelector<HTMLElement>("[data-opt-story]");
-const dataElement = root?.querySelector<HTMLScriptElement>("#opt-story-data");
+interface DesktopStoryController {
+    activate: () => void;
+    deactivate: () => void;
+    renderFee: (feeUsd: number) => void;
+    renderScene: (scene: SceneKey, animate?: boolean) => void;
+    destroy: () => void;
+}
 
-if (root && dataElement) {
-    const data = JSON.parse(dataElement.textContent || "{}") as OptStoryClientData;
-    if (data.schemaVersion !== 6) throw new Error("Unexpected OPT story schema");
-
+const initializeDesktopStory = (
+    root: HTMLElement,
+    data: OptStoryClientData,
+    initialFeeUsd: number,
+): DesktopStoryController => {
     const marks: OptMark[] = data.marks.map((row) => ({
         id: row[0],
         degree: row[1],
@@ -69,14 +76,7 @@ if (root && dataElement) {
         currency: "USD",
         maximumFractionDigits: 0,
     });
-    const formatCompactMoney = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        notation: "compact",
-        maximumFractionDigits: 1,
-    });
     const stage = root.querySelector<HTMLElement>("[data-story-stage]")!;
-    const feeInput = root.querySelector<HTMLInputElement>("[data-fee-input]")!;
 
     const degreeY: Record<DegreeKey, number> = { bachelors: 155, masters: 350, doctorate: 545 };
     const settingY: Record<WorkSettingKey, number> = {
@@ -194,7 +194,7 @@ if (root && dataElement) {
 
     const state: { scene: SceneKey; feeUsd: number } = {
         scene: "graduates",
-        feeUsd: data.meta.defaultFeeUsd,
+        feeUsd: initialFeeUsd,
     };
     const feeScenario = () => data.feeScenarios.find((row) => row.feeUsd === state.feeUsd)!;
     const classification = (compensation: number | null): Classification => (
@@ -479,6 +479,8 @@ if (root && dataElement) {
         .attr("stroke", "var(--ribbon)")
         .attr("opacity", 0);
 
+    let bindProgramScatter = () => {};
+    let unbindProgramScatter = () => {};
     const scatter = d3.select<SVGSVGElement, unknown>(root.querySelector<SVGSVGElement>("[data-program-scatter]")!);
     if (!scatter.empty()) {
         const tooltip = root.querySelector<HTMLElement>("[data-program-tooltip]")!;
@@ -503,8 +505,7 @@ if (root && dataElement) {
                 .attr("d", "M50,310 l10,-8 M50,302 l10,-8")
                 .attr("class", "scatter-axis-break");
         }
-        const showProgram = (event: PointerEvent, row: ProgramPoint) => {
-            const dot = event.currentTarget as SVGCircleElement;
+        const showProgram = (dot: SVGCircleElement, row: ProgramPoint) => {
             const dotBox = dot.getBoundingClientRect();
             const hostBox = tooltip.parentElement!.getBoundingClientRect();
             tooltip.textContent = `${row.school}\n${row.degree} · ${row.major}\n${formatNumber.format(row.optWithin60)} of ${formatNumber.format(row.expectedCompleters)} entered OPT within 60 days (${row.share60Pct.toFixed(1)}%)`;
@@ -512,7 +513,6 @@ if (root && dataElement) {
             tooltip.style.top = `${Math.max(70, dotBox.top - hostBox.top - 8)}px`;
             tooltip.hidden = false;
         };
-        const hideProgram = () => { tooltip.hidden = true; };
         const dots = scatter
             .selectAll<SVGCircleElement, ProgramPoint>(".program-dot")
             .data(programs)
@@ -521,10 +521,31 @@ if (root && dataElement) {
             .attr("cy", (row) => sy(row.share60Pct))
             .attr("r", 3.1)
             .attr("class", (row) => `program-dot program-dot--${row.degree.toLowerCase().replace(/[^a-z]/g, "")}`)
-            .attr("aria-hidden", "true")
-            .on("pointerenter pointerdown", showProgram)
-            .on("pointerleave", hideProgram);
+            .attr("aria-hidden", "true");
         dots.append("title").text((row) => `${row.school} — ${row.degree}, ${row.major}: ${row.share60Pct.toFixed(1)}% (${formatNumber.format(row.optWithin60)} of ${formatNumber.format(row.expectedCompleters)})`);
+        const eventDot = (event: PointerEvent) => (event.target as Element | null)?.closest<SVGCircleElement>(".program-dot");
+        bindProgramScatter = () => {
+            scatter
+                .on("pointerover.story", (event: PointerEvent) => {
+                    const dot = eventDot(event);
+                    if (dot) showProgram(dot, d3.select<SVGCircleElement, ProgramPoint>(dot).datum());
+                })
+                .on("pointerdown.story", (event: PointerEvent) => {
+                    const dot = eventDot(event);
+                    if (!dot) return;
+                    event.preventDefault();
+                    showProgram(dot, d3.select<SVGCircleElement, ProgramPoint>(dot).datum());
+                })
+                .on("pointerout.story", (event: PointerEvent) => {
+                    const dot = eventDot(event);
+                    const related = event.relatedTarget as Node | null;
+                    if (dot && (!related || !dot.contains(related))) tooltip.hidden = true;
+                })
+                .on("blur.story", () => { tooltip.hidden = true; });
+        };
+        unbindProgramScatter = () => {
+            scatter.on(".story", null);
+        };
         scatter.append("text").attr("x", 275).attr("y", 342).attr("text-anchor", "middle").attr("class", "scatter-label").text("Expected-completion records");
         scatter.append("text").attr("transform", "rotate(-90)").attr("x", -165).attr("y", 14).attr("text-anchor", "middle").attr("class", "scatter-label").text("Share entering OPT within 60 days");
     }
@@ -628,33 +649,6 @@ if (root && dataElement) {
             panel.hidden = panel.dataset.panel !== panelFor(scene);
         });
 
-        const metric = feeScenario();
-        root.querySelector<HTMLOutputElement>("[data-fee-output]")!.value = selectedFee;
-        root.querySelector<HTMLElement>("[data-continues]")!.textContent = formatNumber.format(metric.continuesPeople);
-        root.querySelector<HTMLElement>("[data-does-not-continue]")!.textContent = formatNumber.format(metric.doesNotContinuePeople);
-        root.querySelector<HTMLElement>("[data-payments]")!.textContent = formatCompactMoney.format(metric.feePaymentsUsd);
-        root.querySelector<HTMLElement>("[data-compensation]")!.textContent = formatCompactMoney.format(metric.representedCompensationUsd);
-        root.querySelectorAll<HTMLElement>("[data-copy-fee]").forEach((element) => { element.textContent = selectedFee; });
-        root.querySelector<HTMLElement>("[data-copy-gross-exposure]")!.textContent = `$${(data.meta.totalEntrants * state.feeUsd / 1_000_000_000).toFixed(3).replace(/\.?0+$/, "")} billion`;
-        root.querySelector<HTMLElement>("[data-copy-ending-outcome]")!.textContent = `${formatNumber.format(metric.continuesPeople)} would continue and ${formatNumber.format(metric.doesNotContinuePeople)} would not continue`;
-
-        const biology = outcomeRows("fields").find((row) => row.key === "biological-science")!;
-        const biologyPricedOutPct = 100 * biology.doesNotContinuePeople / biology.matchedPeople;
-        const linContinues = data.comparisons.lin.totalCompensationUsd >= state.feeUsd;
-        root.querySelector<HTMLElement>("[data-copy-lin-outcome]")!.textContent = linContinues
-            ? "Dr. Lin's postdoc would remain in the modeled talent pool"
-            : "Dr. Lin's postdoc would not continue under the model";
-        root.querySelector<HTMLElement>("[data-copy-biology-outcome]")!.textContent = `${biologyPricedOutPct.toFixed(1)}% would not continue`;
-        root.querySelector<HTMLElement>("[data-copy-ending-biology]")!.textContent = `Among biology graduates in that group, ${biologyPricedOutPct.toFixed(1)}% would not continue.`;
-
-        const university = outcomeRows("workSettings").find((row) => row.key === "university-research")!;
-        const industry = outcomeRows("workSettings").find((row) => row.key === "other-named-employer")!;
-        const universityPricedOutPct = 100 * university.doesNotContinuePeople / university.matchedPeople;
-        const industryPricedOutPct = 100 * industry.doesNotContinuePeople / industry.matchedPeople;
-        root.querySelector<HTMLElement>("[data-copy-setting-outcome]")!.textContent = `At ${selectedFee}, ${universityPricedOutPct.toFixed(1)}% of university and research jobs with compensation estimates would not continue, compared with ${industryPricedOutPct.toFixed(1)}% of industry jobs with estimates.`;
-        root.querySelector<HTMLElement>("[data-student-fee]")!.textContent = selectedFee;
-        root.querySelector<HTMLElement>("[data-student-fee-bar]")!.style.width = `${100 * state.feeUsd / data.meta.feeMaxUsd}%`;
-
         orientationLayer.selectAll("*").remove();
         if (scene === "orientation") drawOrientation();
 
@@ -696,12 +690,10 @@ if (root && dataElement) {
         moveGroup(characters.lin, heroes.lin, animate);
     };
 
-    feeInput.addEventListener("input", () => {
-        state.feeUsd = Number(feeInput.value);
-        render(state.scene, true);
-    });
     let activeScene: SceneKey = "graduates";
-    const selectSceneFromScroll = () => {
+    let active = false;
+    let scrollFrame = 0;
+    const selectSceneFromScroll = (animate = true) => {
         const targetY = window.innerHeight * 0.46;
         const steps = Array.from(root.querySelectorAll<HTMLElement>(".story-step[data-scene]"));
         let nearest = steps[0];
@@ -717,15 +709,180 @@ if (root && dataElement) {
         const scene = nearest.dataset.scene as SceneKey;
         if (scene !== activeScene) {
             activeScene = scene;
-            render(scene, true);
+            render(scene, animate);
         }
     };
-    window.addEventListener("scroll", selectSceneFromScroll, { passive: true });
-    window.addEventListener("resize", () => {
+    const scheduleSceneSelection = () => {
+        if (scrollFrame) return;
+        scrollFrame = window.requestAnimationFrame(() => {
+            scrollFrame = 0;
+            if (active) selectSceneFromScroll(true);
+        });
+    };
+    const handleResize = () => {
         render(state.scene, false);
-        selectSceneFromScroll();
-    }, { passive: true });
-    reducedMotion.addEventListener("change", () => render(state.scene, false));
-    render("graduates", false);
-    selectSceneFromScroll();
+        selectSceneFromScroll(false);
+    };
+    const handleReducedMotion = () => render(state.scene, false);
+    const activate = () => {
+        if (active) return;
+        active = true;
+        window.addEventListener("scroll", scheduleSceneSelection, { passive: true });
+        window.addEventListener("resize", handleResize, { passive: true });
+        reducedMotion.addEventListener("change", handleReducedMotion);
+        bindProgramScatter();
+        render(activeScene, false);
+        selectSceneFromScroll(false);
+    };
+    const deactivate = () => {
+        if (!active) return;
+        active = false;
+        window.removeEventListener("scroll", scheduleSceneSelection);
+        window.removeEventListener("resize", handleResize);
+        reducedMotion.removeEventListener("change", handleReducedMotion);
+        unbindProgramScatter();
+        if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
+        scrollFrame = 0;
+        circles.interrupt("story");
+        ribbons.interrupt("story");
+        characters.asha.interrupt("story");
+        characters.lin.interrupt("story");
+    };
+    const renderFee = (feeUsd: number) => {
+        state.feeUsd = feeUsd;
+        if (active) render(state.scene, true);
+    };
+    const renderScene = (scene: SceneKey, animate = true) => {
+        activeScene = scene;
+        if (active) render(scene, animate);
+    };
+
+    return {
+        activate,
+        deactivate,
+        renderFee,
+        renderScene,
+        destroy: deactivate,
+    };
+};
+
+const root = document.querySelector<HTMLElement>("[data-opt-story]");
+const dataElement = root?.querySelector<HTMLScriptElement>("#opt-story-data");
+
+if (root && dataElement) {
+    const data = JSON.parse(dataElement.textContent || "{}") as OptStoryClientData;
+    if (data.schemaVersion !== 6) throw new Error("Unexpected OPT story schema");
+
+    const compactLayout = window.matchMedia("(max-width: 759px), (max-width: 999px) and (max-height: 599px)");
+    const formatNumber = new Intl.NumberFormat("en-US");
+    const formatMoney = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0,
+    });
+    const formatCompactMoney = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        notation: "compact",
+        maximumFractionDigits: 1,
+    });
+    let feeUsd = data.meta.defaultFeeUsd;
+    let pendingFeeUsd: number | null = null;
+    let feeFrame = 0;
+    let mode: "desktop" | "mobile" | null = null;
+    let desktopStory: DesktopStoryController | null = null;
+    let mobileStory: MobileStoryController | null = null;
+
+    const scenarioFor = (fee: number) => {
+        const scenario = data.feeScenarios.find((row) => row.feeUsd === fee);
+        if (!scenario) throw new Error(`Missing OPT fee scenario for ${fee}`);
+        return scenario;
+    };
+    const setText = (selector: string, value: string) => {
+        root.querySelectorAll<HTMLElement>(selector).forEach((element) => { element.textContent = value; });
+    };
+    const syncSharedFeeUi = () => {
+        const scenario = scenarioFor(feeUsd);
+        const selectedFee = formatMoney.format(feeUsd);
+        root.querySelectorAll<HTMLInputElement>("[data-fee-input]").forEach((input) => {
+            if (Number(input.value) !== feeUsd) input.value = String(feeUsd);
+        });
+        root.querySelectorAll<HTMLOutputElement>("[data-fee-output]").forEach((output) => {
+            output.value = selectedFee;
+            output.textContent = selectedFee;
+        });
+        setText("[data-continues]", formatNumber.format(scenario.continuesPeople));
+        setText("[data-does-not-continue]", formatNumber.format(scenario.doesNotContinuePeople));
+        setText("[data-payments]", formatCompactMoney.format(scenario.feePaymentsUsd));
+        setText("[data-compensation]", formatCompactMoney.format(scenario.representedCompensationUsd));
+        setText("[data-copy-fee]", selectedFee);
+        setText("[data-copy-gross-exposure]", `$${(data.meta.totalEntrants * feeUsd / 1_000_000_000).toFixed(3).replace(/\.?0+$/, "")} billion`);
+        setText("[data-copy-ending-outcome]", `${formatNumber.format(scenario.continuesPeople)} would continue and ${formatNumber.format(scenario.doesNotContinuePeople)} would not continue`);
+
+        const biology = scenario.outcomes.fields.find((row) => row.key === "biological-science")!;
+        const biologyPricedOutPct = 100 * biology.doesNotContinuePeople / biology.matchedPeople;
+        const linContinues = data.comparisons.lin.totalCompensationUsd >= feeUsd;
+        setText("[data-copy-lin-outcome]", linContinues
+            ? "Dr. Lin's postdoc would remain in the modeled talent pool"
+            : "Dr. Lin's postdoc would not continue under the model");
+        setText("[data-copy-biology-outcome]", `${biologyPricedOutPct.toFixed(1)}% would not continue`);
+        setText("[data-copy-ending-biology]", `Among biology graduates in that group, ${biologyPricedOutPct.toFixed(1)}% would not continue.`);
+
+        const university = scenario.outcomes.workSettings.find((row) => row.key === "university-research")!;
+        const industry = scenario.outcomes.workSettings.find((row) => row.key === "other-named-employer")!;
+        const universityPricedOutPct = 100 * university.doesNotContinuePeople / university.matchedPeople;
+        const industryPricedOutPct = 100 * industry.doesNotContinuePeople / industry.matchedPeople;
+        setText("[data-copy-setting-outcome]", `At ${selectedFee}, ${universityPricedOutPct.toFixed(1)}% of university and research jobs with compensation estimates would not continue, compared with ${industryPricedOutPct.toFixed(1)}% of industry jobs with estimates.`);
+        setText("[data-student-fee]", selectedFee);
+        root.querySelectorAll<HTMLElement>("[data-student-fee-bar]").forEach((bar) => {
+            bar.style.width = `${100 * feeUsd / data.meta.feeMaxUsd}%`;
+        });
+    };
+
+    const renderActiveFee = () => {
+        syncSharedFeeUi();
+        if (mode === "mobile") mobileStory?.renderFee(feeUsd);
+        else desktopStory?.renderFee(feeUsd);
+    };
+    const commitPendingFee = () => {
+        feeFrame = 0;
+        if (pendingFeeUsd == null) return;
+        feeUsd = pendingFeeUsd;
+        pendingFeeUsd = null;
+        renderActiveFee();
+    };
+    const queueFee = (nextFeeUsd: number) => {
+        pendingFeeUsd = nextFeeUsd;
+        if (!feeFrame) feeFrame = window.requestAnimationFrame(commitPendingFee);
+    };
+
+    root.addEventListener("input", (event) => {
+        const input = (event.target as Element | null)?.closest<HTMLInputElement>("[data-fee-input]");
+        if (input) queueFee(Number(input.value));
+    });
+
+    const activateLayout = () => {
+        if (pendingFeeUsd != null) {
+            if (feeFrame) window.cancelAnimationFrame(feeFrame);
+            commitPendingFee();
+        }
+        const nextMode = compactLayout.matches ? "mobile" : "desktop";
+        if (nextMode === mode) return;
+        if (nextMode === "mobile") {
+            desktopStory?.deactivate();
+            mobileStory ??= initializeMobileStory(root, data);
+            mobileStory.renderFee(feeUsd);
+            mobileStory.activate();
+        } else {
+            mobileStory?.deactivate();
+            desktopStory ??= initializeDesktopStory(root, data, feeUsd);
+            desktopStory.renderFee(feeUsd);
+            desktopStory.activate();
+        }
+        mode = nextMode;
+    };
+
+    compactLayout.addEventListener("change", activateLayout);
+    syncSharedFeeUi();
+    activateLayout();
 }

@@ -1,0 +1,79 @@
+---
+import type { OptStoryData, OptStoryMobileViewModel } from "../types/opt-story";
+import OptStoryMobileFieldLegend from "./OptStoryMobileFieldLegend.astro";
+
+interface Props {
+    variant: "gate" | "interactive" | "ending";
+    storyData: OptStoryData;
+    mobileView: OptStoryMobileViewModel;
+}
+
+const { variant, storyData, mobileView } = Astro.props;
+const number = (value: number) => new Intl.NumberFormat("en-US").format(value);
+const money = (value: number) => new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+}).format(value);
+const compactMoney = (value: number) => new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    notation: "compact",
+    maximumFractionDigits: 1,
+}).format(value);
+const scenario = mobileView.defaultScenario;
+const colorMode = variant === "gate" ? "status" : "field";
+const className = variant === "gate" ? "mobile-gate" : variant === "interactive" ? "mobile-threshold" : "mobile-ending";
+const feeAttribute = variant === "gate" ? "data-mobile-gate-fee" : variant === "interactive" ? "data-mobile-threshold-fee" : "data-mobile-ending-fee";
+const feeControlId = "opt-mobile-fee-decision";
+const ariaSuffix = colorMode === "field" ? " Dots are colored by field." : "";
+---
+
+<figure class={className} data-mobile-outcome-summary={variant === "interactive" ? "" : undefined}>
+    <figcaption>
+        <strong {...{ [feeAttribute]: "" }}>{money(storyData.meta.defaultFeeUsd)}{variant === "ending" ? " OPT fee" : " fee"}</strong>
+        {variant === "interactive" && <span>{number(storyData.meta.knownCompensationPeople)} entrants with compensation estimates</span>}
+    </figcaption>
+    <svg
+        class:list={["mobile-crossing-plot", { "mobile-crossing-plot--fields": colorMode === "field" }]}
+        viewBox="0 0 360 340"
+        role="img"
+        data-mobile-crossing-plot={variant}
+        data-mobile-crossing-color={colorMode}
+        aria-label={`At a ${money(storyData.meta.defaultFeeUsd)} fee, ${number(scenario.continuesPeople)} entrants with compensation estimates would continue and ${number(scenario.doesNotContinuePeople)} would not continue.${ariaSuffix}`}
+    >
+        <text x="14" y="20">WOULD NOT CONTINUE</text>
+        <text x="346" y="20" text-anchor="end" data-mobile-plot-stop-count>{number(scenario.doesNotContinuePeople)}</text>
+        <line x1="10" x2="350" y1="170" y2="170"></line>
+        <rect x="126" y="157" width="108" height="26"></rect>
+        <text x="180" y="175" text-anchor="middle" data-mobile-crossing-fee>{money(storyData.meta.defaultFeeUsd)} FEE</text>
+        <g data-mobile-crossing-dots></g>
+        <text x="14" y="330">WOULD CONTINUE</text>
+        <text x="346" y="330" text-anchor="end" data-mobile-plot-continue-count>{number(scenario.continuesPeople)}</text>
+    </svg>
+    <p class="mobile-dot-note">Each dot represents about 100 entrants with a compensation estimate. Counts are exact.</p>
+
+    {colorMode === "field" && (
+        <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} shortLabels={mobileView.fieldShortLabels} collapsible />
+    )}
+
+    {variant === "gate" && (
+        <p><strong data-mobile-gross-exposure>{compactMoney(storyData.meta.defaultGrossExposureUsd)}</strong> if every entrant paid once</p>
+    )}
+
+    {variant === "interactive" && (
+        <>
+            <dl class="mobile-metrics">
+                <div><dt>Fee payments</dt><dd data-mobile-payments>{compactMoney(scenario.feePaymentsUsd)}</dd></div>
+                <div><dt>Represented compensation</dt><dd data-mobile-compensation>{compactMoney(scenario.representedCompensationUsd)}</dd></div>
+            </dl>
+            <label class="mobile-fee-control" for={feeControlId}>
+                <span>OPT fee <output data-fee-output>{money(storyData.meta.defaultFeeUsd)}</output></span>
+                <input id={feeControlId} data-fee-input type="range" min={storyData.meta.feeMinUsd} max={storyData.meta.feeMaxUsd} step={storyData.meta.feeStepUsd} value={storyData.meta.defaultFeeUsd}/>
+                <small><span>{money(storyData.meta.feeMinUsd)}</span><span>{money(storyData.meta.feeMaxUsd)}</span></small>
+            </label>
+        </>
+    )}
+
+    {variant === "ending" && <p>among {number(storyData.meta.knownCompensationPeople)} entrants with compensation estimates</p>}
+</figure>

@@ -165,3 +165,34 @@ export interface OptStoryClientData {
     comparisons: OptStoryData["compensation"]["comparisons"];
     programs: CompactProgramPoint[];
 }
+
+export interface OptStoryMobileViewModel {
+    defaultScenario: FeeScenario;
+    fieldKeys: string[];
+    fieldLabels: Record<string, string>;
+    degreeLabels: Record<string, string>;
+    settingLabels: Record<string, string>;
+    degreeFieldPeople: Record<string, number>;
+    sankeyFlows: Array<{
+        degree: string;
+        setting: string;
+        people: number;
+        path: string;
+        width: number;
+    }>;
+    sankeyMarks: Array<{
+        field: string;
+        workSetting: string;
+        x: number;
+        y: number;
+    }>;
+    fieldShortLabels: Record<string, string>;
+    comparisonScale: number;
+    minProgramShare: number;
+    organizationPanels: Array<{
+        id: string;
+        labelledby: string;
+        rows: Array<{ name: string; people: number }>;
+        maximum: number;
+    }>;
+}

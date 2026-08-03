@@ -1,7 +1,9 @@
 ---
 import rawStoryData from "../data/opt-story.json";
 import "../styles/opt-story.css";
+import "../styles/opt-story-mobile.css";
 import OptStoryMethods from "./OptStoryMethods.astro";
+import OptStoryMobileScene from "./OptStoryMobileScene.astro";
 import OptStoryStage from "./OptStoryStage.astro";
 import type {
     CompactFlow,
@@ -10,11 +12,13 @@ import type {
     OptStoryClientData,
     OptStoryData,
 } from "../types/opt-story";
+import { buildOptStoryMobileView } from "../utils/opt-story-mobile-view";
 
 const storyData = rawStoryData as unknown as OptStoryData;
 if (storyData.schemaVersion !== 6) {
     throw new Error(`Unexpected OPT story schema ${storyData.schemaVersion}`);
 }
+const mobileView = buildOptStoryMobileView(storyData);
 
 const number = (value: number) => new Intl.NumberFormat("en-US").format(value);
 const money = (value: number) => new Intl.NumberFormat("en-US", {
@@ -119,6 +123,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>America has already welcomed and trained this talent.</h2>
                     <p>U.S. universities awarded <strong>{number(storyData.openingPopulation.people)}</strong> bachelor's, master's, and doctoral degrees to international students in 2021–22. These graduates spent years studying in American classrooms and laboratories. Each circle represents about {Math.round(storyData.openingPopulation.people / storyData.openingPopulation.markCount)} degrees.</p>
                 </div>
+                <OptStoryMobileScene scene="graduates" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="orientation">
@@ -127,6 +132,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>OPT lets many international graduates work in the field they studied.</h2>
                     <p>An F-1 student can apply for up to 12 months of post-completion OPT. Some STEM graduates can later apply for a 24-month extension. This story examines the moment a graduate first enters post-completion OPT.</p>
                 </div>
+                <OptStoryMobileScene scene="orientation" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="opt">
@@ -137,6 +143,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <p class="character-copy"><b>A</b> Asha completed an MS in computer science.</p>
                     <p class="character-copy"><b>L</b> Dr. Lin completed an engineering PhD and is entering a postdoc.</p>
                 </div>
+                <OptStoryMobileScene scene="opt" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="composition">
@@ -145,6 +152,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>More than half enter with a master's degree.</h2>
                     <p>Master's graduates account for <strong>{number(degree.get("masters")!.people)}</strong> entrants, followed by <strong>{number(degree.get("bachelors")!.people)}</strong> bachelor's and <strong>{number(degree.get("doctorate")!.people)}</strong> doctorates. Computer science, business, and engineering together make up <strong>{leadingFieldPct.toFixed(1)}%</strong>.</p>
                 </div>
+                <OptStoryMobileScene scene="composition" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="connections">
@@ -154,6 +162,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <p>Most entrants—<strong>{number(industrySetting.people)}</strong>—head to industry. Another <strong>{number(universitySetting.people)}</strong> go to universities or research institutions.</p>
                     <p>Asha heads toward software. Dr. Lin heads toward a university postdoc.</p>
                 </div>
+                <OptStoryMobileScene scene="connections" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="workers">
@@ -180,6 +189,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <p>Asha's software role carries <strong>{money(storyData.compensation.comparisons.asha.wageUsd)} in median wages</strong> and <strong>{money(storyData.compensation.comparisons.asha.totalCompensationUsd)} in estimated compensation</strong>.</p>
                     <p>Dr. Lin's postdoc has a <strong>{money(storyData.compensation.comparisons.lin.salaryUsd)} median salary</strong>. Including estimated employer-paid benefits, that is about <strong>{money(storyData.compensation.comparisons.lin.totalCompensationUsd)} in annual compensation</strong>.</p>
                 </div>
+                <OptStoryMobileScene scene="value" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="gate">
@@ -189,6 +199,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <p>Every entrant faces the same price, including Asha and Dr. Lin.</p>
                     <p>If all {number(storyData.meta.totalEntrants)} entrants crossed once, the fees would total <strong data-copy-gross-exposure>{billions(storyData.meta.defaultGrossExposureUsd)}</strong>.</p>
                 </div>
+                <OptStoryMobileScene scene="gate" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="student">
@@ -197,6 +208,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>The fee arrives after years of educational expenses.</h2>
                     <p>Among master's entrants, median reported annual tuition was <strong>{money(storyData.studentPaid.tuitionUsd)}</strong>. Their Form I-20 records listed <strong>{money(storyData.studentPaid.reportedFundingUsd)}</strong> in total financial resources for one academic year, including personal or family funds, school aid, outside support, and expected on-campus earnings.</p>
                 </div>
+                <OptStoryMobileScene scene="student" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="threshold">
@@ -205,6 +217,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>Set the price of entry.</h2>
                     <p>Choose an OPT fee. The model assumes that an employer would pay it when the job's typical annual compensation is at least as high. For some records, the data support only a broader occupation-family estimate; where they support neither, we do not guess.</p>
                 </div>
+                <OptStoryMobileScene scene="threshold" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="impacts">
@@ -222,6 +235,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>Universities feel the fee differently from industry.</h2>
                     <p>The same fee sits beside an industry salary, a university postdoc, or a public-sector role. <span data-copy-setting-outcome>At {money(storyData.meta.defaultFeeUsd)}, {universityPricedOut.toFixed(1)}% of university and research jobs with compensation estimates would not continue, compared with {industryPricedOut.toFixed(1)}% of industry jobs with estimates.</span></p>
                 </div>
+                <OptStoryMobileScene scene="settings" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="organizations">
@@ -230,6 +244,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>The exposure is concentrated in particular schools and employers.</h2>
                     <p>These rankings count initial OPT entrants at schools and clearly identified employers. The next view examines how frequently individual school programs lead to OPT.</p>
                 </div>
+                <OptStoryMobileScene scene="organizations" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="programs">
@@ -238,6 +253,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>Some programs send nearly every expected completer into OPT.</h2>
                     <p>The chart compares program size with the share of expected completers who begin OPT within 60 days. It includes each school, degree, and program with at least 50 expected completions.</p>
                 </div>
+                <OptStoryMobileScene scene="programs" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="alternatives">
@@ -246,6 +262,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>Graduates may seek another route.</h2>
                     <p>J-1 sponsorship, an H-1B petition, further study, departure, and overseas work are all possible. The records cannot show which route a person would take.</p>
                 </div>
+                <OptStoryMobileScene scene="alternatives" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="ending">
@@ -254,6 +271,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <h2>The fee changes the talent pool America retains.</h2>
                     <p>At <strong data-copy-fee>{money(storyData.meta.defaultFeeUsd)}</strong>, <span data-copy-ending-outcome>{number(defaultFeeScenario.continuesPeople)} would continue and {number(defaultFeeScenario.doesNotContinuePeople)} would not continue</span> among jobs with compensation estimates. <span data-copy-ending-biology>Among biology graduates in that group, {biologyPricedOut.toFixed(1)}% would not continue.</span></p>
                 </div>
+                <OptStoryMobileScene scene="ending" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="conclusion">

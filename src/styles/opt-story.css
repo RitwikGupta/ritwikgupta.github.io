@@ -818,6 +818,11 @@ html[data-theme="dark"] .opt-story {
     display: none !important;
 }
 
+.opt-story .mobile-scene,
+.opt-story .table-swipe-hint {
+    display: none;
+}
+
 @media (max-width: 900px) {
     .opt-story .story-grid {
         grid-template-columns: minmax(245px, 300px) minmax(0, 1fr);

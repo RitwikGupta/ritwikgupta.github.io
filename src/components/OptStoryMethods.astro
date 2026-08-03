@@ -43,7 +43,8 @@ const broadFamilyBenchmarkPeople = typeof broadFamilyCoverage?.people === "numbe
 
     <details>
         <summary>Accessible fee table</summary>
-        <div class="table-scroll">
+        <p class="table-swipe-hint" id="fee-table-swipe">Swipe horizontally to see all columns.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="OPT fee scenarios" aria-describedby="fee-table-swipe" data-table-scroll>
             <table>
                 <thead><tr><th scope="col">OPT fee</th><th scope="col">Would continue</th><th scope="col">Would not continue</th><th scope="col">No compensation benchmark</th><th scope="col">Fee payments</th></tr></thead>
                 <tbody>{storyData.compensation.feeScenarios.map((row) => <tr><th scope="row">{money(row.feeUsd)}</th><td>{number(row.continuesPeople)}</td><td>{number(row.doesNotContinuePeople)}</td><td>{number(row.unknownPeople)}</td><td>{money(row.feePaymentsUsd)}</td></tr>)}</tbody>
@@ -54,7 +55,8 @@ const broadFamilyBenchmarkPeople = typeof broadFamilyCoverage?.people === "numbe
     <details>
         <summary>Accessible school-program table</summary>
         <p id="school-program-table-note">All programs plotted in the rate-versus-size chart are included below.</p>
-        <div class="table-scroll">
+        <p class="table-swipe-hint" id="program-table-swipe">Swipe horizontally to see all columns.</p>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="School-program OPT records" aria-describedby="school-program-table-note program-table-swipe" data-table-scroll>
             <table aria-describedby="school-program-table-note" data-program-table>
                 <thead><tr><th scope="col">School</th><th scope="col">Degree</th><th scope="col">Program</th><th scope="col">Expected records</th><th scope="col">OPT within 60 days</th><th scope="col">Share</th></tr></thead>
                 <tbody>{storyData.schoolPrograms.scatter.map((row) => <tr><th scope="row">{row.school}</th><td>{row.degree}</td><td>{row.major}</td><td>{number(row.expectedCompleters)}</td><td>{number(row.optWithin60)}</td><td>{percent(row.share60Pct)}</td></tr>)}</tbody>

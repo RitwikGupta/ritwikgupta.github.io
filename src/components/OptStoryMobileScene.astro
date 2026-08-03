@@ -1,0 +1,199 @@
+---
+import type { FeeOutcomeRow, OptStoryData, OptStoryMobileViewModel } from "../types/opt-story";
+import OptStoryMobileCrossing from "./OptStoryMobileCrossing.astro";
+import OptStoryMobileFieldLegend from "./OptStoryMobileFieldLegend.astro";
+
+interface Props {
+    scene: string;
+    storyData: OptStoryData;
+    mobileView: OptStoryMobileViewModel;
+}
+
+const { scene, storyData, mobileView } = Astro.props;
+const number = (value: number) => new Intl.NumberFormat("en-US").format(value);
+const money = (value: number) => new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+}).format(value);
+const defaultScenario = mobileView.defaultScenario;
+const rowLabel = (row: FeeOutcomeRow, dimension: string) => {
+    if (dimension === "fields") return mobileView.fieldLabels[row.key] ?? row.key;
+    if (dimension === "workSettings") return mobileView.settingLabels[row.key] ?? row.key;
+    return row.key;
+};
+const feeControl = (suffix: string) => ({
+    id: `opt-mobile-fee-${suffix}`,
+    min: storyData.meta.feeMinUsd,
+    max: storyData.meta.feeMaxUsd,
+    step: storyData.meta.feeStepUsd,
+    value: storyData.meta.defaultFeeUsd,
+});
+const scenesWithVisual = new Set([
+    "graduates", "orientation", "opt", "composition", "connections", "value", "gate", "student",
+    "threshold", "settings", "organizations", "programs", "alternatives", "ending",
+]);
+---
+
+{scenesWithVisual.has(scene) && (
+    <div class={`mobile-scene mobile-scene--${scene}`} data-mobile-scene={scene}>
+        {scene === "graduates" && (
+            <figure class="mobile-cohort-card">
+                <figcaption><strong>{number(storyData.openingPopulation.people)}</strong><span>international bachelor's, master's, and doctoral degrees</span></figcaption>
+                <div class="mobile-dot-field mobile-dot-field--graduates" aria-hidden="true"></div>
+                <p>Each dot represents about 100 degrees.</p>
+            </figure>
+        )}
+
+        {scene === "orientation" && (
+            <figure class="mobile-orientation" aria-label="An F-1 student completes a U.S. degree, enters initial post-completion OPT, and works in a degree-related job or research appointment. Some STEM graduates can then receive an extension.">
+                <div class="mobile-process-node"><strong>F-1 student</strong><span>studying at a U.S. school</span></div>
+                <span class="mobile-process-arrow" aria-hidden="true">↓</span>
+                <div class="mobile-process-node"><strong>U.S. degree</strong><span>program completed</span></div>
+                <span class="mobile-process-arrow" aria-hidden="true">↓</span>
+                <div class="mobile-process-node mobile-process-node--opt"><strong>Initial post-completion OPT</strong><span>temporary work authorization · up to 12 months</span></div>
+                <span class="mobile-process-arrow" aria-hidden="true">↓</span>
+                <div class="mobile-process-node"><strong>Job or research appointment</strong><span>work related to the degree</span></div>
+                <span class="mobile-process-arrow mobile-process-arrow--secondary" aria-hidden="true">↓</span>
+                <div class="mobile-process-node mobile-process-node--secondary"><strong>STEM extension</strong><span>some graduates · up to 24 additional months</span></div>
+                <span class="mobile-process-arrow mobile-process-arrow--secondary" aria-hidden="true">↙</span>
+                <p class="mobile-process-return">Continues in degree-related work</p>
+            </figure>
+        )}
+
+        {scene === "opt" && (
+            <figure class="mobile-cohort-card">
+                <figcaption><strong>{number(storyData.meta.totalEntrants)}</strong><span>initial post-completion OPT entrants</span></figcaption>
+                <div class="mobile-dot-field mobile-dot-field--opt" aria-hidden="true"></div>
+                <div class="mobile-character-pair" aria-label="Fictional composites"><span><span class="mobile-character mobile-character--asha" aria-hidden="true">A</span>Asha</span><span><span class="mobile-character mobile-character--lin" aria-hidden="true">L</span>Dr. Lin</span></div>
+                <ul class="mobile-key mobile-key--cohort" aria-label="Cohort legend">
+                    <li><span style="--legend-color:var(--opt-highlight)"></span>Initial OPT</li>
+                    <li><span style="--legend-color:var(--mark-neutral)"></span>Other degree awards</li>
+                </ul>
+            </figure>
+        )}
+
+        {scene === "composition" && (
+            <figure class="mobile-composition">
+                <figcaption class="sr-only">Initial OPT entrants by degree and broad field</figcaption>
+                {storyData.cohort.degreeGroups.map((degree) => (
+                    <div class="mobile-degree-row">
+                        <div class="mobile-chart-heading"><strong>{degree.label}</strong><span>{number(degree.people)}</span></div>
+                        <div class="mobile-stacked-bar" role="img" aria-label={`${degree.label}: ${number(degree.people)} entrants, divided by broad field`}>
+                            {mobileView.fieldKeys.map((field) => {
+                                const people = mobileView.degreeFieldPeople[`${degree.key}|${field}`] ?? 0;
+                                return people > 0 && <span style={`--segment-color:var(--field-${field});width:${100 * people / degree.people}%`}><span class="sr-only">{mobileView.fieldLabels[field]}: {number(people)}</span></span>;
+                            })}
+                        </div>
+                    </div>
+                ))}
+                <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} shortLabels={mobileView.fieldShortLabels} afterChart />
+            </figure>
+        )}
+
+        {scene === "connections" && (
+            <figure class="mobile-sankey">
+                <figcaption class="sr-only">Degree to initial OPT to employer setting</figcaption>
+                <svg viewBox="0 0 360 382" role="img" aria-label="Bachelor's, master's, and doctorate entrants flow downward through initial OPT to five employer settings. Colored dots represent broad fields.">
+                    {mobileView.sankeyFlows.map((row) => (
+                        <path d={row.path} style={`stroke-width:${row.width}`}><title>{mobileView.degreeLabels[row.degree]} to {mobileView.settingLabels[row.setting]}: {number(row.people)}</title></path>
+                    ))}
+                    {mobileView.sankeyMarks.map((mark) => <circle cx={mark.x} cy={mark.y} r={mark.workSetting === "government" ? "4" : "2.8"} style={`fill:var(--field-${mark.field})`}><title>{mobileView.fieldLabels[mark.field]}</title></circle>)}
+                    <circle cx="180" cy="164" r="5" class="mobile-sankey__opt-dot"></circle>
+                    <text x="180" y="148" text-anchor="middle" class="mobile-sankey__opt">INITIAL OPT</text>
+                    <text x="58" y="20" text-anchor="middle">Bachelor's</text>
+                    <text x="180" y="20" text-anchor="middle">Master's</text>
+                    <text x="302" y="20" text-anchor="middle">Doctorate</text>
+                    <text x="48" y="278" text-anchor="middle">Industry</text>
+                    <text x="180" y="276" text-anchor="middle"><tspan x="180">University /</tspan><tspan x="180" dy="15">research</tspan></text>
+                    <text x="312" y="276" text-anchor="middle"><tspan x="312">Nonprofit /</tspan><tspan x="312" dy="15">health</tspan></text>
+                    <text x="100" y="368" text-anchor="middle">Government</text>
+                    <text x="270" y="364" text-anchor="middle"><tspan x="270">Employer not</tspan><tspan x="270" dy="15">reported</tspan></text>
+                </svg>
+                <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} shortLabels={mobileView.fieldShortLabels} collapsible />
+            </figure>
+        )}
+
+        {scene === "value" && (
+            <figure class="mobile-bullets">
+                <figcaption class="sr-only">Compensation comparisons for Asha and Dr. Lin</figcaption>
+                <section><h3><span class="mobile-character mobile-character--asha" aria-hidden="true">A</span>Asha · software</h3>
+                    <div class="mobile-bullet"><span>Median wage</span><strong>{money(storyData.compensation.comparisons.asha.wageUsd)}</strong><span class="mobile-bullet-fill" style={`width:${100 * storyData.compensation.comparisons.asha.wageUsd / mobileView.comparisonScale}%`}></span></div>
+                    <div class="mobile-bullet"><span>Estimated compensation</span><strong>{money(storyData.compensation.comparisons.asha.totalCompensationUsd)}</strong><span class="mobile-bullet-fill" style={`width:${100 * storyData.compensation.comparisons.asha.totalCompensationUsd / mobileView.comparisonScale}%`}></span></div>
+                </section>
+                <section class="mobile-bullets__lin"><h3><span class="mobile-character mobile-character--lin" aria-hidden="true">L</span>Dr. Lin · postdoc</h3>
+                    <div class="mobile-bullet"><span>Median salary</span><strong>{money(storyData.compensation.comparisons.lin.salaryUsd)}</strong><span class="mobile-bullet-fill" style={`width:${100 * storyData.compensation.comparisons.lin.salaryUsd / mobileView.comparisonScale}%`}></span></div>
+                    <div class="mobile-bullet"><span>Estimated compensation</span><strong>{money(storyData.compensation.comparisons.lin.totalCompensationUsd)}</strong><span class="mobile-bullet-fill" style={`width:${100 * storyData.compensation.comparisons.lin.totalCompensationUsd / mobileView.comparisonScale}%`}></span></div>
+                </section>
+                <div class="mobile-axis"><span>$0</span><span>$100k</span><span>$200k</span></div>
+            </figure>
+        )}
+
+        {scene === "gate" && <OptStoryMobileCrossing variant="gate" storyData={storyData} mobileView={mobileView} />}
+
+        {scene === "student" && (
+            <figure class="mobile-student-bars">
+                <figcaption>Master's amounts on a common $0–$300,000 scale</figcaption>
+                {[
+                    ["Reported annual tuition", storyData.studentPaid.tuitionUsd, "student"],
+                    ["Form I-20 financial resources", storyData.studentPaid.reportedFundingUsd, "student"],
+                    ["OPT fee", storyData.meta.defaultFeeUsd, "fee"],
+                ].map(([label, rawValue, kind]) => {
+                    const value = Number(rawValue);
+                    return <div class={`mobile-comparison-bar mobile-comparison-bar--${kind}`}><span>{label}</span><strong data-mobile-student-fee={kind === "fee" ? "" : undefined}>{money(value)}</strong><span class="mobile-comparison-track"><span data-mobile-student-fee-bar={kind === "fee" ? "" : undefined} style={`width:${100 * value / storyData.meta.feeMaxUsd}%`}></span></span></div>;
+                })}
+            </figure>
+        )}
+
+        {scene === "threshold" && <OptStoryMobileCrossing variant="interactive" storyData={storyData} mobileView={mobileView} />}
+
+        {scene === "settings" && (
+            <figure class="mobile-settings">
+                <figcaption class="sr-only">Employer setting outcomes at the selected fee</figcaption>
+                <div class="mobile-outcome-legend" aria-label="Bar legend"><span><span class="mobile-legend-swatch is-continue"></span>Would continue</span><span><span class="mobile-legend-swatch is-stop"></span>Would not continue</span></div>
+                <div class="mobile-outcome-rows">
+                    {defaultScenario.outcomes.workSettings.map((row) => <div class="mobile-outcome-row" data-outcome-dimension="workSettings" data-outcome-key={row.key}><div class="mobile-chart-heading"><strong>{rowLabel(row, "workSettings")}</strong><span>{row.matchedPeople ? <><b data-row-continue>{number(row.continuesPeople)}</b> would continue</> : "No compensation estimates"}</span></div>{row.matchedPeople > 0 && <div class="mobile-outcome-bar"><span data-row-continue-bar style={`width:${100 * row.continuesPeople / row.matchedPeople}%`}></span><span data-row-stop-bar style={`width:${100 * row.doesNotContinuePeople / row.matchedPeople}%`}></span></div>}</div>)}
+                </div>
+                {(() => { const control = feeControl("settings"); return <label class="mobile-fee-control" for={control.id}><span>OPT fee <output data-fee-output>{money(control.value)}</output></span><input id={control.id} data-fee-input type="range" min={control.min} max={control.max} step={control.step} value={control.value}/><small><span>{money(control.min)}</span><span>{money(control.max)}</span></small></label>; })()}
+            </figure>
+        )}
+
+        {scene === "organizations" && (
+            <div class="mobile-tabbed-chart" data-mobile-tabs>
+                <div class="mobile-tabs__list" role="tablist" aria-label="Organization rankings">
+                    <button type="button" role="tab" id="mobile-schools-tab" aria-selected="true" aria-controls="mobile-schools-panel">Schools</button>
+                    <button type="button" role="tab" id="mobile-employers-tab" aria-selected="false" aria-controls="mobile-employers-panel" tabindex="-1">Employers</button>
+                </div>
+                {mobileView.organizationPanels.map((panel, panelIndex) => <section class="mobile-tabs__panel" role="tabpanel" id={panel.id} aria-labelledby={panel.labelledby} data-tab-panel data-tab-default={panelIndex === 0 ? "" : undefined}><ol class="mobile-ranking">{panel.rows.map((organization) => <li><span><b>{organization.name}</b><span class="mobile-ranking-track"><span style={`width:${100 * organization.people / panel.maximum}%`}></span></span></span><strong>{number(organization.people)}</strong></li>)}</ol></section>)}
+            </div>
+        )}
+
+        {scene === "programs" && (
+            <div class="mobile-tabbed-chart" data-mobile-tabs>
+                <div class="mobile-tabs__list" role="tablist" aria-label="School program views">
+                    <button type="button" role="tab" id="mobile-scatter-tab" aria-selected="true" aria-controls="mobile-scatter-panel">Scatterplot</button>
+                    <button type="button" role="tab" id="mobile-shares-tab" aria-selected="false" aria-controls="mobile-shares-panel" tabindex="-1">Highest shares</button>
+                </div>
+                <section class="mobile-tabs__panel" role="tabpanel" id="mobile-scatter-panel" aria-labelledby="mobile-scatter-tab" data-tab-panel data-tab-default>
+                    <figure class="mobile-program-scatter"><svg viewBox="0 0 360 270" role="img" tabindex="0" aria-label={`School programs plotted by expected-completion records and share entering OPT within 60 days. Shares range from ${mobileView.minProgramShare.toFixed(1)} to 100 percent.`} data-mobile-program-scatter>
+                        <line x1="50" x2="330" y1="224" y2="224"></line><line x1="50" x2="50" y1="32" y2="224"></line>
+                        <path d="M44,226 l12,-8 M44,218 l12,-8" class="mobile-axis-break"></path>
+                        <text x="42" y="44" text-anchor="end">100%</text><text x="42" y="224" text-anchor="end">{Math.floor(mobileView.minProgramShare)}%</text><text x="190" y="260" text-anchor="middle">Expected-completion records</text>
+                        <g data-mobile-program-dots></g>
+                    </svg><div class="mobile-scatter-tooltip" data-mobile-program-tooltip hidden role="status" aria-live="polite"></div>
+                    <noscript><p class="mobile-scatter-noscript">Program details are available in the complete table below.</p></noscript>
+                    <ul class="mobile-key mobile-key--degrees" aria-label="Degree legend"><li><span style="--legend-color:var(--degree-bachelors)"></span>Bachelor's</li><li><span style="--legend-color:var(--degree-masters)"></span>Master's</li><li><span style="--legend-color:var(--degree-doctorate)"></span>Doctorate</li></ul></figure>
+                </section>
+                <section class="mobile-tabs__panel" role="tabpanel" id="mobile-shares-panel" aria-labelledby="mobile-shares-tab" data-tab-panel><ol class="mobile-program-ranking">{storyData.schoolPrograms.ranked.slice(0, 7).map((row) => <li><span><b>{row.school}</b><small>{row.degree} · {row.major}</small></span><strong>{row.share60Pct.toFixed(1)}%<small>{number(row.optWithin60)} / {number(row.expectedCompleters)}</small></strong></li>)}</ol></section>
+            </div>
+        )}
+
+        {scene === "alternatives" && (
+            <ul class="mobile-pathways" aria-label="Possible alternative pathways">
+                {[["J-1", "Research sponsorship"], ["H-1B", "Employer petition"], ["Study", "Another program"], ["Depart", "Leave the United States"], ["Overseas", "Work in another country"]].map(([title, label]) => <li><strong>{title}</strong><span>{label}</span><span class="mobile-pathway-question" aria-hidden="true">?</span></li>)}
+            </ul>
+        )}
+
+        {scene === "ending" && <OptStoryMobileCrossing variant="ending" storyData={storyData} mobileView={mobileView} />}
+    </div>
+)}
