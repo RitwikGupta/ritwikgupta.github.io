@@ -106,7 +106,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                 Optional Practical Training gives eligible F-1 students temporary permission to work in jobs related to their degree. Initial post-completion OPT may last up to 12 months, and some STEM graduates may later apply for a 24-month extension.
             </p>
             <p>
-                The FY{storyData.meta.fiscalYear} SEVIS records contain {number(storyData.meta.totalEntrants)} initial post-completion OPT entrants. At the default {money(storyData.meta.defaultFeeUsd)} fee, {number(defaultFeeScenario.continuesPeople)} would continue under the scenario and {number(defaultFeeScenario.doesNotContinuePeople)} would not continue. The comparison covers the {number(storyData.meta.knownCompensationPeople)} entrants whose occupations can be matched to a compensation benchmark. This is a counterfactual rule, not a forecast.
+                The FY{storyData.meta.fiscalYear} SEVIS records contain {number(storyData.meta.totalEntrants)} initial post-completion OPT entrants. At the default {money(storyData.meta.defaultFeeUsd)} fee, {number(defaultFeeScenario.continuesPeople)} would continue under the scenario and {number(defaultFeeScenario.doesNotContinuePeople)} would not continue. The comparison covers the {number(storyData.meta.knownCompensationPeople)} entrants whose jobs receive either an occupation or broader occupation-family compensation estimate. This is a counterfactual rule, not a forecast.
             </p>
         </div>
     </noscript>
@@ -203,7 +203,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                 <div class="step-card step-card--turn">
                     <p class="step-number">11 / Employer decision</p>
                     <h2>Set the price of entry.</h2>
-                    <p>Choose an OPT fee. For each job we can identify, the model assumes that an employer pays when the occupation's typical annual compensation meets the fee. Jobs without a reliable occupation match stay outside the calculation.</p>
+                    <p>Choose an OPT fee. The model assumes that an employer would pay it when the job's typical annual compensation is at least as high. For some records, the data support only a broader occupation-family estimate; where they support neither, we do not guess.</p>
                 </div>
             </section>
 
@@ -212,7 +212,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <p class="step-number">12 / Fields and occupations</p>
                     <h2>The fee reshapes the talent pool.</h2>
                     <p>Biology and biomedical science show how quickly specialized talent can be lost. A university laboratory may hire a postdoc at a typical salary of <strong>{money(storyData.compensation.comparisons.lin.salaryUsd)}</strong> because that researcher has expertise needed for a particular project. Salary and estimated benefits bring the position's annual compensation to about <strong>{money(storyData.compensation.comparisons.lin.totalCompensationUsd)}</strong>.</p>
-                    <p>At <strong data-copy-fee>{money(storyData.meta.defaultFeeUsd)}</strong>, <span data-copy-lin-outcome>{linContinuesByDefault ? "Dr. Lin's postdoc would remain in the modeled talent pool" : "Dr. Lin's postdoc would be priced out"}</span>. Among biology graduates whose jobs we can identify, <strong data-copy-biology-outcome>{biologyPricedOut.toFixed(1)}% would be priced out</strong>.</p>
+                    <p>At <strong data-copy-fee>{money(storyData.meta.defaultFeeUsd)}</strong>, <span data-copy-lin-outcome>{linContinuesByDefault ? "Dr. Lin's postdoc would remain in the modeled talent pool" : "Dr. Lin's postdoc would not continue under the model"}</span>. Among biology graduates with compensation estimates, <strong data-copy-biology-outcome>{biologyPricedOut.toFixed(1)}% would not continue</strong>.</p>
                 </div>
             </section>
 
@@ -220,7 +220,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                 <div class="step-card">
                     <p class="step-number">13 / Employers</p>
                     <h2>Universities feel the fee differently from industry.</h2>
-                    <p>The same fee sits beside an industry salary, a university postdoc, or a public-sector role. <span data-copy-setting-outcome>At {money(storyData.meta.defaultFeeUsd)}, the model prices out {universityPricedOut.toFixed(1)}% of matched university and research jobs and {industryPricedOut.toFixed(1)}% of matched industry jobs.</span></p>
+                    <p>The same fee sits beside an industry salary, a university postdoc, or a public-sector role. <span data-copy-setting-outcome>At {money(storyData.meta.defaultFeeUsd)}, {universityPricedOut.toFixed(1)}% of university and research jobs with compensation estimates would not continue, compared with {industryPricedOut.toFixed(1)}% of industry jobs with estimates.</span></p>
                 </div>
             </section>
 
@@ -252,7 +252,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                 <div class="step-card">
                     <p class="step-number">17 / The selected fee</p>
                     <h2>The fee changes the talent pool America retains.</h2>
-                    <p>At <strong data-copy-fee>{money(storyData.meta.defaultFeeUsd)}</strong>, <span data-copy-ending-outcome>{number(defaultFeeScenario.continuesPeople)} would continue and {number(defaultFeeScenario.doesNotContinuePeople)} would be priced out</span> among the jobs we can identify. <span data-copy-ending-biology>Biology would lose {biologyPricedOut.toFixed(1)}% of its matched graduates.</span></p>
+                    <p>At <strong data-copy-fee>{money(storyData.meta.defaultFeeUsd)}</strong>, <span data-copy-ending-outcome>{number(defaultFeeScenario.continuesPeople)} would continue and {number(defaultFeeScenario.doesNotContinuePeople)} would not continue</span> among jobs with compensation estimates. <span data-copy-ending-biology>Among biology graduates in that group, {biologyPricedOut.toFixed(1)}% would not continue.</span></p>
                 </div>
             </section>
 

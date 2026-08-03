@@ -245,9 +245,9 @@ if (root && dataElement) {
         value: { eyebrow: "Before the fee", title: "Two compensation tracks", description: "Software compensation and estimated postdoc compensation are shown on the same scale." },
         gate: { eyebrow: "A variable charge", title: "The fee at the crossing", description: "The entire cohort stops at the selected fee before the employer scenario is applied." },
         student: { eyebrow: "If the student pays", title: "The fee versus prior costs", description: "The selected fee is compared with reported master's tuition and one year of Form I-20 financial resources." },
-        threshold: { eyebrow: "Employer decision", title: "Set the OPT fee", description: `The scenario covers ${formatNumber.format(data.meta.knownCompensationPeople)} entrants whose jobs can be matched to compensation benchmarks.` },
-        impacts: { eyebrow: "Who would continue", title: "Fields and occupations", description: "Among matched jobs, different fee levels change the mix of fields and occupations that would continue." },
-        settings: { eyebrow: "Who would continue", title: "Employer settings", description: "Among matched jobs, the same fee has different consequences across workplace settings." },
+        threshold: { eyebrow: "Employer decision", title: "Set the OPT fee", description: `The scenario covers ${formatNumber.format(data.meta.knownCompensationPeople)} entrants with an occupation or broader occupation-family benchmark.` },
+        impacts: { eyebrow: "Who would continue", title: "Fields and occupations", description: "Among jobs with compensation estimates, different fee levels change the mix of fields and occupations that would continue." },
+        settings: { eyebrow: "Who would continue", title: "Employer settings", description: "Among jobs with compensation estimates, the same fee has different consequences across workplace settings." },
         organizations: { eyebrow: "Observed FY2022 counts", title: "Schools and employers", description: "Static rankings show raw exposure counts only." },
         programs: { eyebrow: "SEVIS expected-completion records", title: "Program rate versus size", description: "School-program cohort size is plotted against first post-completion OPT within 60 days." },
         alternatives: { eyebrow: "Possible, not predicted", title: "Other pathways", description: "Potential alternatives are shown without substitution probabilities." },
@@ -389,7 +389,7 @@ if (root && dataElement) {
         drawGate();
         addText(275, 120, "WOULD NOT CONTINUE", "side-label", "middle");
         addText(730, 120, "WOULD CONTINUE", "side-label", "middle");
-        addText(500, 525, `${formatNumber.format(data.meta.knownCompensationPeople)} ENTRANTS WITH MATCHED JOBS`, "chart-kicker", "middle");
+        addText(500, 525, `${formatNumber.format(data.meta.knownCompensationPeople)} ENTRANTS WITH COMPENSATION ESTIMATES`, "chart-kicker", "middle");
     };
 
     const outcomeRows = (dimension: SummaryDimension): FeeOutcomeRow[] => feeScenario().outcomes[dimension];
@@ -405,7 +405,7 @@ if (root && dataElement) {
     const displayLabel = (key: string) => (
         data.fieldGroups.find((row) => row.key === key)?.label
         || data.workSettings.find((row) => row.key === key)?.label
-        || key
+        || (key === "other-occupation-families" ? "Other occupation families" : key)
     );
     const drawStackedRows = (
         rows: ReturnType<typeof summarize>,
@@ -419,10 +419,21 @@ if (root && dataElement) {
     ) => {
         addText(x, y - 25, title.toUpperCase(), "chart-kicker");
         addText(labelX, y - 25, "WOULD CONTINUE", "chart-kicker", "end");
+        const visibleRows = rows.length > maxRows
+            ? [
+                ...rows.slice(0, maxRows - 1),
+                rows.slice(maxRows - 1).reduce((other, row) => ({
+                    key: "other-occupation-families",
+                    continue: other.continue + row.continue,
+                    stop: other.stop + row.stop,
+                    total: other.total + row.total,
+                }), { key: "other-occupation-families", continue: 0, stop: 0, total: 0 }),
+            ]
+            : rows;
         const scale = d3.scaleLinear()
-            .domain([0, Math.max(...rows.map((item) => item.total))])
+            .domain([0, Math.max(...visibleRows.map((item) => item.total))])
             .range([0, width]);
-        rows.slice(0, maxRows).forEach((row, index) => {
+        visibleRows.forEach((row, index) => {
             const yy = y + index * rowHeight;
             addText(x, yy, displayLabel(row.key), "bar-label");
             let cursor = x;
@@ -436,7 +447,7 @@ if (root && dataElement) {
                 cursor += scale(row[key]);
             });
             const label = addText(labelX, yy + 20, formatNumber.format(row.continue), "bar-count", "end");
-            label.append("title").text(`${displayLabel(row.key)}: ${formatNumber.format(row.total)} matched job records; ${formatNumber.format(row.continue)} would continue; ${formatNumber.format(row.stop)} would not continue.`);
+            label.append("title").text(`${displayLabel(row.key)}: ${formatNumber.format(row.total)} job records with compensation estimates; ${formatNumber.format(row.continue)} would continue; ${formatNumber.format(row.stop)} would not continue.`);
         });
     };
     const drawOutcomeLegend = (x: number, y: number) => {
@@ -446,12 +457,12 @@ if (root && dataElement) {
         addText(x + 151, y + 1, "Would not continue", "legend-label");
     };
     const drawImpacts = () => {
-        drawStackedRows(summarize("fields"), 45, 105, 285, 465, 60, 8, "Major field · matched jobs");
-        drawStackedRows(summarize("occupationFamilies"), 535, 105, 275, 955, 60, 8, "Occupation family · matched jobs");
+        drawStackedRows(summarize("fields"), 45, 105, 285, 465, 60, 8, "Major field");
+        drawStackedRows(summarize("occupationFamilies"), 535, 105, 275, 955, 60, 8, "Occupation family");
         drawOutcomeLegend(365, 620);
     };
     const drawSettings = () => {
-        drawStackedRows(summarize("workSettings"), 115, 155, 560, 885, 82, 5, "Employer-name-inferred setting · matched jobs");
+        drawStackedRows(summarize("workSettings"), 115, 155, 560, 885, 82, 5, "Employer-name-inferred setting");
         drawOutcomeLegend(365, 610);
     };
 
@@ -601,7 +612,7 @@ if (root && dataElement) {
                     ? `${selectedFee} OPT fee`
                     : copy.title;
         root.querySelector<HTMLElement>("[data-stage-description]")!.textContent = scene === "ending"
-            ? `Among matched jobs, ${formatNumber.format(feeScenario().continuesPeople)} would continue and ${formatNumber.format(feeScenario().doesNotContinuePeople)} would be priced out.`
+            ? `Among benchmarked jobs, ${formatNumber.format(feeScenario().continuesPeople)} would continue and ${formatNumber.format(feeScenario().doesNotContinuePeople)} would not continue.`
             : copy.description;
         root.querySelectorAll<HTMLElement>(".story-step[data-scene]").forEach((step) => {
             step.classList.toggle("is-active", step.dataset.scene === scene);
@@ -625,22 +636,22 @@ if (root && dataElement) {
         root.querySelector<HTMLElement>("[data-compensation]")!.textContent = formatCompactMoney.format(metric.representedCompensationUsd);
         root.querySelectorAll<HTMLElement>("[data-copy-fee]").forEach((element) => { element.textContent = selectedFee; });
         root.querySelector<HTMLElement>("[data-copy-gross-exposure]")!.textContent = `$${(data.meta.totalEntrants * state.feeUsd / 1_000_000_000).toFixed(3).replace(/\.?0+$/, "")} billion`;
-        root.querySelector<HTMLElement>("[data-copy-ending-outcome]")!.textContent = `${formatNumber.format(metric.continuesPeople)} would continue and ${formatNumber.format(metric.doesNotContinuePeople)} would be priced out`;
+        root.querySelector<HTMLElement>("[data-copy-ending-outcome]")!.textContent = `${formatNumber.format(metric.continuesPeople)} would continue and ${formatNumber.format(metric.doesNotContinuePeople)} would not continue`;
 
         const biology = outcomeRows("fields").find((row) => row.key === "biological-science")!;
         const biologyPricedOutPct = 100 * biology.doesNotContinuePeople / biology.matchedPeople;
         const linContinues = data.comparisons.lin.totalCompensationUsd >= state.feeUsd;
         root.querySelector<HTMLElement>("[data-copy-lin-outcome]")!.textContent = linContinues
             ? "Dr. Lin's postdoc would remain in the modeled talent pool"
-            : "Dr. Lin's postdoc would be priced out";
-        root.querySelector<HTMLElement>("[data-copy-biology-outcome]")!.textContent = `${biologyPricedOutPct.toFixed(1)}% would be priced out`;
-        root.querySelector<HTMLElement>("[data-copy-ending-biology]")!.textContent = `Biology would lose ${biologyPricedOutPct.toFixed(1)}% of its matched graduates.`;
+            : "Dr. Lin's postdoc would not continue under the model";
+        root.querySelector<HTMLElement>("[data-copy-biology-outcome]")!.textContent = `${biologyPricedOutPct.toFixed(1)}% would not continue`;
+        root.querySelector<HTMLElement>("[data-copy-ending-biology]")!.textContent = `Among biology graduates in that group, ${biologyPricedOutPct.toFixed(1)}% would not continue.`;
 
         const university = outcomeRows("workSettings").find((row) => row.key === "university-research")!;
         const industry = outcomeRows("workSettings").find((row) => row.key === "other-named-employer")!;
         const universityPricedOutPct = 100 * university.doesNotContinuePeople / university.matchedPeople;
         const industryPricedOutPct = 100 * industry.doesNotContinuePeople / industry.matchedPeople;
-        root.querySelector<HTMLElement>("[data-copy-setting-outcome]")!.textContent = `At ${selectedFee}, the model prices out ${universityPricedOutPct.toFixed(1)}% of matched university and research jobs and ${industryPricedOutPct.toFixed(1)}% of matched industry jobs.`;
+        root.querySelector<HTMLElement>("[data-copy-setting-outcome]")!.textContent = `At ${selectedFee}, ${universityPricedOutPct.toFixed(1)}% of university and research jobs with compensation estimates would not continue, compared with ${industryPricedOutPct.toFixed(1)}% of industry jobs with estimates.`;
         root.querySelector<HTMLElement>("[data-student-fee]")!.textContent = selectedFee;
         root.querySelector<HTMLElement>("[data-student-fee-bar]")!.style.width = `${100 * state.feeUsd / data.meta.feeMaxUsd}%`;
 
