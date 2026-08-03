@@ -15,10 +15,13 @@ import type {
 import { buildOptStoryMobileView } from "../utils/opt-story-mobile-view";
 
 const storyData = rawStoryData as unknown as OptStoryData;
-if (storyData.schemaVersion !== 6) {
+if (storyData.schemaVersion !== 7) {
     throw new Error(`Unexpected OPT story schema ${storyData.schemaVersion}`);
 }
 const mobileView = buildOptStoryMobileView(storyData);
+const fieldCssVariables = storyData.cohort.fieldGroups
+    .map((field) => `--field-${field.key}:${field.color}`)
+    .join(";");
 
 const number = (value: number) => new Intl.NumberFormat("en-US").format(value);
 const money = (value: number) => new Intl.NumberFormat("en-US", {
@@ -57,7 +60,7 @@ for (const row of storyData.cohort.flows) {
 }
 
 const clientData: OptStoryClientData = {
-    schemaVersion: 6,
+    schemaVersion: 7,
     meta: {
         fiscalYear: storyData.meta.fiscalYear,
         defaultFeeUsd: storyData.meta.defaultFeeUsd,
@@ -100,7 +103,7 @@ const clientData: OptStoryClientData = {
 const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
 ---
 
-<section class="opt-story" aria-label="OPT fee visual story" data-opt-story>
+<section class="opt-story" aria-label="OPT fee visual story" data-opt-story style={fieldCssVariables}>
     <script is:inline type="application/json" id="opt-story-data" set:html={storyJson}></script>
 
     <noscript>
@@ -120,7 +123,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
             <section class="story-step is-active" data-scene="graduates">
                 <div class="step-card">
                     <p class="step-number">01 / International graduates</p>
-                    <h2>America has already welcomed and trained this talent.</h2>
+                    <h2>America's universities are top notch, and people come from all around the world to study.</h2>
                     <p>U.S. universities awarded <strong>{number(storyData.openingPopulation.people)}</strong> bachelor's, master's, and doctoral degrees to international students in 2021–22. These graduates spent years studying in American classrooms and laboratories. Each circle represents about {Math.round(storyData.openingPopulation.people / storyData.openingPopulation.markCount)} degrees.</p>
                 </div>
                 <OptStoryMobileScene scene="graduates" storyData={storyData} mobileView={mobileView} />
@@ -128,9 +131,9 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
 
             <section class="story-step" data-scene="orientation">
                 <div class="step-card">
-                    <p class="step-number">02 / How OPT works</p>
-                    <h2>OPT lets many international graduates work in the field they studied.</h2>
-                    <p>An F-1 student can apply for up to 12 months of post-completion OPT. Some STEM graduates can later apply for a 24-month extension. This story examines the moment a graduate first enters post-completion OPT.</p>
+                    <p class="step-number">02 / What is OPT?</p>
+                    <h2>Knowledge is useless without practice, so Optional Practical Training (OPT) lets many international graduates work in the field they studied.</h2>
+                    <p>An F-1 student can apply for up to 12 months of post-completion OPT. Some STEM graduates can later apply for a 24-month extension.</p>
                 </div>
                 <OptStoryMobileScene scene="orientation" storyData={storyData} mobileView={mobileView} />
             </section>
@@ -177,7 +180,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                 <div class="step-card">
                     <p class="step-number">07 / What research finds</p>
                     <h2>Studies find effects in both directions.</h2>
-                    <p>A <a href="https://www.census.gov/library/working-papers/2016/adrm/ces-wp-16-56.html">Census Bureau study</a> of immigration broadly found small declines in native workers' earnings and employment. A <a href="https://aisel.aisnet.org/misq/vol48/iss2/15/">2024 study of STEM OPT</a> found that its expansion increased domestic STEM employment, especially in information technology. A <a href="https://www.aeaweb.org/articles?id=10.1257%2Fpandp.20261100">2026 study</a> found that domestic STEM degree completion rose after OPT expanded.</p>
+                    <p>A <a href="https://www.census.gov/library/working-papers/2016/adrm/ces-wp-16-56.html">Census Bureau study</a> of immigration <i>broadly</i> found small declines in native workers' earnings and employment. A <a href="https://aisel.aisnet.org/misq/vol48/iss2/15/">2024 study of STEM OPT</a> found that its expansion increased domestic STEM employment, especially in information technology. A <a href="https://www.aeaweb.org/articles?id=10.1257%2Fpandp.20261100">2026 study</a> found that domestic STEM degree completion rose after OPT expanded.</p>
                     <p>Individual workers may face greater competition for a particular job while domestic STEM employment and training grow across the economy.</p>
                 </div>
             </section>
@@ -227,6 +230,7 @@ const storyJson = JSON.stringify(clientData).replace(/</g, "\\u003c");
                     <p>Biology and biomedical science show how quickly specialized talent can be lost. A university laboratory may hire a postdoc at a typical salary of <strong>{money(storyData.compensation.comparisons.lin.salaryUsd)}</strong> because that researcher has expertise needed for a particular project. Salary and estimated benefits bring the position's annual compensation to about <strong>{money(storyData.compensation.comparisons.lin.totalCompensationUsd)}</strong>.</p>
                     <p>At <strong data-copy-fee>{money(storyData.meta.defaultFeeUsd)}</strong>, <span data-copy-lin-outcome>{linContinuesByDefault ? "Dr. Lin's postdoc would remain in the modeled talent pool" : "Dr. Lin's postdoc would not continue under the model"}</span>. Among biology graduates with compensation estimates, <strong data-copy-biology-outcome>{biologyPricedOut.toFixed(1)}% would not continue</strong>.</p>
                 </div>
+                <OptStoryMobileScene scene="impacts" storyData={storyData} mobileView={mobileView} />
             </section>
 
             <section class="story-step" data-scene="settings">

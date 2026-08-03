@@ -1,0 +1,30 @@
+---
+import type { FieldGroupRow } from "../types/opt-story";
+
+interface Props {
+    fields: FieldGroupRow[];
+    afterChart?: boolean;
+}
+
+const { fields, afterChart = false } = Astro.props;
+---
+
+<ul
+    class:list={["mobile-key", "mobile-key--fields", { "mobile-key--after-chart": afterChart }]}
+    aria-label="Broad field legend"
+>
+    {fields.map((field) => (
+        <li>
+            <span style={`--legend-color:var(--field-${field.key})`}></span>
+            {field.includedFieldLabels.length > 1 ? (
+                <details class="mobile-field-members">
+                    <summary>{field.shortLabel}</summary>
+                    <span>{field.includedFieldLabels.join(", ")}</span>
+                </details>
+            ) : field.shortLabel}
+            {field.shortLabel !== field.label && (
+                <span class="sr-only"> ({field.label})</span>
+            )}
+        </li>
+    ))}
+</ul>

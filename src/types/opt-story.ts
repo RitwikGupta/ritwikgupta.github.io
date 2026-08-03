@@ -13,6 +13,20 @@ export interface GroupRow<Key extends string = string> {
     people: number;
 }
 
+export interface FieldGroupRow extends GroupRow {
+    shortLabel: string;
+    color: string;
+    includedFieldLabels: string[];
+}
+
+export type OutcomeStatus = "continue" | "stop" | "unknown";
+
+export interface OutcomeParticle {
+    id: number;
+    field: string;
+    status: OutcomeStatus;
+}
+
 export interface FeeOutcomeRow {
     key: string;
     totalPeople: number;
@@ -57,7 +71,7 @@ export interface OptMark {
 }
 
 export interface OptStoryData {
-    schemaVersion: 6;
+    schemaVersion: 7;
     meta: {
         fiscalYear: number;
         defaultFeeUsd: number;
@@ -78,7 +92,7 @@ export interface OptStoryData {
     };
     cohort: {
         degreeGroups: GroupRow<DegreeKey>[];
-        fieldGroups: GroupRow[];
+        fieldGroups: FieldGroupRow[];
         workSettings: GroupRow<WorkSettingKey>[];
         flows: Array<{
             degree: DegreeKey;
@@ -153,11 +167,11 @@ export type CompactProgramPoint = [
 ];
 
 export interface OptStoryClientData {
-    schemaVersion: 6;
+    schemaVersion: 7;
     meta: OptStoryData["meta"];
     openingPopulation: OptStoryData["openingPopulation"];
     degreeGroups: GroupRow<DegreeKey>[];
-    fieldGroups: GroupRow[];
+    fieldGroups: FieldGroupRow[];
     workSettings: GroupRow<WorkSettingKey>[];
     marks: CompactMark[];
     flows: CompactFlow[];
@@ -186,7 +200,6 @@ export interface OptStoryMobileViewModel {
         x: number;
         y: number;
     }>;
-    fieldShortLabels: Record<string, string>;
     comparisonScale: number;
     minProgramShare: number;
     organizationPanels: Array<{

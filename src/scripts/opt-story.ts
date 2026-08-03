@@ -7,6 +7,7 @@ import type {
     ProgramPoint,
     WorkSettingKey,
 } from "../types/opt-story";
+import { allocateOutcomeParticles } from "../utils/opt-story-outcome-particles";
 import { initializeMobileStory, type MobileStoryController } from "./opt-story-mobile";
 
 type SceneKey =
@@ -86,16 +87,9 @@ const initializeDesktopStory = (
         government: 475,
         "employer-not-reported": 590,
     };
-    const fieldColors: Record<string, string> = {
-        "computer-science": "var(--field-computer-science)",
-        business: "var(--field-business)",
-        engineering: "var(--field-engineering)",
-        "social-science": "var(--field-social-science)",
-        mathematics: "var(--field-mathematics)",
-        "biological-science": "var(--field-biological-science)",
-        "physical-science": "var(--field-physical-science)",
-        other: "var(--field-other)",
-    };
+    const fieldColors = Object.fromEntries(
+        data.fieldGroups.map((field) => [field.key, `var(--field-${field.key})`]),
+    );
 
     const openingMarks = d3.range(data.openingPopulation.markCount).map((id) => ({
         id,
@@ -200,28 +194,22 @@ const initializeDesktopStory = (
     const classification = (compensation: number | null): Classification => (
         compensation == null ? "unknown" : compensation >= state.feeUsd ? "continue" : "stop"
     );
-    const markClassIndexes = () => {
-        const indexes = {
-            continue: new Map<number, number>(),
-            stop: new Map<number, number>(),
-            unknown: new Map<number, number>(),
-        };
+    let outcomeParticles = allocateOutcomeParticles(feeScenario(), data.fieldGroups, data.meta.optMarkCount);
+    let outcomeIndexes = new Map<number, number>();
+    const refreshOutcomeParticles = () => {
+        outcomeParticles = allocateOutcomeParticles(feeScenario(), data.fieldGroups, data.meta.optMarkCount);
+        outcomeIndexes = new Map<number, number>();
         const counts = { continue: 0, stop: 0, unknown: 0 };
-        marks.forEach((mark) => {
-            const key = classification(mark.benchmarkCompensationUsd);
-            indexes[key].set(mark.id, counts[key]++);
+        outcomeParticles.forEach((particle) => {
+            outcomeIndexes.set(particle.id, counts[particle.status]++);
         });
-        return indexes;
     };
-    const thresholdPoint = (mark: OptMark) => {
-        const indexes = markClassIndexes();
-        const key = classification(mark.benchmarkCompensationUsd);
-        const index = indexes[key].get(mark.id) || 0;
-        if (key === "continue") return { ...grid(index, 30, 605, 175, 11, 10.5), key };
-        if (key === "stop") return { ...grid(index, 30, 65, 175, 11, 10.5), key };
-        return { ...grid(index, 90, 62, 535, 9.7, 9.2), key };
+    const thresholdPoint = (particle: (typeof outcomeParticles)[number]) => {
+        const index = outcomeIndexes.get(particle.id) ?? 0;
+        if (particle.status === "continue") return grid(index, 30, 605, 170, 11, 10.5);
+        if (particle.status === "stop") return grid(index, 30, 65, 170, 11, 10.5);
+        return grid(index, 70, 65, 470, 12.5, 10.2);
     };
-
     const sceneText: Record<SceneKey, { eyebrow: string; title: string; description: string }> = {
         graduates: {
             eyebrow: "Nonresident degrees · 2021–22",
@@ -364,9 +352,9 @@ const initializeDesktopStory = (
         }
     };
 
-    const drawGate = () => {
+    const drawGate = (bottom = 505) => {
         annotationLayer.append("line")
-            .attr("x1", 500).attr("x2", 500).attr("y1", 95).attr("y2", 505)
+            .attr("x1", 500).attr("x2", 500).attr("y1", 95).attr("y2", bottom)
             .attr("class", "fee-gate");
         addText(500, 74, `${formatMoney.format(state.feeUsd)} FEE`, "gate-label", "middle");
     };
@@ -386,10 +374,15 @@ const initializeDesktopStory = (
         });
     };
     const drawFeeLabels = () => {
-        drawGate();
-        addText(275, 120, "WOULD NOT CONTINUE", "side-label", "middle");
-        addText(730, 120, "WOULD CONTINUE", "side-label", "middle");
-        addText(500, 525, `${formatNumber.format(data.meta.knownCompensationPeople)} ENTRANTS WITH COMPENSATION ESTIMATES`, "chart-kicker", "middle");
+        const scenario = feeScenario();
+        drawGate(385);
+        addText(275, 120, `WOULD NOT CONTINUE · ${formatNumber.format(scenario.doesNotContinuePeople)}`, "side-label", "middle");
+        addText(730, 120, `WOULD CONTINUE · ${formatNumber.format(scenario.continuesPeople)}`, "side-label", "middle");
+        annotationLayer.append("line")
+            .attr("x1", 45).attr("x2", 955).attr("y1", 420).attr("y2", 420)
+            .attr("class", "unknown-separator");
+        addText(65, 450, "NO USABLE COMPENSATION ESTIMATE", "side-label");
+        addText(935, 450, formatNumber.format(scenario.unknownPeople), "side-label", "end");
     };
 
     const outcomeRows = (dimension: SummaryDimension): FeeOutcomeRow[] => feeScenario().outcomes[dimension];
@@ -418,7 +411,7 @@ const initializeDesktopStory = (
         title: string,
     ) => {
         addText(x, y - 25, title.toUpperCase(), "chart-kicker");
-        addText(labelX, y - 25, "WOULD CONTINUE", "chart-kicker", "end");
+        addText(labelX, y - 25, "CONTINUE · STOP", "chart-kicker", "end");
         const visibleRows = rows.length > maxRows
             ? [
                 ...rows.slice(0, maxRows - 1),
@@ -446,8 +439,8 @@ const initializeDesktopStory = (
                     .attr("class", `stack stack--${key}`);
                 cursor += scale(row[key]);
             });
-            const label = addText(labelX, yy + 20, formatNumber.format(row.continue), "bar-count", "end");
-            label.append("title").text(`${displayLabel(row.key)}: ${formatNumber.format(row.total)} job records with compensation estimates; ${formatNumber.format(row.continue)} would continue; ${formatNumber.format(row.stop)} would not continue.`);
+            const label = addText(labelX, yy + 20, `${formatNumber.format(row.continue)} · ${formatNumber.format(row.stop)}`, "bar-count", "end");
+            label.append("title").text(`${displayLabel(row.key)}: ${formatNumber.format(row.total)} entrants with usable compensation estimates; ${formatNumber.format(row.continue)} would continue (${(100 * row.continue / row.total).toFixed(1)}%); ${formatNumber.format(row.stop)} would not continue (${(100 * row.stop / row.total).toFixed(1)}%).`);
         });
     };
     const drawOutcomeLegend = (x: number, y: number) => {
@@ -457,7 +450,7 @@ const initializeDesktopStory = (
         addText(x + 151, y + 1, "Would not continue", "legend-label");
     };
     const drawImpacts = () => {
-        drawStackedRows(summarize("fields"), 45, 105, 285, 465, 60, 8, "Major field");
+        drawStackedRows(summarize("fields"), 35, 78, 260, 488, 40, 13, "Major field");
         drawStackedRows(summarize("occupationFamilies"), 535, 105, 275, 955, 60, 8, "Occupation family");
         drawOutcomeLegend(365, 620);
     };
@@ -572,13 +565,14 @@ const initializeDesktopStory = (
             return { ...grid(opening.opt.id, 42, 68, 155, 9.7, 10.2), r: 2.5, opacity: 0.7, fill: "var(--mark-blocked)" };
         }
         if (scene === "threshold" || scene === "ending" || scene === "conclusion") {
-            const point = thresholdPoint(opening.opt);
-            if (point.key === "unknown") return hidden;
+            const particle = outcomeParticles[opening.opt.id];
+            if (!particle) return hidden;
+            const point = thresholdPoint(particle);
             return {
                 ...point,
                 r: 2.7,
-                opacity: 0.9,
-                fill: point.key === "continue" ? fieldColors[opening.opt.field] : "var(--mark-blocked)",
+                opacity: particle.status === "continue" ? 0.94 : particle.status === "stop" ? 0.64 : 0.5,
+                fill: fieldColors[particle.field],
             };
         }
         return hidden;
@@ -610,8 +604,8 @@ const initializeDesktopStory = (
             const ashaContinues = classification(data.comparisons.asha.totalCompensationUsd) === "continue";
             const linContinues = classification(data.comparisons.lin.totalCompensationUsd) === "continue";
             return {
-                asha: { x: ashaContinues ? 730 : 470, y: 245, opacity: 1 },
-                lin: { x: linContinues ? 730 : 470, y: 385, opacity: 1 },
+                asha: { x: ashaContinues ? 730 : 275, y: 245, opacity: 1 },
+                lin: { x: linContinues ? 730 : 275, y: 335, opacity: 1 },
             };
         }
         return { asha: hidden, lin: hidden };
@@ -632,8 +626,9 @@ const initializeDesktopStory = (
                 : scene === "threshold" || scene === "ending"
                     ? `${selectedFee} OPT fee`
                     : copy.title;
-        root.querySelector<HTMLElement>("[data-stage-description]")!.textContent = scene === "ending"
-            ? `Among benchmarked jobs, ${formatNumber.format(feeScenario().continuesPeople)} would continue and ${formatNumber.format(feeScenario().doesNotContinuePeople)} would not continue.`
+        const scenario = feeScenario();
+        root.querySelector<HTMLElement>("[data-stage-description]")!.textContent = ["threshold", "ending", "conclusion"].includes(scene)
+            ? `At ${selectedFee}, ${formatNumber.format(scenario.continuesPeople)} would continue, ${formatNumber.format(scenario.doesNotContinuePeople)} would not continue, and ${formatNumber.format(scenario.unknownPeople)} have no usable compensation estimate. Dots are colored by major field.`
             : copy.description;
         root.querySelectorAll<HTMLElement>(".story-step[data-scene]").forEach((step) => {
             step.classList.toggle("is-active", step.dataset.scene === scene);
@@ -641,8 +636,12 @@ const initializeDesktopStory = (
         stage.dataset.scene = scene;
 
         const interactive = ["threshold", "impacts", "settings"].includes(scene);
+        const knownOnlyBreakdown = scene === "impacts" || scene === "settings";
         root.querySelector<HTMLElement>("[data-fee-controls]")!.hidden = !interactive;
         root.querySelector<HTMLElement>("[data-threshold-metrics]")!.hidden = !interactive && scene !== "ending" && scene !== "conclusion";
+        root.querySelector<HTMLElement>("[data-unknown-metric]")!.hidden = knownOnlyBreakdown;
+        if (knownOnlyBreakdown) stage.dataset.knownOnlyBreakdown = "true";
+        else delete stage.dataset.knownOnlyBreakdown;
         root.querySelector<HTMLElement>("[data-field-legend]")!.hidden = !["composition", "connections", "workers", "evidence", "threshold", "ending", "conclusion"].includes(scene);
         root.querySelector<HTMLElement>("[data-cohort-legend]")!.hidden = scene !== "opt";
         root.querySelectorAll<HTMLElement>("[data-panel]").forEach((panel) => {
@@ -652,6 +651,7 @@ const initializeDesktopStory = (
         orientationLayer.selectAll("*").remove();
         if (scene === "orientation") drawOrientation();
 
+        if (["threshold", "ending", "conclusion"].includes(scene)) refreshOutcomeParticles();
         const targets = openingMarks.map((mark) => markTarget(mark, scene));
         circles.interrupt("story").attr("fill", (_, index) => targets[index].fill);
         if (animate && !reducedMotion.matches) {
@@ -771,7 +771,7 @@ const dataElement = root?.querySelector<HTMLScriptElement>("#opt-story-data");
 
 if (root && dataElement) {
     const data = JSON.parse(dataElement.textContent || "{}") as OptStoryClientData;
-    if (data.schemaVersion !== 6) throw new Error("Unexpected OPT story schema");
+    if (data.schemaVersion !== 7) throw new Error("Unexpected OPT story schema");
 
     const compactLayout = window.matchMedia("(max-width: 759px), (max-width: 999px) and (max-height: 599px)");
     const formatNumber = new Intl.NumberFormat("en-US");
@@ -813,6 +813,7 @@ if (root && dataElement) {
         });
         setText("[data-continues]", formatNumber.format(scenario.continuesPeople));
         setText("[data-does-not-continue]", formatNumber.format(scenario.doesNotContinuePeople));
+        setText("[data-unknown]", formatNumber.format(scenario.unknownPeople));
         setText("[data-payments]", formatCompactMoney.format(scenario.feePaymentsUsd));
         setText("[data-compensation]", formatCompactMoney.format(scenario.representedCompensationUsd));
         setText("[data-copy-fee]", selectedFee);

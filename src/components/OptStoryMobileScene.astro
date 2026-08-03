@@ -17,6 +17,7 @@ const money = (value: number) => new Intl.NumberFormat("en-US", {
     maximumFractionDigits: 0,
 }).format(value);
 const defaultScenario = mobileView.defaultScenario;
+const percent = (value: number, total: number) => `${(100 * value / total).toFixed(1)}%`;
 const rowLabel = (row: FeeOutcomeRow, dimension: string) => {
     if (dimension === "fields") return mobileView.fieldLabels[row.key] ?? row.key;
     if (dimension === "workSettings") return mobileView.settingLabels[row.key] ?? row.key;
@@ -31,7 +32,7 @@ const feeControl = (suffix: string) => ({
 });
 const scenesWithVisual = new Set([
     "graduates", "orientation", "opt", "composition", "connections", "value", "gate", "student",
-    "threshold", "settings", "organizations", "programs", "alternatives", "ending",
+    "threshold", "impacts", "settings", "organizations", "programs", "alternatives", "ending",
 ]);
 ---
 
@@ -87,7 +88,7 @@ const scenesWithVisual = new Set([
                         </div>
                     </div>
                 ))}
-                <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} shortLabels={mobileView.fieldShortLabels} afterChart />
+                <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} afterChart />
             </figure>
         )}
 
@@ -110,7 +111,7 @@ const scenesWithVisual = new Set([
                     <text x="100" y="368" text-anchor="middle">Government</text>
                     <text x="270" y="364" text-anchor="middle"><tspan x="270">Employer not</tspan><tspan x="270" dy="15">reported</tspan></text>
                 </svg>
-                <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} shortLabels={mobileView.fieldShortLabels} collapsible />
+                <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} collapsible />
             </figure>
         )}
 
@@ -147,12 +148,27 @@ const scenesWithVisual = new Set([
 
         {scene === "threshold" && <OptStoryMobileCrossing variant="interactive" storyData={storyData} mobileView={mobileView} />}
 
+        {scene === "impacts" && (
+            <figure class="mobile-settings mobile-field-outcomes">
+                <figcaption class="sr-only">Major field outcomes at the selected fee</figcaption>
+                <div class="mobile-outcome-legend" aria-label="Bar legend"><span><span class="mobile-legend-swatch is-continue"></span>Would continue</span><span><span class="mobile-legend-swatch is-stop"></span>Would not continue</span></div>
+                <div class="mobile-outcome-rows">
+                    {storyData.cohort.fieldGroups.map((field) => {
+                        const row = defaultScenario.outcomes.fields.find((item) => item.key === field.key)!;
+                        return <div class="mobile-outcome-row" data-outcome-dimension="fields" data-outcome-key={row.key} style={`--row-field:var(--field-${field.key})`}><div class="mobile-chart-heading"><strong>{field.label}</strong><span><b data-row-continue>{number(row.continuesPeople)}</b> · <b data-row-stop>{number(row.doesNotContinuePeople)}</b></span></div><div class="mobile-outcome-bar"><span data-row-continue-bar style={`width:${100 * row.continuesPeople / row.matchedPeople}%`}></span><span data-row-stop-bar style={`width:${100 * row.doesNotContinuePeople / row.matchedPeople}%`}></span></div><p class="mobile-outcome-percentages">C <span data-row-continue-pct>{percent(row.continuesPeople, row.matchedPeople)}</span> · N <span data-row-stop-pct>{percent(row.doesNotContinuePeople, row.matchedPeople)}</span></p></div>;
+                    })}
+                </div>
+                {(() => { const control = feeControl("fields"); return <label class="mobile-fee-control" for={control.id}><span>OPT fee <output data-fee-output>{money(control.value)}</output></span><input id={control.id} data-fee-input type="range" min={control.min} max={control.max} step={control.step} value={control.value}/><small><span>{money(control.min)}</span><span>{money(control.max)}</span></small></label>; })()}
+                <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} collapsible />
+            </figure>
+        )}
+
         {scene === "settings" && (
             <figure class="mobile-settings">
                 <figcaption class="sr-only">Employer setting outcomes at the selected fee</figcaption>
                 <div class="mobile-outcome-legend" aria-label="Bar legend"><span><span class="mobile-legend-swatch is-continue"></span>Would continue</span><span><span class="mobile-legend-swatch is-stop"></span>Would not continue</span></div>
                 <div class="mobile-outcome-rows">
-                    {defaultScenario.outcomes.workSettings.map((row) => <div class="mobile-outcome-row" data-outcome-dimension="workSettings" data-outcome-key={row.key}><div class="mobile-chart-heading"><strong>{rowLabel(row, "workSettings")}</strong><span>{row.matchedPeople ? <><b data-row-continue>{number(row.continuesPeople)}</b> would continue</> : "No compensation estimates"}</span></div>{row.matchedPeople > 0 && <div class="mobile-outcome-bar"><span data-row-continue-bar style={`width:${100 * row.continuesPeople / row.matchedPeople}%`}></span><span data-row-stop-bar style={`width:${100 * row.doesNotContinuePeople / row.matchedPeople}%`}></span></div>}</div>)}
+                    {defaultScenario.outcomes.workSettings.filter((row) => row.matchedPeople > 0).map((row) => <div class="mobile-outcome-row" data-outcome-dimension="workSettings" data-outcome-key={row.key}><div class="mobile-chart-heading"><strong>{rowLabel(row, "workSettings")}</strong><span><b data-row-continue>{number(row.continuesPeople)}</b> · <b data-row-stop>{number(row.doesNotContinuePeople)}</b></span></div><div class="mobile-outcome-bar"><span data-row-continue-bar style={`width:${100 * row.continuesPeople / row.matchedPeople}%`}></span><span data-row-stop-bar style={`width:${100 * row.doesNotContinuePeople / row.matchedPeople}%`}></span></div><p class="mobile-outcome-percentages">C <span data-row-continue-pct>{percent(row.continuesPeople, row.matchedPeople)}</span> · N <span data-row-stop-pct>{percent(row.doesNotContinuePeople, row.matchedPeople)}</span></p></div>)}
                 </div>
                 {(() => { const control = feeControl("settings"); return <label class="mobile-fee-control" for={control.id}><span>OPT fee <output data-fee-output>{money(control.value)}</output></span><input id={control.id} data-fee-input type="range" min={control.min} max={control.max} step={control.step} value={control.value}/><small><span>{money(control.min)}</span><span>{money(control.max)}</span></small></label>; })()}
             </figure>

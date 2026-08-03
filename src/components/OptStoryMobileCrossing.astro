@@ -27,20 +27,24 @@ const className = variant === "gate" ? "mobile-gate" : variant === "interactive"
 const feeAttribute = variant === "gate" ? "data-mobile-gate-fee" : variant === "interactive" ? "data-mobile-threshold-fee" : "data-mobile-ending-fee";
 const feeControlId = "opt-mobile-fee-decision";
 const ariaSuffix = colorMode === "field" ? " Dots are colored by field." : "";
+const isOutcome = variant !== "gate";
+const ariaLabel = isOutcome
+    ? `At a ${money(storyData.meta.defaultFeeUsd)} fee, ${number(scenario.continuesPeople)} entrants would continue, ${number(scenario.doesNotContinuePeople)} would not continue, and ${number(scenario.unknownPeople)} have no usable compensation estimate.${ariaSuffix}`
+    : `A ${money(storyData.meta.defaultFeeUsd)} fee divides entrants with usable compensation estimates into those above and below the fee.`;
 ---
 
 <figure class={className} data-mobile-outcome-summary={variant === "interactive" ? "" : undefined}>
     <figcaption>
         <strong {...{ [feeAttribute]: "" }}>{money(storyData.meta.defaultFeeUsd)}{variant === "ending" ? " OPT fee" : " fee"}</strong>
-        {variant === "interactive" && <span>{number(storyData.meta.knownCompensationPeople)} entrants with compensation estimates</span>}
+        {variant === "interactive" && <span>{number(storyData.meta.totalEntrants)} entrants · missing estimates shown separately</span>}
     </figcaption>
     <svg
         class:list={["mobile-crossing-plot", { "mobile-crossing-plot--fields": colorMode === "field" }]}
-        viewBox="0 0 360 340"
+        viewBox={isOutcome ? "0 0 360 500" : "0 0 360 340"}
         role="img"
         data-mobile-crossing-plot={variant}
         data-mobile-crossing-color={colorMode}
-        aria-label={`At a ${money(storyData.meta.defaultFeeUsd)} fee, ${number(scenario.continuesPeople)} entrants with compensation estimates would continue and ${number(scenario.doesNotContinuePeople)} would not continue.${ariaSuffix}`}
+        aria-label={ariaLabel}
     >
         <text x="14" y="20">WOULD NOT CONTINUE</text>
         <text x="346" y="20" text-anchor="end" data-mobile-plot-stop-count>{number(scenario.doesNotContinuePeople)}</text>
@@ -48,13 +52,20 @@ const ariaSuffix = colorMode === "field" ? " Dots are colored by field." : "";
         <rect x="126" y="157" width="108" height="26"></rect>
         <text x="180" y="175" text-anchor="middle" data-mobile-crossing-fee>{money(storyData.meta.defaultFeeUsd)} FEE</text>
         <g data-mobile-crossing-dots></g>
-        <text x="14" y="330">WOULD CONTINUE</text>
-        <text x="346" y="330" text-anchor="end" data-mobile-plot-continue-count>{number(scenario.continuesPeople)}</text>
+        <text x="14" y={isOutcome ? "310" : "330"}>WOULD CONTINUE</text>
+        <text x="346" y={isOutcome ? "310" : "330"} text-anchor="end" data-mobile-plot-continue-count>{number(scenario.continuesPeople)}</text>
+        {isOutcome && (
+            <>
+                <line class="mobile-unknown-divider" x1="10" x2="350" y1="332" y2="332"></line>
+                <text class="mobile-unknown-label" x="14" y="356">COMPENSATION UNKNOWN</text>
+                <text x="346" y="356" text-anchor="end" data-mobile-plot-unknown-count>{number(scenario.unknownPeople)}</text>
+            </>
+        )}
     </svg>
-    <p class="mobile-dot-note">Each dot represents about 100 entrants with a compensation estimate. Counts are exact.</p>
+    <p class="mobile-dot-note">Each dot represents about 100 entrants. Counts are exact.</p>
 
     {colorMode === "field" && (
-        <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} shortLabels={mobileView.fieldShortLabels} collapsible />
+        <OptStoryMobileFieldLegend fields={storyData.cohort.fieldGroups} collapsible />
     )}
 
     {variant === "gate" && (
@@ -75,5 +86,5 @@ const ariaSuffix = colorMode === "field" ? " Dots are colored by field." : "";
         </>
     )}
 
-    {variant === "ending" && <p>among {number(storyData.meta.knownCompensationPeople)} entrants with compensation estimates</p>}
+    {variant === "ending" && <p>among all {number(storyData.meta.totalEntrants)} entrants; missing estimates remain unknown</p>}
 </figure>

@@ -1,19 +1,10 @@
 .opt-story {
-    --field-computer-science: #0072b2;
-    --field-business: #e69f00;
-    --field-engineering: #009e73;
-    --field-social-science: #cc79a7;
-    --field-mathematics: #56b4e9;
-    --field-biological-science: #d55e00;
-    --field-physical-science: #8064a2;
-    --field-other: #8d897e;
     --degree-bachelors: var(--midnight);
     --degree-masters: var(--goldenrod);
     --degree-doctorate: var(--burgundy);
     --fee: #8b0010;
     --mark-neutral: color-mix(in srgb, var(--text) 42%, transparent);
     --mark-blocked: #aaa69c;
-    --mark-unknown: #c9c4b8;
     --opt-highlight: #0072b2;
     --ribbon: color-mix(in srgb, var(--text) 34%, transparent);
     --character-asha: #0072b2;
@@ -27,7 +18,6 @@
 
 html[data-theme="dark"] .opt-story {
     --mark-blocked: #64635f;
-    --mark-unknown: #4d4c48;
     --ribbon: rgb(255 255 255 / 34%);
     --degree-bachelors: #f4f0e7;
     --degree-doctorate: #e06a72;
@@ -315,7 +305,13 @@ html[data-theme="dark"] .opt-story {
 }
 
 .opt-story .stack--stop {
-    fill: var(--mark-blocked);
+    fill: var(--goldenrod);
+}
+
+.opt-story .unknown-separator {
+    stroke: var(--border-strong);
+    stroke-dasharray: 5 5;
+    stroke-width: 1;
 }
 
 .opt-story .legend-label {
@@ -350,6 +346,18 @@ html[data-theme="dark"] .opt-story {
     gap: 0.4rem;
 }
 
+.opt-story .field-members summary {
+    cursor: pointer;
+}
+
+.opt-story .field-members > span {
+    display: block;
+    max-width: 34rem;
+    margin-top: 0.35rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
 .opt-story .legend-dot {
     display: block;
     width: 0.65rem;
@@ -367,10 +375,14 @@ html[data-theme="dark"] .opt-story {
 .opt-story .threshold-metrics {
     display: grid;
     margin: 0;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 1px;
     border-top: 1px solid var(--border);
     background: var(--border);
+}
+
+.opt-story .story-stage[data-known-only-breakdown="true"] .threshold-metrics {
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .opt-story .threshold-metrics div {

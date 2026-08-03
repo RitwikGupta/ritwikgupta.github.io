@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
+    "test": "vitest run",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -26,7 +27,8 @@
     "remark-math": "^6.0.0",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "d3": "^7.9.0"

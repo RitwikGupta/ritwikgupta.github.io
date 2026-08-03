@@ -170,7 +170,15 @@ const percentWidth = (value: number, maximum: number) => `${100 * value / maximu
 
         <ul class="field-legend" data-field-legend hidden aria-label="Major field legend">
             {storyData.cohort.fieldGroups.map((field) => (
-                <li><span class="legend-dot" style={`--legend-color:var(--field-${field.key})`} aria-hidden="true"></span>{field.label}</li>
+                <li>
+                    <span class="legend-dot" style={`--legend-color:var(--field-${field.key})`} aria-hidden="true"></span>
+                    {field.includedFieldLabels.length > 1 ? (
+                        <details class="field-members">
+                            <summary>{field.label}</summary>
+                            <span>{field.includedFieldLabels.join(", ")}</span>
+                        </details>
+                    ) : field.label}
+                </li>
             ))}
         </ul>
 
@@ -182,6 +190,7 @@ const percentWidth = (value: number, maximum: number) => `${100 * value / maximu
         <dl class="threshold-metrics" data-threshold-metrics hidden aria-live="polite">
             <div><dt>Would continue</dt><dd data-continues>{number(defaultFee.continuesPeople)}</dd></div>
             <div><dt>Would not continue</dt><dd data-does-not-continue>{number(defaultFee.doesNotContinuePeople)}</dd></div>
+            <div data-unknown-metric><dt>Compensation unknown</dt><dd data-unknown>{number(defaultFee.unknownPeople)}</dd></div>
             <div><dt>Fee payments</dt><dd data-payments>{compactMoney(defaultFee.feePaymentsUsd)}</dd></div>
             <div><dt>Represented compensation</dt><dd data-compensation>{compactMoney(defaultFee.representedCompensationUsd)}</dd></div>
         </dl>

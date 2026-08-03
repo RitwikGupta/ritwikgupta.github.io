@@ -1,25 +1,21 @@
 ---
-import type { GroupRow } from "../types/opt-story";
+import type { FieldGroupRow } from "../types/opt-story";
+import OptStoryMobileFieldLegendList from "./OptStoryMobileFieldLegendList.astro";
 
 interface Props {
-    fields: GroupRow[];
-    shortLabels: Record<string, string>;
+    fields: FieldGroupRow[];
     collapsible?: boolean;
     afterChart?: boolean;
 }
 
-const { fields, shortLabels, collapsible = false, afterChart = false } = Astro.props;
+const { fields, collapsible = false, afterChart = false } = Astro.props;
 ---
 
 {collapsible ? (
     <details class="mobile-collapsible-key">
         <summary>Field colors</summary>
-        <ul class="mobile-key mobile-key--fields" aria-label="Broad field legend">
-            {fields.map((field) => <li><span style={`--legend-color:var(--field-${field.key})`}></span>{shortLabels[field.key] ?? field.label}<span class="sr-only"> ({field.label})</span></li>)}
-        </ul>
+        <OptStoryMobileFieldLegendList fields={fields} />
     </details>
 ) : (
-    <ul class:list={["mobile-key", "mobile-key--fields", { "mobile-key--after-chart": afterChart }]} aria-label="Broad field legend">
-        {fields.map((field) => <li><span style={`--legend-color:var(--field-${field.key})`}></span>{shortLabels[field.key] ?? field.label}<span class="sr-only"> ({field.label})</span></li>)}
-    </ul>
+    <OptStoryMobileFieldLegendList fields={fields} afterChart={afterChart} />
 )}

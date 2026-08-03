@@ -1,4 +1,5 @@
 import type { FeeOutcomeRow, FeeScenario, OptStoryClientData } from "../types/opt-story";
+import { allocateOutcomeParticles } from "../utils/opt-story-outcome-particles";
 
 export interface MobileStoryController {
     activate: () => void;
@@ -10,6 +11,7 @@ export interface MobileStoryController {
 interface CrossingPlot {
     plot: SVGSVGElement;
     colorMode: string;
+    variant: string;
     dots: SVGCircleElement[];
 }
 
@@ -159,21 +161,27 @@ const ensureCrossingPlots = (root: HTMLElement, data: OptStoryClientData): Cross
     return Array.from(root.querySelectorAll<SVGSVGElement>("[data-mobile-crossing-plot]")).map((plot) => {
         const layer = plot.querySelector<SVGGElement>("[data-mobile-crossing-dots]");
         const colorMode = plot.dataset.mobileCrossingColor ?? "status";
+        const variant = plot.dataset.mobileCrossingPlot ?? "gate";
         const existing = Array.from(layer?.querySelectorAll<SVGCircleElement>("circle") ?? []);
-        if (existing.length) return { plot, colorMode, dots: existing };
+        if (existing.length) return { plot, colorMode, variant, dots: existing };
         const fragment = document.createDocumentFragment();
-        const dots = knownMarks.map((mark) => {
+        const source = variant === "gate"
+            ? knownMarks
+            : Array.from({ length: data.meta.optMarkCount }, (_, id) => ({ id, field: "", compensationUsd: 0 }));
+        const dots = source.map((mark) => {
             const circle = document.createElementNS(svgNamespace, "circle");
             circle.setAttribute("r", "2.75");
             circle.setAttribute("aria-hidden", "true");
-            circle.dataset.compensation = String(mark.compensationUsd);
-            circle.dataset.field = mark.field;
-            if (colorMode === "field") circle.style.fill = `var(--field-${mark.field})`;
+            circle.dataset.particleId = String(mark.id);
+            if (variant === "gate") {
+                circle.dataset.compensation = String(mark.compensationUsd);
+                circle.dataset.field = mark.field;
+            }
             fragment.append(circle);
             return circle;
         });
         layer?.append(fragment);
-        return { plot, colorMode, dots };
+        return { plot, colorMode, variant, dots };
     });
 };
 
@@ -208,6 +216,7 @@ export const initializeMobileStory = (root: HTMLElement, data: OptStoryClientDat
         setText(root, "[data-mobile-crossing-fee]", `${selectedFee} FEE`);
         setText(root, "[data-mobile-plot-continue-count]", formatNumber.format(scenario.continuesPeople));
         setText(root, "[data-mobile-plot-stop-count]", formatNumber.format(scenario.doesNotContinuePeople));
+        setText(root, "[data-mobile-plot-unknown-count]", formatNumber.format(scenario.unknownPeople));
         setText(root, "[data-mobile-gross-exposure]", formatCompactMoney.format(data.meta.totalEntrants * feeUsd));
         setText(root, "[data-mobile-student-fee]", selectedFee);
         root.querySelectorAll<HTMLElement>("[data-mobile-student-fee-bar]").forEach((bar) => {
@@ -216,33 +225,61 @@ export const initializeMobileStory = (root: HTMLElement, data: OptStoryClientDat
         setText(root, "[data-mobile-payments]", formatCompactMoney.format(scenario.feePaymentsUsd));
         setText(root, "[data-mobile-compensation]", formatCompactMoney.format(scenario.representedCompensationUsd));
 
-        crossingPlots?.forEach(({ plot, colorMode, dots }) => {
-            const stopped = dots.filter((dot) => Number(dot.dataset.compensation) < feeUsd);
-            const continuing = dots.filter((dot) => Number(dot.dataset.compensation) >= feeUsd);
-            const position = (dot: SVGCircleElement, index: number, status: "stop" | "continue") => {
-                const columns = 34;
+        const outcomeParticles = allocateOutcomeParticles(scenario, data.fieldGroups, data.meta.optMarkCount);
+        crossingPlots?.forEach(({ plot, colorMode, variant, dots }) => {
+            if (variant !== "gate") {
+                dots.forEach((dot, index) => {
+                    const particle = outcomeParticles[index];
+                    dot.dataset.field = particle.field;
+                    dot.dataset.status = particle.status;
+                    dot.style.fill = `var(--field-${particle.field})`;
+                });
+            }
+            const stopped = variant === "gate"
+                ? dots.filter((dot) => Number(dot.dataset.compensation) < feeUsd)
+                : dots.filter((dot) => dot.dataset.status === "stop");
+            const continuing = variant === "gate"
+                ? dots.filter((dot) => Number(dot.dataset.compensation) >= feeUsd)
+                : dots.filter((dot) => dot.dataset.status === "continue");
+            const unknown = variant === "gate" ? [] : dots.filter((dot) => dot.dataset.status === "unknown");
+            const position = (dot: SVGCircleElement, index: number, status: "stop" | "continue" | "unknown") => {
+                const columns = variant === "gate" ? 34 : 40;
                 const column = index % columns;
                 const row = Math.floor(index / columns);
                 dot.setAttribute("cx", String(14 + column * (332 / (columns - 1))));
-                dot.setAttribute("cy", String(status === "stop" ? 148 - row * 8.1 : 194 + row * 8.1));
+                const y = status === "stop"
+                    ? 148 - row * (variant === "gate" ? 8.1 : 7.8)
+                    : status === "continue"
+                        ? 194 + row * (variant === "gate" ? 8.1 : 7.8)
+                        : 378 + row * 6.1;
+                dot.setAttribute("cy", String(y));
                 dot.dataset.status = status;
                 if (colorMode === "status") dot.style.fill = status === "continue" ? "var(--degree-bachelors)" : "var(--goldenrod)";
             };
             stopped.forEach((dot, index) => position(dot, index, "stop"));
             continuing.forEach((dot, index) => position(dot, index, "continue"));
-            plot.setAttribute("aria-label", `At a ${selectedFee} fee, ${formatNumber.format(scenario.continuesPeople)} entrants with compensation estimates would continue and ${formatNumber.format(scenario.doesNotContinuePeople)} would not continue.${colorMode === "field" ? " Dots are colored by field." : ""}`);
+            unknown.forEach((dot, index) => position(dot, index, "unknown"));
+            plot.setAttribute("aria-label", variant === "gate"
+                ? `A ${selectedFee} fee divides entrants with usable compensation estimates into those above and below the fee.`
+                : `At a ${selectedFee} fee, ${formatNumber.format(scenario.continuesPeople)} entrants would continue, ${formatNumber.format(scenario.doesNotContinuePeople)} would not continue, and ${formatNumber.format(scenario.unknownPeople)} have no usable compensation estimate. Dots are colored by field.`);
         });
 
         root.querySelectorAll<HTMLElement>("[data-outcome-dimension][data-outcome-key]").forEach((element) => {
             const row = findOutcome(scenario, element.dataset.outcomeDimension ?? "", element.dataset.outcomeKey ?? "");
-            if (!row || row.matchedPeople <= 0) return;
+            if (!row) return;
             const continueBar = element.querySelector<HTMLElement>("[data-row-continue-bar]");
             const stopBar = element.querySelector<HTMLElement>("[data-row-stop-bar]");
-            const count = element.querySelector<HTMLElement>("[data-row-continue]");
+            const continueCount = element.querySelector<HTMLElement>("[data-row-continue]");
+            const stopCount = element.querySelector<HTMLElement>("[data-row-stop]");
+            const continuePct = element.querySelector<HTMLElement>("[data-row-continue-pct]");
+            const stopPct = element.querySelector<HTMLElement>("[data-row-stop-pct]");
             if (continueBar) continueBar.style.width = `${100 * row.continuesPeople / row.matchedPeople}%`;
             if (stopBar) stopBar.style.width = `${100 * row.doesNotContinuePeople / row.matchedPeople}%`;
-            if (count) count.textContent = formatNumber.format(row.continuesPeople);
-            element.setAttribute("aria-label", `${count?.closest(".mobile-chart-heading")?.querySelector("strong")?.textContent ?? row.key}: ${formatNumber.format(row.continuesPeople)} would continue and ${formatNumber.format(row.doesNotContinuePeople)} would not continue among ${formatNumber.format(row.matchedPeople)} jobs with compensation estimates.`);
+            if (continueCount) continueCount.textContent = formatNumber.format(row.continuesPeople);
+            if (stopCount) stopCount.textContent = formatNumber.format(row.doesNotContinuePeople);
+            if (continuePct) continuePct.textContent = `${(100 * row.continuesPeople / row.matchedPeople).toFixed(1)}%`;
+            if (stopPct) stopPct.textContent = `${(100 * row.doesNotContinuePeople / row.matchedPeople).toFixed(1)}%`;
+            element.setAttribute("aria-label", `${element.querySelector(".mobile-chart-heading strong")?.textContent ?? row.key}: ${formatNumber.format(row.continuesPeople)} would continue and ${formatNumber.format(row.doesNotContinuePeople)} would not continue among ${formatNumber.format(row.matchedPeople)} entrants with usable compensation estimates.`);
         });
     };
 

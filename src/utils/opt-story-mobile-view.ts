@@ -95,16 +95,6 @@ export const buildOptStoryMobileView = (storyData: OptStoryData): OptStoryMobile
         degreeFieldPeople,
         sankeyFlows,
         sankeyMarks,
-        fieldShortLabels: {
-            "computer-science": "Computing",
-            business: "Business",
-            engineering: "Engineering",
-            "social-science": "Social sciences",
-            mathematics: "Math & statistics",
-            "biological-science": "Biology & biomedicine",
-            "physical-science": "Physical sciences",
-            other: "Other fields",
-        },
         comparisonScale: 200_000,
         minProgramShare: Math.min(...storyData.schoolPrograms.scatter.map((row) => row.share60Pct)),
         organizationPanels: [

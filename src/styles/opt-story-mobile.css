@@ -367,6 +367,26 @@
         margin-top: 0.75rem;
     }
 
+    .opt-story .mobile-field-members {
+        min-width: 0;
+    }
+
+    .opt-story .mobile-field-members summary {
+        padding: 0;
+        cursor: pointer;
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+    }
+
+    .opt-story .mobile-field-members > span {
+        display: block;
+        margin-top: 0.35rem;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+
     .opt-story .mobile-bullets {
         display: grid;
         gap: 1.5rem;
@@ -439,6 +459,12 @@
         stroke-width: 3;
     }
 
+    .opt-story .mobile-crossing-plot line.mobile-unknown-divider {
+        stroke: var(--border-strong);
+        stroke-dasharray: 5 5;
+        stroke-width: 1;
+    }
+
     .opt-story .mobile-crossing-plot rect {
         fill: var(--surface);
     }
@@ -456,6 +482,11 @@
         font-weight: 850;
     }
 
+    .opt-story .mobile-crossing-plot .mobile-unknown-label {
+        font-size: 12.5px;
+        letter-spacing: 0.015em;
+    }
+
     .opt-story .mobile-crossing-plot circle {
         stroke: color-mix(in srgb, var(--surface) 65%, transparent);
         stroke-width: 0.45;
@@ -467,6 +498,10 @@
 
     .opt-story .mobile-crossing-plot--fields circle[data-status="continue"] {
         opacity: 0.96;
+    }
+
+    .opt-story .mobile-crossing-plot--fields circle[data-status="unknown"] {
+        opacity: 0.5;
     }
 
     .opt-story .mobile-dot-note {
@@ -516,13 +551,11 @@
         background: var(--fee);
     }
 
-    .opt-story .mobile-outcome-bar > span:first-child,
     .opt-story [data-row-continue-bar] {
         height: 100%;
         background: var(--degree-bachelors);
     }
 
-    .opt-story .mobile-outcome-bar > span:last-child,
     .opt-story [data-row-stop-bar] {
         height: 100%;
         background: var(--goldenrod);
@@ -674,6 +707,34 @@
 
     .opt-story .mobile-outcome-row .mobile-chart-heading strong {
         max-width: 58%;
+    }
+
+    .opt-story .mobile-field-outcomes .mobile-outcome-row .mobile-chart-heading strong {
+        position: relative;
+        padding-left: 0.9rem;
+    }
+
+    .opt-story .mobile-field-outcomes .mobile-outcome-row .mobile-chart-heading strong::before {
+        position: absolute;
+        top: 0.32em;
+        left: 0;
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background: var(--row-field);
+        content: "";
+    }
+
+    .opt-story .mobile-outcome-row .mobile-chart-heading span {
+        font-variant-numeric: tabular-nums;
+    }
+
+    .opt-story .mobile-outcome-percentages {
+        margin-top: 0.25rem;
+        color: var(--text-muted);
+        font-size: 0.7rem;
+        font-variant-numeric: tabular-nums;
+        text-align: right;
     }
 
     .opt-story .mobile-ranking,
