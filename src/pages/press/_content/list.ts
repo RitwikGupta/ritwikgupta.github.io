@@ -138,6 +138,10 @@ const rawContent: RawContent[] = [
         title: "AI, National Security, and Public Policy",
         links: [
             {
+                url: "https://www.marketwatch.com/story/ai-leaders-want-to-pace-the-frontier-as-part-of-a-safety-slowdown-but-how-d8347418?st=VFpkJH",
+                img: "/press/Marketwatch.svg"
+            },
+            {
                 url: "https://on.ft.com/4oBVNCc",
                 img: "/press/Financial_Times.svg"
             },
