@@ -25,6 +25,33 @@ type PublicationRecord = Omit<Pub, "imgSrc"> & { imgSrc?: string };
 
 const publicationRecords: PublicationRecord[] = [
     {
+        title: "Learning the Shared Latent Structure of Cryo-EM Inverse Problems",
+        authors: [
+            { name: "Nithin Chalapathi" },
+             { name: "Theo Sternlieb" },
+             { name: "Ethan Han" },
+             { name: "Sonya M Hanson" },
+             { name: "Pilar Cossio" },
+             { name: "Aditi S Krishnapriyan" },
+             { name: "Ritwik Gupta" },
+        ],
+        venue: "arXiv preprint",
+        links: [
+            {
+                url: "https://arxiv.org/abs/2610.22523",
+                display: "paper",
+            },
+            {
+                url: "https://github.com/nithinvc/EMber",
+                display: "github",
+            },
+        ],
+        excerpt:
+            "EMber is a self-supervised foundation model for cryo-EM that learns transferable representations of molecular structure, achieving state-of-the-art performance on conformational analysis, population estimation, and 3D reconstruction.",
+        date: "2026-10-15",
+        imgSrc: "publications/ember.jpg",
+    },
+    {
         title: "Tinted Frames: Question Framing Blinds Vision-Language Models",
         authors: [
             { name: "Wan-Cyuan Fan" },
@@ -33,7 +60,7 @@ const publicationRecords: PublicationRecord[] = [
             { name: "Leonid Sigal" },
             { name: "Ritwik Gupta" },
         ],
-        venue: "arXiv preprint",
+        venue: "Conference on Empirical Methods in Natural Language Processing (EMNLP) 2026",
         links: [
             {
                 url: "https://davidhalladay.github.io/tinted_frames_demo/",
